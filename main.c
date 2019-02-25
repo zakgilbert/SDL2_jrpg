@@ -12,87 +12,6 @@ int MAP_WIDTH;
 int MAP_HEIGHT;
 int TICK;
 
-int render_thread(void *ptr)
-{
-    return 0;
-}
-
-void refresh_inputs(int *inputs, int len)
-{
-    for (int i = 0; i < len; ++i)
-    {
-        inputs[i] = 0;
-    }
-}
-
-int quit()
-{
-    if (INPUT == QUIT)
-    {
-        return 0;
-    }
-    return 1;
-}
-
-void set_up_timer()
-{
-    FPS = 60;
-    DELTA = 0;
-    TIME_PER_TICK = 1000000000 / (FPS / 2);
-    TIME_LAST = SDL_GetPerformanceCounter();
-    NANO_TIMER = 0;
-    FRAMES_RENDERED = 0;
-    TICKS_PER_SECOND = 0;
-    TIME_DELAY_PER_SECOND = 0;
-}
-
-void start_timer()
-{
-    TIME_NOW = SDL_GetPerformanceCounter();
-    DELTA += (double)((TIME_NOW - TIME_LAST) / TIME_PER_TICK);
-    NANO_TIMER = TIME_NOW - TIME_LAST;
-    TICKS_PER_SECOND += NANO_TIMER;
-    TIME_LAST = TIME_NOW;
-}
-
-int check_delta()
-{
-    if (DELTA >= 1)
-    {
-        return 1;
-    }
-    return 0;
-}
-
-void update_delta()
-{
-    DELTA--;
-    FRAMES_RENDERED++;
-}
-
-void reset_timer()
-{
-
-    if (TICKS_PER_SECOND >= SDL_GetPerformanceFrequency())
-    {
-        //printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED);
-        //printf("\nTicks Per Second: %ld", TICKS_PER_SECOND);
-        FRAMES_RENDERED = 0;
-        TICKS_PER_SECOND = 0;
-    }
-}
-
-void delay()
-{
-    if (NANO_TIMER < TIME_PER_TICK)
-    {
-        TIME_DELAY_PER_SECOND = ((TIME_PER_TICK - NANO_TIMER) / (SDL_GetPerformanceFrequency() * 0.001));
-        SDL_Delay(TIME_DELAY_PER_SECOND);
-        // printf("\nTimeDelayed is: %Lf", TIME_DELAY_PER_SECOND);
-        //   printf("\nTimeDelayed int is: %Lf", TIME_DELAY_PER_SECOND);
-    }
-}
-
 int main(int argc, char **argv)
 {
 
@@ -176,4 +95,85 @@ int main(int argc, char **argv)
     TTF_Quit();
     SDL_Quit();
     return 0;
+}
+
+int render_thread(void *ptr)
+{
+    return 0;
+}
+
+void refresh_inputs(int *inputs, int len)
+{
+    for (int i = 0; i < len; ++i)
+    {
+        inputs[i] = 0;
+    }
+}
+
+int quit()
+{
+    if (INPUT == QUIT)
+    {
+        return 0;
+    }
+    return 1;
+}
+
+void set_up_timer()
+{
+    FPS = 60;
+    DELTA = 0;
+    TIME_PER_TICK = 1000000000 / (FPS / 2);
+    TIME_LAST = SDL_GetPerformanceCounter();
+    NANO_TIMER = 0;
+    FRAMES_RENDERED = 0;
+    TICKS_PER_SECOND = 0;
+    TIME_DELAY_PER_SECOND = 0;
+}
+
+void start_timer()
+{
+    TIME_NOW = SDL_GetPerformanceCounter();
+    DELTA += (double)((TIME_NOW - TIME_LAST) / TIME_PER_TICK);
+    NANO_TIMER = TIME_NOW - TIME_LAST;
+    TICKS_PER_SECOND += NANO_TIMER;
+    TIME_LAST = TIME_NOW;
+}
+
+int check_delta()
+{
+    if (DELTA >= 1)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+void update_delta()
+{
+    DELTA--;
+    FRAMES_RENDERED++;
+}
+
+void reset_timer()
+{
+
+    if (TICKS_PER_SECOND >= SDL_GetPerformanceFrequency())
+    {
+        //printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED);
+        //printf("\nTicks Per Second: %ld", TICKS_PER_SECOND);
+        FRAMES_RENDERED = 0;
+        TICKS_PER_SECOND = 0;
+    }
+}
+
+void delay()
+{
+    if (NANO_TIMER < TIME_PER_TICK)
+    {
+        TIME_DELAY_PER_SECOND = ((TIME_PER_TICK - NANO_TIMER) / (SDL_GetPerformanceFrequency() * 0.001));
+        SDL_Delay(TIME_DELAY_PER_SECOND);
+        // printf("\nTimeDelayed is: %Lf", TIME_DELAY_PER_SECOND);
+        //   printf("\nTimeDelayed int is: %Lf", TIME_DELAY_PER_SECOND);
+    }
 }
