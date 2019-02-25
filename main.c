@@ -2,10 +2,13 @@
 
 int inputs[6];
 int EDGE_DETECTION[4];
-int ITEMS_QUANTITY[4];
-
 int MOVEMENT_DISABLED;
+int * ITEM_QUANTITIES;
+int * BAG_QUANTITIES;
+int ITEM_QUANTITY;
+int ITEMS_IN_BAG;
 int IS_MOVING;
+char ** BAG;
 int X;
 int Y;
 int MAP_WIDTH;
@@ -17,6 +20,8 @@ int main(int argc, char **argv)
 
     set_up_timer();
     int running;
+    ITEM_QUANTITY = 4;
+    ITEMS_IN_BAG = set_item_quanities();
     TICK = 0;
     running = 1;
     refresh_inputs(inputs, 6);
@@ -90,13 +95,41 @@ int main(int argc, char **argv)
     hero->destroy(hero);
     menu->destroy(menu);
     hand->destroy(hand);
+    free(BAG);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     TTF_Quit();
     SDL_Quit();
     return 0;
 }
+int set_item_quanities()
+{
 
+    int temp[4] = {3, 2, 1, 0};
+    int i, count;
+
+    for( i = 0; i < ITEM_QUANTITY; i++)
+    {
+        if(temp[i] != 0) {
+            count++;
+        }
+        /* code */
+    }
+    char ** inb;
+    inb = malloc(sizeof(char *) * count);
+    BAG_QUANTITIES = malloc (sizeof(int) * count);
+    
+    for( i = 0; i < ITEM_QUANTITY; i++)
+    {
+        if (temp[i] != 0) {
+            inb[i] = malloc(sizeof(ITEMS[i]));
+            strcat(inb[i], ITEMS[i]);
+            BAG_QUANTITIES[i] = temp[i];
+        }
+    }
+    BAG = inb;
+    return count;
+}
 int render_thread(void *ptr)
 {
     return 0;

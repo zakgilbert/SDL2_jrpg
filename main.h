@@ -36,7 +36,6 @@ void print_time_delay();
 int check_delta();
 void update_delta();
 int render_thread(void *);
-
-
+int set_item_quanities();
 
 #endif //JRPG_MAIN_H

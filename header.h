@@ -8,6 +8,11 @@
 #define WINDOW_WIDTH (356)
 #define WINDOW_HEIGHT (324)
 
+extern int ITEM_QUANTITY;
+extern int ITEMS_IN_BAG;
+extern int * ITEM_QUANTITIES;
+extern char ** BAG;
+extern int * BAG_QUANTITIES;
 extern int inputs[6];
 extern int EDGE_DETECTION[4];
 extern int MOVEMENT_DISABLED;

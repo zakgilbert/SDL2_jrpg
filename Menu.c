@@ -34,7 +34,7 @@ static void __render_items_menu(Menu *obj, struct SDL_Renderer *renderer, Hand *
         return;
     }
     MOVEMENT_DISABLED = 1;
-    hand->change_state_quantity(hand, 3, 0);
+    hand->change_state_quantity(hand, ITEMS_IN_BAG - 1, 0);
     obj->main_menu_bg->render(obj->main_menu_bg, renderer);
     hand->move_vertical(hand, obj->render_items_menu_options(obj, renderer, hand->current_state));
     hand->render(hand, renderer);
@@ -44,38 +44,53 @@ static int __render_items_menu_options(Menu *obj, struct SDL_Renderer *renderer,
 {
     int skip;
     char font_path[] = "ponde___.ttf";
+    struct SDL_Surface *quat;
+    struct SDL_Rect quat_rect;
+    struct SDL_Texture *quat_tex;
 
+    TTF_Font *quat_font;
+    char quat_array[2];
     obj->font = TTF_OpenFont(font_path, 10);
-
+    quat_font = obj->font;
     if (!obj->font)
     {
         printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
     }
 
     skip = TTF_FontLineSkip(obj->font);
-    obj->rect.x = 40;
+    obj->rect.x = 49;
     obj->rect.y = 15;
+    quat_rect.x = 200;
+    quat_rect.y = 15;
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < ITEMS_IN_BAG; i++)
     {
-        TTF_SizeText(obj->font, ITEMS[i], &obj->rect.w, &obj->rect.h);
+        TTF_SizeText(obj->font, BAG[i], &obj->rect.w, &obj->rect.h);
+        sprintf(quat_array, "%d", BAG_QUANTITIES[i]);
+        TTF_SizeText(quat_font, quat_array, &quat_rect.w, &quat_rect.h);
 
         if (i == current_state)
         {
-            obj->surface = TTF_RenderText_Solid(obj->font, ITEMS[i], white);
+            obj->surface = TTF_RenderText_Solid(obj->font, BAG[i], white);
+            quat = TTF_RenderText_Solid(quat_font, quat_array, white);
         }
         else
         {
-            obj->surface = TTF_RenderText_Solid(obj->font, ITEMS[i], grey);
+            obj->surface = TTF_RenderText_Solid(obj->font, BAG[i], grey);
+            quat = TTF_RenderText_Solid(quat_font, quat_array, grey);
         }
         obj->texture = SDL_CreateTextureFromSurface(renderer, obj->surface);
+        quat_tex = SDL_CreateTextureFromSurface(renderer, quat);
+        SDL_RenderCopy(renderer, quat_tex, NULL, &quat_rect);
         SDL_RenderCopy(renderer, obj->texture, NULL, &obj->rect);
-
+        quat_rect.y += skip;
         obj->rect.y += skip;
     }
     TTF_CloseFont(obj->font);
     SDL_FreeSurface(obj->surface);
     SDL_DestroyTexture(obj->texture);
+    SDL_FreeSurface(quat);
+    SDL_DestroyTexture(quat_tex);
     obj->surface = NULL;
     obj->texture = NULL;
     return skip;
@@ -147,7 +162,7 @@ static void __render_main_menu(Menu *obj, struct SDL_Renderer *renderer, Hand *h
     hand->move_vertical(hand, obj->render_main_menu_options(obj, renderer, hand->current_state));
     hand->render(hand, renderer);
 
-    if (hand -> current_state == 0 && inputs[4])
+    if (hand->current_state == 0 && inputs[4])
     {
         state = ITEMS_MENU;
         hand->items_menu_position(hand);

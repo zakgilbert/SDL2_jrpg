@@ -4,6 +4,7 @@
 
 #ifndef JRPG_MENU_H
 #define JRPG_MENU_H
+
 #define WINDOW_WIDTH (356)
 #define WINDOW_HEIGHT (324)
 
@@ -20,6 +21,7 @@
 #include "Hand.h"
 #include "Items.h"
 uint32_t transition_delay;
+
 typedef struct __menu
 {
     void (*destroy) (struct __menu *);
