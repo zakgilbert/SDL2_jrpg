@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     set_up_timer();
     int running;
     ITEM_QUANTITY = 4;
-    NUM_CHARACTERS = 4;
+    NUM_CHARACTERS = 1;
     ITEMS_IN_BAG = set_item_quanities();
     TICK = 0;
     running = 1;
@@ -51,13 +51,13 @@ int main(int argc, char **argv)
     party->character_1 = CREATE_CHARACTER();
     party->character_2 = CREATE_CHARACTER();
     party->character_3 = CREATE_CHARACTER();
-    
+
     party->character_0->set_stats(party->character_0, "Locke", "32", "Thief", 345, 48, 1000, "graphics/locke_bio.jpg");
     party->character_0->check_stats(party->character_0);
-    
+
     party->character_1->set_stats(party->character_1, "Terra", "23", "Wizard", 311, 151, 811, "graphics/terra_bio.jpg");
     party->character_1->check_stats(party->character_1);
-    
+
     party->character_2->set_stats(party->character_2, "Sabin", "21", "Monk", 422, 23, 1522, "graphics/sabin_bio.jpg");
     party->character_2->check_stats(party->character_2);
 
@@ -66,13 +66,14 @@ int main(int argc, char **argv)
 
     SDL_Thread *player_input_thread;
     SDL_Thread *update_character_stats_thread;
+    SDL_Thread *hand_thread;
 
     renderer = make_renderer(&window);
     party->character_0->create_character_texture(party->character_0, renderer);
     party->character_1->create_character_texture(party->character_1, renderer);
     party->character_2->create_character_texture(party->character_2, renderer);
     party->character_3->create_character_texture(party->character_3, renderer);
-    
+
     forest->create_assets(forest, renderer);
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
@@ -81,6 +82,8 @@ int main(int argc, char **argv)
     state = DARK_FOREST;
     player_input_thread = SDL_CreateThread(input_thread, "input_thread", NULL);
     update_character_stats_thread = SDL_CreateThread(update_character_stats, "update_character_stats", party);
+    hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
+
     while (running)
     {
 
@@ -97,16 +100,20 @@ int main(int argc, char **argv)
             break;
 
         case MAIN_MENU:
-            hand->animate(hand);
+            // hand->animate(hand);
+            TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_main_menu(menu, renderer, hand, party);
+            hand->render(hand,renderer);
             SDL_RenderPresent(renderer);
             break;
 
         case ITEMS_MENU:
-            hand->animate(hand);
+            //hand->animate(hand);
+            TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_items_menu(menu, renderer, hand);
+            hand->render(hand,renderer);
             SDL_RenderPresent(renderer);
             break;
 
@@ -120,6 +127,7 @@ int main(int argc, char **argv)
     }
     SDL_WaitThread(player_input_thread, NULL);
     SDL_WaitThread(update_character_stats_thread, NULL);
+    SDL_WaitThread(hand_thread, NULL);
 
     forest->destroy(forest);
     hero->destroy(hero);
@@ -147,29 +155,29 @@ int update_character_stats(void *ptr)
         {
             is_running = 0;
         }
-            switch (NUM_CHARACTERS)
-            {
-            case 1:
-                party->character_0->check_stats(party->character_0);
-                break;
-            case 2:
-                party->character_0->check_stats(party->character_0);
-                party->character_1->check_stats(party->character_1);
-                break;
-            case 3:
-                party->character_0->check_stats(party->character_0);
-                party->character_1->check_stats(party->character_1);
-                party->character_2->check_stats(party->character_2);
-                break;
-            case 4:
-                party->character_0->check_stats(party->character_0);
-                party->character_1->check_stats(party->character_1);
-                party->character_2->check_stats(party->character_2);
-                party->character_3->check_stats(party->character_3);
-                break;
-            default:
-                break;
-            }
+        switch (NUM_CHARACTERS)
+        {
+        case 1:
+            party->character_0->check_stats(party->character_0);
+            break;
+        case 2:
+            party->character_0->check_stats(party->character_0);
+            party->character_1->check_stats(party->character_1);
+            break;
+        case 3:
+            party->character_0->check_stats(party->character_0);
+            party->character_1->check_stats(party->character_1);
+            party->character_2->check_stats(party->character_2);
+            break;
+        case 4:
+            party->character_0->check_stats(party->character_0);
+            party->character_1->check_stats(party->character_1);
+            party->character_2->check_stats(party->character_2);
+            party->character_3->check_stats(party->character_3);
+            break;
+        default:
+            break;
+        }
 
         SDL_Delay(1);
     }
@@ -268,8 +276,8 @@ void reset_timer()
 
     if (TICKS_PER_SECOND >= SDL_GetPerformanceFrequency())
     {
-        //printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED);
-        //printf("\nTicks Per Second: %ld", TICKS_PER_SECOND);
+        printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED);
+        printf("\nTicks Per Second: %ld", TICKS_PER_SECOND);
         FRAMES_RENDERED = 0;
         TICKS_PER_SECOND = 0;
     }

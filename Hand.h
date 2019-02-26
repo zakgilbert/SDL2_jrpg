@@ -15,7 +15,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_thread.h>
 #include "header.h"
+
+int animate_hand_thread(void *);
 
 typedef struct __hand
 {

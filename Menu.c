@@ -198,7 +198,6 @@ static void __render_character_main_menu_bio(Menu *this, struct SDL_Renderer *re
     SDL_DestroyTexture(this->texture);
     this->surface = NULL;
     this->texture = NULL;
-    SDL_Delay(1);
 }
 
 static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand)
@@ -364,7 +363,7 @@ static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
     MOVEMENT_DISABLED = 1;
     this->main_menu_bg->render(this->main_menu_bg, renderer);
     hand->move_vertical(hand, this->render_main_menu_options(this, renderer, hand->current_state));
-    hand->render(hand, renderer);
+
     switch (NUM_CHARACTERS)
     {
     case 1:
