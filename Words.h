@@ -1,5 +1,10 @@
-#ifndef JRPG_ITEMS_H
-#define JRPH_ITEMS_H
+#ifndef JRPG_WORDS_H
+#define JRPH_WORDS_H
+
+#define FOREACH_STAT(STAT) \
+    STAT(HP)  \
+    STAT(MP)  \
+    STAT(EXP) \
 
 #define FOREACH_ITEM(ITEM) \
     ITEM(Potion) \
@@ -16,6 +21,14 @@ enum ITEM_ENUM {
 
 static const char * ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)
+};
+
+enum STAT_ENUM {
+    FOREACH_STAT(GERERATE_ENUM)
+};
+
+static const char * STATS[] = {
+    FOREACH_STAT(GENERATE_STRING)
 };
 
 #endif

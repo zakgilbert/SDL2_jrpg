@@ -19,24 +19,28 @@
 #include "header.h"
 #include "Window.h"
 #include "Hand.h"
-#include "Items.h"
+#include "Words.h"
 uint32_t transition_delay;
 
 typedef struct __menu
 {
-    void (*destroy) (struct __menu *);
+    void (*destroy)(struct __menu *);
 
     Window *main_menu_bg;
 
-    void (*render_main_menu) (struct __menu *, struct SDL_Renderer *, Hand *);
+    Window *select_character_bg;
 
-    int (*render_main_menu_options) (struct __menu *, struct SDL_Renderer *, int);
+    void (*render_main_menu)(struct __menu *, struct SDL_Renderer *, Hand *);
 
-    void (*render_items_menu) (struct __menu *, struct SDL_Renderer *, Hand *);
+    int (*render_main_menu_options)(struct __menu *, struct SDL_Renderer *, int);
 
-    int (*render_items_menu_options) (struct __menu *, struct SDL_Renderer *, int);
+    void (*render_items_menu)(struct __menu *, struct SDL_Renderer *, Hand *);
 
+    int (*render_items_menu_options)(struct __menu *, struct SDL_Renderer *, int);
 
+    void (*render_use_item_menu)(struct __menu *, struct SDL_Renderer, Hand *);
+
+    int (*render_use_item_menu_options)(struct __menu *, struct SDL_Renderer, int);
 
     TTF_Font *font;
     struct SDL_Rect rect;
@@ -46,6 +50,6 @@ typedef struct __menu
     int option_states;
 } Menu;
 
-Menu *CREATE_MENU ();
+Menu *CREATE_MENU();
 
 #endif //JRPG_MENU_H

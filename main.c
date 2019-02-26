@@ -1,6 +1,7 @@
 #include "main.h"
 
 int inputs[6];
+int NUM_CHARACTERS;
 int EDGE_DETECTION[4];
 int MOVEMENT_DISABLED;
 int * ITEM_QUANTITIES;
@@ -21,6 +22,7 @@ int main(int argc, char **argv)
     set_up_timer();
     int running;
     ITEM_QUANTITY = 4;
+    NUM_CHARACTERS = 4;
     ITEMS_IN_BAG = set_item_quanities();
     TICK = 0;
     running = 1;
@@ -40,6 +42,11 @@ int main(int argc, char **argv)
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
+
+    Character ** characters = malloc(sizeof(Character *) * NUM_CHARACTERS); 
+    Character * locke = CREATE_CHARACTER();
+    locke->set_stats(locke, "Locke", "32", "Thief", 345, 48, 1000, "/graphics/locke_bio.jpg");
+    characters[0] = locke;
 
     SDL_Thread *player_input_thread;
 

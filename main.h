@@ -26,6 +26,7 @@
 #include "Window.h"
 #include "Menu.h"
 #include "Hand.h"
+#include "Character.h"
 
 int quit();
 void set_up_timer();
