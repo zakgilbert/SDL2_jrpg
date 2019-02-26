@@ -24,9 +24,11 @@ typedef struct __character
     void (*destroy)(struct __character *);
     void (*set_stats)(struct __character *, const char *name, const char *age, char *job, int HP, int MP, int EXP, const char *image_path);
     void (*check_stats)(struct __character *);
-    void (*check_stats_wrapper)(struct __character *);
-    char ** (*get_stat_matrix)(struct __character *);
+    void (*create_character_texture) (struct __character *, struct SDL_Renderer *);
+    struct SDL_Texture * character_texture;
+    struct SDL_Rect character_rect;
 
+    const char *image_path;
     const char *name;
     const char *age;
     char *job;

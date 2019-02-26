@@ -17,42 +17,188 @@ static void __destroy(Menu *this)
         this = NULL;
     }
 }
-static void __render_character_main_menu_bio(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character *character)
+static void __render_character_main_menu_image(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character *character, int character_index)
 {
-    int skip;
-    struct SDL_Texture * tex_name_word;
-    struct SDL_Texture * tex_age_word;
-    struct SDL_Texture * tex_current_word;
-    struct SDL_Texture * tex_slash_word;
-    struct SDL_Texture * tex_max_word;
+    character->character_rect.x = 20;
+    character->character_rect.w = 45;
+    character->character_rect.h = 45;
 
+    character->character_rect.y = 15 + (80 * character_index);
 
+    SDL_RenderCopy(renderer, character->character_texture, NULL, &character->character_rect);
+}
+static void __render_character_main_menu_bio(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character *character, int character_index)
+{
+    int skip, zero_x, first_x, second_x, third_x;
+    char *slash = " /";
     char font_path[] = "ponde___.ttf";
-    this->font = TTF_OpenFont(font_path, 12);
-
+    this->font = TTF_OpenFont(font_path, 9);
+    zero_x = 80;
+    first_x = 40;
+    second_x = 30;
+    third_x = 15;
     if (!this->font)
     {
         printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
     }
 
-    skip = TTF_FontLineSkip(this->font);
-    this->rect.x = 49;
-    this->rect.y = 15;
+    skip = TTF_FontLineSkip(this->font); 
+    /********************************************************************/
+    this->rect.x = zero_x;
+    this->rect.y = 15 + (character_index * 80);
+    TTF_SizeText(this->font, character->name, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, character->name, white);
 
-    for (int i = 0; i < character->num_stats; i++)
-    {
-        TTF_SizeText(this->font, character->get_stat_matrix(character)[i], &this->rect.w, &this->rect.h);
-        this->surface = TTF_RenderText_Solid(this->font, character->get_stat_matrix(character)[i], white);
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
 
-        this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
-        SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-        this->rect.y += skip;
-    }
+    /********************************************************************/
+
+    this->rect.y += skip;
+    this->rect.x = zero_x;
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    TTF_SizeText(this->font, "HP:", &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, "HP:", white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    this->rect.x += first_x;
+
+    TTF_SizeText(this->font, character->HP.str_current, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, character->HP.str_current, white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
+    this->rect.x += second_x;
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    TTF_SizeText(this->font, slash, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, slash, white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
+    this->rect.x += third_x;
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    TTF_SizeText(this->font, character->HP.str_max, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, character->HP.str_max, white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
+    /********************************************************************/
+
+    this->rect.y += skip;
+    this->rect.x = zero_x;
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    TTF_SizeText(this->font, "MP:", &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, "MP:", white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    this->rect.x += first_x;
+
+    TTF_SizeText(this->font, character->MP.str_current, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, character->MP.str_current, white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
+    this->rect.x += second_x;
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    TTF_SizeText(this->font, slash, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, slash, white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
+    this->rect.x += third_x;
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    TTF_SizeText(this->font, character->MP.str_max, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, character->MP.str_max, white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
+    /********************************************************************/
+
+    this->rect.y += skip;
+    this->rect.x = zero_x;
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    TTF_SizeText(this->font, "EXP:", &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, "EXP:", white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    this->rect.x += first_x;
+
+    TTF_SizeText(this->font, character->EXP.str_current, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, character->EXP.str_current, white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
+    this->rect.x += second_x;
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    TTF_SizeText(this->font, slash, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, slash, white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
+    this->rect.x += third_x;
+
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+
+    TTF_SizeText(this->font, character->EXP.str_max, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, character->EXP.str_max, white);
+
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+
     TTF_CloseFont(this->font);
     SDL_FreeSurface(this->surface);
     SDL_DestroyTexture(this->texture);
     this->surface = NULL;
     this->texture = NULL;
+    SDL_Delay(1);
 }
 
 static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand)
@@ -200,7 +346,7 @@ static int __render_main_menu_options(Menu *this, struct SDL_Renderer *renderer,
     return skip;
 }
 
-static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, struct Party * party)
+static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, struct Party *party)
 {
     if (INPUT == CANCEL)
     {
@@ -213,12 +359,45 @@ static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
         SDL_Delay(transition_delay);
         return;
     }
+
     hand->change_state_quantity(hand, this->option_states, 0);
     MOVEMENT_DISABLED = 1;
     this->main_menu_bg->render(this->main_menu_bg, renderer);
     hand->move_vertical(hand, this->render_main_menu_options(this, renderer, hand->current_state));
-    this->render_character_main_menu_bio(this, renderer, hand, party->character_0);
     hand->render(hand, renderer);
+    switch (NUM_CHARACTERS)
+    {
+    case 1:
+        this->render_character_main_menu_bio(this, renderer, hand, party->character_0, 0);
+        this->render_character_main_menu_image(this, renderer, hand, party->character_0, 0);
+        break;
+    case 2:
+        this->render_character_main_menu_bio(this, renderer, hand, party->character_0, 0);
+        this->render_character_main_menu_image(this, renderer, hand, party->character_0, 0);
+        this->render_character_main_menu_bio(this, renderer, hand, party->character_1, 1);
+        this->render_character_main_menu_image(this, renderer, hand, party->character_1, 1);
+        break;
+    case 3:
+        this->render_character_main_menu_bio(this, renderer, hand, party->character_0, 0);
+        this->render_character_main_menu_image(this, renderer, hand, party->character_0, 0);
+        this->render_character_main_menu_bio(this, renderer, hand, party->character_1, 1);
+        this->render_character_main_menu_image(this, renderer, hand, party->character_1, 1);
+        this->render_character_main_menu_bio(this, renderer, hand, party->character_2, 2);
+        this->render_character_main_menu_image(this, renderer, hand, party->character_2, 2);
+        break;
+    case 4:
+        this->render_character_main_menu_bio(this, renderer, hand, party->character_0, 0);
+        this->render_character_main_menu_image(this, renderer, hand, party->character_0, 0);
+        this->render_character_main_menu_bio(this, renderer, hand, party->character_1, 1);
+        this->render_character_main_menu_image(this, renderer, hand, party->character_1, 1);
+        this->render_character_main_menu_bio(this, renderer, hand, party->character_2, 2);
+        this->render_character_main_menu_image(this, renderer, hand, party->character_2, 2);
+        this->render_character_main_menu_bio(this, renderer, hand, party->character_3, 3);
+        this->render_character_main_menu_image(this, renderer, hand, party->character_3, 3);
+        break;
+    default:
+        break;
+    }
 
     if (hand->current_state == 0 && inputs[4])
     {
@@ -242,6 +421,7 @@ Menu *CREATE_MENU()
     this->render_items_menu = __render_items_menu;
     this->render_items_menu_options = __render_items_menu_options;
     this->render_character_main_menu_bio = __render_character_main_menu_bio;
+    this->render_character_main_menu_image = __render_character_main_menu_image;
 
     this->main_menu_bg = CREATE_WINDOW(12, 8, 336, 306);
     this->select_character_bg = CREATE_WINDOW(12, 200, 336, 153);

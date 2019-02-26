@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     set_up_timer();
     int running;
     ITEM_QUANTITY = 4;
-    NUM_CHARACTERS = 1;
+    NUM_CHARACTERS = 4;
     ITEMS_IN_BAG = set_item_quanities();
     TICK = 0;
     running = 1;
@@ -48,13 +48,31 @@ int main(int argc, char **argv)
     party = malloc(sizeof(struct Party));
 
     party->character_0 = CREATE_CHARACTER();
-    party->character_0->set_stats(party->character_0, "Locke", "32", "Thief", 345, 48, 1000, "/graphics/locke_bio.jpg");
+    party->character_1 = CREATE_CHARACTER();
+    party->character_2 = CREATE_CHARACTER();
+    party->character_3 = CREATE_CHARACTER();
+    
+    party->character_0->set_stats(party->character_0, "Locke", "32", "Thief", 345, 48, 1000, "graphics/locke_bio.jpg");
     party->character_0->check_stats(party->character_0);
+    
+    party->character_1->set_stats(party->character_1, "Terra", "23", "Wizard", 311, 151, 811, "graphics/terra_bio.jpg");
+    party->character_1->check_stats(party->character_1);
+    
+    party->character_2->set_stats(party->character_2, "Sabin", "21", "Monk", 422, 23, 1522, "graphics/sabin_bio.jpg");
+    party->character_2->check_stats(party->character_2);
+
+    party->character_3->set_stats(party->character_3, "Gau", "14", "Bezerker", 353, 3, 933, "graphics/gau_bio.jpg");
+    party->character_3->check_stats(party->character_3);
 
     SDL_Thread *player_input_thread;
     SDL_Thread *update_character_stats_thread;
 
     renderer = make_renderer(&window);
+    party->character_0->create_character_texture(party->character_0, renderer);
+    party->character_1->create_character_texture(party->character_1, renderer);
+    party->character_2->create_character_texture(party->character_2, renderer);
+    party->character_3->create_character_texture(party->character_3, renderer);
+    
     forest->create_assets(forest, renderer);
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
@@ -108,6 +126,8 @@ int main(int argc, char **argv)
     menu->destroy(menu);
     hand->destroy(hand);
     free(BAG);
+    party->character_0->destroy(party->character_0);
+    free(party);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     TTF_Quit();
@@ -117,9 +137,9 @@ int main(int argc, char **argv)
 
 int update_character_stats(void *ptr)
 {
-    int i, is_running, stats_changed;
+    int is_running;
     struct Party *party = ptr;
-    stats_changed = 0;
+
     is_running = 1;
     while (is_running)
     {
@@ -127,8 +147,6 @@ int update_character_stats(void *ptr)
         {
             is_running = 0;
         }
-        if (stats_changed)
-        {
             switch (NUM_CHARACTERS)
             {
             case 1:
@@ -152,7 +170,6 @@ int update_character_stats(void *ptr)
             default:
                 break;
             }
-        }
 
         SDL_Delay(1);
     }
