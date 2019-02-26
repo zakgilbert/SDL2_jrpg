@@ -20,6 +20,8 @@
 #include "Window.h"
 #include "Hand.h"
 #include "Words.h"
+#include "Character.h"
+
 uint32_t transition_delay;
 
 typedef struct __menu
@@ -30,7 +32,9 @@ typedef struct __menu
 
     Window *select_character_bg;
 
-    void (*render_main_menu)(struct __menu *, struct SDL_Renderer *, Hand *);
+    void (*render_character_main_menu_bio) (struct __menu *, struct SDL_Renderer *, Hand *,Character *); 
+
+    void (*render_main_menu)(struct __menu *, struct SDL_Renderer *, Hand *, struct Party * );
 
     int (*render_main_menu_options)(struct __menu *, struct SDL_Renderer *, int);
 

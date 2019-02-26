@@ -38,5 +38,7 @@ int check_delta();
 void update_delta();
 int render_thread(void *);
 int set_item_quanities();
+int update_character_stats(void * ptr);
+
 
 #endif //JRPG_MAIN_H

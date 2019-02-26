@@ -8,6 +8,7 @@
 #define WINDOW_WIDTH (356)
 #define WINDOW_HEIGHT (324)
 
+extern int NUM_STATS;
 extern int NUM_CHARACTERS;
 extern int ITEM_QUANTITY;
 extern int ITEMS_IN_BAG;

@@ -17,6 +17,43 @@ static void __destroy(Menu *this)
         this = NULL;
     }
 }
+static void __render_character_main_menu_bio(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character *character)
+{
+    int skip;
+    struct SDL_Texture * tex_name_word;
+    struct SDL_Texture * tex_age_word;
+    struct SDL_Texture * tex_current_word;
+    struct SDL_Texture * tex_slash_word;
+    struct SDL_Texture * tex_max_word;
+
+
+    char font_path[] = "ponde___.ttf";
+    this->font = TTF_OpenFont(font_path, 12);
+
+    if (!this->font)
+    {
+        printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
+    }
+
+    skip = TTF_FontLineSkip(this->font);
+    this->rect.x = 49;
+    this->rect.y = 15;
+
+    for (int i = 0; i < character->num_stats; i++)
+    {
+        TTF_SizeText(this->font, character->get_stat_matrix(character)[i], &this->rect.w, &this->rect.h);
+        this->surface = TTF_RenderText_Solid(this->font, character->get_stat_matrix(character)[i], white);
+
+        this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+        SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+        this->rect.y += skip;
+    }
+    TTF_CloseFont(this->font);
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+    this->surface = NULL;
+    this->texture = NULL;
+}
 
 static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand)
 {
@@ -163,7 +200,7 @@ static int __render_main_menu_options(Menu *this, struct SDL_Renderer *renderer,
     return skip;
 }
 
-static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand)
+static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, struct Party * party)
 {
     if (INPUT == CANCEL)
     {
@@ -180,6 +217,7 @@ static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
     MOVEMENT_DISABLED = 1;
     this->main_menu_bg->render(this->main_menu_bg, renderer);
     hand->move_vertical(hand, this->render_main_menu_options(this, renderer, hand->current_state));
+    this->render_character_main_menu_bio(this, renderer, hand, party->character_0);
     hand->render(hand, renderer);
 
     if (hand->current_state == 0 && inputs[4])
@@ -197,13 +235,14 @@ static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
 Menu *CREATE_MENU()
 {
     Menu *this = (Menu *)malloc(sizeof(*this));
-    // -n>
+
     this->destroy = __destroy;
     this->render_main_menu = __render_main_menu;
     this->render_main_menu_options = __render_main_menu_options;
     this->render_items_menu = __render_items_menu;
     this->render_items_menu_options = __render_items_menu_options;
-    // -o>
+    this->render_character_main_menu_bio = __render_character_main_menu_bio;
+
     this->main_menu_bg = CREATE_WINDOW(12, 8, 336, 306);
     this->select_character_bg = CREATE_WINDOW(12, 200, 336, 153);
     this->font = NULL;

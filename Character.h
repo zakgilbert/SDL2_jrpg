@@ -6,6 +6,8 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_thread.h>
+
 #include "header.h"
 
 struct Main_Attribute
@@ -16,7 +18,6 @@ struct Main_Attribute
     char str_max[10];
 };
 
-int update_character_stats(void *characters);
 
 typedef struct __character
 {
@@ -37,4 +38,14 @@ typedef struct __character
 } Character;
 
 Character *CREATE_CHARACTER();
+
+struct Party {
+    Character * character_0;
+    Character * character_1;
+    Character * character_2;
+    Character * character_3;
+};
+
+int count_party(struct Party *);
+void set_party_null(struct Party *);
 #endif //JRPG_CHARACTER_H
