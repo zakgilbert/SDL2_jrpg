@@ -30,7 +30,8 @@ enum states
 {
     DARK_FOREST,
     MAIN_MENU,
-    ITEMS_MENU
+    ITEMS_MENU,
+    USE_ITEM
 };
 enum states state, previous_state;
 enum INPUTS

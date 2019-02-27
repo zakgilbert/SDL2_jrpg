@@ -44,9 +44,9 @@ typedef struct __menu
 
     int (*render_items_menu_options)(struct __menu *, struct SDL_Renderer *, int);
 
-    void (*render_use_item_menu)(struct __menu *, struct SDL_Renderer, Hand *);
+    void (*render_use_item_menu)(struct __menu *, struct SDL_Renderer *, Hand *);
 
-    int (*render_use_item_menu_options)(struct __menu *, struct SDL_Renderer, int);
+    int (*render_use_item_menu_options)(struct __menu *, struct SDL_Renderer*, int);
 
     TTF_Font *font;
     struct SDL_Rect rect;
@@ -54,6 +54,7 @@ typedef struct __menu
     struct SDL_Surface *surface;
     struct SDL_Texture *texture;
     int option_states;
+    int item_being_used;
 } Menu;
 
 Menu *CREATE_MENU();

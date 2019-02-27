@@ -34,6 +34,8 @@ typedef struct __hand
     
     void (*items_menu_position) (struct __hand*);
 
+    void (*use_item_position) (struct __hand*);
+
     struct SDL_Texture *texture;
     struct SDL_Rect rect;
     struct SDL_Rect position;

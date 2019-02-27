@@ -19,13 +19,20 @@ int stat_matrix_thread(void *ptr)
     is_running = 1;
     Character **p = ptr;
     char *slash = " /";
+    char *HP = "HP:   ";
+    char *MP = "MP:   ";
+    char *EXP = "EXP:  ";
+    size_t slash_size = (strlen(slash) + 1);
+    size_t size_HP_string = (strlen(HP) + 1);
+    size_t size_MP_string = (strlen(MP) + 1);
+    size_t size_EXP_string = (strlen(EXP) + 1);
+
     STAT_MATRIX = (char **)malloc(sizeof(char *) * (NUM_CHARACTERS * 4));
     while (is_running)
     {
         int j = 0;
         for (size_t i = 0; i < NUM_CHARACTERS; i++)
         {
-            size_t slash_size = (strlen(slash) + 1);
             size_t name_size = (strlen(p[i]->name) + 1);
             size_t HP_current_size = (strlen(p[i]->HP.str_current) + 1);
             size_t MP_current_size = (strlen(p[i]->MP.str_current) + 1);
@@ -44,8 +51,9 @@ int stat_matrix_thread(void *ptr)
 
             j++;
 
-            buffer = realloc(buffer, HP_current_size + slash_size + HP_max_size);
-            strcpy(buffer, p[i]->HP.str_current);
+            buffer = realloc(buffer, size_HP_string + HP_current_size + slash_size + HP_max_size);
+            strcpy(buffer, HP);
+            strcat(buffer, p[i]->HP.str_current);
             strcat(buffer, slash);
             strcat(buffer, p[i]->HP.str_max);
 
@@ -56,8 +64,9 @@ int stat_matrix_thread(void *ptr)
 
             j++;
 
-            buffer = realloc(buffer, MP_current_size + slash_size + MP_max_size);
-            strcpy(buffer, p[i]->MP.str_current);
+            buffer = realloc(buffer, size_MP_string + MP_current_size + slash_size + MP_max_size);
+            strcpy(buffer, MP);
+            strcat(buffer, p[i]->MP.str_current);
             strcat(buffer, slash);
             strcat(buffer, p[i]->MP.str_max);
 
@@ -68,8 +77,9 @@ int stat_matrix_thread(void *ptr)
 
             j++;
 
-            buffer = realloc(buffer, EXP_current_size + slash_size + EXP_max_size);
-            strcpy(buffer, p[i]->EXP.str_current);
+            buffer = realloc(buffer, size_EXP_string + EXP_current_size + slash_size + EXP_max_size);
+            strcpy(buffer, EXP);
+            strcat(buffer, p[i]->EXP.str_current);
             strcat(buffer, slash);
             strcat(buffer, p[i]->EXP.str_max);
 
