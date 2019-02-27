@@ -13,6 +13,80 @@ static void __destroy(Character *this)
         this = NULL;
     }
 }
+int stat_matrix_thread(void *ptr)
+{
+    int is_running;
+    is_running = 1;
+    Character **p = ptr;
+    char *slash = " /";
+    STAT_MATRIX = (char **)malloc(sizeof(char *) * (NUM_CHARACTERS * 4));
+    while (is_running)
+    {
+        int j = 0;
+        for (size_t i = 0; i < NUM_CHARACTERS; i++)
+        {
+            size_t slash_size = (strlen(slash) + 1);
+            size_t name_size = (strlen(p[i]->name) + 1);
+            size_t HP_current_size = (strlen(p[i]->HP.str_current) + 1);
+            size_t MP_current_size = (strlen(p[i]->MP.str_current) + 1);
+            size_t EXP_current_size = (strlen(p[i]->EXP.str_current) + 1);
+
+            size_t HP_max_size = (strlen(p[i]->HP.str_max) + 1);
+            size_t MP_max_size = (strlen(p[i]->MP.str_max) + 1);
+            size_t EXP_max_size = (strlen(p[i]->EXP.str_max) + 1);
+
+            char *buffer = malloc(name_size);
+            strcpy(buffer, p[i]->name);
+            size_t buffer_size = (strlen(buffer) + 1);
+
+            STAT_MATRIX[j] = (char *)malloc(sizeof(buffer_size));
+            strcat(STAT_MATRIX[j], buffer);
+
+            j++;
+
+            buffer = realloc(buffer, HP_current_size + slash_size + HP_max_size);
+            strcpy(buffer, p[i]->HP.str_current);
+            strcat(buffer, slash);
+            strcat(buffer, p[i]->HP.str_max);
+
+            buffer_size = (strlen(buffer) + 1);
+
+            STAT_MATRIX[j] = (char *)malloc(sizeof(buffer_size));
+            strcat(STAT_MATRIX[j], buffer);
+
+            j++;
+
+            buffer = realloc(buffer, MP_current_size + slash_size + MP_max_size);
+            strcpy(buffer, p[i]->MP.str_current);
+            strcat(buffer, slash);
+            strcat(buffer, p[i]->MP.str_max);
+
+            buffer_size = (strlen(buffer) + 1);
+
+            STAT_MATRIX[j] = (char *)malloc(sizeof(buffer_size));
+            strcat(STAT_MATRIX[j], buffer);
+
+            j++;
+
+            buffer = realloc(buffer, EXP_current_size + slash_size + EXP_max_size);
+            strcpy(buffer, p[i]->EXP.str_current);
+            strcat(buffer, slash);
+            strcat(buffer, p[i]->EXP.str_max);
+
+            buffer_size = (strlen(buffer) + 1);
+
+            STAT_MATRIX[j] = (char *)malloc(sizeof(buffer_size));
+            strcat(STAT_MATRIX[j], buffer);
+            j++;
+        }
+        if (INPUT == QUIT)
+        {
+            is_running = 0;
+        }
+        SDL_Delay(1);
+    }
+    return 0;
+}
 
 void set_party_null(struct Party *party)
 {
@@ -40,11 +114,12 @@ int count_party(struct Party *party)
 
 static void __create_character_texture(Character *this, struct SDL_Renderer *renderer)
 {
-    struct SDL_Surface * surface = NULL;
-    struct SDL_Texture * texture = NULL;
+    struct SDL_Surface *surface = NULL;
+    struct SDL_Texture *texture = NULL;
     surface = IMG_Load(this->image_path);
 
-    if (!surface) {
+    if (!surface)
+    {
         printf("error creating surface: %s\n", SDL_GetError());
         SDL_Quit();
     }
@@ -52,13 +127,13 @@ static void __create_character_texture(Character *this, struct SDL_Renderer *ren
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
 
-    if (!texture) {
+    if (!texture)
+    {
         printf("error creating Texture: %s\n", SDL_GetError());
         SDL_Quit();
     }
     SDL_QueryTexture(texture, NULL, NULL, &this->character_rect.w, &this->character_rect.h);
     this->character_texture = texture;
-    
 }
 static void __check_stats(Character *this)
 {

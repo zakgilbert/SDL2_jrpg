@@ -15,6 +15,7 @@ int Y;
 int MAP_WIDTH;
 int MAP_HEIGHT;
 int TICK;
+char ** STAT_MATRIX;
 
 int main(int argc, char **argv)
 {
@@ -22,7 +23,8 @@ int main(int argc, char **argv)
     set_up_timer();
     int running;
     ITEM_QUANTITY = 4;
-    NUM_CHARACTERS = 1;
+    NUM_CHARACTERS = 4;
+
     ITEMS_IN_BAG = set_item_quanities();
     TICK = 0;
     running = 1;
@@ -44,6 +46,7 @@ int main(int argc, char **argv)
     Menu *menu = CREATE_MENU();
 
     struct Party *party;
+    Character ** p = malloc(sizeof(struct Party));
 
     party = malloc(sizeof(struct Party));
 
@@ -64,9 +67,15 @@ int main(int argc, char **argv)
     party->character_3->set_stats(party->character_3, "Gau", "14", "Bezerker", 353, 3, 933, "graphics/gau_bio.jpg");
     party->character_3->check_stats(party->character_3);
 
+    p[0] = party->character_0;
+    p[1] = party->character_1;
+    p[2] = party->character_2;
+    p[3] = party->character_3;
+
     SDL_Thread *player_input_thread;
     SDL_Thread *update_character_stats_thread;
     SDL_Thread *hand_thread;
+    SDL_Thread *matrix_thread;
 
     renderer = make_renderer(&window);
     party->character_0->create_character_texture(party->character_0, renderer);
@@ -83,10 +92,10 @@ int main(int argc, char **argv)
     player_input_thread = SDL_CreateThread(input_thread, "input_thread", NULL);
     update_character_stats_thread = SDL_CreateThread(update_character_stats, "update_character_stats", party);
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
+    matrix_thread = SDL_CreateThread(stat_matrix_thread, "stat_matrix_thread", p);
 
     while (running)
     {
-
         start_timer();
         refresh_inputs(EDGE_DETECTION, 4);
         IS_MOVING = 0;
@@ -103,7 +112,7 @@ int main(int argc, char **argv)
             // hand->animate(hand);
             TICK = 1;
             SDL_RenderClear(renderer);
-            menu->render_main_menu(menu, renderer, hand, party);
+            menu->render_main_menu(menu, renderer, hand, p);
             hand->render(hand,renderer);
             SDL_RenderPresent(renderer);
             break;
@@ -128,6 +137,7 @@ int main(int argc, char **argv)
     SDL_WaitThread(player_input_thread, NULL);
     SDL_WaitThread(update_character_stats_thread, NULL);
     SDL_WaitThread(hand_thread, NULL);
+    SDL_WaitThread(matrix_thread, NULL);
 
     forest->destroy(forest);
     hero->destroy(hero);
@@ -276,8 +286,8 @@ void reset_timer()
 
     if (TICKS_PER_SECOND >= SDL_GetPerformanceFrequency())
     {
-        printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED);
-        printf("\nTicks Per Second: %ld", TICKS_PER_SECOND);
+       // printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED);
+       // printf("\nTicks Per Second: %ld", TICKS_PER_SECOND);
         FRAMES_RENDERED = 0;
         TICKS_PER_SECOND = 0;
     }

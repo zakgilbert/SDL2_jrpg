@@ -32,11 +32,11 @@ typedef struct __menu
 
     Window *select_character_bg;
 
-    void (*render_character_main_menu_bio) (struct __menu *, struct SDL_Renderer *, Hand *,Character *, int); 
+    void (*render_character_main_menu_bio) (struct __menu *, struct SDL_Renderer *, Hand *); 
 
-    void (*render_character_main_menu_image)(struct __menu *, struct SDL_Renderer *, Hand *,Character *, int);  
+    void (*render_character_main_menu_image)(struct __menu *, struct SDL_Renderer *, Hand *,Character **);  
 
-    void (*render_main_menu)(struct __menu *, struct SDL_Renderer *, Hand *, struct Party * );
+    void (*render_main_menu)(struct __menu *, struct SDL_Renderer *, Hand *, Character ** );
 
     int (*render_main_menu_options)(struct __menu *, struct SDL_Renderer *, int);
 

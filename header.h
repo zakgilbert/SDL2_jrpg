@@ -9,12 +9,13 @@
 #define WINDOW_HEIGHT (324)
 
 extern int NUM_STATS;
+extern char **STAT_MATRIX;
 extern int NUM_CHARACTERS;
 extern int ITEM_QUANTITY;
 extern int ITEMS_IN_BAG;
-extern int * ITEM_QUANTITIES;
-extern char ** BAG;
-extern int * BAG_QUANTITIES;
+extern int *ITEM_QUANTITIES;
+extern char **BAG;
+extern int *BAG_QUANTITIES;
 extern int inputs[6];
 extern int EDGE_DETECTION[4];
 extern int MOVEMENT_DISABLED;
@@ -25,9 +26,20 @@ extern int MAP_WIDTH;
 extern int MAP_HEIGHT;
 extern int TICK;
 
-enum states{DARK_FOREST, MAIN_MENU, ITEMS_MENU};
+enum states
+{
+    DARK_FOREST,
+    MAIN_MENU,
+    ITEMS_MENU
+};
 enum states state, previous_state;
-enum INPUTS{NONE, OKAY, QUIT, CANCEL};
+enum INPUTS
+{
+    NONE,
+    OKAY,
+    QUIT,
+    CANCEL
+};
 enum INPUTS INPUT;
 
 int FPS;

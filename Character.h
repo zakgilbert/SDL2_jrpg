@@ -19,6 +19,7 @@ struct Main_Attribute
 };
 
 
+int stat_matrix_thread(void * ptr);
 typedef struct __character
 {
     void (*destroy)(struct __character *);
