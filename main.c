@@ -27,6 +27,7 @@ int main(int argc, char **argv)
     NUM_CHARACTERS = 4;
     REFRESH_ITEMS = 1;
     ITEMS_IN_BAG = fill_bag();
+    refresh_items(NULL);
     TICK = 0;
     running = 1;
     refresh_inputs(inputs, 6);
@@ -77,7 +78,6 @@ int main(int argc, char **argv)
     SDL_Thread *update_character_stats_thread;
     SDL_Thread *hand_thread;
     SDL_Thread *matrix_thread;
-    SDL_Thread *item_thread;
 
     renderer = make_renderer(&window);
     party_struct->character_0->create_character_texture(party_struct->character_0, renderer);
@@ -91,7 +91,6 @@ int main(int argc, char **argv)
 
     MOVEMENT_DISABLED = 0;
     state = DARK_FOREST;
-    item_thread = SDL_CreateThread(refresh_items, "refresh_items", NULL);
     player_input_thread = SDL_CreateThread(input_thread, "input_thread", NULL);
     update_character_stats_thread = SDL_CreateThread(update_character_stats, "update_character_stats", party);
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
@@ -123,6 +122,7 @@ int main(int argc, char **argv)
         case ITEMS_MENU:
             //hand->animate(hand);
             TICK = 1;
+            refresh_items(NULL);
             SDL_RenderClear(renderer);
             menu->render_items_menu(menu, renderer, hand);
             hand->render(hand, renderer);
@@ -148,7 +148,6 @@ int main(int argc, char **argv)
     SDL_WaitThread(update_character_stats_thread, NULL);
     SDL_WaitThread(hand_thread, NULL);
     SDL_WaitThread(matrix_thread, NULL);
-    SDL_WaitThread(item_thread, NULL);
 
     forest->destroy(forest);
     hero->destroy(hero);
@@ -207,20 +206,12 @@ int fill_bag()
 }
 int refresh_items(void *ptr)
 {
-    int is_running = 1;
-    while (is_running)
-    {
-        if (INPUT == QUIT)
-        {
-            is_running = 0;
-        }
         if (REFRESH_ITEMS)
         {
             ITEMS_IN_BAG = set_item_quanities();
             REFRESH_ITEMS = 0;
         }
         SDL_Delay(1);
-    }
     return 0;
 }
 int set_item_quanities()
