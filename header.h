@@ -13,7 +13,7 @@ extern char **STAT_MATRIX;
 extern int NUM_CHARACTERS;
 extern int ITEM_QUANTITY;
 extern int ITEMS_IN_BAG;
-extern int *ITEM_QUANTITIES;
+extern int * ITEM_QUANTITIES;
 extern char **BAG;
 extern int *BAG_QUANTITIES;
 extern int inputs[6];
@@ -25,6 +25,7 @@ extern int Y;
 extern int MAP_WIDTH;
 extern int MAP_HEIGHT;
 extern int TICK;
+extern int REFRESH_ITEMS;
 
 enum states
 {

@@ -9,6 +9,7 @@ int *BAG_QUANTITIES;
 int ITEM_QUANTITY;
 int ITEMS_IN_BAG;
 int IS_MOVING;
+int REFRESH_ITEMS;
 char **BAG;
 int X;
 int Y;
@@ -24,8 +25,8 @@ int main(int argc, char **argv)
     int running;
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;
-
-    ITEMS_IN_BAG = set_item_quanities();
+    REFRESH_ITEMS = 1;
+    ITEMS_IN_BAG = fill_bag();
     TICK = 0;
     running = 1;
     refresh_inputs(inputs, 6);
@@ -76,6 +77,7 @@ int main(int argc, char **argv)
     SDL_Thread *update_character_stats_thread;
     SDL_Thread *hand_thread;
     SDL_Thread *matrix_thread;
+    SDL_Thread *item_thread;
 
     renderer = make_renderer(&window);
     party_struct->character_0->create_character_texture(party_struct->character_0, renderer);
@@ -89,11 +91,12 @@ int main(int argc, char **argv)
 
     MOVEMENT_DISABLED = 0;
     state = DARK_FOREST;
+    item_thread = SDL_CreateThread(refresh_items, "refresh_items", NULL);
     player_input_thread = SDL_CreateThread(input_thread, "input_thread", NULL);
     update_character_stats_thread = SDL_CreateThread(update_character_stats, "update_character_stats", party);
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
     matrix_thread = SDL_CreateThread(stat_matrix_thread, "stat_matrix_thread", party);
-
+    party[0]->HP.current = 100;
     while (running)
     {
         start_timer();
@@ -128,13 +131,14 @@ int main(int argc, char **argv)
         case USE_ITEM:
             TICK = 1;
             SDL_RenderClear(renderer);
-            menu->render_use_item_menu(menu, renderer, hand);
+            menu->render_use_item_menu(menu, renderer, hand, party);
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;
         default:
             break;
         }
+        // printf("\nHand X: %d\nHand Y: %d", hand->position.x, hand->position.y);
         running = quit();
         FRAMES_RENDERED++;
         delay();
@@ -144,6 +148,7 @@ int main(int argc, char **argv)
     SDL_WaitThread(update_character_stats_thread, NULL);
     SDL_WaitThread(hand_thread, NULL);
     SDL_WaitThread(matrix_thread, NULL);
+    SDL_WaitThread(item_thread, NULL);
 
     forest->destroy(forest);
     hero->destroy(hero);
@@ -153,6 +158,8 @@ int main(int argc, char **argv)
     party_struct->character_0->destroy(party_struct->character_0);
     free(party_struct);
     free(STAT_MATRIX);
+    free(ITEM_QUANTITIES);
+    free(BAG_QUANTITIES);
     free(party);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -181,30 +188,58 @@ int update_character_stats(void *ptr)
     }
     return 0;
 }
-int set_item_quanities()
+int fill_bag()
 {
-
     int temp[4] = {3, 2, 1, 0};
-    int i, count;
+    int count = 0;
+    ITEM_QUANTITY = 4;
 
-    for (i = 0; i < ITEM_QUANTITY; i++)
+    ITEM_QUANTITIES = malloc(sizeof(int) * ITEM_QUANTITY);
+    for (int i = 0; i < ITEM_QUANTITY; i++)
     {
+        ITEM_QUANTITIES[i] = temp[i];
         if (temp[i] != 0)
         {
             count++;
         }
     }
+    return count;
+}
+int refresh_items(void *ptr)
+{
+    int is_running = 1;
+    while (is_running)
+    {
+        if (INPUT == QUIT)
+        {
+            is_running = 0;
+        }
+        if (REFRESH_ITEMS)
+        {
+            ITEMS_IN_BAG = set_item_quanities();
+            REFRESH_ITEMS = 0;
+        }
+        SDL_Delay(1);
+    }
+    return 0;
+}
+int set_item_quanities()
+{
+    int i, count;
     char **inb;
-    inb = malloc(sizeof(char *) * count);
-    BAG_QUANTITIES = malloc(sizeof(int) * count);
 
+    count = 0;
+    inb = malloc(sizeof(char *) * ITEM_QUANTITY);
+    BAG_QUANTITIES = malloc(sizeof(int) * ITEMS_IN_BAG);
+    
     for (i = 0; i < ITEM_QUANTITY; i++)
     {
-        if (temp[i] != 0)
+        if (ITEM_QUANTITIES[i] != 0)
         {
             inb[i] = malloc(sizeof(ITEMS[i]));
             strcat(inb[i], ITEMS[i]);
-            BAG_QUANTITIES[i] = temp[i];
+            BAG_QUANTITIES[i] = ITEM_QUANTITIES[i];
+            count++;
         }
     }
     BAG = inb;

@@ -38,7 +38,7 @@ int animate_hand_thread(void *ptr)
 static void __use_item_position(Hand *this)
 {
     this->position.x = 15;
-    this->position.y = 200;
+    this->position.y = 215;
 }
 
 static void __items_menu_position(Hand *this)
@@ -100,6 +100,18 @@ static SDL_Rect *__get_rect_pos_pointer(Hand *this)
 static SDL_Rect *__get_rect_pointer(Hand *this)
 {
     return &this->rect;
+}
+
+static void __set_states(Hand *this, int state_00, int state_01, int state_10, int state_11, int state_20, int state_21, int state_30, int state_31)
+{
+    this->state_0[0] = state_00;
+    this->state_0[1] = state_01;
+    this->state_1[0] = state_10;
+    this->state_1[1] = state_11;
+    this->state_2[0] = state_20;
+    this->state_2[1] = state_21;
+    this->state_3[0] = state_30;
+    this->state_3[1] = state_31;
 }
 
 int __change_state_quantity(Hand *this, int number, int add)
@@ -179,6 +191,71 @@ static int __move_vertical(Hand *this, int distance)
     return this->current_state;
 }
 
+static void __vertical_horizontal(Hand *this)
+{
+    switch (this->current_state)
+    {
+    case 0:
+        if (inputs[0]) //down
+        {
+            this->position.y = this->state_2[1];
+            this->current_state = 2;
+            break;
+        }
+        else if (inputs[3]) // right
+        {
+            this->position.x = this->state_1[0];
+            this->current_state = 1;
+            break;
+        }
+        break;
+
+    case 1:
+        if (inputs[0]) //down
+        {
+            this->position.y = this->state_3[1];
+            this->current_state = 3;
+            break;
+        }
+        else if (inputs[2]) //left
+        {
+            this->position.x = this->state_0[0];
+            this->current_state = 0;
+            break;
+        }
+        break;
+
+    case 2:
+        if (inputs[1]) //up
+        {
+            this->position.y = this->state_0[1];
+            this->current_state = 0;
+            break;
+        }
+        else if (inputs[3]) //right
+        {
+            this->position.x = this->state_3[0];
+            this->current_state = 3;
+            break;
+        }
+        break;
+    case 3:
+        if (inputs[1]) //up
+        {
+            this->position.y = this->state_1[1];
+            this->current_state = 1;
+            break;
+        }
+        else if (inputs[2]) //left
+        {
+            this->position.x = this->state_2[0];
+            this->current_state = 2;
+            break;
+        }
+        break;
+    }
+}
+
 Hand *CREATE_HAND()
 {
     Hand *this = (Hand *)malloc(sizeof(*this));
@@ -200,7 +277,10 @@ Hand *CREATE_HAND()
     this->items_menu_position = __items_menu_position;
     this->main_menu_position = __main_menu_position;
     this->use_item_position = __use_item_position;
+    this->vertical_horizontal = __vertical_horizontal;
+    this->set_states = __set_states;
     // -o>
+    this->set_states(this, 15, 215, 190, 215, 15, 265, 190, 265);
     this->current_state = 0;
     return this;
 }

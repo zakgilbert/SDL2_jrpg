@@ -21,6 +21,7 @@
 #include "Hand.h"
 #include "Words.h"
 #include "Character.h"
+#include "Affect.h"
 
 uint32_t transition_delay;
 
@@ -44,9 +45,9 @@ typedef struct __menu
 
     int (*render_items_menu_options)(struct __menu *, struct SDL_Renderer *, int);
 
-    void (*render_use_item_menu)(struct __menu *, struct SDL_Renderer *, Hand *);
+    void (*render_use_item_menu)(struct __menu *, struct SDL_Renderer *, Hand *, Character **);
 
-    int (*render_use_item_menu_options)(struct __menu *, struct SDL_Renderer*, int);
+    int (*render_use_item_menu_options)(struct __menu *, struct SDL_Renderer*, Character **, int);
 
     TTF_Font *font;
     struct SDL_Rect rect;

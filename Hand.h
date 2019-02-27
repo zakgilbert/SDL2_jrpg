@@ -36,6 +36,15 @@ typedef struct __hand
 
     void (*use_item_position) (struct __hand*);
 
+    int (*vertical_horizontal) (struct __hand *);
+
+    void (*set_states) (struct __hand*, int, int, int, int, int, int, int, int);
+
+
+    int state_0[2];
+    int state_1[2];
+    int state_2[2];
+    int state_3[2];
     struct SDL_Texture *texture;
     struct SDL_Rect rect;
     struct SDL_Rect position;

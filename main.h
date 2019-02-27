@@ -27,6 +27,7 @@
 #include "Menu.h"
 #include "Hand.h"
 #include "Character.h"
+#include "Affect.h"
 
 int quit();
 void set_up_timer();
@@ -36,8 +37,10 @@ void delay();
 void print_time_delay();
 int check_delta();
 void update_delta();
+int fill_bag();
 int render_thread(void *);
 int set_item_quanities();
+int refresh_items(void *);
 int update_character_stats(void * ptr);
 
 

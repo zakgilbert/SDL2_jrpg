@@ -1,5 +1,5 @@
 #ifndef JRPG_WORDS_H
-#define JRPH_WORDS_H
+#define JRPG_WORDS_H
 
 #define FOREACH_STAT(STAT) \
     STAT(HP)  \
@@ -15,9 +15,9 @@
 #define GERERATE_ENUM(ENUM) ENUM,
 #define GENERATE_STRING(STRING)  #STRING,
 
-enum ITEM_ENUM {
+typedef enum  {
     FOREACH_ITEM(GERERATE_ENUM)
-};
+}ITEM_ENUM;
 
 static const char * ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)
