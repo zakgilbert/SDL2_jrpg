@@ -47,32 +47,25 @@ int main(int argc, char **argv)
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
 
-    struct Party *party_struct;
-    Character **party = malloc(sizeof(struct Party));
+    Character **party = (Character **)malloc(sizeof(Character *) * NUM_CHARACTERS);
 
-    party_struct = malloc(sizeof(struct Party));
+    party[0] = CREATE_CHARACTER();
+    party[1] = CREATE_CHARACTER();
+    party[2] = CREATE_CHARACTER();
+    party[3] = CREATE_CHARACTER();
 
-    party_struct->character_0 = CREATE_CHARACTER();
-    party_struct->character_1 = CREATE_CHARACTER();
-    party_struct->character_2 = CREATE_CHARACTER();
-    party_struct->character_3 = CREATE_CHARACTER();
 
-    party_struct->character_0->set_stats(party_struct->character_0, "Locke", "32", "Thief", 345, 48, 1000, "graphics/locke_bio.jpg");
-    party_struct->character_0->check_stats(party_struct->character_0);
+    party[0]->set_stats(party[0], "Locke", "32", "Thief", 345, 48, 1000, "graphics/locke_bio.jpg");
+    party[0]->check_stats(party[0]);
 
-    party_struct->character_1->set_stats(party_struct->character_1, "Terra", "23", "Wizard", 311, 151, 811, "graphics/terra_bio.jpg");
-    party_struct->character_1->check_stats(party_struct->character_1);
+    party[1]->set_stats(party[1], "Terra", "23", "Wizard", 311, 151, 811, "graphics/terra_bio.jpg");
+    party[1]->check_stats(party[1]);
 
-    party_struct->character_2->set_stats(party_struct->character_2, "Sabin", "21", "Monk", 422, 23, 1522, "graphics/sabin_bio.jpg");
-    party_struct->character_2->check_stats(party_struct->character_2);
+    party[2]->set_stats(party[2], "Sabin", "21", "Monk", 422, 23, 1522, "graphics/sabin_bio.jpg");
+    party[2]->check_stats(party[2]);
 
-    party_struct->character_3->set_stats(party_struct->character_3, "Gau", "14", "Bezerker", 353, 3, 933, "graphics/gau_bio.jpg");
-    party_struct->character_3->check_stats(party_struct->character_3);
-
-    party[0] = party_struct->character_0;
-    party[1] = party_struct->character_1;
-    party[2] = party_struct->character_2;
-    party[3] = party_struct->character_3;
+    party[3]->set_stats(party[3], "Gau", "14", "Bezerker", 353, 3, 933, "graphics/gau_bio.jpg");
+    party[3]->check_stats(party[3]);
 
     SDL_Thread *player_input_thread;
     SDL_Thread *update_character_stats_thread;
@@ -80,10 +73,10 @@ int main(int argc, char **argv)
     SDL_Thread *matrix_thread;
 
     renderer = make_renderer(&window);
-    party_struct->character_0->create_character_texture(party_struct->character_0, renderer);
-    party_struct->character_1->create_character_texture(party_struct->character_1, renderer);
-    party_struct->character_2->create_character_texture(party_struct->character_2, renderer);
-    party_struct->character_3->create_character_texture(party_struct->character_3, renderer);
+    party[0]->create_character_texture(party[0], renderer);
+    party[1]->create_character_texture(party[1], renderer);
+    party[2]->create_character_texture(party[2], renderer);
+    party[3]->create_character_texture(party[3], renderer);
 
     forest->create_assets(forest, renderer);
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
@@ -154,12 +147,10 @@ int main(int argc, char **argv)
     menu->destroy(menu);
     hand->destroy(hand);
     free(BAG);
-    party_struct->character_0->destroy(party_struct->character_0);
-    free(party_struct);
     free(STAT_MATRIX);
     free(ITEM_QUANTITIES);
     free(BAG_QUANTITIES);
-    free(party);
+    party[0]->destroy_party(party);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     TTF_Quit();
@@ -186,67 +177,6 @@ int update_character_stats(void *ptr)
         SDL_Delay(1);
     }
     return 0;
-}
-int fill_bag()
-{
-    int temp[4] = {3, 2, 1, 0};
-    int count = 0;
-    ITEM_QUANTITY = 4;
-
-    ITEM_QUANTITIES = malloc(sizeof(int) * ITEM_QUANTITY);
-    for (int i = 0; i < ITEM_QUANTITY; i++)
-    {
-        ITEM_QUANTITIES[i] = temp[i];
-        if (temp[i] != 0)
-        {
-            count++;
-        }
-    }
-    return count;
-}
-int refresh_items(void *ptr)
-{
-        if (REFRESH_ITEMS)
-        {
-            ITEMS_IN_BAG = set_item_quanities();
-            REFRESH_ITEMS = 0;
-        }
-        SDL_Delay(1);
-    return 0;
-}
-int set_item_quanities()
-{
-    int i, count;
-    char **inb;
-
-    count = 0;
-    inb = malloc(sizeof(char *) * ITEM_QUANTITY);
-    BAG_QUANTITIES = malloc(sizeof(int) * ITEMS_IN_BAG);
-    
-    for (i = 0; i < ITEM_QUANTITY; i++)
-    {
-        if (ITEM_QUANTITIES[i] != 0)
-        {
-            inb[i] = malloc(sizeof(ITEMS[i]));
-            strcat(inb[i], ITEMS[i]);
-            BAG_QUANTITIES[i] = ITEM_QUANTITIES[i];
-            count++;
-        }
-    }
-    BAG = inb;
-    return count;
-}
-int render_thread(void *ptr)
-{
-    return 0;
-}
-
-void refresh_inputs(int *inputs, int len)
-{
-    for (int i = 0; i < len; ++i)
-    {
-        inputs[i] = 0;
-    }
 }
 
 int quit()

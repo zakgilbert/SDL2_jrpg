@@ -13,6 +13,19 @@ static void __destroy(Character *this)
         this = NULL;
     }
 }
+
+static void __destroy_party(Character **party)
+{
+    int i;
+
+    for (i = 0; i < NUM_CHARACTERS; i++)
+    {
+        party[i]->destroy(party[i]);
+    }
+    free(party);
+    party = NULL;
+}
+
 int stat_matrix_thread(void *ptr)
 {
     int is_running;
@@ -180,6 +193,7 @@ Character *CREATE_CHARACTER()
     this->destroy = __destroy;
     this->check_stats = __check_stats;
     this->create_character_texture = __create_character_texture;
+    this->destroy_party = __destroy_party;
     // this->get_stat_matrix = __get_stat_matrix;
 
     this->num_stats = 1;

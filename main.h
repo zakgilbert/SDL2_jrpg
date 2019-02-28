@@ -16,12 +16,12 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_thread.h>
 
+#include "header.h"
 #include "Window_and_Renderer.h"
 #include "Floor.h"
 #include "Hero.h"
 #include "Forest.h"
 #include "Player_Input.h"
-#include "header.h"
 #include "Movement.h"
 #include "Window.h"
 #include "Menu.h"
@@ -37,10 +37,7 @@ void delay();
 void print_time_delay();
 int check_delta();
 void update_delta();
-int fill_bag();
 int render_thread(void *);
-int set_item_quanities();
-int refresh_items(void *);
 int update_character_stats(void * ptr);
 
 
