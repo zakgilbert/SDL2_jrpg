@@ -8,12 +8,14 @@
 #include "header.h"
 #include "Words.h"
 
-void affect_hp(int, Character *);
+int affect_hp(int, Character *);
+int affect_mp(int, Character *);
+int revive(int, Character *);
 
 typedef struct __affect
 {
     void (*destroy) (struct __affect *);
-    void (*cause_affect) (struct __affect *);
+    int (*cause_affect) (struct __affect *);
     Character * character;
     ITEM_ENUM affect_enum;
     int item_used;

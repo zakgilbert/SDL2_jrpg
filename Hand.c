@@ -282,7 +282,7 @@ Hand *CREATE_HAND()
     this->vertical_horizontal = __vertical_horizontal;
     this->set_states = __set_states;
     // -o>
-    this->set_states(this, 15, 215, 190, 215, 15, 265, 190, 265);
+    this->set_states(this, 15, 215, 180, 215, 15, 265, 180, 265);
     this->current_state = 0;
     return this;
 }

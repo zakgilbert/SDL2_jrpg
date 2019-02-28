@@ -33,7 +33,7 @@ typedef struct __menu
 
     Window *select_character_bg;
 
-    void (*render_character_main_menu_bio) (struct __menu *, struct SDL_Renderer *, Hand *); 
+    void (*render_character_stats) (struct __menu *, struct SDL_Renderer *, Hand *, int, int, int, int); 
 
     void (*render_character_main_menu_image)(struct __menu *, struct SDL_Renderer *, Hand *,Character **);  
 
@@ -56,6 +56,7 @@ typedef struct __menu
     struct SDL_Texture *texture;
     int option_states;
     int item_being_used;
+    int previous_number_of_states;
 } Menu;
 
 Menu *CREATE_MENU();

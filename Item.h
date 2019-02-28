@@ -12,10 +12,10 @@ typedef struct _item
     void (*destroy)(struct _item *);
     void (*fill_bag)(struct _item *, const char **, int *, int);
     void (*add_item)(struct _item *, ITEM_ENUM);
-    void (*quaff_item)(struct _item *, Affect *);
+    int (*quaff_item)(struct _item *, Affect *);
     int (*find_item)(struct _item *, ITEM_ENUM);
-    void (*remove_item)(struct _item *, int);
-    void (*decrement_item)(struct _item *, ITEM_ENUM);
+    int (*remove_item)(struct _item *, int);
+    int (*decrement_item)(struct _item *, ITEM_ENUM);
     void (*loot)(struct _item *, ITEM_ENUM);
     ITEM_ENUM (*get_enum)(struct _item *, int);
     Affect * affect;

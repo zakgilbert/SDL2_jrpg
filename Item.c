@@ -43,34 +43,37 @@ static void _add_item(Items *this, ITEM_ENUM item_enum)
     this->items_in_bag++;
 }
 
-static void _remove_item(Items *this, int item_index)
+static int _remove_item(Items *this, int item_index)
 {
     int last_index = this->items_in_bag - 1;
-    if(last_index != item_index)
+    if (last_index != item_index)
     {
-        char * temp = (char *)malloc(strlen(this->items[last_index]) + 1);
+        char *temp = (char *)malloc(strlen(this->items[last_index]) + 1);
         strcpy(temp, this->items[last_index]);
-        this->items[last_index] = realloc(this->items[last_index],strlen(this->items[item_index]) + 1);
+        this->items[last_index] = realloc(this->items[last_index], strlen(this->items[item_index]) + 1);
         strcpy(this->items[last_index], this->items[item_index]);
         this->items[item_index] = realloc(this->items[item_index], strlen(temp) + 1);
         strcpy(this->items[item_index], temp);
 
+        free(temp);
+        temp = NULL;
         int int_temp = this->item_quantities[last_index];
         this->item_quantities[last_index] = this->item_quantities[item_index];
         this->item_quantities[item_index] = int_temp;
     }
-    printf("\nRemoving %s at %d but from last index of %d", this->items[last_index], item_index, last_index );
+    printf("\nRemoving %s at %d but from last index of %d", this->items[last_index], item_index, last_index);
     free(this->items[last_index]);
     this->items[last_index] = NULL;
     this->items = realloc(this->items, sizeof(char *) * (this->items_in_bag - 1));
     this->item_quantities = realloc(this->item_quantities, sizeof(int) * (this->items_in_bag - 1));
     this->items_in_bag = last_index;
-    
+    return -1;
 }
-static void _decrement_item(Items *this, ITEM_ENUM item_enum)
+static int _decrement_item(Items *this, ITEM_ENUM item_enum)
 {
-    int item_index;
+    int item_index, item_was_removed;
 
+    item_was_removed = 0;
     item_index = this->find_item(this, item_enum);
     if (item_index < 0)
     {
@@ -82,28 +85,29 @@ static void _decrement_item(Items *this, ITEM_ENUM item_enum)
         {
             this->item_quantities[item_index]--;
             this->remove_item(this, item_index);
+            item_was_removed = -1;
         }
         else
         {
             this->item_quantities[item_index]--;
         }
     }
+    return item_was_removed;
 }
 
 static ITEM_ENUM _get_enum(Items *this, int item_index)
 {
 
     int i, enum_value;
-printf("\nItem index is %d", item_index);
     enum_value = 0;
     for (i = 0; i < ITEM_QUANTITY; i++)
     {
-            if (strcmp(this->items[item_index], ITEMS[i]) == 0)
-            {
-                printf("\nFound a match at in index %d in bag and index %d in Items", item_index, i);
-                printf("\nThe match is %s and %s", this->items[item_index], ITEMS[i]);
-                enum_value = i;
-            }
+        if (strcmp(this->items[item_index], ITEMS[i]) == 0)
+        {
+            printf("\nFound a match at in index %d in bag and index %d in Items", item_index, i);
+            printf("\nThe match is %s and %s", this->items[item_index], ITEMS[i]);
+            enum_value = i;
+        }
     }
     return enum_value;
 }
@@ -122,17 +126,21 @@ static int _find_item(Items *this, ITEM_ENUM item_enum)
     return item_index;
 }
 
-static void _quaff_item(Items *this, Affect *affect)
+static int _quaff_item(Items *this, Affect *affect)
 {
-    this->affect = affect;
-    this->affect->cause_affect(affect);
+    int item_was_quaffed, item_was_removed;
 
-    if (this->affect->item_used)
+    item_was_quaffed = 0;
+    item_was_removed = 0;
+    this->affect = affect;
+
+    if (item_was_quaffed = this->affect->cause_affect(affect))
     {
-        this->decrement_item(this, this->affect->affect_enum);
+        item_was_removed = this->decrement_item(this, this->affect->affect_enum);
     }
     this->affect->destroy(this->affect);
     refresh_inputs(inputs, 6);
+    return item_was_removed;
 }
 
 static void _loot(Items *this, ITEM_ENUM item_enum)

@@ -4,14 +4,45 @@
 
 #include "Affect.h"
 
-void affect_hp(int num, Character *character)
+int revive(int num, Character *character)
 {
-    
+    if (character->HP.current > 1)
+    {
+        return 0;
+    }
     character->HP.current += num;
     if (character->HP.current > character->HP.max)
     {
         character->HP.current = character->HP.max;
     }
+    return 1;
+}
+
+int affect_mp(int num, Character *character)
+{
+    if(character->MP.current >= character->MP.max)
+    {
+        return 0;
+    }
+    character->MP.current += num;
+    if (character->MP.current > character->MP.max)
+    {
+        character->MP.current = character->MP.max;
+    }
+    return 1;
+}
+int affect_hp(int num, Character *character)
+{
+    if (character->HP.current < 1 || character->HP.current >= character->HP.max)
+    {
+        return 0;
+    }
+    character->HP.current += num;
+    if (character->HP.current > character->HP.max)
+    {
+        character->HP.current = character->HP.max;
+    }
+    return 1;
 }
 
 static void __destroy(Affect *this)
@@ -23,19 +54,23 @@ static void __destroy(Affect *this)
     }
 }
 
-static void __cause_affect(Affect *this)
+static int __cause_affect(Affect *this)
 {
     switch (this->affect_enum)
     {
     case POTION:
-    printf("\nin cause_affect");
-        affect_hp(50, this->character);
-        this->item_used = 1;
+        this->item_used = affect_hp(50, this->character);
         break;
-
+    case ETHER:
+        this->item_used = affect_mp(25, this->character);
+        break;
+    case PHOENIX_DOWN:
+        this->item_used = revive(50, this->character);
+        break;
     default:
         break;
     }
+    return this->item_used;
 }
 
 Affect *CREATE_AFFECT(ITEM_ENUM affect, Character *character)
@@ -47,9 +82,6 @@ Affect *CREATE_AFFECT(ITEM_ENUM affect, Character *character)
     this->affect_enum = affect;
     this->character = character;
     this->item_used = 0;
-    printf("\nAffect being used is %s and is at index %d", ITEMS[affect], affect);
-
-    this->cause_affect(this);
 
     return this;
 }

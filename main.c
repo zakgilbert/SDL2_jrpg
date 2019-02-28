@@ -7,6 +7,7 @@ int MOVEMENT_DISABLED;
 int ITEM_QUANTITY;
 int IS_MOVING;
 int REFRESH_ITEMS;
+int NUM_STATS;
 char **BAG;
 int X;
 int Y;
@@ -22,6 +23,7 @@ int main(int argc, char **argv)
     int running;
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;
+    NUM_STATS = 4;
     TICK = 0;
     running = 1;
     refresh_inputs(inputs, 6);
@@ -58,7 +60,7 @@ int main(int argc, char **argv)
     party[2] = CREATE_CHARACTER();
     party[3] = CREATE_CHARACTER();
 
-    party[0]->set_stats(party[0], "Locke", "32", "Thief", 345, 48, 1000, "graphics/locke_bio.jpg");
+    party[0]->set_stats(party[0], "Locke", "32", "Thief", 1000, 48, 1000, "graphics/locke_bio.jpg");
     party[0]->check_stats(party[0]);
 
     party[1]->set_stats(party[1], "Terra", "23", "Wizard", 311, 151, 811, "graphics/terra_bio.jpg");

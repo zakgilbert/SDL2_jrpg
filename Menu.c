@@ -44,7 +44,7 @@ static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
     hand->move_vertical(hand, this->render_main_menu_options(this, renderer, hand->current_state));
 
     this->render_character_main_menu_image(this, renderer, hand, characters);
-    this->render_character_main_menu_bio(this, renderer, hand);
+    this->render_character_stats(this, renderer, hand, 80, 15, 9, MAIN_MENU);
 
     if (hand->current_state == 0 && inputs[4])
     {
@@ -105,38 +105,79 @@ static int __render_main_menu_options(Menu *this, struct SDL_Renderer *renderer,
     return skip;
 }
 
-static void __render_character_main_menu_bio(Menu *this, struct SDL_Renderer *renderer, Hand *hand)
+static void __render_character_stats(Menu *this, struct SDL_Renderer *renderer, Hand *hand, int x, int y, int font_size, int cas)
 {
     int skip;
     char font_path[] = "ponde___.ttf";
     size_t len = NUM_CHARACTERS * 4;
-    this->font = TTF_OpenFont(font_path, 9);
+    int j = 0;
+
+    this->font = TTF_OpenFont(font_path, font_size);
     if (!this->font)
     {
         printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
     }
 
     skip = TTF_FontLineSkip(this->font);
-    /********************************************************************/
-    this->rect.x = 80;
-    this->rect.y = 15;
-
-    for (size_t i = 0; i < len; i++)
+    this->rect.x = x;
+    this->rect.y = y;
+    switch (cas)
     {
-        TTF_SizeText(this->font, STAT_MATRIX[i], &this->rect.w, &this->rect.h);
-        this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[i], white);
-        this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
-        SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-        if ((i + 1) % 4 == 0 && i != 0)
+    case MAIN_MENU:
+        for (size_t i = 0; i < len; i++)
         {
-            this->rect.y += 50;
+            TTF_SizeText(this->font, STAT_MATRIX[i], &this->rect.w, &this->rect.h);
+            this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[i], white);
+            this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+            SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+            if ((i + 1) % 4 == 0 && i != 0)
+            {
+                this->rect.y += 50;
+            }
+            else
+            {
+                this->rect.y += skip;
+            }
         }
-        else
-        {
-            this->rect.y += skip;
-        }
-    }
+        break;
 
+    case USE_ITEM:
+
+        for (size_t i = 0; i < NUM_CHARACTERS; i++)
+        {
+            if (i == 2)
+            {
+                this->rect.x = x;
+                this->rect.y = y + 50;
+            }
+            else if (i == 3)
+            {
+                this->rect.y = y + 50;
+            }
+
+            for (; j < NUM_STATS + (i * NUM_STATS); j++)
+            {
+                TTF_SizeText(this->font, STAT_MATRIX[j], &this->rect.w, &this->rect.h);
+                if (i == hand->current_state)
+                {
+                    this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[j], white);
+                }
+                else
+                {
+                    this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[j], grey);
+                }
+                this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+                SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+                this->rect.y += skip;
+            }
+
+            this->rect.x += 165;
+            this->rect.y = y;
+        }
+        break;
+    default:
+        break;
+    }
     TTF_CloseFont(this->font);
     SDL_FreeSurface(this->surface);
     SDL_DestroyTexture(this->texture);
@@ -161,7 +202,7 @@ static void __render_character_main_menu_image(Menu *this, struct SDL_Renderer *
     }
 }
 
-static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Items * bag)
+static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Items *bag)
 {
     if (INPUT == CANCEL)
     {
@@ -189,10 +230,11 @@ static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand 
         SDL_Delay(transition_delay);
         this->item_being_used = hand->current_state;
         hand->current_state = 0;
+        this->previous_number_of_states = hand->number_of_states;
     }
 }
 
-static int __render_items_menu_options(Menu *this, struct SDL_Renderer *renderer, Items * bag, int current_state)
+static int __render_items_menu_options(Menu *this, struct SDL_Renderer *renderer, Items *bag, int current_state)
 {
     int skip;
     char font_path[] = "ponde___.ttf";
@@ -247,7 +289,7 @@ static int __render_items_menu_options(Menu *this, struct SDL_Renderer *renderer
     return skip;
 }
 
-static void __render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **party, Items * bag)
+static void __render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **party, Items *bag)
 {
     if (INPUT == CANCEL)
     {
@@ -255,20 +297,29 @@ static void __render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Ha
         INPUT = NONE;
         hand->current_state = this->item_being_used;
         hand->items_menu_position(hand);
+        hand->number_of_states = this->previous_number_of_states;
         return;
     }
     MOVEMENT_DISABLED = 1;
     hand->change_state_quantity(hand, NUM_CHARACTERS - 1, 0);
-   // printf ("\nState Q: %d", hand->number_of_states);
+    // printf ("\nState Q: %d", hand->number_of_states);
     this->main_menu_bg->render(this->main_menu_bg, renderer);
     this->render_items_menu_options(this, renderer, bag, this->item_being_used);
     this->select_character_bg->render(this->select_character_bg, renderer);
     hand->vertical_horizontal(hand);
     //printf("\nCurrent_State: %d", hand->current_state);
-    this->render_use_item_menu_options(this, renderer, party, hand->current_state);
+    //  this->render_use_item_menu_options(this, renderer, party, hand->current_state);
+    this->render_character_stats(this, renderer, hand, 49, 205, 9, USE_ITEM);
     hand->render(hand, renderer);
-    if(inputs[4]) {
-        bag->quaff_item(bag, CREATE_AFFECT(bag->get_enum(bag, this->item_being_used), party[hand->current_state]));
+    if (inputs[4])
+    {
+        int was_item_removed = bag->quaff_item(bag, CREATE_AFFECT(bag->get_enum(bag, this->item_being_used), party[hand->current_state]));
+
+        this->previous_number_of_states += was_item_removed;
+        if (was_item_removed == -1)
+        {
+            INPUT = CANCEL;
+        }
     }
 }
 static int __render_use_item_menu_options(Menu *this, struct SDL_Renderer *renderer, Character **party, int current_state)
@@ -285,29 +336,6 @@ static int __render_use_item_menu_options(Menu *this, struct SDL_Renderer *rende
 
     skip = TTF_FontLineSkip(this->font);
     /********************************************************************/
-    this->rect.x = 49;
-    this->rect.y = 220;
-
-    for (size_t i = 0; i < NUM_CHARACTERS; i++)
-    {
-        TTF_SizeText(this->font, party[i]->name, &this->rect.w, &this->rect.h);
-        if (i == 2)
-        {
-            this->rect.x = 49;
-            this->rect.y += 50;
-        }
-        if (i == current_state)
-        {
-            this->surface = TTF_RenderText_Solid(this->font, party[i]->name, white);
-        }
-        else
-        {
-            this->surface = TTF_RenderText_Solid(this->font, party[i]->name, grey);
-        }
-        this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
-        SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-        this->rect.x += 175;
-    }
 
     TTF_CloseFont(this->font);
     SDL_FreeSurface(this->surface);
@@ -324,7 +352,7 @@ Menu *CREATE_MENU()
 
     this->render_main_menu = __render_main_menu;
     this->render_main_menu_options = __render_main_menu_options;
-    this->render_character_main_menu_bio = __render_character_main_menu_bio;
+    this->render_character_stats = __render_character_stats;
     this->render_character_main_menu_image = __render_character_main_menu_image;
 
     this->render_items_menu = __render_items_menu;
@@ -343,5 +371,6 @@ Menu *CREATE_MENU()
     this->transition.w = WINDOW_WIDTH;
     this->transition.h = WINDOW_HEIGHT;
     this->item_being_used = 0;
+    this->previous_number_of_states = 0;
     return this;
 }
