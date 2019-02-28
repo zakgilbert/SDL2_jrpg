@@ -15,7 +15,6 @@
 #include <SDL2/SDL_log.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_thread.h>
-
 #include "header.h"
 #include "Window_and_Renderer.h"
 #include "Floor.h"
@@ -27,7 +26,9 @@
 #include "Menu.h"
 #include "Hand.h"
 #include "Character.h"
+#include "Item.h"
 #include "Affect.h"
+#include "Words.h"
 
 int quit();
 void set_up_timer();
@@ -39,6 +40,5 @@ int check_delta();
 void update_delta();
 int render_thread(void *);
 int update_character_stats(void * ptr);
-
 
 #endif //JRPG_MAIN_H

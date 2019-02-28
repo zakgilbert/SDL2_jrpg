@@ -4,10 +4,7 @@ int inputs[6];
 int NUM_CHARACTERS;
 int EDGE_DETECTION[4];
 int MOVEMENT_DISABLED;
-int *ITEM_QUANTITIES;
-int *BAG_QUANTITIES;
 int ITEM_QUANTITY;
-int ITEMS_IN_BAG;
 int IS_MOVING;
 int REFRESH_ITEMS;
 char **BAG;
@@ -25,9 +22,6 @@ int main(int argc, char **argv)
     int running;
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;
-    REFRESH_ITEMS = 1;
-    ITEMS_IN_BAG = fill_bag();
-    refresh_items(NULL);
     TICK = 0;
     running = 1;
     refresh_inputs(inputs, 6);
@@ -46,6 +40,16 @@ int main(int argc, char **argv)
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
+    Items *bag = CREATE_BAG();
+
+    const char current_items[3][10] = {
+        {"POTION"},
+        {"SOFT"},
+        {"ETHER"}};
+
+    int quat[3] = {4, 3, 2};
+
+    bag->fill_bag(bag, current_items, quat, 3);
 
     Character **party = (Character **)malloc(sizeof(Character *) * NUM_CHARACTERS);
 
@@ -53,7 +57,6 @@ int main(int argc, char **argv)
     party[1] = CREATE_CHARACTER();
     party[2] = CREATE_CHARACTER();
     party[3] = CREATE_CHARACTER();
-
 
     party[0]->set_stats(party[0], "Locke", "32", "Thief", 345, 48, 1000, "graphics/locke_bio.jpg");
     party[0]->check_stats(party[0]);
@@ -115,16 +118,15 @@ int main(int argc, char **argv)
         case ITEMS_MENU:
             //hand->animate(hand);
             TICK = 1;
-            refresh_items(NULL);
             SDL_RenderClear(renderer);
-            menu->render_items_menu(menu, renderer, hand);
+            menu->render_items_menu(menu, renderer, hand, bag);
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;
         case USE_ITEM:
             TICK = 1;
             SDL_RenderClear(renderer);
-            menu->render_use_item_menu(menu, renderer, hand, party);
+            menu->render_use_item_menu(menu, renderer, hand, party, bag);
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;
@@ -146,10 +148,7 @@ int main(int argc, char **argv)
     hero->destroy(hero);
     menu->destroy(menu);
     hand->destroy(hand);
-    free(BAG);
     free(STAT_MATRIX);
-    free(ITEM_QUANTITIES);
-    free(BAG_QUANTITIES);
     party[0]->destroy_party(party);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -179,6 +178,15 @@ int update_character_stats(void *ptr)
     return 0;
 }
 
+void refresh_inputs(int *array, int size)
+{
+    int i;
+
+    for (i = 0; i < size; i++)
+    {
+        array[i] = 0;
+    }
+}
 int quit()
 {
     if (INPUT == QUIT)

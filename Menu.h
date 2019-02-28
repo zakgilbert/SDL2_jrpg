@@ -16,12 +16,12 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include "Affect.h"
+#include "Item.h"
 #include "header.h"
 #include "Window.h"
 #include "Hand.h"
-#include "Words.h"
 #include "Character.h"
-#include "Affect.h"
 
 uint32_t transition_delay;
 
@@ -41,11 +41,11 @@ typedef struct __menu
 
     int (*render_main_menu_options)(struct __menu *, struct SDL_Renderer *, int);
 
-    void (*render_items_menu)(struct __menu *, struct SDL_Renderer *, Hand *);
+    void (*render_items_menu)(struct __menu *, struct SDL_Renderer *, Hand *, Items *);
 
-    int (*render_items_menu_options)(struct __menu *, struct SDL_Renderer *, int);
+    int (*render_items_menu_options)(struct __menu *, struct SDL_Renderer *, Items *, int);
 
-    void (*render_use_item_menu)(struct __menu *, struct SDL_Renderer *, Hand *, Character **);
+    void (*render_use_item_menu)(struct __menu *, struct SDL_Renderer *, Hand *, Character **, Items *);
 
     int (*render_use_item_menu_options)(struct __menu *, struct SDL_Renderer*, Character **, int);
 

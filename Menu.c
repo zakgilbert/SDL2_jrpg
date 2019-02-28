@@ -161,7 +161,7 @@ static void __render_character_main_menu_image(Menu *this, struct SDL_Renderer *
     }
 }
 
-static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand)
+static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Items * bag)
 {
     if (INPUT == CANCEL)
     {
@@ -178,9 +178,9 @@ static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand 
     }
 
     MOVEMENT_DISABLED = 1;
-    hand->change_state_quantity(hand, ITEMS_IN_BAG - 1, 0);
+    hand->change_state_quantity(hand, bag->items_in_bag - 1, 0);
     this->main_menu_bg->render(this->main_menu_bg, renderer);
-    hand->move_vertical(hand, this->render_items_menu_options(this, renderer, hand->current_state));
+    hand->move_vertical(hand, this->render_items_menu_options(this, renderer, bag, hand->current_state));
 
     if (inputs[4])
     {
@@ -192,7 +192,7 @@ static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand 
     }
 }
 
-static int __render_items_menu_options(Menu *this, struct SDL_Renderer *renderer, int current_state)
+static int __render_items_menu_options(Menu *this, struct SDL_Renderer *renderer, Items * bag, int current_state)
 {
     int skip;
     char font_path[] = "ponde___.ttf";
@@ -214,21 +214,20 @@ static int __render_items_menu_options(Menu *this, struct SDL_Renderer *renderer
     this->rect.y = 15;
     quat_rect.x = 200;
     quat_rect.y = 15;
-
-    for (int i = 0; i < ITEMS_IN_BAG; i++)
+    for (int i = 0; i < bag->items_in_bag; i++)
     {
-        TTF_SizeText(this->font, BAG[i], &this->rect.w, &this->rect.h);
-        sprintf(quat_array, "%d", BAG_QUANTITIES[i]);
+        TTF_SizeText(this->font, bag->items[i], &this->rect.w, &this->rect.h);
+        sprintf(quat_array, "%d", bag->item_quantities[i]);
         TTF_SizeText(quat_font, quat_array, &quat_rect.w, &quat_rect.h);
 
         if (i == current_state)
         {
-            this->surface = TTF_RenderText_Solid(this->font, BAG[i], white);
+            this->surface = TTF_RenderText_Solid(this->font, bag->items[i], white);
             quat = TTF_RenderText_Solid(quat_font, quat_array, white);
         }
         else
         {
-            this->surface = TTF_RenderText_Solid(this->font, BAG[i], grey);
+            this->surface = TTF_RenderText_Solid(this->font, bag->items[i], grey);
             quat = TTF_RenderText_Solid(quat_font, quat_array, grey);
         }
         this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
@@ -248,7 +247,7 @@ static int __render_items_menu_options(Menu *this, struct SDL_Renderer *renderer
     return skip;
 }
 
-static void __render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **party)
+static void __render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **party, Items * bag)
 {
     if (INPUT == CANCEL)
     {
@@ -262,18 +261,14 @@ static void __render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Ha
     hand->change_state_quantity(hand, NUM_CHARACTERS - 1, 0);
    // printf ("\nState Q: %d", hand->number_of_states);
     this->main_menu_bg->render(this->main_menu_bg, renderer);
-    this->render_items_menu_options(this, renderer, this->item_being_used);
+    this->render_items_menu_options(this, renderer, bag, this->item_being_used);
     this->select_character_bg->render(this->select_character_bg, renderer);
     hand->vertical_horizontal(hand);
     //printf("\nCurrent_State: %d", hand->current_state);
     this->render_use_item_menu_options(this, renderer, party, hand->current_state);
     hand->render(hand, renderer);
-
     if(inputs[4]) {
-        Affect * affect = CREATE_AFFECT(BAG[this->item_being_used], party[this->item_being_used]);
-        affect->destroy(affect);
-        refresh_inputs(inputs, 6);
-        REFRESH_ITEMS = 1;
+        bag->quaff_item(bag, CREATE_AFFECT(bag->get_enum(bag, this->item_being_used), party[hand->current_state]));
     }
 }
 static int __render_use_item_menu_options(Menu *this, struct SDL_Renderer *renderer, Character **party, int current_state)

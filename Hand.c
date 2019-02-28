@@ -253,6 +253,8 @@ static void __vertical_horizontal(Hand *this)
             break;
         }
         break;
+    default:
+        break;
     }
 }
 

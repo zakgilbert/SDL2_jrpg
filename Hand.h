@@ -36,7 +36,7 @@ typedef struct __hand
 
     void (*use_item_position) (struct __hand*);
 
-    int (*vertical_horizontal) (struct __hand *);
+    void (*vertical_horizontal) (struct __hand *);
 
     void (*set_states) (struct __hand*, int, int, int, int, int, int, int, int);
 
