@@ -29,6 +29,7 @@
 #include "Item.h"
 #include "Affect.h"
 #include "Words.h"
+#include "Collidable.h"
 
 int quit();
 void set_up_timer();
@@ -39,6 +40,5 @@ void print_time_delay();
 int check_delta();
 void update_delta();
 int render_thread(void *);
-int update_character_stats(void * ptr);
 
 #endif //JRPG_MAIN_H

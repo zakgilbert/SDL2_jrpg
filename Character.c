@@ -46,6 +46,7 @@ int stat_matrix_thread(void *ptr)
         int j = 0;
         for (size_t i = 0; i < NUM_CHARACTERS; i++)
         {
+            p[i]->check_stats(p[i]);
             size_t name_size = (strlen(p[i]->name) + 1);
             size_t HP_current_size = (strlen(p[i]->HP.str_current) + 1);
             size_t MP_current_size = (strlen(p[i]->MP.str_current) + 1);

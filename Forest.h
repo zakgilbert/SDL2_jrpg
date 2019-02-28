@@ -29,6 +29,7 @@ typedef struct __forest {
     void (*render_forest) (struct __forest *, struct SDL_Renderer *, Hero *);
 
 
+
 }Forest;
 
 Forest * CREATE_FOREST();

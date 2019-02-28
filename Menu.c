@@ -56,6 +56,10 @@ static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
         SDL_RenderPresent(renderer);
         SDL_Delay(transition_delay);
     }
+    if (hand->current_state == 6 && inputs[4])
+    {
+        INPUT = QUIT;
+    }
 }
 
 static int __render_main_menu_options(Menu *this, struct SDL_Renderer *renderer, int current_state)
@@ -319,6 +323,7 @@ static void __render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Ha
         if (was_item_removed == -1)
         {
             INPUT = CANCEL;
+            SDL_Delay(300);
         }
     }
 }

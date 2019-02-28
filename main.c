@@ -73,7 +73,6 @@ int main(int argc, char **argv)
     party[3]->check_stats(party[3]);
 
     SDL_Thread *player_input_thread;
-    SDL_Thread *update_character_stats_thread;
     SDL_Thread *hand_thread;
     SDL_Thread *matrix_thread;
 
@@ -90,7 +89,6 @@ int main(int argc, char **argv)
     MOVEMENT_DISABLED = 0;
     state = DARK_FOREST;
     player_input_thread = SDL_CreateThread(input_thread, "input_thread", NULL);
-    update_character_stats_thread = SDL_CreateThread(update_character_stats, "update_character_stats", party);
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
     matrix_thread = SDL_CreateThread(stat_matrix_thread, "stat_matrix_thread", party);
     party[0]->HP.current = 100;
@@ -141,8 +139,11 @@ int main(int argc, char **argv)
         delay();
         reset_timer();
     }
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_RenderFillRect(renderer, &menu->transition);
+    SDL_RenderPresent(renderer);
     SDL_WaitThread(player_input_thread, NULL);
-    SDL_WaitThread(update_character_stats_thread, NULL);
     SDL_WaitThread(hand_thread, NULL);
     SDL_WaitThread(matrix_thread, NULL);
 
@@ -150,33 +151,14 @@ int main(int argc, char **argv)
     hero->destroy(hero);
     menu->destroy(menu);
     hand->destroy(hand);
+    bag->destroy(bag);
     free(STAT_MATRIX);
     party[0]->destroy_party(party);
     SDL_DestroyRenderer(renderer);
+    SDL_Delay(400);
     SDL_DestroyWindow(window);
     TTF_Quit();
     SDL_Quit();
-    return 0;
-}
-
-int update_character_stats(void *ptr)
-{
-    int is_running;
-    Character **party = ptr;
-
-    is_running = 1;
-    while (is_running)
-    {
-        if (INPUT == QUIT)
-        {
-            is_running = 0;
-        }
-        for (size_t i = 0; i < NUM_CHARACTERS; i++)
-        {
-            party[i]->check_stats(party[i]);
-        }
-        SDL_Delay(1);
-    }
     return 0;
 }
 
