@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     struct SDL_Renderer *renderer = NULL;
 
     window = make_window("Window");
-    Forest *forest = CREATE_FOREST();
+    Forest *forest = CREATE_FOREST(12);
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
