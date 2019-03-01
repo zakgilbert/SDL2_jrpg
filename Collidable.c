@@ -37,8 +37,8 @@ static struct SDL_Rect *_make_chest(Collidable *this, struct SDL_Renderer *rende
 {
     this->first_texture = this->create_collidable_texture(renderer, "graphics/chestClose.png", &this->rect_1);
     this->second_texture = this->create_collidable_texture(renderer, "graphics/chestOpen.png", &this->rect_2);
-    this->rect_1.x = 100;
-    this->rect_1.y = 100;
+    this->rect_1.x = 150;
+    this->rect_1.y = 150;
     this->rect_1.w = w;
     this->rect_1.h = h;
     this->x = x;

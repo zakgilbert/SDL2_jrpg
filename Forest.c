@@ -12,12 +12,12 @@ static void __destroy(Forest *this)
     free(this->lewt_cords_y);
     this->forest_lewt->destroy(this->forest_lewt);
     int i;
-    /*()
+
     for (i = 0; i < this->num_chests; i++)
     {
         this->treasure[i]->destroy(this->treasure[i]);        
     }
-*/
+    
     if (NULL != this)
     {
         free(this);
@@ -41,6 +41,10 @@ static void __render_lewt(Forest *this, struct SDL_Renderer *renderer)
     for(i = 0; i < this->num_chests; i++)
     {
         SDL_RenderCopy(renderer, this->treasure[i]->first_texture, NULL, &this->treasure[i]->rect_1);
+        
+        this->treasure[i]->rect_1.x = this->treasure[i]->x - this->floor->rect.x;
+        this->treasure[i]->rect_1.y = this->treasure[i]->y - this->floor->rect.y; 
+        //printf("\nchest %d is located at \(%d, %\d).", i, this->treasure[i]->rect_1.x, this->treasure[i]->rect_1.y);
     }
 }
 static void __render_forest(Forest *this, struct SDL_Renderer *renderer, Hero *hero)
@@ -84,8 +88,8 @@ static void __create_lewt(Forest *this, struct SDL_Renderer *renderer)
 
     for (i = 0; i < this->num_chests; i++)
     {
-        rand_x = (rand() % (upper_x - lower_x + 1)) + lower_x;
-        rand_y = (rand() % (upper_y - lower_y + 1)) + lower_y;
+        rand_x = (i + 50) * i;
+        rand_y =  (i + 50) *i;
         this->lewt_cords_x[i] = rand_x;
         this->lewt_cords_y[i] = rand_y;
         rand_index = rand() % ITEM_QUANTITY;
