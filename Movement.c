@@ -4,10 +4,25 @@
 
 #include "Movement.h"
 
+int in_dungeon_state()
+{
+    int result = 0;
+
+    switch (state)
+    {
+    case DARK_FOREST:
+        result = 1;
+        break;
+
+    default:
+        break;
+    }
+    return result;
+}
 int movement()
 {
     int result = 0;
-    if (state == MAIN_MENU)
+    if (!in_dungeon_state())
     {
         return result;
     }
@@ -41,7 +56,6 @@ int change_position()
     }
     if (!MOVEMENT_DISABLED)
     {
-
         if (inputs[0])
         { //down
             Y++;

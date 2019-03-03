@@ -3,21 +3,23 @@
 //
 
 #include "Floor.h"
-static void __destroy(Floor * obj)
+static void __destroy(Floor *obj)
 {
     SDL_DestroyTexture(obj->texture);
-    if (NULL != obj) {
+    if (NULL != obj)
+    {
         free(obj);
         obj = NULL;
     }
 }
 
-static void __set_texture(Floor * obj, struct SDL_Renderer * renderer, char * path)
+static void __set_texture(Floor *obj, struct SDL_Renderer *renderer, char *path)
 {
-    struct SDL_Surface * surface = NULL;
-    struct SDL_Texture * texture = NULL;
+    struct SDL_Surface *surface = NULL;
+    struct SDL_Texture *texture = NULL;
     surface = IMG_Load(path);
-    if (!surface) {
+    if (!surface)
+    {
         printf("error creating surface: %s\n", SDL_GetError());
         SDL_Quit();
     }
@@ -25,7 +27,8 @@ static void __set_texture(Floor * obj, struct SDL_Renderer * renderer, char * pa
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
 
-    if (!texture) {
+    if (!texture)
+    {
         printf("error creating Texture: %s\n", SDL_GetError());
         SDL_Quit();
     }
@@ -33,21 +36,24 @@ static void __set_texture(Floor * obj, struct SDL_Renderer * renderer, char * pa
     obj->texture = texture;
 }
 
-static SDL_Rect * __get_rect_pointer(Floor * obj)
+static SDL_Rect *__get_rect_pointer(Floor *obj)
 {
     return &obj->rect;
 }
 
-static void __render_floor(Floor * obj, struct SDL_Renderer * renderer)
+static void __render_floor(Floor *obj, struct SDL_Renderer *renderer)
 {
-    obj->rect.x = X;
-    obj->rect.y = Y;
+    if (!MOVEMENT_DISABLED)
+    {
+        obj->rect.x = X;
+        obj->rect.y = Y;
+    }
     SDL_RenderCopy(renderer, obj->texture, obj->get_rect_pointer(obj), NULL);
 }
 
-Floor * create_floor(int x, int y, int w, int h)
+Floor *create_floor(int x, int y, int w, int h)
 {
-    Floor * obj = (Floor*) malloc (sizeof(*obj));
+    Floor *obj = (Floor *)malloc(sizeof(*obj));
     obj->set_texture = __set_texture;
     obj->destroy = __destroy;
     obj->get_rect_pointer = __get_rect_pointer;

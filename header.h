@@ -12,7 +12,8 @@ extern int NUM_STATS;
 extern char **STAT_MATRIX;
 extern int NUM_CHARACTERS;
 extern int ITEMS_IN_BAG;
-extern int * ITEM_QUANTITIES;
+extern int READY_TO_INTERACT;
+extern int *ITEM_QUANTITIES;
 extern char **BAG;
 extern int *BAG_QUANTITIES;
 extern int inputs[6];
@@ -43,6 +44,14 @@ enum INPUTS
 };
 enum INPUTS INPUT;
 
+enum COLLIDABLE_TYPES
+{
+    CHEST,
+    NPC,
+    ENEMY,
+    BUTTON
+};
+
 int FPS;
 long double TIME_PER_TICK;
 long double TIME_DELAY_PER_SECOND;
@@ -52,7 +61,7 @@ uint64_t TIME_LAST;
 uint64_t NANO_TIMER;
 uint64_t TICKS_PER_SECOND;
 int FRAMES_RENDERED;
-void refresh_inputs(int *, int);
+void refresh_inputs(int *, int, int);
 void set_items(int *);
 
 #endif //JRPG_HEADER_H

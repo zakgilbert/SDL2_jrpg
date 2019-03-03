@@ -30,6 +30,7 @@
 #include "Affect.h"
 #include "Words.h"
 #include "Collidable.h"
+#include "Message.h"
 
 int quit();
 void set_up_timer();

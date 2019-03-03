@@ -180,13 +180,13 @@ static int __move_vertical(Hand *this, int distance)
     {
         this->position.y -= distance;
         this->current_state--;
-        refresh_inputs(inputs, 6);
+        refresh_inputs(inputs, 6, 1);
     }
     else if (inputs[0] && this->current_state < this->number_of_states)
     {
         this->position.y += distance;
         this->current_state++;
-        refresh_inputs(inputs, 6);
+        refresh_inputs(inputs, 6, 1);
     }
     return this->current_state;
 }

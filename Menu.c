@@ -46,7 +46,7 @@ static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
     this->render_character_main_menu_image(this, renderer, hand, characters);
     this->render_character_stats(this, renderer, hand, 80, 15, 9, MAIN_MENU);
 
-    if (hand->current_state == 0 && inputs[4])
+    if (hand->current_state == 0 && inputs[4]) 
     {
         state = ITEMS_MENU;
         hand->items_menu_position(hand);

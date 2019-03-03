@@ -3,12 +3,12 @@
 int inputs[6];
 int NUM_CHARACTERS;
 int EDGE_DETECTION[4];
+int READY_TO_INTERACT;
 int MOVEMENT_DISABLED;
 int ITEM_QUANTITY;
 int IS_MOVING;
 int REFRESH_ITEMS;
 int NUM_STATS;
-char **BAG;
 int X;
 int Y;
 int MAP_WIDTH;
@@ -23,10 +23,12 @@ int main(int argc, char **argv)
     int running;
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;
+    READY_TO_INTERACT = 0;
     NUM_STATS = 4;
     TICK = 0;
     running = 1;
-    refresh_inputs(inputs, 6);
+    INPUT = NONE;
+    refresh_inputs(inputs, 6, 1);
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
     {
@@ -38,12 +40,13 @@ int main(int argc, char **argv)
     struct SDL_Renderer *renderer = NULL;
 
     window = make_window("Window");
-    Forest *forest = CREATE_FOREST(12);
+    Forest *forest = CREATE_FOREST(1);
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
     Items *bag = CREATE_BAG();
-
+    Message *my_test_mesage = CREATE_MESSAGE("ponde___.ttf", "this is a test and i hate it", 10, 100, 100, 100, 100, 12);
+    my_test_mesage->create_lines(my_test_mesage);
     const char current_items[3][10] = {
         {"POTION"},
         {"SOFT"},
@@ -92,18 +95,18 @@ int main(int argc, char **argv)
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
     matrix_thread = SDL_CreateThread(stat_matrix_thread, "stat_matrix_thread", party);
     party[0]->HP.current = 100;
+    party[1]->MP.current = 0;
     while (running)
     {
         start_timer();
-        refresh_inputs(EDGE_DETECTION, 4);
         IS_MOVING = 0;
         switch (state)
         {
         case DARK_FOREST:
-            movement();
             SDL_RenderClear(renderer);
-            forest->render_forest(forest, renderer, hero);
+            forest->render_forest(forest, renderer, hero, bag);
             SDL_RenderPresent(renderer);
+            refresh_inputs(EDGE_DETECTION, 4, movement());
             break;
 
         case MAIN_MENU:
@@ -139,6 +142,7 @@ int main(int argc, char **argv)
         delay();
         reset_timer();
     }
+    SDL_LogVerbose(SDL_LOG_CATEGORY_RENDER, "Render log:");
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &menu->transition);
@@ -162,8 +166,12 @@ int main(int argc, char **argv)
     return 0;
 }
 
-void refresh_inputs(int *array, int size)
+void refresh_inputs(int *array, int size, int bol)
 {
+    if (!bol)
+    {
+        return;
+    }
     int i;
 
     for (i = 0; i < size; i++)

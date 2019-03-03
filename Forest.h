@@ -20,22 +20,25 @@
 #include "header.h"
 #include "Collidable.h"
 #include "Item.h"
+#include "Menu.h"
 
 
 typedef struct __forest {
     Floor * floor;
     Floor * trees;
+    Menu * loot_message;
 
     void (*destroy) (struct __forest *);
     void (*create_assets) (struct __forest *, struct SDL_Renderer *);
-    void (*render_forest) (struct __forest *, struct SDL_Renderer *, Hero *);
-    void (*create_lewt) (struct __forest *, struct SDL_Renderer *);
-    void (*render_lewt) (struct __forest *, struct SDL_Renderer *);
+    void (*render_forest) (struct __forest *, struct SDL_Renderer *, Hero *, Items *);
+    int (*create_loot) (struct __forest *, struct SDL_Renderer *);
+    void (*render_loot) (struct __forest *, struct SDL_Renderer *);
+    int (*check_wait_thread)(struct __forest *);
     int num_chests;
-    int * lewt_cords_x;
-    int * lewt_cords_y;
-    Items * forest_lewt;
-    Collidable ** treasure;
+    int * loot_cords_x;
+    int * loot_cords_y;
+    Items * loot;
+    Collidable ** loot_collidables;
     int forest_map_width;
     int forest_map_height;
 

@@ -32,6 +32,7 @@ static void _fill_bag(Items *this, const char items_from_save[3][10], int quanti
 }
 static void _add_item(Items *this, ITEM_ENUM item_enum)
 {
+
     size_t new_items_size = (sizeof(char *) * (this->items_in_bag + 1));
     size_t new_quantities_size = (sizeof(int) * (this->items_in_bag + 1));
 
@@ -104,8 +105,8 @@ static ITEM_ENUM _get_enum(Items *this, int item_index)
     {
         if (strcmp(this->items[item_index], ITEMS[i]) == 0)
         {
-            printf("\nFound a match at in index %d in bag and index %d in Items", item_index, i);
-            printf("\nThe match is %s and %s", this->items[item_index], ITEMS[i]);
+          //  printf("\nFound a match at in index %d in bag and index %d in Items", item_index, i);
+           // printf("\nThe match is %s and %s", this->items[item_index], ITEMS[i]);
             enum_value = i;
         }
     }
@@ -139,7 +140,7 @@ static int _quaff_item(Items *this, Affect *affect)
         item_was_removed = this->decrement_item(this, this->affect->affect_enum);
     }
     this->affect->destroy(this->affect);
-    refresh_inputs(inputs, 6);
+    refresh_inputs(inputs, 6, 1);
     return item_was_removed;
 }
 
