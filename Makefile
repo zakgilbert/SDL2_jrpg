@@ -1,35 +1,39 @@
-# A simple Makefile for compiling small SDL projects
 
-# set the compiler
-CC := gcc
+EXCEC = game
 
-# set the compiler flags
-CFLAGS := `sdl2-config --libs --cflags` -ggdb3 -O0 --std=c99 -Wall -lSDL2_image -lSDL2_ttf -lm
+SRCDIR  = Sources
+OBJDIR  = Objects
 
-# add header files here
-HDRS := main.h Window_and_Renderer.h Floor.h Forest.h Player_Input.h Hero.h Movement.h Window.h Menu.h Hand.h Character.h Affect.h Item.h Collidable.h Message.h Words.h header.h
-# add source files here
-SRCS := main.c Window_and_Renderer.c Floor.c Forest.c Player_Input.c Hero.c Movement.c Window.c Menu.c Hand.c Character.c Affect.c Item.c Collidable.c Message.c
+SRCS    := $(shell find $(SRCDIR) -name '*.c')
+HDRS    := $(shell find $(SRCDIR) -name '*.h')
+SRCDIRS := $(shell find . -name '*.c' -exec dirname {} \; | uniq)
+OBJS    := $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
-# generate names of object files
-OBJS := $(SRCS:.c=.o)
+CFLAGS = `sdl2-config --libs --cflags` -ggdb3 -O0 --std=c99 -Wall -lSDL2_image -lSDL2_ttf -lm 
 
-# name of executable
-EXEC := game
+LDFLAGS =
 
-# default recipe
-all: $(EXEC)
 
-# recipe for building the final executable
-$(EXEC): $(OBJS) $(HDRS) 
-	$(CC) -o $@ $(OBJS) $(CFLAGS)
+all: $(EXCEC)
 
-# recipe for building object files
-$(OBJS): $(SRCS) $(HDRS)
-	$(CC) -c $(CFLAGS) $(@:.o=.c) 
+$(EXCEC) : buildrepo $(OBJS)
+	$(CC) $(OBJS) $(CFLAGS) -o $@
 
-# recipe to clean the workspace
+$(OBJDIR)/%.o: %.c $(HDRS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(EXEC) $(OBJS)
+	$(RM) $(OBJS)
 
-.PHONY: all clean
+distclean: clen
+	$(RM) $(EXCEC)
+	
+buildrepo:
+	@$(call make-repo)
+
+define make-repo
+   for dir in $(SRCDIRS); \
+   do \
+	mkdir -p $(OBJDIR)/$$dir; \
+   done
+endef

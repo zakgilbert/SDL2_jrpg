@@ -22,13 +22,14 @@ struct SDL_Color GREY;
 
 int main(int argc, char **argv)
 {
-    printf("\n%s",SDL_GetPlatform());
+    printf("\n%s", SDL_GetPlatform());
     set_up_timer();
     int running;
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;
     READY_TO_INTERACT = 0;
     WAITING_FOR_MESSAGE = 0;
+    INTERACT = OFF;
     NUM_STATS = 4;
     TICK = 0;
     running = 1;
@@ -53,7 +54,7 @@ int main(int argc, char **argv)
     struct SDL_Renderer *renderer = NULL;
 
     window = make_window("Window");
-    Forest *forest = CREATE_FOREST(1);
+    Forest *forest = CREATE_FOREST(2);
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
@@ -118,17 +119,21 @@ int main(int argc, char **argv)
         switch (state)
         {
         case DARK_FOREST:
-            SDL_RenderClear(renderer);
-            forest->render_forest(forest, renderer, hero, bag);
             //   my_test_mesage->render(my_test_mesage, renderer, 1);
-            refresh_inputs(EDGE_DETECTION, 4, movement());
             if (state == DARK_FOREST)
             {
+                SDL_RenderClear(renderer);
+                forest->render_forest(forest, renderer, hero, bag);
                 SDL_RenderPresent(renderer);
+                refresh_inputs(EDGE_DETECTION, 4, movement());
                 break;
             }
-            continue;
-
+            else if (state == MESSAGE && WAITING_FOR_MESSAGE != -1)
+            {
+                SDL_RenderClear(renderer);
+                forest->render_forest(forest, renderer, hero, bag);
+                continue;
+            }
         case MAIN_MENU:
             // hand->animate(hand);
             TICK = 1;
@@ -154,13 +159,13 @@ int main(int argc, char **argv)
             SDL_RenderPresent(renderer);
             break;
         case MESSAGE:
-            printf("\nCurrent State %d\nPrevious State", state, previous_state);
+            printf("\nCurrent State %d\nPrevious State %d", state, previous_state);
             potion->render_one_liner(potion, renderer);
             SDL_RenderPresent(renderer);
-            wait_for_okay(NULL);
+            wait_for_okay();
             state = previous_state;
             previous_state = MESSAGE;
-            continue;
+            break;
         default:
             break;
         }

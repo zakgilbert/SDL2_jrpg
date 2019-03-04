@@ -54,8 +54,16 @@ enum COLLIDABLE_TYPES
     CHEST,
     NPC,
     ENEMY,
-    BUTTON
+    BUTTON,
 };
+
+enum BUTTON
+{
+    ON,
+    OFF
+};
+
+enum BUTTON INTERACT;
 
 int FPS;
 long double TIME_PER_TICK;

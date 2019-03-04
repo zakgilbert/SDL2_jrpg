@@ -59,17 +59,13 @@ static void __render_forest(Forest *this, struct SDL_Renderer *renderer, Hero *h
     MOVEMENT_DISABLED = 0;
     hero->animate(hero);
 
-    item_to_be_obtained = this->loot_collidables[0]->collistion(this->loot_collidables);
-
-    if (item_to_be_obtained > -1 && this->loot_collidables[item_to_be_obtained]->chest_was_looted && INPUT == OKAY)
+    if ((-1) != (item_to_be_obtained = this->loot_collidables[0]->collistion(this->loot_collidables)))
     {
         bag->add_item(bag, this->loot->get_enum(this->loot, item_to_be_obtained));
-        WAITING_FOR_MESSAGE = this->loot->get_enum(this->loot, item_to_be_obtained);
+      //  WAITING_FOR_MESSAGE = this->loot->get_enum(this->loot, item_to_be_obtained);
 
-        printf("\nCurrent State %d\nPrevious State", state, previous_state);
         previous_state = DARK_FOREST;
         state = MESSAGE;
-        printf("\nCurrent State %d\nPrevious State", state, previous_state);
     }
 
     this->floor->render_floor(this->floor, renderer);
@@ -98,6 +94,7 @@ static int __create_loot(Forest *this, struct SDL_Renderer *renderer)
 
     for (i = 0; i < this->num_chests; i++)
     {
+        rand_x = rand_x + (i * 50);
         this->loot_cords_x[i] = rand_x;
         this->loot_cords_y[i] = rand_y;
         rand_index = (rand() % ITEM_QUANTITY);

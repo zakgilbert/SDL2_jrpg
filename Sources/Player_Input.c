@@ -4,11 +4,9 @@
 
 #include "Player_Input.h"
 
-int wait_for_okay(void *ptr)
+int wait_for_okay()
 {
     MOVEMENT_DISABLED = 0;
-    INPUT = NONE;
-
     while (!inputs[4])
     {
         SDL_Delay(1);
@@ -23,7 +21,6 @@ int input_thread(void *data)
     while (in_loop)
     {
         get_player_input();
-
         if (INPUT == QUIT)
         {
             in_loop = 0;
@@ -35,8 +32,8 @@ int input_thread(void *data)
 void get_player_input()
 {
     union SDL_Event ev;
-// printf("\nInput: ");
-   /* for (int i = 0; i < 6; i++)
+    // printf("\nInput: ");
+    /* for (int i = 0; i < 6; i++)
     {
         printf(" %d", inputs[i]);
     }*/
@@ -54,26 +51,26 @@ void get_player_input()
             case SDL_SCANCODE_DOWN:
                 inputs[0] = 1;
                 IS_MOVING = 1;
-                continue;
+                break;
             case SDL_SCANCODE_W:
             case SDL_SCANCODE_UP:
                 inputs[1] = 1;
                 IS_MOVING = 1;
-                continue;
+                break;
             case SDL_SCANCODE_A:
             case SDL_SCANCODE_LEFT:
                 inputs[2] = 1;
                 IS_MOVING = 1;
-                continue;
+                break;
             case SDL_SCANCODE_D:
             case SDL_SCANCODE_RIGHT:
                 inputs[3] = 1;
                 IS_MOVING = 1;
-                continue;
+                break;
             case SDL_SCANCODE_J:
                 inputs[4] = 1;
                 INPUT = OKAY;
-                continue;
+                break;
             case SDL_SCANCODE_L:
                 inputs[5] = 1;
                 INPUT = CANCEL;
@@ -81,33 +78,33 @@ void get_player_input()
             default:
                 break;
             }
-           break;
+            break;
         case SDL_KEYUP:
             switch (ev.key.keysym.scancode)
             {
             case SDL_SCANCODE_O:
                 INPUT = QUIT;
-                continue;
+                break;
             case SDL_SCANCODE_S:
             case SDL_SCANCODE_DOWN:
                 inputs[0] = 0;
-                continue;
+                break;
             case SDL_SCANCODE_W:
             case SDL_SCANCODE_UP:
                 inputs[1] = 0;
-                continue;
+                break;
             case SDL_SCANCODE_A:
             case SDL_SCANCODE_LEFT:
                 inputs[2] = 0;
-                continue;
+                break;
             case SDL_SCANCODE_D:
             case SDL_SCANCODE_RIGHT:
                 inputs[3] = 0;
-                continue;
+                break;
             case SDL_SCANCODE_J:
                 inputs[4] = 0;
-               // INPUT = NONE;
-                continue;
+                INPUT = NONE;
+                break;
             case SDL_SCANCODE_L:
                 INPUT = NONE;
                 inputs[5] = 0;

@@ -167,7 +167,6 @@ static void _render_one_liner(Message *this, SDL_Renderer *renderer)
     SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
     SDL_FreeSurface(this->surface);
     SDL_DestroyTexture(this->texture);
-    this->current_line++;
     TTF_CloseFont(this->font);
 }
 Message *ONE_LINER(char *path, const char *message, int seconds_of_existence, int x, int y, int font_size)

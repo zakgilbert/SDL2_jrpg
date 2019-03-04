@@ -46,30 +46,39 @@ static int _collistion(Collidable **these)
         {
             EDGE_DETECTION[3] = 1;
             printf("\nup");
+            these[i]->ready_to_interact = 0;
         }
         if (these[i]->check_down_edge(these[i]))
         {
             these[i]->ready_to_interact = 1;
-            if (INPUT == OKAY&& these[i]->interact(these[i]))
+            result = -1;
+            EDGE_DETECTION[2] = 1;
+        }
+        if (these[i]->ready_to_interact && (inputs[4]))
+        {
+            if (these[i]->interact(these[i]))
             {
                 printf("\n-------------------%d", i);
                 result = i;
             }
+            else
+            {
+                result = -1;
+                these[i]->ready_to_interact = 0;
+            }
             EDGE_DETECTION[2] = 1;
-        }
-        else
-        {
-            these[i]->ready_to_interact = 0;
         }
         if (these[i]->check_left_edge(these[i]))
         {
             EDGE_DETECTION[1] = 1;
             printf("\nleft");
+            these[i]->ready_to_interact = 0;
         }
         if (these[i]->check_right_edge(these[i]))
         {
             EDGE_DETECTION[0] = 1;
             printf("\nright");
+            these[i]->ready_to_interact = 0;
         }
     }
     return result;
@@ -139,12 +148,17 @@ static struct SDL_Rect *_make_chest(Collidable *this, struct SDL_Renderer *rende
 
 static int _loot_chest(Collidable *this)
 {
-    if (this->chest_was_looted)
-        return 0;
-    SDL_DestroyTexture(this->first_texture);
-    this->first_texture = this->second_texture;
-    this->chest_was_looted = 1;
-    return 1;
+    if (!this->chest_was_looted)
+    {
+        MOVEMENT_DISABLED = 1;
+        SDL_DestroyTexture(this->first_texture);
+        this->first_texture = this->second_texture;
+        printf("\n\n\nchest texture has been switched");
+        this->chest_was_looted = 1;
+        this->ready_to_interact = 0;
+        return 1;
+    }
+    return 0;
 }
 static int _interact(Collidable *this)
 {

@@ -42,7 +42,7 @@ static char * _add_item(Items *this, ITEM_ENUM item_enum)
     this->item_quantities = realloc(this->item_quantities, new_quantities_size);
     this->item_quantities[this->items_in_bag] = 1;
     this->items_in_bag++;
-   // refresh_inputs(inputs, 6, 1);
+   refresh_inputs(inputs, 6, 1);
     printf("\nadding a \"%s\" to your bag", this->items[this->items_in_bag - 1]);
 }
 
@@ -102,7 +102,7 @@ static ITEM_ENUM _get_enum(Items *this, int item_index)
 {
 
     int i, enum_value;
-    enum_value = 0;
+    enum_value = -1;
     for (i = 0; i < ITEM_QUANTITY; i++)
     {
         if (strcmp(this->items[item_index], ITEMS[i]) == 0)
