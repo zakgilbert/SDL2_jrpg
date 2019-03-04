@@ -50,8 +50,9 @@ static int _collistion(Collidable **these)
         if (these[i]->check_down_edge(these[i]))
         {
             these[i]->ready_to_interact = 1;
-            if (INPUT == OKAY && these[i]->interact(these[i]))
+            if (INPUT == OKAY&& these[i]->interact(these[i]))
             {
+                printf("\n-------------------%d", i);
                 result = i;
             }
             EDGE_DETECTION[2] = 1;

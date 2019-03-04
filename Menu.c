@@ -4,8 +4,6 @@
 
 #include "Menu.h"
 
-struct SDL_Color white = {255, 255, 255};
-struct SDL_Color grey = {123, 45, 87};
 uint32_t transition_delay = 200;
 
 /**
@@ -90,11 +88,11 @@ static int __render_main_menu_options(Menu *this, struct SDL_Renderer *renderer,
 
         if (i == current_state)
         {
-            this->surface = TTF_RenderText_Solid(this->font, main_menu_options[i], white);
+            this->surface = TTF_RenderText_Solid(this->font, main_menu_options[i], WHITE);
         }
         else
         {
-            this->surface = TTF_RenderText_Solid(this->font, main_menu_options[i], grey);
+            this->surface = TTF_RenderText_Solid(this->font, main_menu_options[i], GREY);
         }
         this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
         SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
@@ -131,7 +129,7 @@ static void __render_character_stats(Menu *this, struct SDL_Renderer *renderer, 
         for (size_t i = 0; i < len; i++)
         {
             TTF_SizeText(this->font, STAT_MATRIX[i], &this->rect.w, &this->rect.h);
-            this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[i], white);
+            this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[i], WHITE);
             this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
             SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
             if ((i + 1) % 4 == 0 && i != 0)
@@ -164,11 +162,11 @@ static void __render_character_stats(Menu *this, struct SDL_Renderer *renderer, 
                 TTF_SizeText(this->font, STAT_MATRIX[j], &this->rect.w, &this->rect.h);
                 if (i == hand->current_state)
                 {
-                    this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[j], white);
+                    this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[j], WHITE);
                 }
                 else
                 {
-                    this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[j], grey);
+                    this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[j], GREY);
                 }
                 this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
                 SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
@@ -268,13 +266,13 @@ static int __render_items_menu_options(Menu *this, struct SDL_Renderer *renderer
 
         if (i == current_state)
         {
-            this->surface = TTF_RenderText_Solid(this->font, bag->items[i], white);
-            quat = TTF_RenderText_Solid(quat_font, quat_array, white);
+            this->surface = TTF_RenderText_Solid(this->font, bag->items[i], WHITE);
+            quat = TTF_RenderText_Solid(quat_font, quat_array, WHITE);
         }
         else
         {
-            this->surface = TTF_RenderText_Solid(this->font, bag->items[i], grey);
-            quat = TTF_RenderText_Solid(quat_font, quat_array, grey);
+            this->surface = TTF_RenderText_Solid(this->font, bag->items[i], GREY);
+            quat = TTF_RenderText_Solid(quat_font, quat_array, GREY);
         }
         this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
         quat_tex = SDL_CreateTextureFromSurface(renderer, quat);

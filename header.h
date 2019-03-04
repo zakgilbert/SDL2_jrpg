@@ -26,13 +26,18 @@ extern int MAP_WIDTH;
 extern int MAP_HEIGHT;
 extern int TICK;
 extern int REFRESH_ITEMS;
+extern int WAITING_FOR_MESSAGE;
+
+extern struct SDL_Color WHITE;
+extern struct SDL_Color GREY;
 
 enum states
 {
     DARK_FOREST,
     MAIN_MENU,
     ITEMS_MENU,
-    USE_ITEM
+    USE_ITEM,
+    MESSAGE
 };
 enum states state, previous_state;
 enum INPUTS

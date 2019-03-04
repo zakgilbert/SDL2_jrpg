@@ -33,11 +33,11 @@ typedef struct __menu
 
     Window *select_character_bg;
 
-    void (*render_character_stats) (struct __menu *, struct SDL_Renderer *, Hand *, int, int, int, int); 
+    void (*render_character_stats)(struct __menu *, struct SDL_Renderer *, Hand *, int, int, int, int);
 
-    void (*render_character_main_menu_image)(struct __menu *, struct SDL_Renderer *, Hand *,Character **);  
+    void (*render_character_main_menu_image)(struct __menu *, struct SDL_Renderer *, Hand *, Character **);
 
-    void (*render_main_menu)(struct __menu *, struct SDL_Renderer *, Hand *, Character ** );
+    void (*render_main_menu)(struct __menu *, struct SDL_Renderer *, Hand *, Character **);
 
     int (*render_main_menu_options)(struct __menu *, struct SDL_Renderer *, int);
 
@@ -47,7 +47,7 @@ typedef struct __menu
 
     void (*render_use_item_menu)(struct __menu *, struct SDL_Renderer *, Hand *, Character **, Items *);
 
-    int (*render_use_item_menu_options)(struct __menu *, struct SDL_Renderer*, Character **, int);
+    int (*render_use_item_menu_options)(struct __menu *, struct SDL_Renderer *, Character **, int);
 
     TTF_Font *font;
     struct SDL_Rect rect;

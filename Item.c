@@ -30,7 +30,7 @@ static void _fill_bag(Items *this, const char items_from_save[3][10], int quanti
         printf("\nAdded %d %s's to bag at i = %d", this->item_quantities[i], this->items[i], i);
     }
 }
-static void _add_item(Items *this, ITEM_ENUM item_enum)
+static char * _add_item(Items *this, ITEM_ENUM item_enum)
 {
 
     size_t new_items_size = (sizeof(char *) * (this->items_in_bag + 1));
@@ -42,6 +42,8 @@ static void _add_item(Items *this, ITEM_ENUM item_enum)
     this->item_quantities = realloc(this->item_quantities, new_quantities_size);
     this->item_quantities[this->items_in_bag] = 1;
     this->items_in_bag++;
+   // refresh_inputs(inputs, 6, 1);
+    printf("\nadding a \"%s\" to your bag", this->items[this->items_in_bag - 1]);
 }
 
 static int _remove_item(Items *this, int item_index)

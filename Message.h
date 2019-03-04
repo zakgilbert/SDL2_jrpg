@@ -15,15 +15,16 @@
 #include "header.h"
 #include "Window.h"
 
+
 typedef struct _message
 {
     void (*destroy)(struct _message *);
-    void (*render)(struct _message *, int, int, int, int, int, int);
+    void (*render)(struct _message *, SDL_Renderer *,int);
     void (*line_r)(struct _message *, const char *, int, int, int, int, int, int);
     int (*create_lines)(struct _message *);
+    void (*render_one_liner)(struct _message *, SDL_Renderer *);
     Window *message_background;
     TTF_Font *font;
-    int skip;
     struct SDL_Texture *texture;
     struct SDL_Surface *surface;
     struct SDL_Rect rect;
@@ -44,6 +45,8 @@ typedef struct _message
     int letter_width;
     int letter_height;
     int num_words;
+    int num_lines;
+    int current_line;
     
 
     char ** message_2d;
@@ -52,4 +55,5 @@ typedef struct _message
 
 Message *CREATE_MESSAGE(char *, const char *, int, int, int, int, int, int);
 
+Message *ONE_LINER(char *, const char *, int , int, int, int);
 #endif

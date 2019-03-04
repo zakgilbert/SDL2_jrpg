@@ -15,6 +15,7 @@
 #include <SDL2/SDL_log.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_thread.h>
+#include <SDL2/SDL_platform.h>
 #include "header.h"
 #include "Window_and_Renderer.h"
 #include "Floor.h"

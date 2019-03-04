@@ -14,20 +14,33 @@ int Y;
 int MAP_WIDTH;
 int MAP_HEIGHT;
 int TICK;
+int WAITING_FOR_MESSAGE;
 char **STAT_MATRIX;
+
+struct SDL_Color WHITE;
+struct SDL_Color GREY;
 
 int main(int argc, char **argv)
 {
-
+    printf("\n%s",SDL_GetPlatform());
     set_up_timer();
     int running;
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;
     READY_TO_INTERACT = 0;
+    WAITING_FOR_MESSAGE = 0;
     NUM_STATS = 4;
     TICK = 0;
     running = 1;
     INPUT = NONE;
+    WHITE.r = 255;
+    WHITE.g = 255;
+    WHITE.b = 255;
+
+    GREY.r = 100;
+    GREY.g = 100;
+    GREY.b = 100;
+
     refresh_inputs(inputs, 6, 1);
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
@@ -45,8 +58,10 @@ int main(int argc, char **argv)
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
     Items *bag = CREATE_BAG();
-    Message *my_test_mesage = CREATE_MESSAGE("ponde___.ttf", "this is a test and i hate it", 10, 100, 100, 100, 100, 12);
+    Message *my_test_mesage = CREATE_MESSAGE("ponde___.ttf", "The theif locke awakes in a strange daze, surrounded by a forest that he does not recognize. ", 10, 50, 100, 300, 100, 12);
     my_test_mesage->create_lines(my_test_mesage);
+
+    Message *potion = ONE_LINER("ponde___.ttf", "POTION", 0, 150, 20, 10);
     const char current_items[3][10] = {
         {"POTION"},
         {"SOFT"},
@@ -105,9 +120,14 @@ int main(int argc, char **argv)
         case DARK_FOREST:
             SDL_RenderClear(renderer);
             forest->render_forest(forest, renderer, hero, bag);
-            SDL_RenderPresent(renderer);
+            //   my_test_mesage->render(my_test_mesage, renderer, 1);
             refresh_inputs(EDGE_DETECTION, 4, movement());
-            break;
+            if (state == DARK_FOREST)
+            {
+                SDL_RenderPresent(renderer);
+                break;
+            }
+            continue;
 
         case MAIN_MENU:
             // hand->animate(hand);
@@ -133,6 +153,14 @@ int main(int argc, char **argv)
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;
+        case MESSAGE:
+            printf("\nCurrent State %d\nPrevious State", state, previous_state);
+            potion->render_one_liner(potion, renderer);
+            SDL_RenderPresent(renderer);
+            wait_for_okay(NULL);
+            state = previous_state;
+            previous_state = MESSAGE;
+            continue;
         default:
             break;
         }
