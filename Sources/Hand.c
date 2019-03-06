@@ -26,10 +26,10 @@ int animate_hand_thread(void *ptr)
             is_running = 0;
             return 0;
         }
-        if (TICK)
+        if (G.TICK)
         {
             hand->animate(hand);
-            TICK = 0;
+            G.TICK = 0;
         }
         SDL_Delay(1);
     }

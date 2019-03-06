@@ -13,7 +13,6 @@ int X;
 int Y;
 int MAP_WIDTH;
 int MAP_HEIGHT;
-int TICK;
 int WAITING_FOR_MESSAGE;
 char **STAT_MATRIX;
 
@@ -23,6 +22,7 @@ struct SDL_Color MENU_BACKGROUND;
 struct SDL_Color RED;
 struct SDL_Color BLU;
 struct SDL_Color GRN;
+struct MY_GLOBAL_LIBRARY G;
 
 int main(int argc, char **argv)
 {
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     WAITING_FOR_MESSAGE = 0;
     INTERACT = OFF;
     NUM_STATS = 4;
-    TICK = 0;
+    G.TICK = 0;
     running = 1;
     INPUT = NONE;
     current_message = malloc(30);
@@ -160,7 +160,7 @@ int main(int argc, char **argv)
             }
         case MAIN_MENU:
             // hand->animate(hand);
-            TICK = 1;
+            G.TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_main_menu(menu, renderer, hand, party);
             hand->render(hand, renderer);
@@ -169,21 +169,21 @@ int main(int argc, char **argv)
 
         case ITEMS_MENU:
             //hand->animate(hand);
-            TICK = 1;
+            G.TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_items_menu(menu, renderer, hand, bag);
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;
         case USE_ITEM:
-            TICK = 1;
+            G.TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_use_item_menu(menu, renderer, hand, party, bag);
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;
         case CONFIG:
-            TICK = 1;
+            G.TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_config_menu(menu, renderer, hand);
             hand->render(hand, renderer);
@@ -299,7 +299,7 @@ void reset_timer()
     if (TICKS_PER_SECOND >= SDL_GetPerformanceFrequency())
     {
         // printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED);
-        // printf("\nTicks Per Second: %ld", TICKS_PER_SECOND);
+        // printf("\nTicks Per Second: %ld", G.TICKS_PER_SECOND);
         FRAMES_RENDERED = 0;
         TICKS_PER_SECOND = 0;
     }

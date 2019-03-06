@@ -24,7 +24,6 @@ extern int X;
 extern int Y;
 extern int MAP_WIDTH;
 extern int MAP_HEIGHT;
-extern int TICK;
 extern int REFRESH_ITEMS;
 extern int WAITING_FOR_MESSAGE;
 extern struct SDL_Color WHITE;
@@ -34,10 +33,10 @@ extern struct SDL_Color MENU_BACKGROUND;
 extern struct SDL_Color RED;
 extern struct SDL_Color BLU;
 extern struct SDL_Color GRN;
-/*
-extern struct GLOBALS {
-    int TEST;
-}G; */ 
+extern struct MY_GLOBAL_LIBRARY
+{
+    int TICK;
+} G;
 
 enum states
 {
@@ -74,8 +73,6 @@ enum BUTTON
 
 enum BUTTON INTERACT;
 
-
-
 int FPS;
 long double TIME_PER_TICK;
 long double TIME_DELAY_PER_SECOND;
@@ -87,6 +84,5 @@ uint64_t TICKS_PER_SECOND;
 int FRAMES_RENDERED;
 int refresh_inputs(int *, int, int);
 void set_items(int *);
-
 
 #endif //JRPG_HEADER_H
