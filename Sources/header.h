@@ -29,6 +29,15 @@ extern int REFRESH_ITEMS;
 extern int WAITING_FOR_MESSAGE;
 extern struct SDL_Color WHITE;
 extern struct SDL_Color GREY;
+extern struct SDL_Color GREY;
+extern struct SDL_Color MENU_BACKGROUND;
+extern struct SDL_Color RED;
+extern struct SDL_Color BLU;
+extern struct SDL_Color GRN;
+/*
+extern struct GLOBALS {
+    int TEST;
+}G; */ 
 
 enum states
 {
@@ -37,6 +46,7 @@ enum states
     ITEMS_MENU,
     USE_ITEM,
     MESSAGE,
+    CONFIG
 };
 enum states state, previous_state;
 enum INPUTS
@@ -63,6 +73,8 @@ enum BUTTON
 };
 
 enum BUTTON INTERACT;
+
+
 
 int FPS;
 long double TIME_PER_TICK;

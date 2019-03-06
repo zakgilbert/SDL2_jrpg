@@ -28,6 +28,7 @@ int movement()
     }
     if (change_position())
     {
+       // printf("\nX: %d\nY: %d", X, Y);
         bounds();
         result = 1;
     }

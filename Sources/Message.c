@@ -155,6 +155,11 @@ static void _render_one_liner(Message *this, SDL_Renderer *renderer)
         printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
     }
     TTF_SizeText(this->font, this->message, &this->rect.w, &this->rect.h);
+    
+    if(this->rect.x == 0)
+    {
+        this->rect.x = (WINDOW_WIDTH / 2) - ( this->rect.w / 2 );
+    }
 
     this->message_background = CREATE_WINDOW(this->rect.x, this->rect.y, this->rect.w + 15, this->rect.h + 15);
     this->rect.x = this->message_background->rect.x + 6;

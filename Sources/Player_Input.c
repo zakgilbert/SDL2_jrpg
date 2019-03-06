@@ -37,6 +37,7 @@ void get_player_input()
     {
         printf(" %d", inputs[i]);
     }*/
+    
     while (SDL_PollEvent(&ev) != 0)
     {
         switch (ev.type)

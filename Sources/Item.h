@@ -17,7 +17,7 @@ typedef struct _item
     int (*find_item)(struct _item *, ITEM_ENUM);
     int (*remove_item)(struct _item *, int);
     int (*decrement_item)(struct _item *, ITEM_ENUM);
-    void (*loot)(struct _item *, ITEM_ENUM);
+    char * (*loot)(struct _item *, ITEM_ENUM);
     ITEM_ENUM(*get_enum)
     (struct _item *, int);
     Affect *affect;

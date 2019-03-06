@@ -30,9 +30,8 @@ static void _fill_bag(Items *this, const char items_from_save[3][10], int quanti
         printf("\nAdded %d %s's to bag at i = %d", this->item_quantities[i], this->items[i], i);
     }
 }
-static char * _add_item(Items *this, ITEM_ENUM item_enum)
+static char *_add_item(Items *this, ITEM_ENUM item_enum)
 {
-
     size_t new_items_size = (sizeof(char *) * (this->items_in_bag + 1));
     size_t new_quantities_size = (sizeof(int) * (this->items_in_bag + 1));
 
@@ -42,7 +41,6 @@ static char * _add_item(Items *this, ITEM_ENUM item_enum)
     this->item_quantities = realloc(this->item_quantities, new_quantities_size);
     this->item_quantities[this->items_in_bag] = 1;
     this->items_in_bag++;
-   refresh_inputs(inputs, 6, 1);
     printf("\nadding a \"%s\" to your bag", this->items[this->items_in_bag - 1]);
     return this->items[this->items_in_bag - 1];
 }
@@ -108,8 +106,8 @@ static ITEM_ENUM _get_enum(Items *this, int item_index)
     {
         if (strcmp(this->items[item_index], ITEMS[i]) == 0)
         {
-          //  printf("\nFound a match at in index %d in bag and index %d in Items", item_index, i);
-           // printf("\nThe match is %s and %s", this->items[item_index], ITEMS[i]);
+            //  printf("\nFound a match at in index %d in bag and index %d in Items", item_index, i);
+            // printf("\nThe match is %s and %s", this->items[item_index], ITEMS[i]);
             enum_value = i;
         }
     }
@@ -147,7 +145,13 @@ static int _quaff_item(Items *this, Affect *affect)
     return item_was_removed;
 }
 
-static void _loot(Items *this, ITEM_ENUM item_enum)
+/************************************************
+ * Check if the item already exits in this bag.
+ * If not call add_item.
+ * Otherwise increment the existing item.
+ * Return the name of the item added as a char *.
+*/
+static char *_loot(Items *this, ITEM_ENUM item_enum)
 {
     int item_index;
 
@@ -155,11 +159,13 @@ static void _loot(Items *this, ITEM_ENUM item_enum)
 
     if (item_index == -1)
     {
-        this->add_item(this, item_enum);
+        return this->add_item(this, item_enum);
     }
     else
     {
         this->item_quantities[item_index]++;
+        printf("\nYour \"%s\" has increased from %d to %d.", this->items[item_index], this->item_quantities[item_index] - 1,this->item_quantities[item_index]);
+        return this->items[item_index];
     }
 }
 

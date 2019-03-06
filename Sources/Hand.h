@@ -20,25 +20,27 @@
 
 int animate_hand_thread(void *);
 
-typedef struct __hand
+typedef struct _hand
 {
-    void (*destroy) (struct __hand *);
+    void (*destroy) (struct _hand *);
 
-    void (*render) (struct __hand *, struct SDL_Renderer *);
+    void (*render) (struct _hand *, struct SDL_Renderer *);
 
-    void (*create_texture) (struct __hand *, char *, struct SDL_Renderer *, int, int);
+    void (*create_texture) (struct _hand *, char *, struct SDL_Renderer *, int, int);
 
-    void (*animate) (struct __hand *);
+    void (*animate) (struct _hand *);
 
-    void (*main_menu_position) (struct __hand*);
+    void (*main_menu_position) (struct _hand*);
     
-    void (*items_menu_position) (struct __hand*);
+    void (*items_menu_position) (struct _hand*);
+    
+    void (*config_menu_position) (struct _hand*);
 
-    void (*use_item_position) (struct __hand*);
+    void (*use_item_position) (struct _hand*);
 
-    void (*vertical_horizontal) (struct __hand *);
+    void (*vertical_horizontal) (struct _hand *);
 
-    void (*set_states) (struct __hand*, int, int, int, int, int, int, int, int);
+    void (*set_states) (struct _hand*, int, int, int, int, int, int, int, int);
 
 
     int state_0[2];
@@ -51,17 +53,17 @@ typedef struct __hand
     int current_state;
     int number_of_states;
 
-    struct SDL_Rect *(*get_rect_pointer) (struct __hand *);
+    struct SDL_Rect *(*get_rect_pointer) (struct _hand *);
 
-    struct SDL_Rect *(*get_rect_pos_pointer) (struct __hand *);
+    struct SDL_Rect *(*get_rect_pos_pointer) (struct _hand *);
 
-    int (*change_state_quantity) (struct __hand *, int number, int add);
+    int (*change_state_quantity) (struct _hand *, int number, int add);
 
-    int (*change_get_state) (struct __hand *, int number, int add);
+    int (*change_get_state) (struct _hand *, int number, int add);
 
-    int (*move_horizontal) (struct __hand *, int);
+    int (*move_horizontal) (struct _hand *, int);
 
-    int (*move_vertical) (struct __hand *, int);
+    int (*move_vertical) (struct _hand *, int);
 
 } Hand;
 

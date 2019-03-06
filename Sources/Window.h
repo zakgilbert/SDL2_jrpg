@@ -30,8 +30,12 @@ typedef struct __window
 
     struct SDL_Rect rect;
     int original_width;
+    int color_value;
 
     void (*render) (struct __window *, struct SDL_Renderer *);
+    void (*render_color_bar)(struct __window **, struct SDL_Renderer *, int x, int y, int skip, int i);
+    int (*adjust_menu_colors)(struct __window *);
+    struct SDL_Color color_bar_color;
 
 } Window;
 

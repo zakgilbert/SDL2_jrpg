@@ -4,7 +4,7 @@
 
 #include "Hand.h"
 
-static void __destroy(Hand *this)
+static void _destroy(Hand *this)
 {
     SDL_DestroyTexture(this->texture);
     if (NULL != this)
@@ -35,29 +35,37 @@ int animate_hand_thread(void *ptr)
     }
     return 0;
 }
-static void __use_item_position(Hand *this)
+static void _use_item_position(Hand *this)
 {
     this->position.x = 15;
     this->position.y = 215;
 }
 
-static void __items_menu_position(Hand *this)
+static void _items_menu_position(Hand *this)
 {
     this->position.x = 15;
     this->position.y = 11 + (11 * this->current_state);
 }
-static void __main_menu_position(Hand *this)
+
+static void _config_menu_position(Hand *this)
+{
+    this->position.x = 15;
+    this->position.y = 15;
+    this->current_state = 0;
+}
+
+static void _main_menu_position(Hand *this)
 {
     this->position.x = 233;
     this->position.y = 11;
 }
 
-static void __render(Hand *this, struct SDL_Renderer *renderer)
+static void _render(Hand *this, struct SDL_Renderer *renderer)
 {
     SDL_RenderCopy(renderer, this->texture, this->get_rect_pointer(this), this->get_rect_pos_pointer(this));
 }
 
-static void __create_texture(Hand *this, char *path, struct SDL_Renderer *renderer, int x, int y)
+static void _create_texture(Hand *this, char *path, struct SDL_Renderer *renderer, int x, int y)
 {
     struct SDL_Surface *surface = NULL;
     struct SDL_Texture *texture = NULL;
@@ -92,17 +100,17 @@ static void __create_texture(Hand *this, char *path, struct SDL_Renderer *render
     this->texture = texture;
 }
 
-static SDL_Rect *__get_rect_pos_pointer(Hand *this)
+static SDL_Rect *_get_rect_pos_pointer(Hand *this)
 {
     return &this->position;
 }
 
-static SDL_Rect *__get_rect_pointer(Hand *this)
+static SDL_Rect *_get_rect_pointer(Hand *this)
 {
     return &this->rect;
 }
 
-static void __set_states(Hand *this, int state_00, int state_01, int state_10, int state_11, int state_20, int state_21, int state_30, int state_31)
+static void _set_states(Hand *this, int state_00, int state_01, int state_10, int state_11, int state_20, int state_21, int state_30, int state_31)
 {
     this->state_0[0] = state_00;
     this->state_0[1] = state_01;
@@ -114,7 +122,7 @@ static void __set_states(Hand *this, int state_00, int state_01, int state_10, i
     this->state_3[1] = state_31;
 }
 
-int __change_state_quantity(Hand *this, int number, int add)
+int _change_state_quantity(Hand *this, int number, int add)
 {
     if (add)
     {
@@ -127,7 +135,7 @@ int __change_state_quantity(Hand *this, int number, int add)
     return this->number_of_states;
 }
 
-int __change_get_state(Hand *this, int number, int add)
+int _change_get_state(Hand *this, int number, int add)
 {
     if (add)
     {
@@ -140,7 +148,7 @@ int __change_get_state(Hand *this, int number, int add)
     return this->current_state;
 }
 
-static void __animate(Hand *this)
+static void _animate(Hand *this)
 {
     if (FRAMES_RENDERED % 10 == 0)
     {
@@ -159,7 +167,7 @@ static void __animate(Hand *this)
     }
 }
 
-static int __move_horizontal(Hand *this, int distance)
+static int _move_horizontal(Hand *this, int distance)
 {
     if (inputs[2] && this->current_state > 0)
     {
@@ -174,7 +182,7 @@ static int __move_horizontal(Hand *this, int distance)
     return this->current_state;
 }
 
-static int __move_vertical(Hand *this, int distance)
+static int _move_vertical(Hand *this, int distance)
 {
     if (inputs[1] && this->current_state > 0)
     {
@@ -191,7 +199,7 @@ static int __move_vertical(Hand *this, int distance)
     return this->current_state;
 }
 
-static void __vertical_horizontal(Hand *this)
+static void _vertical_horizontal(Hand *this)
 {
     switch (this->current_state)
     {
@@ -263,24 +271,25 @@ Hand *CREATE_HAND()
     Hand *this = (Hand *)malloc(sizeof(*this));
 
     // -n>
-    this->destroy = __destroy;
-    this->render = __render;
-    this->create_texture = __create_texture;
-    this->animate = __animate;
+    this->destroy = _destroy;
+    this->render = _render;
+    this->create_texture = _create_texture;
+    this->animate = _animate;
 
-    this->change_state_quantity = __change_state_quantity;
-    this->change_get_state = __change_get_state;
+    this->change_state_quantity = _change_state_quantity;
+    this->change_get_state = _change_get_state;
 
-    this->get_rect_pos_pointer = __get_rect_pos_pointer;
-    this->get_rect_pointer = __get_rect_pointer;
+    this->get_rect_pos_pointer = _get_rect_pos_pointer;
+    this->get_rect_pointer = _get_rect_pointer;
 
-    this->move_vertical = __move_vertical;
-    this->move_horizontal = __move_horizontal;
-    this->items_menu_position = __items_menu_position;
-    this->main_menu_position = __main_menu_position;
-    this->use_item_position = __use_item_position;
-    this->vertical_horizontal = __vertical_horizontal;
-    this->set_states = __set_states;
+    this->move_vertical = _move_vertical;
+    this->move_horizontal = _move_horizontal;
+    this->items_menu_position = _items_menu_position;
+    this->main_menu_position = _main_menu_position;
+    this->use_item_position = _use_item_position;
+    this->config_menu_position = _config_menu_position;
+    this->vertical_horizontal = _vertical_horizontal;
+    this->set_states = _set_states;
     // -o>
     this->set_states(this, 15, 215, 180, 215, 15, 265, 180, 265);
     this->current_state = 0;

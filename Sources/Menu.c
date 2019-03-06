@@ -12,7 +12,7 @@ uint32_t transition_delay = 200;
  * @args:    Menu * this
  * @returns: void
  */
-static void __destroy(Menu *this)
+static void _destroy(Menu *this)
 {
     this->main_menu_bg->destroy(this->main_menu_bg);
     if (NULL != this)
@@ -22,7 +22,7 @@ static void __destroy(Menu *this)
     }
 }
 
-static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **characters)
+static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **characters)
 {
     if (INPUT == CANCEL)
     {
@@ -45,10 +45,20 @@ static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
     this->render_character_main_menu_image(this, renderer, hand, characters);
     this->render_character_stats(this, renderer, hand, 80, 15, 9, MAIN_MENU);
 
-    if (hand->current_state == 0 && inputs[4]) 
+    if (hand->current_state == 0 && inputs[4])
     {
         state = ITEMS_MENU;
         hand->items_menu_position(hand);
+        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+        SDL_RenderFillRect(renderer, &this->transition);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(transition_delay);
+    }
+    if (hand->current_state == 4 && inputs[4])
+    {
+        state = CONFIG;
+        hand->config_menu_position(hand);
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
         SDL_RenderFillRect(renderer, &this->transition);
@@ -61,7 +71,7 @@ static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
     }
 }
 
-static int __render_main_menu_options(Menu *this, struct SDL_Renderer *renderer, int current_state)
+static int _render_main_menu_options(Menu *this, struct SDL_Renderer *renderer, int current_state)
 {
     int skip;
     char font_path[] = "ponde___.ttf";
@@ -108,7 +118,7 @@ static int __render_main_menu_options(Menu *this, struct SDL_Renderer *renderer,
     return skip;
 }
 
-static void __render_character_stats(Menu *this, struct SDL_Renderer *renderer, Hand *hand, int x, int y, int font_size, int cas)
+static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, Hand *hand, int x, int y, int font_size, int cas)
 {
     int skip;
     char font_path[] = "ponde___.ttf";
@@ -188,7 +198,7 @@ static void __render_character_stats(Menu *this, struct SDL_Renderer *renderer, 
     this->texture = NULL;
 }
 
-static void __render_character_main_menu_image(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **characters)
+static void _render_character_main_menu_image(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **characters)
 {
     int i, j;
 
@@ -205,7 +215,7 @@ static void __render_character_main_menu_image(Menu *this, struct SDL_Renderer *
     }
 }
 
-static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Items *bag)
+static void _render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Items *bag)
 {
     if (INPUT == CANCEL)
     {
@@ -237,7 +247,7 @@ static void __render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand 
     }
 }
 
-static int __render_items_menu_options(Menu *this, struct SDL_Renderer *renderer, Items *bag, int current_state)
+static int _render_items_menu_options(Menu *this, struct SDL_Renderer *renderer, Items *bag, int current_state)
 {
     int skip;
     char font_path[] = "ponde___.ttf";
@@ -292,7 +302,7 @@ static int __render_items_menu_options(Menu *this, struct SDL_Renderer *renderer
     return skip;
 }
 
-static void __render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **party, Items *bag)
+static void _render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **party, Items *bag)
 {
     if (INPUT == CANCEL)
     {
@@ -326,10 +336,54 @@ static void __render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Ha
         }
     }
 }
-static int __render_use_item_menu_options(Menu *this, struct SDL_Renderer *renderer, Character **party, int current_state)
+static void _render_config_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand)
 {
-    int skip;
+    /*******************************************************
+     * If Cancel button is pressed. Return to the main menu.
+  */
+    if (INPUT == CANCEL)
+    {
+        state = MAIN_MENU;
+        INPUT = NONE;
+        hand->main_menu_position(hand);
+        hand->current_state = 0;
+        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+        SDL_RenderFillRect(renderer, &this->transition);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(transition_delay);
+        return;
+    }
+    /************************************
+     * Otherwise, render the config menu.
+  */
+    MOVEMENT_DISABLED = 1;
+    hand->change_state_quantity(hand, 2, 0);
+    this->main_menu_bg->render(this->main_menu_bg, renderer);
+    hand->move_vertical(hand, this->render_config_menu_options(this, renderer, hand, hand->current_state));
+}
+static int _render_config_menu_options(Menu *this, struct SDL_Renderer *renderer, Hand *hand, int current_state)
+{
+    int skip, i;
     char font_path[] = "ponde___.ttf";
+
+    char rgb_matrix[3][50];
+    Window **rgb_bars = (Window **)malloc(sizeof(Window *) * 3);
+    rgb_bars[0] = CREATE_WINDOW(110, 20, 150, 15);
+    rgb_bars[1] = CREATE_WINDOW(110, 40, 150, 15);
+    rgb_bars[2] = CREATE_WINDOW(110, 60, 150, 15);
+
+    rgb_bars[0]->color_value = MENU_BACKGROUND.r;
+    rgb_bars[1]->color_value = MENU_BACKGROUND.g;
+    rgb_bars[2]->color_value = MENU_BACKGROUND.b;
+
+    rgb_bars[0]->color_bar_color = RED;
+    rgb_bars[1]->color_bar_color = GRN;
+    rgb_bars[2]->color_bar_color = BLU;
+
+    sprintf(rgb_matrix[0], "RED                          %d", (int)MENU_BACKGROUND.r);
+    sprintf(rgb_matrix[1], "GREEN                        %d", (int)MENU_BACKGROUND.g);
+    sprintf(rgb_matrix[2], "BLUE                         %d", (int)MENU_BACKGROUND.b);
 
     this->font = TTF_OpenFont(font_path, 10);
 
@@ -337,32 +391,64 @@ static int __render_use_item_menu_options(Menu *this, struct SDL_Renderer *rende
     {
         printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
     }
-
+    this->rect.x = 50;
+    this->rect.y = 20;
     skip = TTF_FontLineSkip(this->font);
-    /********************************************************************/
 
+    for (i = 0; i < 3; i++)
+    {
+        rgb_bars[i]->render_color_bar(rgb_bars, renderer, this->rect.x, this->rect.y, 20, i);
+
+        TTF_SizeText(this->font, rgb_matrix[i], &this->rect.w, &this->rect.h);
+
+        if (i == current_state)
+        {
+            this->surface = TTF_RenderText_Solid(this->font, rgb_matrix[i], WHITE);
+            this->change_window_color(rgb_bars, i);
+        }
+        else
+        {
+            this->surface = TTF_RenderText_Solid(this->font, rgb_matrix[i], GREY);
+        }
+        this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+        SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+        this->rect.y += 20;
+    }
     TTF_CloseFont(this->font);
     SDL_FreeSurface(this->surface);
     SDL_DestroyTexture(this->texture);
     this->surface = NULL;
     this->texture = NULL;
+    return 20;
 }
 
+void _change_window_color(Window **color_bars, int current_state)
+{
+    if (current_state == 0)
+        MENU_BACKGROUND.r = color_bars[0]->adjust_menu_colors(color_bars[0]);
+    else if (current_state == 1)
+        MENU_BACKGROUND.g = color_bars[1]->adjust_menu_colors(color_bars[1]);
+    else
+        MENU_BACKGROUND.b = color_bars[2]->adjust_menu_colors(color_bars[2]);
+}
 Menu *CREATE_MENU()
 {
     Menu *this = (Menu *)malloc(sizeof(*this));
 
-    this->destroy = __destroy;
+    this->destroy = _destroy;
 
-    this->render_main_menu = __render_main_menu;
-    this->render_main_menu_options = __render_main_menu_options;
-    this->render_character_stats = __render_character_stats;
-    this->render_character_main_menu_image = __render_character_main_menu_image;
+    this->render_main_menu = _render_main_menu;
+    this->render_main_menu_options = _render_main_menu_options;
+    this->render_character_stats = _render_character_stats;
+    this->render_character_main_menu_image = _render_character_main_menu_image;
 
-    this->render_items_menu = __render_items_menu;
-    this->render_items_menu_options = __render_items_menu_options;
-    this->render_use_item_menu = __render_use_item_menu;
-    this->render_use_item_menu_options = __render_use_item_menu_options;
+    this->render_items_menu = _render_items_menu;
+    this->render_items_menu_options = _render_items_menu_options;
+    this->render_use_item_menu = _render_use_item_menu;
+    this->render_config_menu = _render_config_menu;
+    this->render_config_menu_options = _render_config_menu_options;
+
+    this->change_window_color = _change_window_color;
 
     this->main_menu_bg = CREATE_WINDOW(12, 8, 336, 306);
     this->select_character_bg = CREATE_WINDOW(12, 200, 336, 120);

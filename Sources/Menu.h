@@ -25,30 +25,33 @@
 
 uint32_t transition_delay;
 
-typedef struct __menu
+typedef struct _menu
 {
-    void (*destroy)(struct __menu *);
+    void (*destroy)(struct _menu *);
 
     Window *main_menu_bg;
 
     Window *select_character_bg;
 
-    void (*render_character_stats)(struct __menu *, struct SDL_Renderer *, Hand *, int, int, int, int);
+    void (*render_character_stats)(struct _menu *, struct SDL_Renderer *, Hand *, int, int, int, int);
 
-    void (*render_character_main_menu_image)(struct __menu *, struct SDL_Renderer *, Hand *, Character **);
+    void (*render_character_main_menu_image)(struct _menu *, struct SDL_Renderer *, Hand *, Character **);
 
-    void (*render_main_menu)(struct __menu *, struct SDL_Renderer *, Hand *, Character **);
+    void (*render_main_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Character **);
 
-    int (*render_main_menu_options)(struct __menu *, struct SDL_Renderer *, int);
+    int (*render_main_menu_options)(struct _menu *, struct SDL_Renderer *, int);
 
-    void (*render_items_menu)(struct __menu *, struct SDL_Renderer *, Hand *, Items *);
+    void (*render_items_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Items *);
 
-    int (*render_items_menu_options)(struct __menu *, struct SDL_Renderer *, Items *, int);
+    int (*render_items_menu_options)(struct _menu *, struct SDL_Renderer *, Items *, int);
 
-    void (*render_use_item_menu)(struct __menu *, struct SDL_Renderer *, Hand *, Character **, Items *);
+    void (*render_use_item_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Character **, Items *);
 
-    int (*render_use_item_menu_options)(struct __menu *, struct SDL_Renderer *, Character **, int);
+    void (*render_config_menu)(struct _menu *, struct SDL_Renderer *, Hand *);
 
+    int (*render_config_menu_options)(struct _menu *, struct SDL_Renderer *, Hand *, int);
+    
+    void (*change_window_color)(Window ** color_bars, int current_state);
     TTF_Font *font;
     struct SDL_Rect rect;
     struct SDL_Rect transition;

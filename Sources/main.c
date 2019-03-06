@@ -19,6 +19,10 @@ char **STAT_MATRIX;
 
 struct SDL_Color WHITE;
 struct SDL_Color GREY;
+struct SDL_Color MENU_BACKGROUND;
+struct SDL_Color RED;
+struct SDL_Color BLU;
+struct SDL_Color GRN;
 
 int main(int argc, char **argv)
 {
@@ -41,9 +45,25 @@ int main(int argc, char **argv)
     WHITE.g = 255;
     WHITE.b = 255;
 
-    GREY.r = 100;
-    GREY.g = 100;
-    GREY.b = 100;
+    GREY.r = 140;
+    GREY.g = 140;
+    GREY.b = 140;
+
+    MENU_BACKGROUND.r = 52;
+    MENU_BACKGROUND.g = 104;
+    MENU_BACKGROUND.b = 188;
+
+    RED.r = 255;
+    RED.g = 66;
+    RED.b = 66;
+
+    GRN.r = 66;
+    GRN.g = 255;
+    GRN.b = 66;
+
+    BLU.r = 66;
+    BLU.g = 66;
+    BLU.b = 255;
 
     refresh_inputs(inputs, 6, 1);
 
@@ -57,11 +77,12 @@ int main(int argc, char **argv)
     struct SDL_Renderer *renderer = NULL;
 
     window = make_window("Window");
-    Forest *forest = CREATE_FOREST(2);
+    Forest *forest = CREATE_FOREST(40);
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
     Items *bag = CREATE_BAG();
+    Message *message_being_displayed;
     Message *my_test_mesage = CREATE_MESSAGE("ponde___.ttf", "The theif locke awakes in a strange daze, surrounded by a forest that he does not recognize. ", 10, 50, 100, 300, 100, 12);
     my_test_mesage->create_lines(my_test_mesage);
 
@@ -126,7 +147,7 @@ int main(int argc, char **argv)
             if (state == MESSAGE && WAITING_FOR_MESSAGE != -1)
             {
                 SDL_RenderClear(renderer);
-                current_message, forest->render_forest(forest, renderer, hero, bag, current_message);
+                forest->render_forest(forest, renderer, hero, bag, current_message);
                 break;
             }
             else
@@ -134,7 +155,7 @@ int main(int argc, char **argv)
                 SDL_RenderClear(renderer);
                 strcpy(current_message, forest->render_forest(forest, renderer, hero, bag, current_message));
                 SDL_RenderPresent(renderer);
-                printf("\n\"%s\" is stored at %p.", current_message, current_message);
+                // printf("\n\"%s\" is stored at %p.", current_message, current_message);
                 break;
             }
         case MAIN_MENU:
@@ -161,14 +182,22 @@ int main(int argc, char **argv)
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;
+        case CONFIG:
+            TICK = 1;
+            SDL_RenderClear(renderer);
+            menu->render_config_menu(menu, renderer, hand);
+            hand->render(hand, renderer);
+            SDL_RenderPresent(renderer);
+            break;
+
         case MESSAGE:
-            printf("\nCurrent State %d\nPrevious State %d", state, previous_state);
-            Message *message_being_displayed = ONE_LINER("ponde___.ttf", current_message, 0, 150, 20, 10);
+            message_being_displayed = ONE_LINER("ponde___.ttf", current_message, 0, 0, 20, 10);
             message_being_displayed->render_one_liner(message_being_displayed, renderer);
             SDL_RenderPresent(renderer);
             wait_for_okay();
             state = previous_state;
             previous_state = MESSAGE;
+            WAITING_FOR_MESSAGE = -1;
             break;
         default:
             break;
@@ -193,6 +222,7 @@ int main(int argc, char **argv)
     menu->destroy(menu);
     hand->destroy(hand);
     bag->destroy(bag);
+
     free(STAT_MATRIX);
     free(current_message);
     party[0]->destroy_party(party);

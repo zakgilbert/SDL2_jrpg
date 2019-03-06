@@ -45,7 +45,7 @@ static int _collistion(Collidable **these)
         if (these[i]->check_up_edge(these[i]))
         {
             EDGE_DETECTION[3] = 1;
-            printf("\nup");
+            //printf("\nup");
             these[i]->unlocked = 0;
         }
         if (these[i]->check_down_edge(these[i]))
@@ -62,6 +62,7 @@ static int _collistion(Collidable **these)
             if (these[i]->interact(these[i]))
             {
                 result = i;
+                printf("\nChest was looted at index %d in dungeon bag.", i);
             }
             else
             {
@@ -73,13 +74,13 @@ static int _collistion(Collidable **these)
         if (these[i]->check_left_edge(these[i]))
         {
             EDGE_DETECTION[1] = 1;
-            printf("\nleft");
+            //printf("\nleft");
             these[i]->unlocked = 0;
         }
         if (these[i]->check_right_edge(these[i]))
         {
             EDGE_DETECTION[0] = 1;
-            printf("\nright");
+         //   printf("\nright");
             these[i]->unlocked = 0;
         }
     }
@@ -155,7 +156,6 @@ static int _loot_chest(Collidable *this)
         MOVEMENT_DISABLED = 1;
         SDL_DestroyTexture(this->first_texture);
         this->first_texture = this->second_texture;
-        printf("\n\n\nchest texture has been switched");
         this->chest_was_looted = 1;
         this->unlocked = -1;
         return 1;
