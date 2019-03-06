@@ -27,6 +27,7 @@ static void __render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
     if (INPUT == CANCEL)
     {
         state = previous_state;
+        previous_state = MAIN_MENU;
         INPUT = NONE;
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);

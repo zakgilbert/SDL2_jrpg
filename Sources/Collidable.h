@@ -26,7 +26,7 @@ typedef struct _collidable
     int x_ref;
     int y_ref;
     int number_of_collidables;
-    int ready_to_interact;
+    int unlocked;
 
     enum COLLIDABLE_TYPES TYPE;
     /**

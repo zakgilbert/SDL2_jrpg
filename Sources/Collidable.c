@@ -46,25 +46,27 @@ static int _collistion(Collidable **these)
         {
             EDGE_DETECTION[3] = 1;
             printf("\nup");
-            these[i]->ready_to_interact = 0;
+            these[i]->unlocked = 0;
         }
         if (these[i]->check_down_edge(these[i]))
         {
-            these[i]->ready_to_interact = 1;
+            if (these[i]->unlocked != -1)
+            {
+                these[i]->unlocked = 1;
+            }
             result = -1;
             EDGE_DETECTION[2] = 1;
         }
-        if (these[i]->ready_to_interact && (inputs[4]))
+        if (these[i]->unlocked && (inputs[4]))
         {
             if (these[i]->interact(these[i]))
             {
-                printf("\n-------------------%d", i);
                 result = i;
             }
             else
             {
                 result = -1;
-                these[i]->ready_to_interact = 0;
+                these[i]->unlocked = 0;
             }
             EDGE_DETECTION[2] = 1;
         }
@@ -72,13 +74,13 @@ static int _collistion(Collidable **these)
         {
             EDGE_DETECTION[1] = 1;
             printf("\nleft");
-            these[i]->ready_to_interact = 0;
+            these[i]->unlocked = 0;
         }
         if (these[i]->check_right_edge(these[i]))
         {
             EDGE_DETECTION[0] = 1;
             printf("\nright");
-            these[i]->ready_to_interact = 0;
+            these[i]->unlocked = 0;
         }
     }
     return result;
@@ -155,7 +157,7 @@ static int _loot_chest(Collidable *this)
         this->first_texture = this->second_texture;
         printf("\n\n\nchest texture has been switched");
         this->chest_was_looted = 1;
-        this->ready_to_interact = 0;
+        this->unlocked = -1;
         return 1;
     }
     return 0;
@@ -200,7 +202,7 @@ Collidable *CREATE_COLLIDABLE(COLLIDABLE_TYPES)
     this->x = 0;
     this->y = 0;
     this->number_of_collidables = 0;
-    this->ready_to_interact = 0;
+    this->unlocked = 0;
     /**
      * Lootable Item Section...chests and such.
      */

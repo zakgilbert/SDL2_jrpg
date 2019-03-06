@@ -44,6 +44,7 @@ static char * _add_item(Items *this, ITEM_ENUM item_enum)
     this->items_in_bag++;
    refresh_inputs(inputs, 6, 1);
     printf("\nadding a \"%s\" to your bag", this->items[this->items_in_bag - 1]);
+    return this->items[this->items_in_bag - 1];
 }
 
 static int _remove_item(Items *this, int item_index)

@@ -44,7 +44,7 @@ static void __render_loot(Forest *this, struct SDL_Renderer *renderer)
         SDL_RenderCopy(renderer, this->loot_collidables[i]->first_texture, NULL, &this->loot_collidables[i]->rect_1);
     }
 }
-static void __render_forest(Forest *this, struct SDL_Renderer *renderer, Hero *hero, Items *bag)
+static char * __render_forest(Forest *this, struct SDL_Renderer *renderer, Hero *hero, Items *bag, char * dungeon_message)
 {
     if (INPUT == CANCEL)
     {
@@ -56,14 +56,15 @@ static void __render_forest(Forest *this, struct SDL_Renderer *renderer, Hero *h
         return;
     }
     int item_to_be_obtained = -1;
+
     MOVEMENT_DISABLED = 0;
     hero->animate(hero);
 
     if ((-1) != (item_to_be_obtained = this->loot_collidables[0]->collistion(this->loot_collidables)))
     {
-        bag->add_item(bag, this->loot->get_enum(this->loot, item_to_be_obtained));
-      //  WAITING_FOR_MESSAGE = this->loot->get_enum(this->loot, item_to_be_obtained);
-
+        strcpy(dungeon_message, "LOOTED ");
+        strcat(dungeon_message, ((const char *)bag->add_item(bag, this->loot->get_enum(this->loot, item_to_be_obtained))));
+printf("\n\n\n\n--------------%p------------------\n\n\n", dungeon_message);
         previous_state = DARK_FOREST;
         state = MESSAGE;
     }
@@ -72,6 +73,8 @@ static void __render_forest(Forest *this, struct SDL_Renderer *renderer, Hero *h
     this->loot_collidables[0]->render_collidables(this->loot_collidables, renderer, this->floor->rect.x, this->floor->rect.y);
     hero->render(hero, renderer);
     this->trees->render_floor(this->trees, renderer);
+
+    return dungeon_message;
 }
 
 static int __create_loot(Forest *this, struct SDL_Renderer *renderer)

@@ -27,7 +27,6 @@ extern int MAP_HEIGHT;
 extern int TICK;
 extern int REFRESH_ITEMS;
 extern int WAITING_FOR_MESSAGE;
-
 extern struct SDL_Color WHITE;
 extern struct SDL_Color GREY;
 
@@ -37,7 +36,7 @@ enum states
     MAIN_MENU,
     ITEMS_MENU,
     USE_ITEM,
-    MESSAGE
+    MESSAGE,
 };
 enum states state, previous_state;
 enum INPUTS
@@ -74,7 +73,8 @@ uint64_t TIME_LAST;
 uint64_t NANO_TIMER;
 uint64_t TICKS_PER_SECOND;
 int FRAMES_RENDERED;
-void refresh_inputs(int *, int, int);
+int refresh_inputs(int *, int, int);
 void set_items(int *);
+
 
 #endif //JRPG_HEADER_H

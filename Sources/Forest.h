@@ -30,7 +30,7 @@ typedef struct __forest {
 
     void (*destroy) (struct __forest *);
     void (*create_assets) (struct __forest *, struct SDL_Renderer *);
-    void (*render_forest) (struct __forest *, struct SDL_Renderer *, Hero *, Items *);
+    char * (*render_forest) (struct __forest *, struct SDL_Renderer *, Hero *, Items *, char *);
     int (*create_loot) (struct __forest *, struct SDL_Renderer *);
     void (*render_loot) (struct __forest *, struct SDL_Renderer *);
     int (*check_wait_thread)(struct __forest *);

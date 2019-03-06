@@ -25,6 +25,7 @@ int main(int argc, char **argv)
     printf("\n%s", SDL_GetPlatform());
     set_up_timer();
     int running;
+    char *current_message;
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;
     READY_TO_INTERACT = 0;
@@ -34,6 +35,8 @@ int main(int argc, char **argv)
     TICK = 0;
     running = 1;
     INPUT = NONE;
+    current_message = malloc(30);
+
     WHITE.r = 255;
     WHITE.g = 255;
     WHITE.b = 255;
@@ -62,7 +65,6 @@ int main(int argc, char **argv)
     Message *my_test_mesage = CREATE_MESSAGE("ponde___.ttf", "The theif locke awakes in a strange daze, surrounded by a forest that he does not recognize. ", 10, 50, 100, 300, 100, 12);
     my_test_mesage->create_lines(my_test_mesage);
 
-    Message *potion = ONE_LINER("ponde___.ttf", "POTION", 0, 150, 20, 10);
     const char current_items[3][10] = {
         {"POTION"},
         {"SOFT"},
@@ -116,23 +118,24 @@ int main(int argc, char **argv)
     {
         start_timer();
         IS_MOVING = 0;
+        refresh_inputs(EDGE_DETECTION, 4, movement());
+
         switch (state)
         {
         case DARK_FOREST:
-            //   my_test_mesage->render(my_test_mesage, renderer, 1);
-            if (state == DARK_FOREST)
+            if (state == MESSAGE && WAITING_FOR_MESSAGE != -1)
             {
                 SDL_RenderClear(renderer);
-                forest->render_forest(forest, renderer, hero, bag);
-                SDL_RenderPresent(renderer);
-                refresh_inputs(EDGE_DETECTION, 4, movement());
+                current_message, forest->render_forest(forest, renderer, hero, bag, current_message);
                 break;
             }
-            else if (state == MESSAGE && WAITING_FOR_MESSAGE != -1)
+            else
             {
                 SDL_RenderClear(renderer);
-                forest->render_forest(forest, renderer, hero, bag);
-                continue;
+                strcpy(current_message, forest->render_forest(forest, renderer, hero, bag, current_message));
+                SDL_RenderPresent(renderer);
+                printf("\n\"%s\" is stored at %p.", current_message, current_message);
+                break;
             }
         case MAIN_MENU:
             // hand->animate(hand);
@@ -160,7 +163,8 @@ int main(int argc, char **argv)
             break;
         case MESSAGE:
             printf("\nCurrent State %d\nPrevious State %d", state, previous_state);
-            potion->render_one_liner(potion, renderer);
+            Message *message_being_displayed = ONE_LINER("ponde___.ttf", current_message, 0, 150, 20, 10);
+            message_being_displayed->render_one_liner(message_being_displayed, renderer);
             SDL_RenderPresent(renderer);
             wait_for_okay();
             state = previous_state;
@@ -190,6 +194,7 @@ int main(int argc, char **argv)
     hand->destroy(hand);
     bag->destroy(bag);
     free(STAT_MATRIX);
+    free(current_message);
     party[0]->destroy_party(party);
     SDL_DestroyRenderer(renderer);
     SDL_Delay(400);
@@ -199,11 +204,11 @@ int main(int argc, char **argv)
     return 0;
 }
 
-void refresh_inputs(int *array, int size, int bol)
+int refresh_inputs(int *array, int size, int bol)
 {
     if (!bol)
     {
-        return;
+        return 0;
     }
     int i;
 
@@ -211,6 +216,7 @@ void refresh_inputs(int *array, int size, int bol)
     {
         array[i] = 0;
     }
+    return 1;
 }
 int quit()
 {

@@ -51,30 +51,30 @@ void get_player_input()
             case SDL_SCANCODE_DOWN:
                 inputs[0] = 1;
                 IS_MOVING = 1;
-                break;
+                continue;
             case SDL_SCANCODE_W:
             case SDL_SCANCODE_UP:
                 inputs[1] = 1;
                 IS_MOVING = 1;
-                break;
+                continue;
             case SDL_SCANCODE_A:
             case SDL_SCANCODE_LEFT:
                 inputs[2] = 1;
                 IS_MOVING = 1;
-                break;
+                continue;
             case SDL_SCANCODE_D:
             case SDL_SCANCODE_RIGHT:
                 inputs[3] = 1;
                 IS_MOVING = 1;
-                break;
+                continue;
             case SDL_SCANCODE_J:
                 inputs[4] = 1;
                 INPUT = OKAY;
-                break;
+                continue;
             case SDL_SCANCODE_L:
                 inputs[5] = 1;
                 INPUT = CANCEL;
-                break;
+                continue;
             default:
                 break;
             }
@@ -84,31 +84,31 @@ void get_player_input()
             {
             case SDL_SCANCODE_O:
                 INPUT = QUIT;
-                break;
+                continue;
             case SDL_SCANCODE_S:
             case SDL_SCANCODE_DOWN:
                 inputs[0] = 0;
-                break;
+                continue;
             case SDL_SCANCODE_W:
             case SDL_SCANCODE_UP:
                 inputs[1] = 0;
-                break;
+                continue;
             case SDL_SCANCODE_A:
             case SDL_SCANCODE_LEFT:
                 inputs[2] = 0;
-                break;
+                continue;
             case SDL_SCANCODE_D:
             case SDL_SCANCODE_RIGHT:
                 inputs[3] = 0;
-                break;
+                continue;
             case SDL_SCANCODE_J:
                 inputs[4] = 0;
                 INPUT = NONE;
-                break;
+                continue;
             case SDL_SCANCODE_L:
                 INPUT = NONE;
                 inputs[5] = 0;
-                break;
+                continue;
             default:
                 break;
             }
