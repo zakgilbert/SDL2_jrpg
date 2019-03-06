@@ -1,5 +1,8 @@
+
 #include "Item.h"
 
+static const char *ITEMS[] = {
+    FOREACH_ITEM(GENERATE_STRING)};
 static void _destroy(Items *this)
 {
     if (NULL != this->items)
@@ -136,7 +139,7 @@ static int _quaff_item(Items *this, Affect *affect)
     item_was_removed = 0;
     this->affect = affect;
 
-    if (item_was_quaffed = this->affect->cause_affect(affect))
+    if (0 != ((item_was_quaffed) = (this->affect->cause_affect(affect))))
     {
         item_was_removed = this->decrement_item(this, this->affect->affect_enum);
     }
@@ -164,7 +167,7 @@ static char *_loot(Items *this, ITEM_ENUM item_enum)
     else
     {
         this->item_quantities[item_index]++;
-        printf("\nYour \"%s\" has increased from %d to %d.", this->items[item_index], this->item_quantities[item_index] - 1,this->item_quantities[item_index]);
+        printf("\nYour \"%s\" has increased from %d to %d.", this->items[item_index], this->item_quantities[item_index] - 1, this->item_quantities[item_index]);
         return this->items[item_index];
     }
 }

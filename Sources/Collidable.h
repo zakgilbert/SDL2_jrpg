@@ -38,6 +38,6 @@ typedef struct _collidable
 
 } Collidable;
 
-Collidable *CREATE_COLLIDABLE(COLLIDABLE_TYPES);
+Collidable *CREATE_COLLIDABLE(int type);
 void update_collidables(struct SDL_Rect *, int, int, int, int);
 #endif

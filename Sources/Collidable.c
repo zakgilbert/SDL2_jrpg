@@ -182,7 +182,7 @@ static int _interact(Collidable *this)
     return result;
 }
 
-Collidable *CREATE_COLLIDABLE(COLLIDABLE_TYPES)
+Collidable *CREATE_COLLIDABLE(int type)
 {
     Collidable *this = (Collidable *)malloc(sizeof(*this));
     this->destroy = _destroy;
@@ -197,7 +197,7 @@ Collidable *CREATE_COLLIDABLE(COLLIDABLE_TYPES)
     this->first_texture = NULL;
     this->second_texture = NULL;
 
-    this->TYPE = COLLIDABLE_TYPES;
+    this->TYPE = type;
 
     this->x = 0;
     this->y = 0;

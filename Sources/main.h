@@ -17,6 +17,7 @@
 #include <SDL2/SDL_thread.h>
 #include <SDL2/SDL_platform.h>
 #include "header.h"
+#include "Words.h"
 #include "Window_and_Renderer.h"
 #include "Floor.h"
 #include "Hero.h"
@@ -29,7 +30,6 @@
 #include "Character.h"
 #include "Item.h"
 #include "Affect.h"
-#include "Words.h"
 #include "Collidable.h"
 #include "Message.h"
 #include "Assets.h"

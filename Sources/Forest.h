@@ -34,7 +34,7 @@ typedef struct __forest
     int (*create_loot)(struct __forest *, struct SDL_Renderer *);
     void (*render_loot)(struct __forest *, struct SDL_Renderer *);
     int (*check_wait_thread)(struct __forest *);
-    int (*randomize_loot_locations)(struct __forest *, int *x, int *y);
+    void (*randomize_loot_locations)(struct __forest *, int *x, int *y);
     int num_chests;
     int *loot_cords_x;
     int *loot_cords_y;

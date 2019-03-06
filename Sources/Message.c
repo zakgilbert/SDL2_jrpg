@@ -41,19 +41,17 @@ static void _render(Message *this, SDL_Renderer *renderer, int has_background)
     TTF_CloseFont(this->font);
 }
 
-static int _create_lines(Message *this)
+static void _create_lines(Message *this)
 {
-    int i, k, f, space_width, space_height;
+    int i, k, space_width, space_height;
     int current_line_width, trash_h;
-    int current_word_width, current_num_words;
+    int current_word_width;
     int current_characters_in_line;
 
-    char space = ' ';
     char *space_str = " ";
-    f = 0;
+
     current_line_width = 0;
     current_characters_in_line = 0;
-    current_num_words = 0;
     trash_h = 0;
     current_word_width = 0;
     k = 0;
@@ -118,7 +116,7 @@ static int _create_lines(Message *this)
     int j = 0;
     for (k = 1; k <= this->num_words; k++)
     {
-        printf("\nSize of \"%s\" on the %dth line is %d", this->message_2d[j], j, strlen(this->message_2d[j]));
+        printf("\nSize of \"%s\" on the %dth line is %d", this->message_2d[j], j, (int)strlen(this->message_2d[j]));
         if (k + 1 == lines[j])
         {
             strcat(this->message_2d[j], temp_2d[k]);
@@ -140,7 +138,7 @@ static int _create_lines(Message *this)
     }
     for (k = 0; k <= this->num_lines; k++)
     {
-        printf("\nline %d is %d bytes", k, strlen(this->message_2d[k]));
+        printf("\nline %d is %d bytes", k, (int)strlen(this->message_2d[k]));
         printf("\n%s", this->message_2d[k]);
     }
     free(lines);
@@ -174,7 +172,7 @@ static void _render_one_liner(Message *this, SDL_Renderer *renderer)
     SDL_DestroyTexture(this->texture);
     TTF_CloseFont(this->font);
 }
-Message *ONE_LINER(char *path, const char *message, int seconds_of_existence, int x, int y, int font_size)
+Message *ONE_LINER(char *path, char *message, int seconds_of_existence, int x, int y, int font_size)
 {
     Message *this = malloc(sizeof(*this));
 
@@ -202,7 +200,7 @@ Message *ONE_LINER(char *path, const char *message, int seconds_of_existence, in
 
     return this;
 }
-Message *CREATE_MESSAGE(char *path, const char *message, int seconds_of_existence, int x, int y, int w, int h, int font_size)
+Message *CREATE_MESSAGE(char *path, char *message, int seconds_of_existence, int x, int y, int w, int h, int font_size)
 {
     Message *this = malloc(sizeof(*this));
 

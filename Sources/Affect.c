@@ -56,21 +56,22 @@ static void __destroy(Affect *this)
 
 static int __cause_affect(Affect *this)
 {
+    int used = 0;
     switch (this->affect_enum)
     {
     case POTION:
-        this->item_used = affect_hp(50, this->character);
+        used = affect_hp(50, this->character);
         break;
     case ETHER:
-        this->item_used = affect_mp(25, this->character);
+        used = affect_mp(25, this->character);
         break;
     case PHOENIX_DOWN:
-        this->item_used = revive(50, this->character);
+        used = revive(50, this->character);
         break;
     default:
         break;
     }
-    return this->item_used;
+    return used;
 }
 
 Affect *CREATE_AFFECT(ITEM_ENUM affect, Character *character)

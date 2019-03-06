@@ -18,17 +18,11 @@ typedef enum  {
     FOREACH_ITEM(GERERATE_ENUM)
 }ITEM_ENUM;
 
-static const char * ITEMS[] = {
-    FOREACH_ITEM(GENERATE_STRING)
-};
 
 enum STAT_ENUM {
     FOREACH_STAT(GERERATE_ENUM)
 };
 
-static const char * STATS[] = {
-    FOREACH_STAT(GENERATE_STRING)
-};
 
 extern int ITEM_QUANTITY;
 #endif

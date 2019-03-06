@@ -4,6 +4,9 @@
 
 #include "Forest.h"
 
+static const char * ITEMS[] = {
+    FOREACH_ITEM(GENERATE_STRING)
+};
 static void __destroy(Forest *this)
 {
     this->floor->destroy(this->floor);
@@ -98,7 +101,7 @@ static void _randomize_loot_locations(Forest * this, int * x, int * y)
 
 static int __create_loot(Forest *this, struct SDL_Renderer *renderer)
 {
-    int i, rand_index, rand_x, rand_y, lower_x, lower_y, upper_x, upper_y;
+    int i, rand_index, rand_x, rand_y;
     this->loot = CREATE_BAG();
     this->loot->items = malloc(sizeof(char *) * this->num_chests);
     this->loot_cords_x = malloc(sizeof(int) * this->num_chests);
@@ -109,10 +112,6 @@ static int __create_loot(Forest *this, struct SDL_Renderer *renderer)
     rand_x  = 0;
     rand_y =  0;
 
-    upper_x = this->forest_map_width - (WINDOW_WIDTH / 2);
-    lower_x = this->forest_map_width + (WINDOW_WIDTH / 2);
-    upper_y = this->forest_map_height - (WINDOW_HEIGHT / 2);
-    lower_y = this->forest_map_height + (WINDOW_HEIGHT / 2);
 
     for (i = 0; i < this->num_chests; i++)
     {

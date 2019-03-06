@@ -369,9 +369,11 @@ static int _render_config_menu_options(Menu *this, struct SDL_Renderer *renderer
 
     char rgb_matrix[3][50];
     Window **rgb_bars = (Window **)malloc(sizeof(Window *) * 3);
-    rgb_bars[0] = CREATE_WINDOW(110, 20, 150, 15);
-    rgb_bars[1] = CREATE_WINDOW(110, 40, 150, 15);
-    rgb_bars[2] = CREATE_WINDOW(110, 60, 150, 15);
+
+    skip = 20;
+    rgb_bars[0] = CREATE_WINDOW(110, skip, 150, 15);
+    rgb_bars[1] = CREATE_WINDOW(110, skip * 2, 150, 15);
+    rgb_bars[2] = CREATE_WINDOW(110, skip * 3, 150, 15);
 
     rgb_bars[0]->color_value = MENU_BACKGROUND.r;
     rgb_bars[1]->color_value = MENU_BACKGROUND.g;
@@ -392,12 +394,12 @@ static int _render_config_menu_options(Menu *this, struct SDL_Renderer *renderer
         printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
     }
     this->rect.x = 50;
-    this->rect.y = 20;
+    this->rect.y = skip;
     skip = TTF_FontLineSkip(this->font);
 
     for (i = 0; i < 3; i++)
     {
-        rgb_bars[i]->render_color_bar(rgb_bars, renderer, this->rect.x, this->rect.y, 20, i);
+        rgb_bars[i]->render_color_bar(rgb_bars, renderer, this->rect.x, this->rect.y, skip, i);
 
         TTF_SizeText(this->font, rgb_matrix[i], &this->rect.w, &this->rect.h);
 
@@ -412,14 +414,14 @@ static int _render_config_menu_options(Menu *this, struct SDL_Renderer *renderer
         }
         this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
         SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-        this->rect.y += 20;
+        this->rect.y += skip;
     }
     TTF_CloseFont(this->font);
     SDL_FreeSurface(this->surface);
     SDL_DestroyTexture(this->texture);
     this->surface = NULL;
     this->texture = NULL;
-    return 20;
+    return skip;
 }
 
 void _change_window_color(Window **color_bars, int current_state)
