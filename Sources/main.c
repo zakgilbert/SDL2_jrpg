@@ -1,28 +1,5 @@
 #include "main.h"
 
-int inputs[6];
-int NUM_CHARACTERS;
-int EDGE_DETECTION[4];
-int READY_TO_INTERACT;
-int MOVEMENT_DISABLED;
-int ITEM_QUANTITY;
-int IS_MOVING;
-int REFRESH_ITEMS;
-int NUM_STATS;
-int X;
-int Y;
-int MAP_WIDTH;
-int MAP_HEIGHT;
-int WAITING_FOR_MESSAGE;
-char **STAT_MATRIX;
-
-struct SDL_Color WHITE;
-struct SDL_Color GREY;
-struct SDL_Color MENU_BACKGROUND;
-struct SDL_Color RED;
-struct SDL_Color BLU;
-struct SDL_Color GRN;
-struct MY_GLOBAL_LIBRARY G;
 
 int main(int argc, char **argv)
 {
@@ -30,13 +7,15 @@ int main(int argc, char **argv)
     set_up_timer();
     int running;
     char *current_message;
+
+    CREATE_GLOBALS();
+
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;
     READY_TO_INTERACT = 0;
     WAITING_FOR_MESSAGE = 0;
     INTERACT = OFF;
     NUM_STATS = 4;
-    G.TICK = 0;
     running = 1;
     INPUT = NONE;
     current_message = malloc(30);
