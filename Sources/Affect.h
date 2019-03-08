@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Character.h"
-#include "header.h"
+#include "Header.h"
 #include "Words.h"
 
 int affect_hp(int, Character *);

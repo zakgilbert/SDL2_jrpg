@@ -26,10 +26,10 @@ int animate_hand_thread(void *ptr)
             is_running = 0;
             return 0;
         }
-        if (G.TICK)
+        if (TICK)
         {
             hand->animate(hand);
-            G.TICK = 0;
+            TICK = 0;
         }
         SDL_Delay(1);
     }
@@ -169,12 +169,12 @@ static void _animate(Hand *this)
 
 static int _move_horizontal(Hand *this, int distance)
 {
-    if (inputs[2] && this->current_state > 0)
+    if (USER_INPUTS[2] && this->current_state > 0)
     {
         this->position.x -= distance;
         this->current_state--;
     }
-    else if (inputs[3] && this->current_state < this->number_of_states)
+    else if (USER_INPUTS[3] && this->current_state < this->number_of_states)
     {
         this->position.x += distance;
         this->current_state++;
@@ -184,17 +184,16 @@ static int _move_horizontal(Hand *this, int distance)
 
 static int _move_vertical(Hand *this, int distance)
 {
-    if (inputs[1] && this->current_state > 0)
+    if (USER_INPUTS[1] && this->current_state > 0)
     {
         this->position.y -= distance;
         this->current_state--;
-        refresh_inputs(inputs, 6, 1);
-    }
-    else if (inputs[0] && this->current_state < this->number_of_states)
+        refresh_inputs(USER_INPUTS, 6, 1);
+    } else if (USER_INPUTS[0] && this->current_state < this->number_of_states)
     {
         this->position.y += distance;
         this->current_state++;
-        refresh_inputs(inputs, 6, 1);
+        refresh_inputs(USER_INPUTS, 6, 1);
     }
     return this->current_state;
 }
@@ -204,13 +203,13 @@ static void _vertical_horizontal(Hand *this)
     switch (this->current_state)
     {
     case 0:
-        if (inputs[0]) //down
+        if (USER_INPUTS[0]) //down
         {
             this->position.y = this->state_2[1];
             this->current_state = 2;
             break;
         }
-        else if (inputs[3]) // right
+        else if (USER_INPUTS[3]) // right
         {
             this->position.x = this->state_1[0];
             this->current_state = 1;
@@ -219,13 +218,13 @@ static void _vertical_horizontal(Hand *this)
         break;
 
     case 1:
-        if (inputs[0]) //down
+        if (USER_INPUTS[0]) //down
         {
             this->position.y = this->state_3[1];
             this->current_state = 3;
             break;
         }
-        else if (inputs[2]) //left
+        else if (USER_INPUTS[2]) //left
         {
             this->position.x = this->state_0[0];
             this->current_state = 0;
@@ -234,13 +233,13 @@ static void _vertical_horizontal(Hand *this)
         break;
 
     case 2:
-        if (inputs[1]) //up
+        if (USER_INPUTS[1]) //up
         {
             this->position.y = this->state_0[1];
             this->current_state = 0;
             break;
         }
-        else if (inputs[3]) //right
+        else if (USER_INPUTS[3]) //right
         {
             this->position.x = this->state_3[0];
             this->current_state = 3;
@@ -248,13 +247,13 @@ static void _vertical_horizontal(Hand *this)
         }
         break;
     case 3:
-        if (inputs[1]) //up
+        if (USER_INPUTS[1]) //up
         {
             this->position.y = this->state_1[1];
             this->current_state = 1;
             break;
         }
-        else if (inputs[2]) //left
+        else if (USER_INPUTS[2]) //left
         {
             this->position.x = this->state_2[0];
             this->current_state = 2;

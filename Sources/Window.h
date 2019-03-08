@@ -15,7 +15,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
-#include "header.h"
+#include "Header.h"
 
 typedef struct __window
 {

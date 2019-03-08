@@ -41,38 +41,38 @@ int change_position()
 
     if (EDGE_DETECTION[0])
     { //on left
-        inputs[2] = 0;
+        USER_INPUTS[2] = 0;
     }
     if (EDGE_DETECTION[1])
     { //on right
-        inputs[3] = 0;
+        USER_INPUTS[3] = 0;
     }
     if (EDGE_DETECTION[2])
     { //on up
-        inputs[1] = 0;
+        USER_INPUTS[1] = 0;
     }
     if (EDGE_DETECTION[3])
     { //on down
-        inputs[0] = 0;
+        USER_INPUTS[0] = 0;
     }
     if (!MOVEMENT_DISABLED)
     {
-        if (inputs[0])
+        if (USER_INPUTS[0])
         { //down
             Y++;
             is_moving = 1;
         }
-        else if (inputs[1])
+        else if (USER_INPUTS[1])
         { //up
             Y--;
             is_moving = 1;
         }
-        else if (inputs[2])
+        else if (USER_INPUTS[2])
         { //left
             X--;
             is_moving = 1;
         }
-        else if (inputs[3])
+        else if (USER_INPUTS[3])
         { //right
             X++;
             is_moving = 1;

@@ -12,7 +12,7 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include "header.h"
+#include "Header.h"
 #include "Window.h"
 
 

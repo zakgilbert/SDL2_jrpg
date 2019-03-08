@@ -4,7 +4,7 @@
 
 #ifndef JRPG_MOVEMENT_H
 #define JRPG_MOVEMENT_H
-#include "header.h"
+#include "Header.h"
 
 int movement();
 int change_position();

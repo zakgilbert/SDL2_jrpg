@@ -16,7 +16,7 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_thread.h>
-#include "header.h"
+#include "Header.h"
 
 int animate_hand_thread(void *);
 

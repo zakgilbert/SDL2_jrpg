@@ -1,32 +1,41 @@
-#include "main.h"
-
-
-int main(int argc, char **argv)
+#include "Header.h"
+#include "Words.h"
+#include "Window_and_Renderer.h"
+#include "Floor.h"
+#include "Hero.h"
+#include "Area.h"
+#include "Player_Input.h"
+#include "Movement.h"
+#include "Window.h"
+#include "Menu.h"
+#include "Hand.h"
+#include "Character.h"
+#include "Item.h"
+#include "Affect.h"
+#include "Collidable.h"
+#include "Message.h"
+#include "Time.h"
+void SET_GLOBALS()
 {
-    printf("\n%s", SDL_GetPlatform());
-    set_up_timer();
-    int running;
-    char *current_message;
-
-    CREATE_GLOBALS();
-
+    TICK = 0;
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;
     READY_TO_INTERACT = 0;
     WAITING_FOR_MESSAGE = 0;
     INTERACT = OFF;
     NUM_STATS = 4;
-    running = 1;
     INPUT = NONE;
-    current_message = malloc(30);
+
+    HERO_WIDTH = 32;
+    HERO_HEIGHT = 32;
 
     WHITE.r = 255;
     WHITE.g = 255;
     WHITE.b = 255;
 
-    GREY.r = 140;
-    GREY.g = 140;
-    GREY.b = 140;
+    GREY.r = 160;
+    GREY.g = 160;
+    GREY.b = 160;
 
     MENU_BACKGROUND.r = 52;
     MENU_BACKGROUND.g = 104;
@@ -44,7 +53,19 @@ int main(int argc, char **argv)
     BLU.g = 66;
     BLU.b = 255;
 
-    refresh_inputs(inputs, 6, 1);
+    MOVEMENT_DISABLED = 0;
+    state = DARK_FOREST;
+}
+int main(int argc, char **argv)
+{
+    set_up_timer(60);
+    int running;
+    char *current_message;
+    SET_GLOBALS();
+    running = 1;
+    current_message = malloc(30);
+
+    refresh_inputs(USER_INPUTS, 6, 1);
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
     {
@@ -56,13 +77,13 @@ int main(int argc, char **argv)
     struct SDL_Renderer *renderer = NULL;
 
     window = make_window("Window");
-    Forest *forest = CREATE_FOREST(40);
+    Area *dark_forest = CREATE_FOREST(2, DARK_FOREST);
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
     Items *bag = CREATE_BAG();
     Message *message_being_displayed;
-    Message *my_test_mesage = CREATE_MESSAGE("ponde___.ttf", "The theif locke awakes in a strange daze, surrounded by a forest that he does not recognize. ", 10, 50, 100, 300, 100, 12);
+    Message *my_test_mesage = CREATE_MESSAGE("ponde___.ttf", "The theif locke awakes in a strange daze, surrounded by a dark_forest that he does not recognize. ", 10, 50, 100, 300, 100, 12);
     my_test_mesage->create_lines(my_test_mesage);
 
     const char current_items[3][10] = {
@@ -103,17 +124,16 @@ int main(int argc, char **argv)
     party[2]->create_character_texture(party[2], renderer);
     party[3]->create_character_texture(party[3], renderer);
 
-    forest->create_assets(forest, renderer);
+    dark_forest->create_assets(dark_forest, renderer);
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
 
-    MOVEMENT_DISABLED = 0;
-    state = DARK_FOREST;
     player_input_thread = SDL_CreateThread(input_thread, "input_thread", NULL);
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
     matrix_thread = SDL_CreateThread(stat_matrix_thread, "stat_matrix_thread", party);
     party[0]->HP.current = 100;
     party[1]->MP.current = 0;
+
     while (running)
     {
         start_timer();
@@ -126,20 +146,20 @@ int main(int argc, char **argv)
             if (state == MESSAGE && WAITING_FOR_MESSAGE != -1)
             {
                 SDL_RenderClear(renderer);
-                forest->render_forest(forest, renderer, hero, bag, current_message);
+                dark_forest->render_area(dark_forest, renderer, hero, bag, current_message);
                 break;
             }
             else
             {
                 SDL_RenderClear(renderer);
-                strcpy(current_message, forest->render_forest(forest, renderer, hero, bag, current_message));
+                strcpy(current_message, dark_forest->render_area(dark_forest, renderer, hero, bag, current_message));
                 SDL_RenderPresent(renderer);
                 // printf("\n\"%s\" is stored at %p.", current_message, current_message);
                 break;
             }
         case MAIN_MENU:
             // hand->animate(hand);
-            G.TICK = 1;
+            TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_main_menu(menu, renderer, hand, party);
             hand->render(hand, renderer);
@@ -148,21 +168,21 @@ int main(int argc, char **argv)
 
         case ITEMS_MENU:
             //hand->animate(hand);
-            G.TICK = 1;
+            TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_items_menu(menu, renderer, hand, bag);
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;
         case USE_ITEM:
-            G.TICK = 1;
+            TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_use_item_menu(menu, renderer, hand, party, bag);
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;
         case CONFIG:
-            G.TICK = 1;
+            TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_config_menu(menu, renderer, hand);
             hand->render(hand, renderer);
@@ -196,7 +216,7 @@ int main(int argc, char **argv)
     SDL_WaitThread(hand_thread, NULL);
     SDL_WaitThread(matrix_thread, NULL);
 
-    forest->destroy(forest);
+    dark_forest->destroy(dark_forest);
     hero->destroy(hero);
     menu->destroy(menu);
     hand->destroy(hand);
@@ -235,7 +255,7 @@ int quit()
     }
     return 1;
 }
-
+/*
 void set_up_timer()
 {
     FPS = 60;
@@ -278,7 +298,7 @@ void reset_timer()
     if (TICKS_PER_SECOND >= SDL_GetPerformanceFrequency())
     {
         // printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED);
-        // printf("\nTicks Per Second: %ld", G.TICKS_PER_SECOND);
+        // printf("\nTicks Per Second: %ld", TICKS_PER_SECOND);
         FRAMES_RENDERED = 0;
         TICKS_PER_SECOND = 0;
     }
@@ -294,3 +314,4 @@ void delay()
         //   printf("\nTimeDelayed int is: %Lf", TIME_DELAY_PER_SECOND);
     }
 }
+*/

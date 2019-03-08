@@ -45,7 +45,7 @@ static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
     this->render_character_main_menu_image(this, renderer, hand, characters);
     this->render_character_stats(this, renderer, hand, 80, 15, 9, MAIN_MENU);
 
-    if (hand->current_state == 0 && inputs[4])
+    if (hand->current_state == 0 && USER_INPUTS[4])
     {
         state = ITEMS_MENU;
         hand->items_menu_position(hand);
@@ -55,7 +55,7 @@ static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
         SDL_RenderPresent(renderer);
         SDL_Delay(transition_delay);
     }
-    if (hand->current_state == 4 && inputs[4])
+    if (hand->current_state == 4 && USER_INPUTS[4])
     {
         state = CONFIG;
         hand->config_menu_position(hand);
@@ -65,7 +65,7 @@ static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
         SDL_RenderPresent(renderer);
         SDL_Delay(transition_delay);
     }
-    if (hand->current_state == 6 && inputs[4])
+    if (hand->current_state == 6 && USER_INPUTS[4])
     {
         INPUT = QUIT;
     }
@@ -236,7 +236,7 @@ static void _render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
     this->main_menu_bg->render(this->main_menu_bg, renderer);
     hand->move_vertical(hand, this->render_items_menu_options(this, renderer, bag, hand->current_state));
 
-    if (inputs[4])
+    if (USER_INPUTS[4])
     {
         state = USE_ITEM;
         hand->use_item_position(hand);
@@ -324,7 +324,7 @@ static void _render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Han
     //  this->render_use_item_menu_options(this, renderer, party, hand->current_state);
     this->render_character_stats(this, renderer, hand, 49, 205, 9, USE_ITEM);
     hand->render(hand, renderer);
-    if (inputs[4])
+    if (USER_INPUTS[4])
     {
         int was_item_removed = bag->quaff_item(bag, CREATE_AFFECT(bag->get_enum(bag, this->item_being_used), party[hand->current_state]));
 
@@ -395,7 +395,6 @@ static int _render_config_menu_options(Menu *this, struct SDL_Renderer *renderer
     }
     this->rect.x = 50;
     this->rect.y = skip;
-    skip = TTF_FontLineSkip(this->font);
 
     for (i = 0; i < 3; i++)
     {

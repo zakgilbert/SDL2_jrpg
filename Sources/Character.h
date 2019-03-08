@@ -8,7 +8,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_thread.h>
 
-#include "header.h"
+#include "Header.h"
 
 struct Main_Attribute
 {

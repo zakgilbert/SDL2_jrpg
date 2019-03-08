@@ -17,7 +17,7 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
 #include "Hero.h"
-#include "header.h"
+#include "Header.h"
 
 
 typedef struct __floor

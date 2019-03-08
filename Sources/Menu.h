@@ -18,7 +18,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "Affect.h"
 #include "Item.h"
-#include "header.h"
+#include "Header.h"
 #include "Window.h"
 #include "Hand.h"
 #include "Character.h"

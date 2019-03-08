@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "header.h"
+#include "Header.h"
 #include "Affect.h"
 #include "Words.h"
 #include "Message.h"

@@ -22,11 +22,11 @@ static void __destroy(Window *this)
 }
 static int __adjust_menu_colors(Window *this)
 {
-    if(inputs[2])
+    if(USER_INPUTS[2])
     {
         this->color_value--;
     }
-    else if(inputs[3])
+    else if(USER_INPUTS[3])
     {
         this->color_value++;
     }
