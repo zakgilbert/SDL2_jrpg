@@ -185,7 +185,7 @@ static void _update_collidables(Collidable *this)
 static void _render_collidables(Collidable **chests, Collidable **npcs, struct SDL_Renderer *renderer)
 {
     int i, len, len_2, is_moving;
-    is_moving = !(!USER_INPUTS[1] && !USER_INPUTS[2] && !USER_INPUTS[3]);
+    is_moving = !(!USER_INPUTS[0] && !USER_INPUTS[1] && !USER_INPUTS[2] && !USER_INPUTS[3]);
     len = chests[0]->number_of_collidables;
     if (USER_INPUTS[4])
     {
