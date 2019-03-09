@@ -1,4 +1,5 @@
 #include "Collidable.h"
+static SDL_Color my_color = {255, 66, 66};
 static void _destroy(Collidable *this)
 {
     if (NULL != this)
@@ -112,6 +113,9 @@ static int _check_up_edge(Collidable *this)
 {
     if ((this->rect_1.y <= this->top.y_1) && (this->rect_1.y >= this->top.y_2) && (this->rect_1.x <= this->top.x_1) && (this->rect_1.x >= this->top.x_2))
     {
+        my_color.r = 66;
+        my_color.g = 255;
+        my_color.b = 66;
         return 1;
     }
     /*
@@ -127,6 +131,9 @@ static int _check_left_edge(Collidable *this)
     if ((this->rect_1.x <= this->left.x_1) && (this->rect_1.x >= this->left.x_2) && (this->rect_1.y <= this->left.y_1) && (this->rect_1.y >= this->left.y_2))
     {
         printf("\nat left");
+        my_color.r = 66;
+        my_color.g = 255;
+        my_color.b = 66;
         return 1;
     }
 
@@ -149,6 +156,9 @@ static int _check_right_edge(Collidable *this)
 {
     if ((this->rect_1.x >= this->right.x_1) && (this->rect_1.x <= this->right.x_2) && (this->rect_1.y <= this->right.y_1) && (this->rect_1.y >= this->right.y_2))
     {
+        my_color.r = 66;
+        my_color.g = 255;
+        my_color.b = 66;
         return 1;
     }
     /*
@@ -177,16 +187,15 @@ static void _render_collidables(Collidable **chests, Collidable **npcs, struct S
     int i, len, len_2, is_moving;
     is_moving = !(!USER_INPUTS[0] && !USER_INPUTS[1] && !USER_INPUTS[2] && !USER_INPUTS[3]);
     len = chests[0]->number_of_collidables;
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
     if (USER_INPUTS[4])
     {
-
-        SDL_SetRenderDrawColor(renderer, RED.r, RED.g, RED.b, SDL_ALPHA_OPAQUE);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
     }
     else
     {
-     //   SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+        SDL_SetRenderDrawColor(renderer, my_color.r, my_color.g, my_color.b, SDL_ALPHA_OPAQUE);
     }
+    //   SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
 
     for (i = 0; i < len; i++)
     {
