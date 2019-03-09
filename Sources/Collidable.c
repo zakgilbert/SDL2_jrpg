@@ -207,8 +207,8 @@ static void _render_collidables(Collidable **chests, Collidable **npcs, struct S
         SDL_RenderDrawRect(renderer, &chests[i]->rect_2);
         SDL_RenderDrawLine(renderer, chests[i]->left.x_1, chests[i]->left.y_1, chests[i]->left.x_2, chests[i]->left.y_2);
         SDL_RenderDrawLine(renderer, chests[i]->top.x_1, chests[i]->top.y_1, chests[i]->top.x_2, chests[i]->top.y_2);
-        SDL_RenderDrawLine(renderer, chests[i]->right.x_1, chests[i]->right.y_1, chests[i]->right.x_2, chests[i]->right.y_2);
-        SDL_RenderDrawLine(renderer, chests[i]->bottem.x_1, chests[i]->bottem.y_1, chests[i]->bottem.x_2, chests[i]->bottem.y_2);
+        SDL_RenderDrawLine(renderer, npcs[i]->top.x_1, npcs[i]->top.y_1, npcs[i]->top.x_2, npcs[i]->top.y_2);
+        SDL_RenderDrawLine(renderer, npcs[i]->right.x_1, npcs[i]->right.y_1, npcs[i]->right.x_2, npcs[i]->right.y_2);
     }
     len_2 = npcs[0]->number_of_collidables;
     for (i = 0; i < len_2; i++)
@@ -220,9 +220,9 @@ static void _render_collidables(Collidable **chests, Collidable **npcs, struct S
         SDL_RenderCopy(renderer, npcs[i]->first_texture, NULL, &npcs[i]->rect_1);
         SDL_RenderDrawRect(renderer, &npcs[i]->rect_2);
         SDL_RenderDrawLine(renderer, npcs[i]->left.x_1, npcs[i]->left.y_1, npcs[i]->left.x_2, npcs[i]->left.y_2);
-        SDL_RenderDrawLine(renderer, npcs[i]->top.x_1, npcs[i]->top.y_1, npcs[i]->top.x_2, npcs[i]->top.y_2);
-        SDL_RenderDrawLine(renderer, npcs[i]->right.x_1, npcs[i]->right.y_1, npcs[i]->right.x_2, npcs[i]->right.y_2);
         SDL_RenderDrawLine(renderer, npcs[i]->bottem.x_1, npcs[i]->bottem.y_1, npcs[i]->bottem.x_2, npcs[i]->bottem.y_2);
+        SDL_RenderDrawLine(renderer, chests[i]->right.x_1, chests[i]->right.y_1, chests[i]->right.x_2, chests[i]->right.y_2);
+        SDL_RenderDrawLine(renderer, chests[i]->bottem.x_1, chests[i]->bottem.y_1, chests[i]->bottem.x_2, chests[i]->bottem.y_2);
     }
 }
 static struct SDL_Rect *_make_chest(Collidable *this, struct SDL_Renderer *renderer, int x, int y, int w, int h)
