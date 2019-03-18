@@ -12,9 +12,9 @@
 #include "Character.h"
 #include "Item.h"
 #include "Affect.h"
-#include "Collidable.h"
 #include "Message.h"
 #include "Time.h"
+
 void SET_GLOBALS()
 {
     TICK = 0;
@@ -56,6 +56,7 @@ void SET_GLOBALS()
     MOVEMENT_DISABLED = 0;
     state = DARK_FOREST;
 }
+
 int main(int argc, char **argv)
 {
     set_up_timer(60);
@@ -207,7 +208,6 @@ int main(int argc, char **argv)
         delay();
         reset_timer();
     }
-    SDL_LogVerbose(SDL_LOG_CATEGORY_RENDER, "Render log:");
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &menu->transition);
