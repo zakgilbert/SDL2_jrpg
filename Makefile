@@ -1,5 +1,5 @@
 
-EXCEC = prg 
+EXCEC = game
 
 SRCDIR  = Sources 
 OBJDIR  = Objects
