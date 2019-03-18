@@ -19,6 +19,8 @@
 #include "Item.h"
 #include "Menu.h"
 
+
+
 typedef struct _area
 {
     Floor *floor;
@@ -34,6 +36,7 @@ typedef struct _area
     int map_w;
     int map_h;
     int area_key;
+    
 
 } Area;
 

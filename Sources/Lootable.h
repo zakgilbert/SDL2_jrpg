@@ -15,16 +15,18 @@ typedef struct _lootable
 {
     void (*destroy)(struct _lootable *);
     void (*loot)(struct _lootable *);
+    void (*render)(struct _lootable *, struct SDL_Renderer * renderer);
 
     struct SDL_Texture * texture;
     struct SDL_Texture * alt_tex;
     struct SDL_Rect * rect;
-
+    
+    int key;
     int looted;
     int index;
 
 } Lootable;
 
-Lootable *CREATE_LOOTABLE(struct SDL_Renderer * renderer, int index);
+Lootable *CREATE_LOOTABLE(struct SDL_Renderer * renderer, int x, int y, int index, int key);
 
 #endif
