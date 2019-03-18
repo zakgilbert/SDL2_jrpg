@@ -77,7 +77,7 @@ int main(int argc, char **argv)
     struct SDL_Renderer *renderer = NULL;
 
     window = make_window("Window");
-    Area *dark_forest = CREATE_FOREST(2, DARK_FOREST);
+    Area *dark_forest = CREATE_FOREST(50, DARK_FOREST);
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();

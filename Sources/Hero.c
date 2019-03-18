@@ -73,9 +73,8 @@ static SDL_Rect *__get_rect_pos_pointer (Hero *obj)
 static void __render (Hero *obj, struct SDL_Renderer *renderer)
 {
     SDL_RenderCopy(renderer, obj->texture, obj->get_rect_pointer(obj), obj->get_rect_pos_pointer(obj));
-   // SDL_RenderDrawRect(renderer, &obj->rect_pos);
-    printf("\nHero X: %d",obj->rect_pos.x);
-    printf("\nHero Y: %d",obj->rect_pos.y);
+//    printf("\nHero X: %d",obj->rect_pos.x);
+  //  printf("\nHero Y: %d",obj->rect_pos.y);
 }
 
 static void __animate_down (Hero *obj)

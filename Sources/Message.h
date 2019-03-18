@@ -1,7 +1,5 @@
 #ifndef JRPG_MESSAGE_H
 #define JRPG_MESSAGE_H
-#define WINDOW_WIDTH (356)
-#define WINDOW_HEIGHT (324)
 
 #include <stdio.h>
 #include <stdlib.h>

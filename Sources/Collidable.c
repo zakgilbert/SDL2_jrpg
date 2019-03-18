@@ -56,7 +56,10 @@ static int _collistion(Collidable **these)
                 these[i]->unlocked = 1;
             }
             result = -1;
-            EDGE_DETECTION[2] = 1;
+            if (EDGE_DETECTION[2])
+            {
+                return result;
+            }
         }
         if (these[i]->unlocked && (USER_INPUTS[4]))
         {
@@ -70,7 +73,10 @@ static int _collistion(Collidable **these)
                 result = -1;
                 these[i]->unlocked = 0;
             }
-            EDGE_DETECTION[2] = 1;
+            if (EDGE_DETECTION[2])
+            {
+                return result;
+            }
         }
         if (these[i]->check_left_edge(these[i]))
         {
@@ -89,90 +95,38 @@ static int _collistion(Collidable **these)
 }
 static int _check_down_edge(Collidable *this)
 {
-
-    if ((this->rect_1.y >= this->bottem.y_1) && (this->rect_1.y <= this->bottem.y_2) && (this->rect_1.x <= this->bottem.x_1) && (this->rect_1.x >= this->bottem.x_2))
-    {
-        return 1;
-    }
-
-    /*
     if (((this->rect_1.x - 162) < (22) && (this->rect_1.x - 162) > (((32 / 2) - (this->rect_1.w + (32 / 8))))) &&
         ((this->rect_1.y - 146) == ((32 / 2) - this->rect_1.h)))
     {
         return 1;
-    }*/
-    printf("\nthis->bottem.x_1: %d    this->rect_1.x:  %d", this->bottem.x_1, this->rect_1.x);
-    printf("\nthis->bottem.y_1: %d    this->rect_1.y:  %d", this->bottem.y_1, this->rect_1.y);
-    printf("\nthis->bottem.x_2: %d    this->rect_1.x:  %d", this->bottem.x_2, this->rect_1.x);
-    printf("\nthis->bottem.y_2: %d    this->rect_1.y:  %d", this->bottem.y_2, this->rect_1.y);
-    printf("\n____________________________________________________________________________________");
+    }
     return 0;
 }
-
 static int _check_up_edge(Collidable *this)
 {
-    if ((this->rect_1.y <= this->top.y_1) && (this->rect_1.y >= this->top.y_2) && (this->rect_1.x <= this->top.x_1) && (this->rect_1.x >= this->top.x_2))
-    {
-        my_color.r = 66;
-        my_color.g = 255;
-        my_color.b = 66;
-        return 1;
-    }
-    /*
     if (((this->rect_1.x - 162) < (22) && (this->rect_1.x - 162) > (((32 / 2) - (this->rect_1.w + (32 / 8))))) &&
         ((this->rect_1.y - 146) == 26))
     {
         return 1;
-    }*/
+    }
     return 0;
 }
 static int _check_left_edge(Collidable *this)
 {
-    if ((this->rect_1.x <= this->left.x_1) && (this->rect_1.x >= this->left.x_2) && (this->rect_1.y <= this->left.y_1) && (this->rect_1.y >= this->left.y_2))
-    {
-        printf("\nat left");
-        my_color.r = 66;
-        my_color.g = 255;
-        my_color.b = 66;
-        return 1;
-    }
-
-    /* printf("\nthis->left.x_1: %d    this->rect_1.x:  %d", this->left.x_1, this->rect_1.x);
-    printf("\nthis->left.y_1: %d    this->rect_1.y:  %d", this->left.y_1, this->rect_1.y);
-    printf("\nthis->left.x_2: %d    this->rect_1.x:  %d", this->left.x_2, this->rect_1.x);
-    printf("\nthis->left.y_2: %d    this->rect_1.y:  %d", this->left.y_2, this->rect_1.y);
-    printf("\n____________________________________________________________________________________");
-    return 0; */
-    /*
     if (((this->rect_1.y - 146) < (32) && (this->rect_1.y - 146) > (((32 / 2) - (this->rect_1.h + (32 / 8))))) &&
         ((this->rect_1.x - 162) == 22))
     {
         return 1;
     }
-    return 0; */
     return 0;
 }
 static int _check_right_edge(Collidable *this)
 {
-    if ((this->rect_1.x >= this->right.x_1) && (this->rect_1.x <= this->right.x_2) && (this->rect_1.y <= this->right.y_1) && (this->rect_1.y >= this->right.y_2))
-    {
-        my_color.r = 66;
-        my_color.g = 255;
-        my_color.b = 66;
-        return 1;
-    }
-    /*
-    printf("\nthis->right.x_1: %d    this->rect_1.x:  %d", this->right.x_1, this->rect_1.x);
-    printf("\nthis->right.y_1: %d    this->rect_1.y:  %d", this->right.y_1, this->rect_1.y);
-    printf("\nthis->right.x_2: %d    this->rect_1.x:  %d", this->right.x_2, this->rect_1.x);
-    printf("\nthis->right.y_2: %d    this->rect_1.y:  %d", this->right.y_2, this->rect_1.y);
-    printf("\n____________________________________________________________________________________");
     if (((this->rect_1.y - 146) < (32) && (this->rect_1.y - 146) > (((32 / 2) - (this->rect_1.h + (32 / 8))))) &&
         ((this->rect_1.x - 162) == ((32 / 2) - this->rect_1.w)))
     {
         return 1;
     }
-    */
     return 0;
 }
 static void _update_collidables(Collidable *this)
@@ -181,6 +135,7 @@ static void _update_collidables(Collidable *this)
     this->rect_1.y = (this->y - Y);
     this->rect_2.x = this->rect_1.x;
     this->rect_2.y = this->rect_1.y + this->rect_2.h;
+    this->rect_2_lower_y = this->rect_2.y + this->rect_2.h;
 }
 static void _render_collidables(Collidable **chests, Collidable **npcs, struct SDL_Renderer *renderer)
 {
@@ -207,8 +162,8 @@ static void _render_collidables(Collidable **chests, Collidable **npcs, struct S
         SDL_RenderDrawRect(renderer, &chests[i]->rect_2);
         SDL_RenderDrawLine(renderer, chests[i]->left.x_1, chests[i]->left.y_1, chests[i]->left.x_2, chests[i]->left.y_2);
         SDL_RenderDrawLine(renderer, chests[i]->top.x_1, chests[i]->top.y_1, chests[i]->top.x_2, chests[i]->top.y_2);
-        SDL_RenderDrawLine(renderer, npcs[i]->top.x_1, npcs[i]->top.y_1, npcs[i]->top.x_2, npcs[i]->top.y_2);
-        SDL_RenderDrawLine(renderer, npcs[i]->right.x_1, npcs[i]->right.y_1, npcs[i]->right.x_2, npcs[i]->right.y_2);
+        SDL_RenderDrawLine(renderer, chests[i]->right.x_1, chests[i]->right.y_1, chests[i]->right.x_2, chests[i]->right.y_2);
+        SDL_RenderDrawLine(renderer, chests[i]->bottom.x_1, chests[i]->bottom.y_1, chests[i]->bottom.x_2, chests[i]->bottom.y_2);
     }
     len_2 = npcs[0]->number_of_collidables;
     for (i = 0; i < len_2; i++)
@@ -220,47 +175,21 @@ static void _render_collidables(Collidable **chests, Collidable **npcs, struct S
         SDL_RenderCopy(renderer, npcs[i]->first_texture, NULL, &npcs[i]->rect_1);
         SDL_RenderDrawRect(renderer, &npcs[i]->rect_2);
         SDL_RenderDrawLine(renderer, npcs[i]->left.x_1, npcs[i]->left.y_1, npcs[i]->left.x_2, npcs[i]->left.y_2);
-        SDL_RenderDrawLine(renderer, npcs[i]->bottem.x_1, npcs[i]->bottem.y_1, npcs[i]->bottem.x_2, npcs[i]->bottem.y_2);
-        SDL_RenderDrawLine(renderer, chests[i]->right.x_1, chests[i]->right.y_1, chests[i]->right.x_2, chests[i]->right.y_2);
-        SDL_RenderDrawLine(renderer, chests[i]->bottem.x_1, chests[i]->bottem.y_1, chests[i]->bottem.x_2, chests[i]->bottem.y_2);
+        SDL_RenderDrawLine(renderer, npcs[i]->bottom.x_1, npcs[i]->bottom.y_1, npcs[i]->bottom.x_2, npcs[i]->bottom.y_2);
+        SDL_RenderDrawLine(renderer, npcs[i]->top.x_1, npcs[i]->top.y_1, npcs[i]->top.x_2, npcs[i]->top.y_2);
+        SDL_RenderDrawLine(renderer, npcs[i]->right.x_1, npcs[i]->right.y_1, npcs[i]->right.x_2, npcs[i]->right.y_2);
     }
 }
 static struct SDL_Rect *_make_chest(Collidable *this, struct SDL_Renderer *renderer, int x, int y, int w, int h)
 {
     this->first_texture = this->create_collidable_texture(renderer, "graphics/chestClose.png", &this->rect_1);
-    this->second_texture = this->create_collidable_texture(renderer, "graphics/chestOpen.png", &this->rect_1);
+    this->second_texture = this->create_collidable_texture(renderer, "graphics/chestOpen.png", &this->rect_2);
     this->rect_1.x = x;
     this->rect_1.y = y;
     this->rect_1.w = w;
     this->rect_1.h = h;
     this->x = x;
     this->y = y;
-
-    this->rect_2.x = x;
-    this->rect_2.y = y + (h / 2);
-    this->rect_2.w = w;
-    this->rect_2.h = h / 2;
-
-    this->left.x_1 = (WINDOW_WIDTH / 2) + (HERO_WIDTH / 4);
-    this->left.y_1 = (WINDOW_HEIGHT / 2) + (HERO_HEIGHT / 4);
-    this->left.x_2 = (WINDOW_WIDTH / 2) + (HERO_WIDTH / 4);
-    this->left.y_2 = (WINDOW_HEIGHT / 2);
-
-    this->right.x_1 = (WINDOW_WIDTH / 2) - (HERO_WIDTH / 4);
-    this->right.y_1 = (WINDOW_HEIGHT / 2) + (HERO_HEIGHT / 4);
-    this->right.x_2 = (WINDOW_WIDTH / 2) - (HERO_WIDTH / 4);
-    this->right.y_2 = (WINDOW_HEIGHT / 2);
-
-    this->bottem.x_1 = (WINDOW_WIDTH / 2) - (HERO_WIDTH / 4);
-    this->bottem.y_1 = (WINDOW_HEIGHT / 2);
-    this->bottem.x_2 = (WINDOW_WIDTH / 2) + (HERO_WIDTH / 4);
-    this->bottem.y_2 = (WINDOW_HEIGHT / 2);
-
-    this->top.x_1 = (WINDOW_WIDTH / 2) - (HERO_WIDTH / 4);
-    this->top.y_1 = (WINDOW_HEIGHT / 2) + (HERO_HEIGHT / 4);
-    this->top.x_2 = (WINDOW_WIDTH / 2) + (HERO_WIDTH / 4);
-    this->top.y_2 = (WINDOW_HEIGHT / 2) + (HERO_HEIGHT / 4);
-
     return &this->rect_1;
 }
 static void _make_npc(Collidable *this, struct SDL_Renderer *renderer, int x, int y, int w, int h, char *path)
@@ -272,30 +201,6 @@ static void _make_npc(Collidable *this, struct SDL_Renderer *renderer, int x, in
     this->rect_1.h = h;
     this->x = x;
     this->y = y;
-    this->rect_2.x = x;
-    this->rect_2.y = y + (h / 2);
-    this->rect_2.w = w;
-    this->rect_2.h = h / 2;
-
-    this->left.x_1 = (WINDOW_WIDTH / 2) + (HERO_WIDTH / 4);
-    this->left.y_1 = (WINDOW_HEIGHT / 2) + (HERO_HEIGHT / 4);
-    this->left.x_2 = (WINDOW_WIDTH / 2) + (HERO_WIDTH / 4);
-    this->left.y_2 = (WINDOW_HEIGHT / 2);
-
-    this->right.x_1 = (WINDOW_WIDTH / 2) - (HERO_WIDTH / 4);
-    this->right.y_1 = (WINDOW_HEIGHT / 2) + (HERO_HEIGHT / 4);
-    this->right.x_2 = (WINDOW_WIDTH / 2) - (HERO_WIDTH / 4);
-    this->right.y_2 = (WINDOW_HEIGHT / 2);
-
-    this->bottem.x_1 = (WINDOW_WIDTH / 2) - (HERO_WIDTH / 4);
-    this->bottem.y_1 = (WINDOW_HEIGHT / 2);
-    this->bottem.x_2 = (WINDOW_WIDTH / 2) + (HERO_WIDTH / 4);
-    this->bottem.y_2 = (WINDOW_HEIGHT / 2);
-
-    this->top.x_1 = (WINDOW_WIDTH / 2) - (HERO_WIDTH / 4);
-    this->top.y_1 = (WINDOW_HEIGHT / 2) + (HERO_HEIGHT / 4);
-    this->top.x_2 = (WINDOW_WIDTH / 2) + (HERO_WIDTH / 4);
-    this->top.y_2 = (WINDOW_HEIGHT / 2) + (HERO_HEIGHT / 4);
 }
 
 static int _loot_chest(Collidable *this)

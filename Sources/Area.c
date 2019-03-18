@@ -109,20 +109,20 @@ static int _create_loot(Area *this, struct SDL_Renderer *renderer)
     this->loot_cords_y = malloc(sizeof(int) * this->num_chests);
     this->loot_collidables = malloc(sizeof(Collidable *) * this->num_chests);
 
-    rand_index = 0;
+    rand_index = 0;;
     rand_x = 0;
     rand_y = 0;
 
     for (i = 0; i < this->num_chests; i++)
     {
         this->randomize_loot_locations(this, &rand_x, &rand_y);
-        this->loot_cords_x[i] = rand_x + 50;
+        this->loot_cords_x[i] = rand_x;
         this->loot_cords_y[i] = rand_y;
         rand_index = (rand() % ITEM_QUANTITY);
         this->loot->items[i] = malloc(strlen(ITEMS[rand_index]) + 1);
         strcpy(this->loot->items[i], ITEMS[rand_index]);
         this->loot_collidables[i] = CREATE_COLLIDABLE(CHEST);
-        this->loot_collidables[i]->make_chest(this->loot_collidables[i], renderer, 200 * (i + 1), 200, 16, 16);
+        this->loot_collidables[i]->make_chest(this->loot_collidables[i], renderer, rand_x, rand_y, 16, 16);
         printf("\nAdding %s to area loot collection. at index %d.", this->loot->items[i], i);
     }
     return this->num_chests;

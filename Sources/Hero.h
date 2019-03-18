@@ -4,8 +4,6 @@
 
 #ifndef JRPG_HERO_H
 #define JRPG_HERO_H
-#define WINDOW_WIDTH (356)
-#define WINDOW_HEIGHT (324)
 #define SPRITE_FRAME_WIDTH (32)
 #define SPRITE_FRAME_HEIGHT (32)
 

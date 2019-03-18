@@ -37,10 +37,11 @@ typedef struct _collidable
     int y_ref;
     int number_of_collidables;
     int unlocked;
+    int rect_2_lower_y;
 
     struct edge left;
     struct edge right;
-    struct edge bottem;
+    struct edge bottom;
     struct edge top;
     int collision_padding_x;
     int collision_padding_y;
