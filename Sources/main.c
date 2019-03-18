@@ -4,6 +4,7 @@
 #include "Window_and_Renderer.h"
 #include "Floor.h"
 #include "Hero.h"
+#include "Item.h"
 #include "Area.h"
 #include "Player_Input.h"
 #include "Movement.h"
@@ -11,11 +12,11 @@
 #include "Menu.h"
 #include "Hand.h"
 #include "Character.h"
-#include "Item.h"
 #include "Affect.h"
 #include "Message.h"
 #include "Time.h"
 #include "Lootable.h"
+#include "Collision.h"
 
 void SET_GLOBALS()
 {
@@ -27,6 +28,7 @@ void SET_GLOBALS()
     INTERACT = OFF;
     NUM_STATS = 4;
     INPUT = NONE;
+    NUM_AREAS = 1;
 
     HERO_WIDTH = 32;
     HERO_HEIGHT = 32;
@@ -80,23 +82,21 @@ int main(int argc, char **argv)
     struct SDL_Renderer *renderer = NULL;
 
     window = make_window("Window");
-    Area *dark_forest = CREATE_FOREST(50, DARK_FOREST);
+    Area *dark_forest = CREATE_FOREST(DARK_FOREST);
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
     Items *bag = CREATE_BAG();
+    Collision *game_collision = CREATE_COLLISION();
+
     Message *message_being_displayed;
     Message *my_test_mesage = CREATE_MESSAGE("ponde___.ttf", "The theif locke awakes in a strange daze, surrounded by a dark_forest that he does not recognize. ", 10, 50, 100, 300, 100, 12);
     my_test_mesage->create_lines(my_test_mesage);
 
-    const char current_items[3][10] = {
-        {"POTION"},
-        {"SOFT"},
-        {"ETHER"}};
-
+    int party_items[3] = {POTION, ETHER, SOFT};
     int quat[3] = {4, 3, 2};
 
-    bag->fill_bag(bag, current_items, quat, 3);
+    bag->fill_bag(bag, party_items, quat, 3);
 
     Character **party = (Character **)malloc(sizeof(Character *) * NUM_CHARACTERS);
 
@@ -127,7 +127,14 @@ int main(int argc, char **argv)
     party[2]->create_character_texture(party[2], renderer);
     party[3]->create_character_texture(party[3], renderer);
 
-    dark_forest->create_assets(dark_forest, renderer);
+    int dark_forest_items[10] = {ETHER, SOFT, PHOENIX_DOWN, POTION, SOFT, ETHER, SOFT, PHOENIX_DOWN, POTION, POTION};
+
+    int dark_forest_items_x[10] = {100, 200, 300, 100, 200, 300, 100, 200, 300, 100};
+
+    int dark_forest_items_y[10] = {100, 200, 300, 100, 200, 300, 100, 200, 300, 100};
+
+    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 10, dark_forest_items_x, dark_forest_items_y);
+
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
 

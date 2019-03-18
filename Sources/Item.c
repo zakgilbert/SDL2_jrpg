@@ -1,17 +1,21 @@
 
 #include "Item.h"
 
-static const char *ITEMS[] = {
+static char *ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)};
+
 static void _destroy(Items *this)
 {
-    if (NULL != this->items)
+    if (this->items_in_bag > 1)
     {
-        free(this->items);
-    }
-    if (NULL != this->item_quantities)
-    {
-        free(this->item_quantities);
+        if (NULL != this->items)
+        {
+            free(this->items);
+        }
+        if (NULL != this->item_quantities)
+        {
+            free(this->item_quantities);
+        }
     }
     if (NULL != this)
     {
@@ -19,63 +23,62 @@ static void _destroy(Items *this)
         this = NULL;
     }
 }
-static void _fill_bag(Items *this, const char items_from_save[3][10], int quantities[3], int len)
+static void _fill_bag(Items *this, int *items, int *quantities, int len)
 {
-    this->items = (char **)malloc(sizeof(char *) * len);
+    this->items = (int *)malloc(sizeof(int) * len);
     this->item_quantities = (int *)malloc(sizeof(int) * len);
-    this->items_in_bag = len;
-    printf("\nLen %d\nItems in bag %d", len, this->items_in_bag);
-    for (int i = 0; i < this->items_in_bag; i++)
+
+    for (int i = 0; i < len; i++)
     {
-        this->items[i] = (char *)malloc(strlen(items_from_save[i]) + 1);
-        strcpy(this->items[i], items_from_save[i]);
-        this->item_quantities[i] = quantities[i];
-        printf("\nAdded %d %s's to bag at i = %d", this->item_quantities[i], this->items[i], i);
+        this->items[i] = items[i];
+        if (NULL == quantities)
+        {
+            this->item_quantities[i] = 1;
+        }
+        else
+        {
+            this->item_quantities[i] = quantities[i];
+        }
     }
+    this->items_in_bag = len;
 }
 static char *_add_item(Items *this, ITEM_ENUM item_enum)
 {
-    size_t new_items_size = (sizeof(char *) * (this->items_in_bag + 1));
-    size_t new_quantities_size = (sizeof(int) * (this->items_in_bag + 1));
+    size_t new_size = this->items_in_bag + 1;
 
-    this->items = realloc(this->items, new_items_size);
-    this->items[this->items_in_bag] = (char *)malloc(strlen(ITEMS[item_enum]) + 1);
-    strcpy(this->items[this->items_in_bag], ITEMS[item_enum]);
-    this->item_quantities = realloc(this->item_quantities, new_quantities_size);
+    this->items = realloc(this->items, sizeof(int) * new_size);
+    this->item_quantities = realloc(this->item_quantities, sizeof(int) * new_size);
+
+    this->items[this->items_in_bag] = item_enum;
     this->item_quantities[this->items_in_bag] = 1;
     this->items_in_bag++;
-    printf("\nadding a \"%s\" to your bag", this->items[this->items_in_bag - 1]);
-    return this->items[this->items_in_bag - 1];
+    return ITEMS[this->items[this->items_in_bag - 1]];
 }
 
 static int _remove_item(Items *this, int item_index)
 {
+
     int last_index = this->items_in_bag - 1;
+
+    this->items = realloc(this->items, sizeof(int) * (this->items_in_bag - 1));
+    this->item_quantities = realloc(this->items, sizeof(int) * (this->items_in_bag - 1));
     if (last_index != item_index)
     {
-        char *temp = (char *)malloc(strlen(this->items[last_index]) + 1);
-        strcpy(temp, this->items[last_index]);
-        this->items[last_index] = realloc(this->items[last_index], strlen(this->items[item_index]) + 1);
-        strcpy(this->items[last_index], this->items[item_index]);
-        this->items[item_index] = realloc(this->items[item_index], strlen(temp) + 1);
-        strcpy(this->items[item_index], temp);
-
-        free(temp);
-        temp = NULL;
-        int int_temp = this->item_quantities[last_index];
-        this->item_quantities[last_index] = this->item_quantities[item_index];
-        this->item_quantities[item_index] = int_temp;
+        for (int i = item_index; i < last_index; i++)
+        {
+            this->items[i] = this->items[i + 1];
+            this->item_quantities[i] = this->item_quantities[i + 1];
+        }
     }
-    printf("\nRemoving %s at %d but from last index of %d", this->items[last_index], item_index, last_index);
-    free(this->items[last_index]);
-    this->items[last_index] = NULL;
-    this->items = realloc(this->items, sizeof(char *) * (this->items_in_bag - 1));
-    this->item_quantities = realloc(this->item_quantities, sizeof(int) * (this->items_in_bag - 1));
+    printf("\nRemoving %s at %d but from last index of %d", ITEMS[this->items[last_index]], item_index, last_index);
+    this->items = realloc(this->items, sizeof(int) * (this->items_in_bag - 1));
+    this->item_quantities = realloc(this->items, sizeof(int) * (this->items_in_bag - 1));
     this->items_in_bag = last_index;
     return -1;
 }
 static int _decrement_item(Items *this, ITEM_ENUM item_enum)
 {
+
     int item_index, item_was_removed;
 
     item_was_removed = 0;
@@ -100,22 +103,6 @@ static int _decrement_item(Items *this, ITEM_ENUM item_enum)
     return item_was_removed;
 }
 
-static ITEM_ENUM _get_enum(Items *this, int item_index)
-{
-
-    int i, enum_value;
-    enum_value = -1;
-    for (i = 0; i < ITEM_QUANTITY; i++)
-    {
-        if (strcmp(this->items[item_index], ITEMS[i]) == 0)
-        {
-            //  printf("\nFound a match at in index %d in bag and index %d in Items", item_index, i);
-            // printf("\nThe match is %s and %s", this->items[item_index], ITEMS[i]);
-            enum_value = i;
-        }
-    }
-    return enum_value;
-}
 static int _find_item(Items *this, ITEM_ENUM item_enum)
 {
     int i, item_index;
@@ -123,7 +110,7 @@ static int _find_item(Items *this, ITEM_ENUM item_enum)
 
     for (i = 0; i < this->items_in_bag; i++)
     {
-        if (strcmp(this->items[i], ITEMS[item_enum]) == 0)
+        if (this->items[i] == item_enum)
         {
             item_index = i;
         }
@@ -167,8 +154,8 @@ static char *_loot(Items *this, ITEM_ENUM item_enum)
     else
     {
         this->item_quantities[item_index]++;
-        printf("\nYour \"%s\" has increased from %d to %d.", this->items[item_index], this->item_quantities[item_index] - 1, this->item_quantities[item_index]);
-        return this->items[item_index];
+        printf("\nYour \"%s\" has increased from %d to %d.", ITEMS[this->items[item_index]], this->item_quantities[item_index] - 1, this->item_quantities[item_index]);
+        return ITEMS[this->items[item_index]];
     }
 }
 
@@ -184,7 +171,6 @@ Items *CREATE_BAG()
     this->quaff_item = _quaff_item;
     this->remove_item = _remove_item;
     this->loot = _loot;
-    this->get_enum = _get_enum;
 
     this->item_quantities = NULL;
     this->items = NULL;

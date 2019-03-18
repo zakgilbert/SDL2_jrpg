@@ -24,6 +24,7 @@ typedef struct _lootable
     int key;
     int looted;
     int index;
+    int x, y;
 
 } Lootable;
 

@@ -34,13 +34,13 @@ Lootable *CREATE_LOOTABLE(struct SDL_Renderer *renderer, int x, int y, int index
     this->loot = _loot;
     this->render = _render;
 
-    this->texture = create_texture(renderer, "../graphics/chestClose.png", this->rect);
-    this->alt_tex = create_texture(renderer, "../graphics/chestOpen.png", this->rect);
     this->looted = 0;
     this->index = index;
     this->rect->x = x;
     this->rect->y = y;
     this->key = key;
+    this->x = x;
+    this->y = y;
 
     return this;
 }
