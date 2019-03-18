@@ -1,5 +1,6 @@
 #include "Header.h"
 #include "Words.h"
+#include "Graphics.h"
 #include "Window_and_Renderer.h"
 #include "Floor.h"
 #include "Hero.h"
@@ -14,6 +15,7 @@
 #include "Affect.h"
 #include "Message.h"
 #include "Time.h"
+#include "Lootable.h"
 
 void SET_GLOBALS()
 {
