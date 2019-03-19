@@ -64,6 +64,10 @@ static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero,
     for (int k = 0; k < this->bag->items_in_bag; k++)
     {
         this->lootables[k]->render(this->lootables[k], renderer);
+        if(READY_TO_INTERACT != -1)
+        {
+             
+        }
     }
     for (int i = 0; i < this->num_npcs; i++)
     {
