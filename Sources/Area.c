@@ -52,11 +52,11 @@ static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero,
     hero->animate(hero);
 
     this->floor->render_floor(this->floor, renderer);
-    hero->render(hero, renderer);
     for (int k = 0; k < this->bag->items_in_bag; k++)
     {
         this->lootables[k]->render(this->lootables[k], renderer);
     }
+    hero->render(hero, renderer);
     this->trees->render_floor(this->trees, renderer);
 
     return dungeon_message;

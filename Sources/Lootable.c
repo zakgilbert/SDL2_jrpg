@@ -15,6 +15,7 @@ static void _destroy(Lootable *this)
 static void _render(Lootable *this, struct SDL_Renderer *renderer)
 {
     SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+    SDL_RenderDrawRect(renderer, &this->rect);
 }
 
 static void _loot(Lootable *this)

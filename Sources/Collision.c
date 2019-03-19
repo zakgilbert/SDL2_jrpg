@@ -33,11 +33,20 @@ static void _add_lootables(Collision *this, Lootable **lootables, int num_lootab
 
 static void _update_collidables(Collision *this, int area_key)
 {
+    if (area_key >= NUM_AREAS)
+    {
+        return;
+    }
     for (int k = 0; k < this->num_collibables[area_key]; k++)
     {
         this->collidables[area_key][k]->rect->x = ((this->collidables[area_key][k]->x) - X);
         this->collidables[area_key][k]->rect->y = ((this->collidables[area_key][k]->y) - Y);
     }
+}
+
+static int _area_collision(Collision *this, int area_key)
+{
+    
 }
 
 Collision *CREATE_COLLISION()
@@ -46,6 +55,7 @@ Collision *CREATE_COLLISION()
     this->add_collision = _add_collision;
     this->add_lootables = _add_lootables;
     this->update_collidables = _update_collidables;
+    this->area_collision = _area_collision;
     this->destroy = _destroy;
     this->collidables = malloc(sizeof(struct Collidable **) * NUM_AREAS);
     this->num_collibables = malloc(sizeof(int) * NUM_AREAS);

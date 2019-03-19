@@ -16,6 +16,7 @@
 #include "Message.h"
 #include "Time.h"
 #include "Lootable.h"
+#include "Npc.h"
 #include "Collision.h"
 
 void SET_GLOBALS()
@@ -127,13 +128,12 @@ int main(int argc, char **argv)
     party[2]->create_character_texture(party[2], renderer);
     party[3]->create_character_texture(party[3], renderer);
 
-    int dark_forest_items[10] = {ETHER, SOFT, PHOENIX_DOWN, POTION, SOFT, ETHER, SOFT, PHOENIX_DOWN, POTION, POTION};
+    int dark_forest_items[1] = {PHOENIX_DOWN};
 
-    int dark_forest_items_x[10] = {100, 200, 300, 100, 200, 300, 100, 200, 300, 100};
+    int dark_forest_items_x[1] = {300};
+    int dark_forest_items_y[1] = {300};
 
-    int dark_forest_items_y[10] = {100, 200, 300, 100, 200, 300, 100, 200, 300, 100};
-
-    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 10, dark_forest_items_x, dark_forest_items_y);
+    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 1, dark_forest_items_x, dark_forest_items_y);
 
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
@@ -149,11 +149,11 @@ int main(int argc, char **argv)
         start_timer();
         IS_MOVING = 0;
         refresh_inputs(EDGE_DETECTION, 4, movement());
+        game_collision->update_collidables(game_collision, state);
 
         switch (state)
         {
         case DARK_FOREST:
-            game_collision->update_collidables(game_collision, dark_forest->area_key);
             if (state == MESSAGE && WAITING_FOR_MESSAGE != -1)
             {
                 SDL_RenderClear(renderer);
