@@ -14,7 +14,7 @@ static void _destroy(Lootable *this)
 
 static void _render(Lootable *this, struct SDL_Renderer *renderer)
 {
-    SDL_RenderCopy(renderer, this->texture, NULL, this->rect);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
 }
 
 static void _loot(Lootable *this)
@@ -36,11 +36,13 @@ Lootable *CREATE_LOOTABLE(struct SDL_Renderer *renderer, int x, int y, int index
 
     this->looted = 0;
     this->index = index;
-    this->rect->x = x;
-    this->rect->y = y;
+    this->rect.x = x;
+    this->rect.y = y;
     this->key = key;
     this->x = x;
     this->y = y;
+    this->texture = create_texture(renderer, "graphics/chestClose.png", &this->rect);
+    this->alt_tex= create_texture(renderer, "graphics/chestOpen.png", &this->rect);
 
     return this;
 }

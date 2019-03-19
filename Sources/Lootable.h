@@ -19,7 +19,7 @@ typedef struct _lootable
 
     struct SDL_Texture * texture;
     struct SDL_Texture * alt_tex;
-    struct SDL_Rect * rect;
+    struct SDL_Rect rect;
     
     int key;
     int looted;

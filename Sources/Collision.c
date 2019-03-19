@@ -22,12 +22,12 @@ static void _add_lootables(Collision *this, Lootable **lootables, int num_lootab
     for (int k = 0; k < num_lootables; k++)
     {
         this->collidables[area_key][this->current_index] = malloc(sizeof(struct Collidable));
-        this->collidables[area_key][this->current_index]->rect = lootables[k]->rect;
+        this->collidables[area_key][this->current_index]->rect = malloc(sizeof(struct SDL_Rect));
+        this->collidables[area_key][this->current_index]->rect = &lootables[k]->rect;
         this->collidables[area_key][this->current_index]->x = lootables[k]->x;
         this->collidables[area_key][this->current_index]->y = lootables[k]->y;
         this->collidables[area_key][this->current_index]->index = this->current_index;
         lootables[k]->index = this->current_index;
-        this->num_collibables[area_key]++;
         this->current_index++;
     }
 }
