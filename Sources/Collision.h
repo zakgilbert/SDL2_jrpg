@@ -27,6 +27,11 @@ typedef struct _collision
     void (*add_npcs)(struct _collision *, Npc ** npcs, int num_npcs, int area_key);
     void (*update_collidables)(struct _collision *, int area_key);
     int (*area_collision)(struct _collision *, int area_key);
+
+    int (*check_up_edge)(struct Collidable *);
+    int (*check_left_edge)(struct Collidable *);
+    int (*check_down_edge)(struct Collidable *);
+    int (*check_right_edge)(struct Collidable *);
     struct Collidable ***collidables;
     int *num_collibables;
     int current_index;

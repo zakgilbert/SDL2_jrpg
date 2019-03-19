@@ -16,10 +16,46 @@ static void _add_collision(Collision *this, Lootable **lootables, int num_lootab
     {
         this->add_lootables(this, lootables, num_lootables, area_key);
     }
-    if(NULL != npcs)
+    if (NULL != npcs)
     {
         this->add_npcs(this, npcs, num_npcs, area_key);
     }
+}
+static int _check_down_edge(struct Collidable *collidable)
+{
+    if (((collidable->rect->x - 162) < (22) && (collidable->rect->x - 162) > (((32 / 2) - (collidable->rect->w + (32 / 8))))) &&
+        ((collidable->rect->y - 146) == ((32 / 2) - collidable->rect->h)))
+    {
+        return 1;
+    }
+    return 0;
+}
+static int _check_up_edge(struct Collidable *collidable)
+{
+    if (((collidable->rect->x - 162) < (22) && (collidable->rect->x - 162) > (((32 / 2) - (collidable->rect->w + (32 / 8))))) &&
+        ((collidable->rect->y - 146) == 26))
+    {
+        return 1;
+    }
+    return 0;
+}
+static int _check_left_edge(struct Collidable *collidable)
+{
+    if (((collidable->rect->y - 146) < (32) && (collidable->rect->y - 146) > (((32 / 2) - (collidable->rect->h + (32 / 8))))) &&
+        ((collidable->rect->x - 162) == 22))
+    {
+        return 1;
+    }
+    return 0;
+}
+static int _check_right_edge(struct Collidable *collidable)
+{
+    if (((collidable->rect->y - 146) < (32) && (collidable->rect->y - 146) > (((32 / 2) - (collidable->rect->h + (32 / 8))))) &&
+        ((collidable->rect->x - 162) == ((32 / 2) - collidable->rect->w)))
+    {
+        return 1;
+    }
+    return 0;
 }
 static void _add_lootables(Collision *this, Lootable **lootables, int num_lootables, int area_key)
 {
@@ -58,6 +94,23 @@ static void _update_collidables(Collision *this, int area_key)
     {
         this->collidables[area_key][k]->rect->x = ((this->collidables[area_key][k]->x) - X);
         this->collidables[area_key][k]->rect->y = ((this->collidables[area_key][k]->y) - Y);
+
+        if (this->check_left_edge(this->collidables[area_key][k]))
+        {
+            EDGE_DETECTION[1] = 1;
+        }
+        if (this->check_right_edge(this->collidables[area_key][k]))
+        {
+            EDGE_DETECTION[0] = 1;
+        }
+        if (this->check_up_edge(this->collidables[area_key][k]))
+        {
+            EDGE_DETECTION[3] = 1;
+        }
+        if (this->check_down_edge(this->collidables[area_key][k]))
+        {
+            EDGE_DETECTION[2] = 1;
+        }
     }
 }
 
@@ -75,6 +128,12 @@ Collision *CREATE_COLLISION()
     this->update_collidables = _update_collidables;
     this->area_collision = _area_collision;
     this->destroy = _destroy;
+
+    this->check_down_edge = _check_down_edge;
+    this->check_left_edge = _check_left_edge;
+    this->check_right_edge = _check_right_edge;
+    this->check_up_edge = _check_up_edge;
+
     this->collidables = malloc(sizeof(struct Collidable **) * NUM_AREAS);
     this->num_collibables = malloc(sizeof(int) * NUM_AREAS);
     this->current_index = 0;
