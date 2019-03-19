@@ -19,7 +19,7 @@ static void _destroy(Area *this)
     }
 }
 
-static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision *collidables, int *item_keys, int num_items, int *collidable_cords_x, int *collidable_cords_y)
+static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision *collidables, int *item_keys, int num_items, int *npc_keys, int num_npcs, int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y)
 {
     this->floor = create_floor(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     this->trees = create_floor(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -28,11 +28,20 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
 
     this->bag->fill_bag(this->bag, item_keys, NULL, num_items);
     this->lootables = (Lootable **)malloc(sizeof(Lootable *) * num_items);
+    this->npcs = (Npc **)malloc(sizeof(Npc *) * num_npcs);
+
     for (int k = 0; k < num_items; k++)
     {
-        this->lootables[k] = CREATE_LOOTABLE(renderer, collidable_cords_x[k], collidable_cords_y[k], k, item_keys[k]);
+        this->lootables[k] = CREATE_LOOTABLE(renderer, loot_cords_x[k], loot_cords_y[k], k, item_keys[k]);
+        this->num_collidables++;
     }
-    collidables->add_collision(collidables, this->lootables, num_items, num_items, this->area_key);
+    for (int i = 0; i < num_npcs; i++)
+    {
+        this->npcs[i] = CREATE_NPC(renderer, npc_cords_x[i], npc_cords_y[i], i, npc_keys[i], "graphics/giga.png");
+        this->num_npcs++;
+        this->num_collidables++;
+    }
+    collidables->add_collision(collidables, this->lootables, num_items, this->npcs, num_npcs, this->num_collidables, this->area_key);
 }
 
 static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Items *bag, char *dungeon_message)
@@ -56,6 +65,10 @@ static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero,
     {
         this->lootables[k]->render(this->lootables[k], renderer);
     }
+    for (int i = 0; i < this->num_npcs; i++)
+    {
+        this->npcs[i]->render(this->npcs[i], renderer);
+    }
     hero->render(hero, renderer);
     this->trees->render_floor(this->trees, renderer);
 
@@ -70,7 +83,8 @@ Area *CREATE_FOREST(int area_key)
     this->render_area = _render_area;
 
     this->bag = CREATE_BAG();
-
+    this->num_collidables = 0;
+    this->num_npcs = 0;
     this->map_w = 2048;
     this->map_h = 1792;
     this->area_key = area_key;

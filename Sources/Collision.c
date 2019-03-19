@@ -8,13 +8,17 @@ static void _destroy(Collision *this)
         this = NULL;
     }
 }
-static void _add_collision(Collision *this, Lootable **lootables, int num_lootables, int num_collidables, int area_key)
+static void _add_collision(Collision *this, Lootable **lootables, int num_lootables, Npc **npcs, int num_npcs, int num_collidables, int area_key)
 {
     this->num_collibables[area_key] = num_collidables;
     this->collidables[area_key] = malloc(sizeof(struct Collidable *) * num_collidables);
     if (NULL != lootables)
     {
         this->add_lootables(this, lootables, num_lootables, area_key);
+    }
+    if(NULL != npcs)
+    {
+        this->add_npcs(this, npcs, num_npcs, area_key);
     }
 }
 static void _add_lootables(Collision *this, Lootable **lootables, int num_lootables, int area_key)
@@ -27,6 +31,19 @@ static void _add_lootables(Collision *this, Lootable **lootables, int num_lootab
         this->collidables[area_key][this->current_index]->y = lootables[k]->y;
         this->collidables[area_key][this->current_index]->index = this->current_index;
         lootables[k]->index = this->current_index;
+        this->current_index++;
+    }
+}
+static void _add_npcs(Collision *this, Npc **npcs, int num_npcs, int area_key)
+{
+    for (int k = 0; k < num_npcs; k++)
+    {
+        this->collidables[area_key][this->current_index] = malloc(sizeof(struct Collidable));
+        this->collidables[area_key][this->current_index]->rect = &npcs[k]->rect;
+        this->collidables[area_key][this->current_index]->x = npcs[k]->x;
+        this->collidables[area_key][this->current_index]->y = npcs[k]->y;
+        this->collidables[area_key][this->current_index]->index = this->current_index;
+        npcs[k]->index = this->current_index;
         this->current_index++;
     }
 }
@@ -46,7 +63,7 @@ static void _update_collidables(Collision *this, int area_key)
 
 static int _area_collision(Collision *this, int area_key)
 {
-    
+    return 0;
 }
 
 Collision *CREATE_COLLISION()
@@ -54,6 +71,7 @@ Collision *CREATE_COLLISION()
     Collision *this = malloc(sizeof(*this));
     this->add_collision = _add_collision;
     this->add_lootables = _add_lootables;
+    this->add_npcs = _add_npcs;
     this->update_collidables = _update_collidables;
     this->area_collision = _area_collision;
     this->destroy = _destroy;
