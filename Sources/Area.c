@@ -32,7 +32,7 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
     {
         this->lootables[k] = CREATE_LOOTABLE(renderer, collidable_cords_x[k], collidable_cords_y[k], k, item_keys[k]);
     }
-    collidables->add_collision(collidables, this->lootables, num_items, num_items, 0);
+    collidables->add_collision(collidables, this->lootables, num_items, num_items, this->area_key);
 }
 
 static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Items *bag, char *dungeon_message)

@@ -153,6 +153,7 @@ int main(int argc, char **argv)
         switch (state)
         {
         case DARK_FOREST:
+            game_collision->update_collidables(game_collision, dark_forest->area_key);
             if (state == MESSAGE && WAITING_FOR_MESSAGE != -1)
             {
                 SDL_RenderClear(renderer);

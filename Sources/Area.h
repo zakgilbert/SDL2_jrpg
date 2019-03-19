@@ -5,7 +5,6 @@
 #ifndef JRPG_AREA_H
 #define JRPG_AREA_H
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -21,8 +20,6 @@
 #include "Collision.h"
 #include "Lootable.h"
 
-
-
 typedef struct _area
 {
     Floor *floor;
@@ -30,7 +27,7 @@ typedef struct _area
     Menu *loot_message;
 
     void (*destroy)(struct _area *);
-    void (*create_assets)(struct _area *, struct SDL_Renderer *, Collision * collidables, int*, int, int *, int *);
+    void (*create_assets)(struct _area *, struct SDL_Renderer *, Collision *collidables, int *, int, int *, int *);
     char *(*render_area)(struct _area *, struct SDL_Renderer *, Hero *, Items *, char *);
     int (*check_wait_thread)(struct _area *);
     int area_map_width;
@@ -38,8 +35,8 @@ typedef struct _area
     int map_w;
     int map_h;
     int area_key;
-    Items * bag;
-    Lootable ** lootables;
+    Items *bag;
+    Lootable **lootables;
 } Area;
 
 Area *CREATE_FOREST(int area_key);
