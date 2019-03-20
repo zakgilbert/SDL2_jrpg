@@ -17,7 +17,6 @@
  *                  dark_forest->create_assets(dark_forest, renderer,...,...)
  */
 
-
 /* Generate the char** list of all items from the ITEMS_ENUM */
 static const char *ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)};
@@ -65,7 +64,7 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
     collidables->add_collision(collidables, this->lootables, num_items, this->npcs, num_npcs, this->num_collidables, this->area_key);
 }
 
-static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Items *bag, char *dungeon_message)
+static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Items *bag)
 {
     if (INPUT == CANCEL)
     {
@@ -74,10 +73,11 @@ static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero,
         INPUT = NONE;
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 
-        return dungeon_message;
+        return NULL;
     }
     int item_to_be_obtained = -1;
 
+    Message *dungeon_message = NULL;
     MOVEMENT_DISABLED = 0;
     hero->animate(hero);
 
@@ -86,7 +86,7 @@ static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero,
     {
         if (this->lootables[k]->ready_to_interact > 0 && (0 < ((item_to_be_obtained) = (this->lootables[k]->loot(this->lootables[k])))))
         {
-            strcpy(dungeon_message, ITEMS[item_to_be_obtained]);
+            dungeon_message = CREATE_MESSAGE((char *)ITEMS[item_to_be_obtained], 0, 0, 10);
             state = MESSAGE;
             previous_state = this->area_key;
             USER_INPUTS[4] = 0;

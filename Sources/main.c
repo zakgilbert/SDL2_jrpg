@@ -66,10 +66,8 @@ int main(int argc, char **argv)
 {
     set_up_timer(60);
     int running;
-    char *current_message;
     SET_GLOBALS();
     running = 1;
-    current_message = malloc(30);
 
     refresh_inputs(USER_INPUTS, 6, 1);
 
@@ -90,9 +88,7 @@ int main(int argc, char **argv)
     Items *bag = CREATE_BAG();
     Collision *game_collision = CREATE_COLLISION();
 
-    Message *message_being_displayed;
-    Message *my_test_mesage = CREATE_MESSAGE("ponde___.ttf", "The theif locke awakes in a strange daze, surrounded by a dark_forest that he does not recognize. ", 10, 50, 100, 300, 100, 12);
-    my_test_mesage->create_lines(my_test_mesage);
+    Message *message_being_displayed = NULL;
 
     int party_items[3] = {POTION, ETHER, SOFT};
     int quat[3] = {4, 3, 2};
@@ -160,13 +156,13 @@ int main(int argc, char **argv)
             if (state == MESSAGE && WAITING_FOR_MESSAGE != -1)
             {
                 SDL_RenderClear(renderer);
-                dark_forest->render_area(dark_forest, renderer, hero, bag, current_message);
+                dark_forest->render_area(dark_forest, renderer, hero, bag);
                 break;
             }
             else
             {
                 SDL_RenderClear(renderer);
-                strcpy(current_message, dark_forest->render_area(dark_forest, renderer, hero, bag, current_message));
+                message_being_displayed = dark_forest->render_area(dark_forest, renderer, hero, bag);
                 SDL_RenderPresent(renderer);
                 // printf("\n\"%s\" is stored at %p.", current_message, current_message);
                 break;
@@ -204,7 +200,6 @@ int main(int argc, char **argv)
             break;
 
         case MESSAGE:
-            message_being_displayed = ONE_LINER("ponde___.ttf", current_message, 0, 0, 20, 10);
             message_being_displayed->render_one_liner(message_being_displayed, renderer);
             SDL_RenderPresent(renderer);
             wait_for_okay();
@@ -236,7 +231,6 @@ int main(int argc, char **argv)
     bag->destroy(bag);
 
     free(STAT_MATRIX);
-    free(current_message);
     party[0]->destroy_party(party);
     SDL_DestroyRenderer(renderer);
     SDL_Delay(400);
