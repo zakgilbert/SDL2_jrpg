@@ -14,8 +14,8 @@
 typedef struct _lootable
 {
     void (*destroy)(struct _lootable *);
-    void (*loot)(struct _lootable *);
-    void (*render)(struct _lootable *, struct SDL_Renderer * renderer);
+    int (*loot)(struct _lootable *);
+    struct _lootable * (*render)(struct _lootable *, struct SDL_Renderer * renderer);
 
     struct SDL_Texture * texture;
     struct SDL_Texture * alt_tex;
@@ -25,6 +25,7 @@ typedef struct _lootable
     int looted;
     int index;
     int x, y;
+    int ready_to_interact;
 
 } Lootable;
 

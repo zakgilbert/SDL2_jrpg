@@ -66,7 +66,7 @@ static void _add_lootables(Collision *this, Lootable **lootables, int num_lootab
         this->collidables[area_key][this->current_index]->x = lootables[k]->x;
         this->collidables[area_key][this->current_index]->y = lootables[k]->y;
         this->collidables[area_key][this->current_index]->index = this->current_index;
-        this->collidables[area_key][this->current_index]->key = lootables[k]->key;
+        this->collidables[area_key][this->current_index]->ready_to_interact = &lootables[k]->ready_to_interact;
         lootables[k]->index = this->current_index;
         this->current_index++;
     }
@@ -80,7 +80,7 @@ static void _add_npcs(Collision *this, Npc **npcs, int num_npcs, int area_key)
         this->collidables[area_key][this->current_index]->x = npcs[k]->x;
         this->collidables[area_key][this->current_index]->y = npcs[k]->y;
         this->collidables[area_key][this->current_index]->index = this->current_index;
-        this->collidables[area_key][this->current_index]->key = npcs[k]->key;
+        this->collidables[area_key][this->current_index]->ready_to_interact = &npcs[k]->ready_to_interact;
         npcs[k]->index = this->current_index;
         this->current_index++;
     }
@@ -100,22 +100,22 @@ static void _update_collidables(Collision *this, int area_key)
         if (this->check_left_edge(this->collidables[area_key][k]))
         {
             EDGE_DETECTION[1] = 1;
-            READY_TO_INTERACT = -1;
         }
         if (this->check_right_edge(this->collidables[area_key][k]))
         {
             EDGE_DETECTION[0] = 1;
-            READY_TO_INTERACT = -1;
         }
         if (this->check_up_edge(this->collidables[area_key][k]))
         {
             EDGE_DETECTION[3] = 1;
-            READY_TO_INTERACT = this->collidables[area_key][k]->key;
         }
         if (this->check_down_edge(this->collidables[area_key][k]))
         {
             EDGE_DETECTION[2] = 1;
-            READY_TO_INTERACT = k;
+            if (!(*this->collidables[area_key][k]->ready_to_interact))
+            {
+                *this->collidables[area_key][k]->ready_to_interact = 1;
+            }
         }
     }
 }

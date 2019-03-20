@@ -64,9 +64,10 @@ static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero,
     for (int k = 0; k < this->bag->items_in_bag; k++)
     {
         this->lootables[k]->render(this->lootables[k], renderer);
-        if(READY_TO_INTERACT != -1)
+
+        if (this->lootables[k]->ready_to_interact > 0 && (0 < ((item_to_be_obtained) = (this->lootables[k]->loot(this->lootables[k])))))
         {
-             
+            strcpy(dungeon_message, ITEMS[item_to_be_obtained]);
         }
     }
     for (int i = 0; i < this->num_npcs; i++)

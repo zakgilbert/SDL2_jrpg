@@ -132,11 +132,11 @@ int main(int argc, char **argv)
     int dark_forest_npcs_x[1] = {400};
     int dark_forest_npcs_y[1] = {400};
 
-    int dark_forest_items[1] = {PHOENIX_DOWN};
-    int dark_forest_items_x[1] = {300};
-    int dark_forest_items_y[1] = {300};
+    int dark_forest_items[2] = {PHOENIX_DOWN, ETHER};
+    int dark_forest_items_x[2] = {300, 400};
+    int dark_forest_items_y[2] = {300, 300};
 
-    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 1, dark_forest_npcs, 1, dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
+    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 2, dark_forest_npcs, 1, dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
 
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);

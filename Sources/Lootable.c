@@ -12,19 +12,22 @@ static void _destroy(Lootable *this)
     }
 }
 
-static void _render(Lootable *this, struct SDL_Renderer *renderer)
+static Lootable * _render(Lootable *this, struct SDL_Renderer *renderer)
 {
     SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
     SDL_RenderDrawRect(renderer, &this->rect);
+    return this;
 }
 
-static void _loot(Lootable *this)
+static int _loot(Lootable *this)
 {
-    if (!this->looted)
+    if (!this->looted && USER_INPUTS[4])
     {
         this->texture = this->alt_tex;
         this->looted = 1;
+        return this->key;
     }
+    return -1;
 }
 
 Lootable *CREATE_LOOTABLE(struct SDL_Renderer *renderer, int x, int y, int index, int key)
@@ -36,6 +39,7 @@ Lootable *CREATE_LOOTABLE(struct SDL_Renderer *renderer, int x, int y, int index
     this->render = _render;
 
     this->looted = 0;
+    this->ready_to_interact = 0;
     this->index = index;
     this->rect.x = x;
     this->rect.y = y;

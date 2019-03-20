@@ -17,7 +17,7 @@ struct Collidable
     struct SDL_Rect *rect;
     int x, y;
     int index;
-    int key;
+    int * ready_to_interact;
 };
 
 typedef struct _collision

@@ -24,6 +24,7 @@ Npc *CREATE_NPC(struct SDL_Renderer *renderer, int x, int y, int index, int key,
     this->destroy = _destroy;
     this->render = _render;
 
+    this->ready_to_interact = 0;
     this->index = index;
     this->rect.x = x;
     this->rect.y = y;

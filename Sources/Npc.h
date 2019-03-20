@@ -22,6 +22,7 @@ typedef struct _npc
     int key;
     int index;
     int x, y;
+    int  ready_to_interact;
 } Npc;
 
 Npc *CREATE_NPC(struct SDL_Renderer * renderer, int x, int y, int index, int key, char * path);
