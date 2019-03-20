@@ -1,12 +1,31 @@
-//
-
-// Created by zachary on 1/23/19.
-//
 
 #include "Area.h"
 
+/*
+ * Name:    Area.c    
+ * Project: jrpg     
+ * Author:  Zachary Gilbert
+ * Description: 
+ *      The Area class lets one create a new game area(dungeon, town, wilderness...)
+ * 
+ * Insights:
+ *      CREATE_AREA(int area_key) lets you pass in an area key which comes from the 
+ *      states enum list. The details of the area are futher specified when create_assets
+ *      is called.
+ * 
+ *      Example:    Area *dark_forest = CREATE_AREA(DARK_FOREST);
+ *                  dark_forest->create_assets(dark_forest, renderer,...,...)
+ */
+
+
+/* Generate the char** list of all items from the ITEMS_ENUM */
 static const char *ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)};
+
+/*
+ * destroy
+ * the Area struct
+ */
 static void _destroy(Area *this)
 {
     this->floor->destroy(this->floor);
@@ -19,7 +38,9 @@ static void _destroy(Area *this)
     }
 }
 
-static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision *collidables, int *item_keys, int num_items, int *npc_keys, int num_npcs, int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y)
+static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision *collidables,
+                           int *item_keys, int num_items, int *npc_keys, int num_npcs,
+                           int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y)
 {
     this->floor = create_floor(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     this->trees = create_floor(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -63,12 +84,15 @@ static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero,
     this->floor->render_floor(this->floor, renderer);
     for (int k = 0; k < this->bag->items_in_bag; k++)
     {
-        this->lootables[k]->render(this->lootables[k], renderer);
-
         if (this->lootables[k]->ready_to_interact > 0 && (0 < ((item_to_be_obtained) = (this->lootables[k]->loot(this->lootables[k])))))
         {
             strcpy(dungeon_message, ITEMS[item_to_be_obtained]);
+            state = MESSAGE;
+            previous_state = this->area_key;
+            USER_INPUTS[4] = 0;
+            bag->loot(bag, item_to_be_obtained);
         }
+        this->lootables[k]->render(this->lootables[k], renderer);
     }
     for (int i = 0; i < this->num_npcs; i++)
     {
@@ -80,7 +104,7 @@ static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero,
     return dungeon_message;
 }
 
-Area *CREATE_FOREST(int area_key)
+Area *CREATE_AREA(int area_key)
 {
     Area *this = (Area *)malloc(sizeof(*this));
 

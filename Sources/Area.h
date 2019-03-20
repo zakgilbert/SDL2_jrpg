@@ -43,5 +43,5 @@ typedef struct _area
     Npc **npcs;
 } Area;
 
-Area *CREATE_FOREST(int area_key);
+Area *CREATE_AREA(int area_key);
 #endif //JRPG_FOREST_H

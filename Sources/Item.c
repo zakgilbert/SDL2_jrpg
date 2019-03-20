@@ -6,23 +6,27 @@ static char *ITEMS[] = {
 
 static void _destroy(Items *this)
 {
-    if (this->items_in_bag > 1)
-    {
-        if (NULL != this->items)
-        {
-            free(this->items);
-        }
-        if (NULL != this->item_quantities)
-        {
-            free(this->item_quantities);
-        }
-    }
     if (NULL != this)
     {
         free(this);
         this = NULL;
     }
 }
+/*
+ *  fill_bag
+ *      After calling CREATE_BAG, fill the bag with the items you desire.
+ *      The parameters items and quantities both correspond to num_items
+ *      as follows.
+ *  (Items *this)       --> the object
+ *  (int * items)       --> the list of item keys(enum values).
+ *  (int * quantities)  --> the list of each items quantity.
+ *  (int num_items)     --> the amount of items being added.
+ *   
+ *  In the following case you would have 4 POTIONS, and 5 ETHERS put in the bag.
+ *      int items[2] =       {POTION, ETHER}
+ *      int quantities[2] =  {4,5}
+ *      int num_items =      2;
+ */
 static void _fill_bag(Items *this, int *items, int *quantities, int len)
 {
     this->items = (int *)malloc(sizeof(int) * len);
