@@ -128,7 +128,7 @@ int main(int argc, char **argv)
     int dark_forest_npcs_x[1] = {400};
     int dark_forest_npcs_y[1] = {400};
 
-    int dark_forest_items[2] = {PHOENIX_DOWN, ETHER};
+    int dark_forest_items[2] = {POTION, ETHER};
     int dark_forest_items_x[2] = {300, 400};
     int dark_forest_items_y[2] = {300, 300};
 
@@ -153,20 +153,19 @@ int main(int argc, char **argv)
         switch (state)
         {
         case DARK_FOREST:
-            if (state == MESSAGE && WAITING_FOR_MESSAGE != -1)
+            if (state == MESSAGE)
             {
                 SDL_RenderClear(renderer);
                 dark_forest->render_area(dark_forest, renderer, hero, bag);
-                break;
+                printf("\n IN message state");
             }
             else
             {
                 SDL_RenderClear(renderer);
                 message_being_displayed = dark_forest->render_area(dark_forest, renderer, hero, bag);
                 SDL_RenderPresent(renderer);
-                // printf("\n\"%s\" is stored at %p.", current_message, current_message);
-                break;
             }
+            break;
         case MAIN_MENU:
             // hand->animate(hand);
             TICK = 1;
@@ -205,7 +204,6 @@ int main(int argc, char **argv)
             wait_for_okay();
             state = previous_state;
             previous_state = MESSAGE;
-            WAITING_FOR_MESSAGE = -1;
             break;
         default:
             break;

@@ -6,12 +6,12 @@
 
 int wait_for_okay()
 {
-    MOVEMENT_DISABLED = 0;
+    MOVEMENT_DISABLED = 1;
     while (!USER_INPUTS[4])
     {
         SDL_Delay(1);
     }
-    MOVEMENT_DISABLED = 1;
+    MOVEMENT_DISABLED = 0;
     return 0;
 }
 int input_thread(void *data)

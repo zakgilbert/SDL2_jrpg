@@ -14,18 +14,17 @@
 typedef struct _npc
 {
     void (*destroy)(struct _npc *);
-    void (*render)(struct _npc *, struct SDL_Renderer * renderer);
-
-    struct SDL_Texture * texture;
+    void (*render)(struct _npc *, struct SDL_Renderer *renderer);
+    int (*interact)(struct _npc *);
+    struct SDL_Texture *texture;
     struct SDL_Rect rect;
-    
+
     int key;
     int index;
     int x, y;
-    int  ready_to_interact;
+    int ready_to_interact;
 } Npc;
 
-Npc *CREATE_NPC(struct SDL_Renderer * renderer, int x, int y, int index, int key, char * path);
-
+Npc *CREATE_NPC(struct SDL_Renderer *renderer, int x, int y, int index, int key, char *path);
 
 #endif

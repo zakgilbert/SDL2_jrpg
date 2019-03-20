@@ -76,6 +76,7 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
         return NULL;
     }
     int item_to_be_obtained = -1;
+    int npc_to_interact_with = -1;
 
     Message *dungeon_message = NULL;
     MOVEMENT_DISABLED = 0;
@@ -84,7 +85,7 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
     this->floor->render_floor(this->floor, renderer);
     for (int k = 0; k < this->bag->items_in_bag; k++)
     {
-        if (this->lootables[k]->ready_to_interact > 0 && (0 < ((item_to_be_obtained) = (this->lootables[k]->loot(this->lootables[k])))))
+        if (this->lootables[k]->ready_to_interact > 0 && (0 <= ((item_to_be_obtained) = (this->lootables[k]->loot(this->lootables[k])))))
         {
             dungeon_message = CREATE_MESSAGE((char *)ITEMS[item_to_be_obtained], 0, 0, 10);
             state = MESSAGE;
@@ -96,6 +97,13 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
     }
     for (int i = 0; i < this->num_npcs; i++)
     {
+        if (state == DARK_FOREST && this->npcs[i]->ready_to_interact > 0 && (0 <= ((npc_to_interact_with) = (this->npcs[i]->interact(this->npcs[i])))))
+        {
+            dungeon_message = CREATE_MESSAGE("Im a giant", 0, 0, 10);
+            state = MESSAGE;
+            previous_state = this->area_key;
+            USER_INPUTS[4] = 0;
+        }
         this->npcs[i]->render(this->npcs[i], renderer);
     }
     hero->render(hero, renderer);

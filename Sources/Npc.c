@@ -17,12 +17,23 @@ static void _render(Npc *this, struct SDL_Renderer *renderer)
     SDL_RenderDrawRect(renderer, &this->rect);
 }
 
+static int _interact(Npc * this)
+{
+    if(this->ready_to_interact && USER_INPUTS[4])
+    {
+        return this->key;
+    }
+    return -1;
+
+}
+
 Npc *CREATE_NPC(struct SDL_Renderer *renderer, int x, int y, int index, int key, char *path)
 {
     Npc *this = (Npc *)malloc(sizeof(*this));
 
     this->destroy = _destroy;
     this->render = _render;
+    this->interact = _interact;
 
     this->ready_to_interact = 0;
     this->index = index;
