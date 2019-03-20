@@ -6,6 +6,8 @@
 
 uint32_t transition_delay = 200;
 
+static const char *ITEMS[] = {
+    FOREACH_ITEM(GENERATE_STRING)};
 /**
  * Destructor for the Menu "class"
  * 
@@ -271,18 +273,18 @@ static int _render_items_menu_options(Menu *this, struct SDL_Renderer *renderer,
     quat_rect.y = 15;
     for (int i = 0; i < bag->items_in_bag; i++)
     {
-        TTF_SizeText(this->font, bag->items[i], &this->rect.w, &this->rect.h);
+        TTF_SizeText(this->font, ITEMS[bag->items[i]], &this->rect.w, &this->rect.h);
         sprintf(quat_array, "%d", bag->item_quantities[i]);
         TTF_SizeText(quat_font, quat_array, &quat_rect.w, &quat_rect.h);
 
         if (i == current_state)
         {
-            this->surface = TTF_RenderText_Solid(this->font, bag->items[i], WHITE);
+            this->surface = TTF_RenderText_Solid(this->font, ITEMS[bag->items[i]], WHITE);
             quat = TTF_RenderText_Solid(quat_font, quat_array, WHITE);
         }
         else
         {
-            this->surface = TTF_RenderText_Solid(this->font, bag->items[i], GREY);
+            this->surface = TTF_RenderText_Solid(this->font, ITEMS[bag->items[i]], GREY);
             quat = TTF_RenderText_Solid(quat_font, quat_array, GREY);
         }
         this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
@@ -326,7 +328,7 @@ static void _render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Han
     hand->render(hand, renderer);
     if (USER_INPUTS[4])
     {
-        int was_item_removed = bag->quaff_item(bag, CREATE_AFFECT(bag->get_enum(bag, this->item_being_used), party[hand->current_state]));
+        int was_item_removed = bag->quaff_item(bag, CREATE_AFFECT(bag->items[this->item_being_used] , party[hand->current_state]));
 
         this->previous_number_of_states += was_item_removed;
         if (was_item_removed == -1)

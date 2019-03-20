@@ -1,8 +1,10 @@
 #include "Header.h"
 #include "Words.h"
+#include "Graphics.h"
 #include "Window_and_Renderer.h"
 #include "Floor.h"
 #include "Hero.h"
+#include "Item.h"
 #include "Area.h"
 #include "Player_Input.h"
 #include "Movement.h"
@@ -10,21 +12,24 @@
 #include "Menu.h"
 #include "Hand.h"
 #include "Character.h"
-#include "Item.h"
 #include "Affect.h"
-#include "Collidable.h"
 #include "Message.h"
 #include "Time.h"
+#include "Lootable.h"
+#include "Npc.h"
+#include "Collision.h"
+
 void SET_GLOBALS()
 {
     TICK = 0;
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;
-    READY_TO_INTERACT = 0;
+    READY_TO_INTERACT = -1;
     WAITING_FOR_MESSAGE = 0;
     INTERACT = OFF;
     NUM_STATS = 4;
     INPUT = NONE;
+    NUM_AREAS = 1;
 
     HERO_WIDTH = 32;
     HERO_HEIGHT = 32;
@@ -56,6 +61,7 @@ void SET_GLOBALS()
     MOVEMENT_DISABLED = 0;
     state = DARK_FOREST;
 }
+
 int main(int argc, char **argv)
 {
     set_up_timer(60);
@@ -77,23 +83,21 @@ int main(int argc, char **argv)
     struct SDL_Renderer *renderer = NULL;
 
     window = make_window("Window");
-    Area *dark_forest = CREATE_FOREST(50, DARK_FOREST);
+    Area *dark_forest = CREATE_AREA(DARK_FOREST);
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
     Items *bag = CREATE_BAG();
+    Collision *game_collision = CREATE_COLLISION();
+
     Message *message_being_displayed;
     Message *my_test_mesage = CREATE_MESSAGE("ponde___.ttf", "The theif locke awakes in a strange daze, surrounded by a dark_forest that he does not recognize. ", 10, 50, 100, 300, 100, 12);
     my_test_mesage->create_lines(my_test_mesage);
 
-    const char current_items[3][10] = {
-        {"POTION"},
-        {"SOFT"},
-        {"ETHER"}};
-
+    int party_items[3] = {POTION, ETHER, SOFT};
     int quat[3] = {4, 3, 2};
 
-    bag->fill_bag(bag, current_items, quat, 3);
+    bag->fill_bag(bag, party_items, quat, 3);
 
     Character **party = (Character **)malloc(sizeof(Character *) * NUM_CHARACTERS);
 
@@ -124,7 +128,16 @@ int main(int argc, char **argv)
     party[2]->create_character_texture(party[2], renderer);
     party[3]->create_character_texture(party[3], renderer);
 
-    dark_forest->create_assets(dark_forest, renderer);
+    int dark_forest_npcs[1] = {GIGAS};
+    int dark_forest_npcs_x[1] = {400};
+    int dark_forest_npcs_y[1] = {400};
+
+    int dark_forest_items[2] = {PHOENIX_DOWN, ETHER};
+    int dark_forest_items_x[2] = {300, 400};
+    int dark_forest_items_y[2] = {300, 300};
+
+    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 2, dark_forest_npcs, 1, dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
+
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
 
@@ -139,6 +152,7 @@ int main(int argc, char **argv)
         start_timer();
         IS_MOVING = 0;
         refresh_inputs(EDGE_DETECTION, 4, movement());
+        game_collision->update_collidables(game_collision, state);
 
         switch (state)
         {
@@ -207,7 +221,6 @@ int main(int argc, char **argv)
         delay();
         reset_timer();
     }
-    SDL_LogVerbose(SDL_LOG_CATEGORY_RENDER, "Render log:");
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &menu->transition);

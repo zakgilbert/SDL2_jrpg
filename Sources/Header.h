@@ -23,6 +23,7 @@ extern int FPS;
 extern int FRAMES_RENDERED;
 
 extern int NUM_STATS;
+extern int NUM_AREAS;
 extern char **STAT_MATRIX;
 extern int NUM_CHARACTERS;
 extern int ITEMS_IN_BAG;
@@ -104,6 +105,7 @@ int HERO_WIDTH;
 int HERO_HEIGHT;
 
 int NUM_STATS;
+int NUM_AREAS;
 int X;
 int Y;
 int TICK;

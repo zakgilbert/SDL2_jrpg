@@ -14,12 +14,14 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include "Header.h"
 #include "Affect.h"
 #include "Item.h"
 #include "Header.h"
 #include "Window.h"
 #include "Hand.h"
 #include "Character.h"
+#include "Words.h"
 
 uint32_t transition_delay;
 
