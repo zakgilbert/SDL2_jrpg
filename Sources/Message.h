@@ -17,6 +17,7 @@ typedef struct _message
 {
     void (*destroy)(struct _message *);
     void (*render_one_liner)(struct _message *, SDL_Renderer *);
+    int (*render_dialogue)(struct _message *, SDL_Renderer *);
     Window *message_background;
     TTF_Font *font;
     struct SDL_Texture *texture;
@@ -41,10 +42,11 @@ typedef struct _message
     int num_words;
     int num_lines;
     int current_line;
+    int type;
 
-    char **message_2d;
+    char **dialogue;
 
 } Message;
 
-Message *CREATE_MESSAGE(char *message, int x, int y, int font_size);
+Message *CREATE_MESSAGE(char *message, int x, int y, int font_size, int type, int key);
 #endif

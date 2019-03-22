@@ -19,7 +19,7 @@ static void _render(Npc *this, struct SDL_Renderer *renderer)
 
 static int _interact(Npc * this)
 {
-    if(this->ready_to_interact && USER_INPUTS[4])
+    if(this->ready_to_interact && USER_INPUTS[4] && FACING == UP)
     {
         return this->key;
     }
@@ -27,7 +27,7 @@ static int _interact(Npc * this)
 
 }
 
-Npc *CREATE_NPC(struct SDL_Renderer *renderer, int x, int y, int index, int key, char *path)
+Npc *CREATE_NPC(struct SDL_Renderer *renderer, int x, int y, int index, int key, char *path, int type)
 {
     Npc *this = (Npc *)malloc(sizeof(*this));
 
@@ -40,6 +40,7 @@ Npc *CREATE_NPC(struct SDL_Renderer *renderer, int x, int y, int index, int key,
     this->rect.x = x;
     this->rect.y = y;
     this->key = key;
+    this->type = type;
     this->x = x;
     this->y = y;
     this->texture = create_texture(renderer, path, &this->rect);

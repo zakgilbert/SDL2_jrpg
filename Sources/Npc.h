@@ -18,13 +18,15 @@ typedef struct _npc
     int (*interact)(struct _npc *);
     struct SDL_Texture *texture;
     struct SDL_Rect rect;
+    struct SDL_Rect rect2;
 
     int key;
     int index;
     int x, y;
     int ready_to_interact;
+    enum NPC_TYPES type;
 } Npc;
 
-Npc *CREATE_NPC(struct SDL_Renderer *renderer, int x, int y, int index, int key, char *path);
+Npc *CREATE_NPC(struct SDL_Renderer *renderer, int x, int y, int index, int key, char *path, int type);
 
 #endif
