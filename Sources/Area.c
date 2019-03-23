@@ -75,6 +75,13 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
 
         return NULL;
     }
+    else if (NUM_STEPS > 300)
+    {
+        state = BATTLE;
+        previous_state = this->area_key;
+
+        return NULL;
+    }
     int item_to_be_obtained = -1;
     int npc_to_interact_with = -1;
 

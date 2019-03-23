@@ -17,15 +17,11 @@
 #include <SDL2/SDL_thread.h>
 #include <SDL2/SDL_platform.h>
 #include <stdint.h>
+#include "H.h"
 #define WINDOW_WIDTH (356)
 #define WINDOW_HEIGHT (324)
 #define SPRITE_FRAME_WIDTH (32)
 #define SPRITE_FRAME_HEIGHT (32)
-typedef struct LIST_STRUCT
-{
-    char **list;
-    int num_items;
-} LIST;
 
 extern int FPS;
 extern int FRAMES_RENDERED;
@@ -52,7 +48,8 @@ extern int MAP_HEIGHT;
 extern int REFRESH_ITEMS;
 extern int HERO_WIDTH;
 extern int HERO_HEIGHT;
-
+extern int IN_BATTLE;
+extern int NUM_STEPS;
 extern int WAITING_FOR_MESSAGE;
 extern struct SDL_Color WHITE;
 extern struct SDL_Color GREY;
@@ -61,8 +58,12 @@ extern struct SDL_Color MENU_BACKGROUND;
 extern struct SDL_Color RED;
 extern struct SDL_Color BLU;
 extern struct SDL_Color GRN;
-extern struct LIST_STRUCT **DIALOGUES;
-extern struct LIST_STRUCT *NPC_PATHS;
+extern struct STRING_LIST **DIALOGUES;
+extern struct INTEGER_LIST **BATTLE_LINEUP;
+extern struct STRING_LIST *NPC_PATHS;
+extern struct STRING_LIST *ENEMY_PATHS;
+extern struct STRING_LIST *BATTLE_BACKGROUNDS;
+
 
 enum states
 {
@@ -71,7 +72,8 @@ enum states
     ITEMS_MENU,
     USE_ITEM,
     MESSAGE,
-    CONFIG
+    CONFIG,
+    BATTLE
 };
 enum states state, previous_state;
 enum INPUTS
@@ -89,6 +91,11 @@ enum COLLIDABLE_TYPES
     NPC,
     ENEMY,
     BUTTON
+};
+
+enum ENEMIES
+{
+    KNIGHT_BEZ_MOUNT
 };
 
 enum BUTTON
@@ -151,6 +158,9 @@ int MAP_WIDTH;
 int MAP_HEIGHT;
 int WAITING_FOR_MESSAGE;
 char **STAT_MATRIX;
+int IN_BATTLE;
+int NUM_STEPS;
+
 
 struct SDL_Color WHITE;
 struct SDL_Color GREY;
@@ -158,8 +168,11 @@ struct SDL_Color MENU_BACKGROUND;
 struct SDL_Color RED;
 struct SDL_Color BLU;
 struct SDL_Color GRN;
-struct LIST_STRUCT **DIALOGUES;
-struct LIST_STRUCT *NPC_PATHS;
+struct STRING_LIST **DIALOGUES;
+struct INTEGER_LIST **BATTLE_LINEUP;
+struct STRING_LIST *NPC_PATHS;
+struct STRING_LIST *ENEMY_PATHS;
+struct STRING_LIST *BATTLE_BACKGROUNDS;
 
 int refresh_inputs(int *, int, int);
 void set_items(int *);

@@ -61,21 +61,25 @@ int change_position()
         { //down
             Y++;
             is_moving = 1;
+            NUM_STEPS++;
         }
         else if (USER_INPUTS[1])
         { //up
             Y--;
             is_moving = 1;
+            NUM_STEPS++;
         }
         else if (USER_INPUTS[2])
         { //left
             X--;
             is_moving = 1;
+            NUM_STEPS++;
         }
         else if (USER_INPUTS[3])
         { //right
             X++;
             is_moving = 1;
+            NUM_STEPS++;
         }
     }
     return is_moving;
