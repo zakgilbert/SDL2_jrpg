@@ -63,7 +63,7 @@ extern struct INTEGER_LIST **BATTLE_LINEUP;
 extern struct STRING_LIST *NPC_PATHS;
 extern struct STRING_LIST *ENEMY_PATHS;
 extern struct STRING_LIST *BATTLE_BACKGROUNDS;
-
+extern struct STRING_LIST *BATTLE_CHARACTER_GRAPHICS;
 
 enum states
 {
@@ -76,6 +76,15 @@ enum states
     BATTLE
 };
 enum states state, previous_state;
+
+enum CHARACTERS
+{
+    LOCKE,
+    TERRA,
+    SABIN,
+    GAU
+};
+
 enum INPUTS
 {
     NONE,
@@ -161,7 +170,6 @@ char **STAT_MATRIX;
 int IN_BATTLE;
 int NUM_STEPS;
 
-
 struct SDL_Color WHITE;
 struct SDL_Color GREY;
 struct SDL_Color MENU_BACKGROUND;
@@ -173,6 +181,7 @@ struct INTEGER_LIST **BATTLE_LINEUP;
 struct STRING_LIST *NPC_PATHS;
 struct STRING_LIST *ENEMY_PATHS;
 struct STRING_LIST *BATTLE_BACKGROUNDS;
+struct STRING_LIST *BATTLE_CHARACTER_GRAPHICS;
 
 int refresh_inputs(int *, int, int);
 void set_items(int *);

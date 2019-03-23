@@ -186,7 +186,7 @@ static void __set_stats(Character *this, const char *name, const char *age, char
     this->image_path = image_path;
 }
 
-Character *CREATE_CHARACTER()
+Character *CREATE_CHARACTER(int key)
 {
     Character *this = (Character *)malloc(sizeof(*this));
 
@@ -196,7 +196,7 @@ Character *CREATE_CHARACTER()
     this->create_character_texture = __create_character_texture;
     this->destroy_party = __destroy_party;
     // this->get_stat_matrix = __get_stat_matrix;
-
+    this->key = key;
     this->num_stats = 1;
 
     return this;

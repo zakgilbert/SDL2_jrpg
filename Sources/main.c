@@ -90,9 +90,14 @@ void SET_GLOBALS()
     int num_forest_lineup[1] = {1};
 
     BATTLE_LINEUP[0] = CREATE_LIST_INT(forest_lineup, num_forest_lineup, 1);
+
     BATTLE_BACKGROUNDS = malloc(sizeof(struct STRING_LIST) * NUM_AREAS);
     char *b_bgs_df[1] = {"graphics/dark_forest.png"};
     BATTLE_BACKGROUNDS = CREATE_LIST_STRING(b_bgs_df, 1);
+
+    BATTLE_CHARACTER_GRAPHICS = malloc(sizeof(struct STRING_LIST));
+    char *character_battle_graphics[1] = {"graphics/Locke_battle.png"};
+    BATTLE_CHARACTER_GRAPHICS = CREATE_LIST_STRING(character_battle_graphics, 1);
 }
 
 int main(int argc, char **argv)
@@ -128,10 +133,10 @@ int main(int argc, char **argv)
 
     Character **party = (Character **)malloc(sizeof(Character *) * NUM_CHARACTERS);
 
-    party[0] = CREATE_CHARACTER();
-    party[1] = CREATE_CHARACTER();
-    party[2] = CREATE_CHARACTER();
-    party[3] = CREATE_CHARACTER();
+    party[0] = CREATE_CHARACTER(LOCKE);
+    party[1] = CREATE_CHARACTER(TERRA);
+    party[2] = CREATE_CHARACTER(SABIN);
+    party[3] = CREATE_CHARACTER(GAU);
 
     party[0]->set_stats(party[0], "Locke", "32", "Thief", 1000, 48, 1000, "graphics/locke_bio.jpg");
     party[0]->check_stats(party[0]);
@@ -251,7 +256,7 @@ int main(int argc, char **argv)
         case BATTLE:
             if (current_battle == NULL)
             {
-                current_battle = CREATE_BATTLE(previous_state, 0, renderer);
+                current_battle = CREATE_BATTLE(previous_state, 0, renderer, party, 1);
             }
 
             SDL_RenderClear(renderer);
