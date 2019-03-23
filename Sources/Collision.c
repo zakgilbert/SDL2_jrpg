@@ -116,6 +116,11 @@ static void _update_collidables(Collision *this, int area_key)
         {
             EDGE_DETECTION[2] = 1;
             *this->collidables[area_key][k]->ready_to_interact = 1;
+            printf("\nat the edge of: %d\n", this->collidables[area_key][k]->index);
+        }
+        else
+        {
+            *this->collidables[area_key][k]->ready_to_interact = 0;
         }
     }
 }

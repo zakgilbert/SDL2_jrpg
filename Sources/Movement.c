@@ -43,15 +43,15 @@ int change_position()
     { //on left
         USER_INPUTS[2] = 0;
     }
-    if (EDGE_DETECTION[1])
+    else if (EDGE_DETECTION[1])
     { //on right
         USER_INPUTS[3] = 0;
     }
-    if (EDGE_DETECTION[2])
+    else if (EDGE_DETECTION[2])
     { //on up
         USER_INPUTS[1] = 0;
     }
-    if (EDGE_DETECTION[3])
+    else if (EDGE_DETECTION[3])
     { //on down
         USER_INPUTS[0] = 0;
     }

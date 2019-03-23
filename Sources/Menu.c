@@ -4,7 +4,7 @@
 
 #include "Menu.h"
 
-uint32_t transition_delay = 200;
+ uint32_t transition_delay = 200;
 
 static const char *ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)};

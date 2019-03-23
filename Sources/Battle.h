@@ -12,7 +12,9 @@
 #include "Graphics.h"
 #include "Floor.h"
 #include "Character.h"
+#include "Window.h"
 
+uint32_t transition_delay1;
 typedef struct _battle
 {
     void (*destroy)(struct _battle *);
@@ -31,6 +33,8 @@ typedef struct _battle
     struct SDL_Texture **party_textures;
     struct SDL_Rect party_rect_1;
     struct SDL_Rect party_rect_2;
+    struct SDL_Rect transition;
+    Window * window;
 
     Character **party;
     int num_party;
