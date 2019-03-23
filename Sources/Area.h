@@ -20,6 +20,7 @@
 #include "Collision.h"
 #include "Lootable.h"
 #include "Npc.h"
+#include "Message.h"
 
 typedef struct _area
 {
@@ -28,8 +29,8 @@ typedef struct _area
     Menu *loot_message;
 
     void (*destroy)(struct _area *);
-    void (*create_assets)(struct _area *, struct SDL_Renderer *renderer, Collision *collidables, int *item_keys, int num_items, int *npc_keys, int num_npcs, int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y);
-    char *(*render_area)(struct _area *, struct SDL_Renderer *, Hero *, Items *, char *);
+    void (*create_assets)(struct _area *, struct SDL_Renderer *renderer, Collision *collidables, int *item_keys, int num_items, int *npc_keys, int * npc_types, int num_npcs, int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y);
+    Message *(*render_area)(struct _area *, struct SDL_Renderer *, Hero *, Items *);
     int (*check_wait_thread)(struct _area *);
     int area_map_width;
     int area_map_height;
@@ -41,6 +42,10 @@ typedef struct _area
     Items *bag;
     Lootable **lootables;
     Npc **npcs;
+    int last_x;
+    int last_y;
+    int current_index;
+    int last_index;
 } Area;
 
 Area *CREATE_AREA(int area_key);

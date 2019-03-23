@@ -11,8 +11,6 @@
     STAT(MP)               \
     STAT(EXP)
 
-#define FOREACH_NPC(NPC) \
-    NPC(GIGAS)
 
 #define GERERATE_ENUM(ENUM) ENUM,
 #define GENERATE_STRING(STRING) #STRING,
@@ -26,11 +24,6 @@ enum STAT_ENUM
 {
     FOREACH_STAT(GERERATE_ENUM)
 };
-
-typedef enum
-{
-    FOREACH_NPC(GERERATE_ENUM)
-} NPC_ENUM;
 
 extern int ITEM_QUANTITY;
 #endif

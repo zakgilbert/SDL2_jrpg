@@ -19,6 +19,14 @@
 #include <stdint.h>
 #define WINDOW_WIDTH (356)
 #define WINDOW_HEIGHT (324)
+#define SPRITE_FRAME_WIDTH (32)
+#define SPRITE_FRAME_HEIGHT (32)
+typedef struct LIST_STRUCT
+{
+    char **list;
+    int num_items;
+} LIST;
+
 extern int FPS;
 extern int FRAMES_RENDERED;
 
@@ -53,6 +61,8 @@ extern struct SDL_Color MENU_BACKGROUND;
 extern struct SDL_Color RED;
 extern struct SDL_Color BLU;
 extern struct SDL_Color GRN;
+extern struct LIST_STRUCT **DIALOGUES;
+extern struct LIST_STRUCT *NPC_PATHS;
 
 enum states
 {
@@ -88,6 +98,34 @@ enum BUTTON
 };
 
 enum BUTTON INTERACT;
+enum MESSAGE_TYPES
+{
+    ONE_LINER,
+    DIALOGUE
+};
+enum MESSAGE_TYPES MESSAGE_TYPE;
+
+enum NPCS
+{
+    GIGAS,
+    SASH
+};
+
+enum NPC_TYPES
+{
+    SPRITE,
+    ONE_FRAME
+};
+
+enum DIRECTION_FACING
+{
+    DOWN,
+    UP,
+    LEFT,
+    RIGHT
+};
+
+enum DIRECTION_FACING FACING;
 
 int FPS;
 int FRAMES_RENDERED;
@@ -120,6 +158,8 @@ struct SDL_Color MENU_BACKGROUND;
 struct SDL_Color RED;
 struct SDL_Color BLU;
 struct SDL_Color GRN;
+struct LIST_STRUCT **DIALOGUES;
+struct LIST_STRUCT *NPC_PATHS;
 
 int refresh_inputs(int *, int, int);
 void set_items(int *);

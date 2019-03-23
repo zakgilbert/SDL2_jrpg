@@ -19,6 +19,20 @@
 #include "Npc.h"
 #include "Collision.h"
 
+LIST *CREATE_LIST(char **list, int num_items)
+{
+    LIST *this = malloc(sizeof(*this));
+
+    this->list = malloc(sizeof(char *) * num_items);
+    for (size_t i = 0; i < num_items; i++)
+    {
+        this->list[i] = malloc(strlen(list[i]));
+        this->list[i] = list[i];
+    }
+
+    this->num_items = num_items;
+    return this;
+}
 void SET_GLOBALS()
 {
     TICK = 0;
@@ -60,16 +74,31 @@ void SET_GLOBALS()
 
     MOVEMENT_DISABLED = 0;
     state = DARK_FOREST;
+    char *p_temp[2] = {"graphics/giga.png", "graphics/yeti.png"};
+
+    DIALOGUES = malloc(sizeof(struct LIST_STRUCT) * 2);
+    char *d_temp[8] = {"I am a giant, but im nice",
+                       "as long as Im not hungry.",
+                       "Where are you traveling",
+                       "too? I've seen a lot of",
+                       "treasure lately you should",
+                       "look around, and see if",
+                       "you can find some. I bet",
+                       "You'll get lucky..."};
+
+    char *d_yeti[1] = {"I am yeti..."};
+
+    DIALOGUES[0] = CREATE_LIST(d_temp, 8);
+    DIALOGUES[1] = CREATE_LIST(d_yeti, 1);
+    NPC_PATHS = CREATE_LIST(p_temp, 2);
 }
 
 int main(int argc, char **argv)
 {
     set_up_timer(60);
     int running;
-    char *current_message;
     SET_GLOBALS();
     running = 1;
-    current_message = malloc(30);
 
     refresh_inputs(USER_INPUTS, 6, 1);
 
@@ -89,10 +118,6 @@ int main(int argc, char **argv)
     Menu *menu = CREATE_MENU();
     Items *bag = CREATE_BAG();
     Collision *game_collision = CREATE_COLLISION();
-
-    Message *message_being_displayed;
-    Message *my_test_mesage = CREATE_MESSAGE("ponde___.ttf", "The theif locke awakes in a strange daze, surrounded by a dark_forest that he does not recognize. ", 10, 50, 100, 300, 100, 12);
-    my_test_mesage->create_lines(my_test_mesage);
 
     int party_items[3] = {POTION, ETHER, SOFT};
     int quat[3] = {4, 3, 2};
@@ -128,15 +153,18 @@ int main(int argc, char **argv)
     party[2]->create_character_texture(party[2], renderer);
     party[3]->create_character_texture(party[3], renderer);
 
-    int dark_forest_npcs[1] = {GIGAS};
-    int dark_forest_npcs_x[1] = {400};
-    int dark_forest_npcs_y[1] = {400};
+    int dark_forest_npcs[2] = {GIGAS, SASH};
+    int dark_forest_npc_types[2] = {ONE_FRAME, SPRITE};
+    int dark_forest_npcs_x[2] = {400, 350};
+    int dark_forest_npcs_y[2] = {400, 350};
 
-    int dark_forest_items[2] = {PHOENIX_DOWN, ETHER};
+    int dark_forest_items[2] = {POTION, ETHER};
     int dark_forest_items_x[2] = {300, 400};
     int dark_forest_items_y[2] = {300, 300};
 
-    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 2, dark_forest_npcs, 1, dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
+    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 2, 
+                                dark_forest_npcs, dark_forest_npc_types, 2, 
+                                dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
 
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
@@ -150,29 +178,18 @@ int main(int argc, char **argv)
     while (running)
     {
         start_timer();
-        IS_MOVING = 0;
         refresh_inputs(EDGE_DETECTION, 4, movement());
         game_collision->update_collidables(game_collision, state);
 
         switch (state)
         {
         case DARK_FOREST:
-            if (state == MESSAGE && WAITING_FOR_MESSAGE != -1)
-            {
-                SDL_RenderClear(renderer);
-                dark_forest->render_area(dark_forest, renderer, hero, bag, current_message);
-                break;
-            }
-            else
-            {
-                SDL_RenderClear(renderer);
-                strcpy(current_message, dark_forest->render_area(dark_forest, renderer, hero, bag, current_message));
-                SDL_RenderPresent(renderer);
-                // printf("\n\"%s\" is stored at %p.", current_message, current_message);
-                break;
-            }
+            SDL_RenderClear(renderer);
+            Message *message_being_displayed = dark_forest->render_area(dark_forest, renderer, hero, bag);
+            SDL_RenderPresent(renderer);
+            break;
+
         case MAIN_MENU:
-            // hand->animate(hand);
             TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_main_menu(menu, renderer, hand, party);
@@ -181,7 +198,6 @@ int main(int argc, char **argv)
             break;
 
         case ITEMS_MENU:
-            //hand->animate(hand);
             TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_items_menu(menu, renderer, hand, bag);
@@ -204,18 +220,34 @@ int main(int argc, char **argv)
             break;
 
         case MESSAGE:
-            message_being_displayed = ONE_LINER("ponde___.ttf", current_message, 0, 0, 20, 10);
-            message_being_displayed->render_one_liner(message_being_displayed, renderer);
-            SDL_RenderPresent(renderer);
-            wait_for_okay();
-            state = previous_state;
-            previous_state = MESSAGE;
-            WAITING_FOR_MESSAGE = -1;
+            if (message_being_displayed->type == ONE_LINER)
+            {
+                message_being_displayed->render_one_liner(message_being_displayed, renderer);
+                SDL_RenderPresent(renderer);
+                wait_for_okay();
+                state = previous_state;
+                previous_state = MESSAGE;
+                message_being_displayed->destroy(message_being_displayed);
+                message_being_displayed = NULL;
+            }
+            else if (message_being_displayed->type == DIALOGUE)
+            {
+                while (!message_being_displayed->render_dialogue(message_being_displayed, renderer))
+                {
+                    SDL_RenderPresent(renderer);
+                    wait_for_okay();
+                    USER_INPUTS[4] = 0;
+                }
+                state = previous_state;
+                previous_state = MESSAGE;
+                message_being_displayed->destroy(message_being_displayed);
+                message_being_displayed = NULL;
+                printf("\nwe are finished here\n\n");
+            }
             break;
         default:
             break;
         }
-        // printf("\nHand X: %d\nHand Y: %d", hand->position.x, hand->position.y);
         running = quit();
         FRAMES_RENDERED++;
         delay();
@@ -236,7 +268,6 @@ int main(int argc, char **argv)
     bag->destroy(bag);
 
     free(STAT_MATRIX);
-    free(current_message);
     party[0]->destroy_party(party);
     SDL_DestroyRenderer(renderer);
     SDL_Delay(400);

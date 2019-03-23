@@ -6,12 +6,12 @@
 
 int wait_for_okay()
 {
-    MOVEMENT_DISABLED = 0;
+    MOVEMENT_DISABLED = 1;
     while (!USER_INPUTS[4])
     {
         SDL_Delay(1);
     }
-    MOVEMENT_DISABLED = 1;
+    MOVEMENT_DISABLED = 0;
     return 0;
 }
 int input_thread(void *data)
@@ -72,15 +72,17 @@ void get_player_input()
             case SDL_SCANCODE_J:
                 USER_INPUTS[4] = 1;
                 INPUT = OKAY;
+                anything_pressed = 1;
                 continue;
             case SDL_SCANCODE_L:
                 USER_INPUTS[5] = 1;
                 INPUT = CANCEL;
+                anything_pressed = 1;
                 continue;
             default:
                 break;
             }
-            break;
+            continue;
         case SDL_KEYUP:
             switch (ev.key.keysym.scancode)
             {

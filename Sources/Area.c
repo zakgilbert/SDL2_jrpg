@@ -17,7 +17,6 @@
  *                  dark_forest->create_assets(dark_forest, renderer,...,...)
  */
 
-
 /* Generate the char** list of all items from the ITEMS_ENUM */
 static const char *ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)};
@@ -39,7 +38,7 @@ static void _destroy(Area *this)
 }
 
 static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision *collidables,
-                           int *item_keys, int num_items, int *npc_keys, int num_npcs,
+                           int *item_keys, int num_items, int *npc_keys, int *npc_types, int num_npcs,
                            int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y)
 {
     this->floor = create_floor(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -58,14 +57,14 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
     }
     for (int i = 0; i < num_npcs; i++)
     {
-        this->npcs[i] = CREATE_NPC(renderer, npc_cords_x[i], npc_cords_y[i], i, npc_keys[i], "graphics/giga.png");
+        this->npcs[i] = CREATE_NPC(renderer, npc_cords_x[i], npc_cords_y[i], i, npc_keys[i], NPC_PATHS->list[npc_keys[i]], npc_types[i]);
         this->num_npcs++;
         this->num_collidables++;
     }
     collidables->add_collision(collidables, this->lootables, num_items, this->npcs, num_npcs, this->num_collidables, this->area_key);
 }
 
-static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Items *bag, char *dungeon_message)
+static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Items *bag)
 {
     if (INPUT == CANCEL)
     {
@@ -74,19 +73,21 @@ static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero,
         INPUT = NONE;
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 
-        return dungeon_message;
+        return NULL;
     }
     int item_to_be_obtained = -1;
+    int npc_to_interact_with = -1;
 
+    Message *dungeon_message = NULL;
     MOVEMENT_DISABLED = 0;
     hero->animate(hero);
 
     this->floor->render_floor(this->floor, renderer);
     for (int k = 0; k < this->bag->items_in_bag; k++)
     {
-        if (this->lootables[k]->ready_to_interact > 0 && (0 < ((item_to_be_obtained) = (this->lootables[k]->loot(this->lootables[k])))))
+        if (this->lootables[k]->ready_to_interact > 0 && (0 <= ((item_to_be_obtained) = (this->lootables[k]->loot(this->lootables[k])))))
         {
-            strcpy(dungeon_message, ITEMS[item_to_be_obtained]);
+            dungeon_message = CREATE_MESSAGE((char *)ITEMS[item_to_be_obtained], 0, 0, 10, ONE_LINER, item_to_be_obtained);
             state = MESSAGE;
             previous_state = this->area_key;
             USER_INPUTS[4] = 0;
@@ -97,10 +98,28 @@ static char *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero,
     for (int i = 0; i < this->num_npcs; i++)
     {
         this->npcs[i]->render(this->npcs[i], renderer);
+        if (this->current_index == -1 &&
+            (0 <= ((npc_to_interact_with) = (this->npcs[i]->interact(this->npcs[i])))))
+        {
+            this->last_x = X;
+            this->last_y = Y;
+            this->current_index = i;
+            dungeon_message = CREATE_MESSAGE(" ", 0, 0, 10, DIALOGUE, npc_to_interact_with);
+            state = MESSAGE;
+            previous_state = this->area_key;
+            WAITING_FOR_MESSAGE = 0;
+            USER_INPUTS[4] = 0;
+        }
     }
     hero->render(hero, renderer);
     this->trees->render_floor(this->trees, renderer);
-
+    if (this->current_index != -1 && (this->last_x != X || this->last_y != Y))
+    {
+        this->npcs[this->current_index]->ready_to_interact = 0;
+        this->current_index = -1;
+        this->last_x = X;
+        this->last_y = Y;
+    }
     return dungeon_message;
 }
 
@@ -118,6 +137,11 @@ Area *CREATE_AREA(int area_key)
     this->map_h = 1792;
     this->area_key = area_key;
     this->destroy = _destroy;
-
+    this->last_x = 0;
+    this->last_y = 0;
+    this->current_index = -1;
+    this->last_index = -1;
+    this->last_x = X;
+    this->last_y = Y;
     return this;
 }
