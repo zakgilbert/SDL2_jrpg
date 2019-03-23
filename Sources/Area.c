@@ -38,7 +38,7 @@ static void _destroy(Area *this)
 }
 
 static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision *collidables,
-                           int *item_keys, int num_items, int *npc_keys, int * npc_types, int num_npcs,
+                           int *item_keys, int num_items, int *npc_keys, int *npc_types, int num_npcs,
                            int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y)
 {
     this->floor = create_floor(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -57,7 +57,7 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
     }
     for (int i = 0; i < num_npcs; i++)
     {
-        this->npcs[i] = CREATE_NPC(renderer, npc_cords_x[i], npc_cords_y[i], i, npc_keys[i], NPC_PATHS->list[npc_keys[i]] , npc_types[i]);
+        this->npcs[i] = CREATE_NPC(renderer, npc_cords_x[i], npc_cords_y[i], i, npc_keys[i], NPC_PATHS->list[npc_keys[i]], npc_types[i]);
         this->num_npcs++;
         this->num_collidables++;
     }
@@ -97,8 +97,8 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
     }
     for (int i = 0; i < this->num_npcs; i++)
     {
+        this->npcs[i]->render(this->npcs[i], renderer);
         if (this->current_index == -1 &&
-            state == this->area_key &&
             (0 <= ((npc_to_interact_with) = (this->npcs[i]->interact(this->npcs[i])))))
         {
             this->last_x = X;
@@ -110,7 +110,6 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
             WAITING_FOR_MESSAGE = 0;
             USER_INPUTS[4] = 0;
         }
-        this->npcs[i]->render(this->npcs[i], renderer);
     }
     hero->render(hero, renderer);
     this->trees->render_floor(this->trees, renderer);
@@ -141,6 +140,7 @@ Area *CREATE_AREA(int area_key)
     this->last_x = 0;
     this->last_y = 0;
     this->current_index = -1;
+    this->last_index = -1;
     this->last_x = X;
     this->last_y = Y;
     return this;

@@ -76,7 +76,7 @@ void SET_GLOBALS()
     state = DARK_FOREST;
     char *p_temp[2] = {"graphics/giga.png", "graphics/yeti.png"};
 
-    DIALOGUES = malloc(sizeof(struct LIST_STRUCT));
+    DIALOGUES = malloc(sizeof(struct LIST_STRUCT) * 2);
     char *d_temp[8] = {"I am a giant, but im nice",
                        "as long as Im not hungry.",
                        "Where are you traveling",
@@ -86,7 +86,10 @@ void SET_GLOBALS()
                        "you can find some. I bet",
                        "You'll get lucky..."};
 
+    char *d_yeti[1] = {"I am yeti..."};
+
     DIALOGUES[0] = CREATE_LIST(d_temp, 8);
+    DIALOGUES[1] = CREATE_LIST(d_yeti, 1);
     NPC_PATHS = CREATE_LIST(p_temp, 2);
 }
 
@@ -115,8 +118,6 @@ int main(int argc, char **argv)
     Menu *menu = CREATE_MENU();
     Items *bag = CREATE_BAG();
     Collision *game_collision = CREATE_COLLISION();
-
-    Message *message_being_displayed = NULL;
 
     int party_items[3] = {POTION, ETHER, SOFT};
     int quat[3] = {4, 3, 2};
@@ -161,7 +162,9 @@ int main(int argc, char **argv)
     int dark_forest_items_x[2] = {300, 400};
     int dark_forest_items_y[2] = {300, 300};
 
-    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 2, dark_forest_npcs, dark_forest_npc_types, 2, dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
+    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 2, 
+                                dark_forest_npcs, dark_forest_npc_types, 2, 
+                                dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
 
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
@@ -182,12 +185,11 @@ int main(int argc, char **argv)
         {
         case DARK_FOREST:
             SDL_RenderClear(renderer);
-            message_being_displayed = dark_forest->render_area(dark_forest, renderer, hero, bag);
+            Message *message_being_displayed = dark_forest->render_area(dark_forest, renderer, hero, bag);
             SDL_RenderPresent(renderer);
             break;
 
         case MAIN_MENU:
-            // hand->animate(hand);
             TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_main_menu(menu, renderer, hand, party);
@@ -196,7 +198,6 @@ int main(int argc, char **argv)
             break;
 
         case ITEMS_MENU:
-            //hand->animate(hand);
             TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_items_menu(menu, renderer, hand, bag);
@@ -228,7 +229,6 @@ int main(int argc, char **argv)
                 previous_state = MESSAGE;
                 message_being_displayed->destroy(message_being_displayed);
                 message_being_displayed = NULL;
-                break;
             }
             else if (message_being_displayed->type == DIALOGUE)
             {
@@ -241,13 +241,13 @@ int main(int argc, char **argv)
                 state = previous_state;
                 previous_state = MESSAGE;
                 message_being_displayed->destroy(message_being_displayed);
-                break;
+                message_being_displayed = NULL;
+                printf("\nwe are finished here\n\n");
             }
             break;
         default:
             break;
         }
-        // printf("\nHand X: %d\nHand Y: %d", hand->position.x, hand->position.y);
         running = quit();
         FRAMES_RENDERED++;
         delay();

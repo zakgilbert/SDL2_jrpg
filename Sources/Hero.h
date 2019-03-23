@@ -4,8 +4,6 @@
 
 #ifndef JRPG_HERO_H
 #define JRPG_HERO_H
-#define SPRITE_FRAME_WIDTH (32)
-#define SPRITE_FRAME_HEIGHT (32)
 
 #include <stdio.h>
 #include <stdlib.h>

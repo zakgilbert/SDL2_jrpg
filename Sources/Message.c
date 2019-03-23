@@ -30,31 +30,31 @@ static int _render_dialogue(Message *this, struct SDL_Renderer *renderer)
 
     this->message_background->render(this->message_background, renderer);
     this->current_line++;
-    if (this->current_line == this->num_lines)
+    if (this->current_line > this->num_lines)
     {
         is_finished = 1;
     }
     else
     {
         is_finished = 0;
-    }
-    if (this->current_line > 4)
-    {
-        i = this->current_line - 4;
-    }
-    else
-    {
-        i = 0;
-    }
+        if (this->current_line > 4)
+        {
+            i = this->current_line - 4;
+        }
+        else
+        {
+            i = 0;
+        }
 
-    for (; i < this->current_line; i++)
-    {
-        TTF_SizeText(this->font, this->dialogue[i], &this->rect.w, &this->rect.h);
-        this->surface = TTF_RenderText_Solid(this->font, this->dialogue[i], WHITE);
+        for (; i < this->current_line; i++)
+        {
+            TTF_SizeText(this->font, this->dialogue[i], &this->rect.w, &this->rect.h);
+            this->surface = TTF_RenderText_Solid(this->font, this->dialogue[i], WHITE);
 
-        this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
-        SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-        this->rect.y += skip;
+            this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+            SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+            this->rect.y += skip;
+        }
     }
 
     return is_finished;

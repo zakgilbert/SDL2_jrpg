@@ -45,6 +45,7 @@ typedef struct _area
     int last_x;
     int last_y;
     int current_index;
+    int last_index;
 } Area;
 
 Area *CREATE_AREA(int area_key);

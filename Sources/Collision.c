@@ -100,16 +100,19 @@ static void _update_collidables(Collision *this, int area_key)
         if (this->check_left_edge(this->collidables[area_key][k]))
         {
             EDGE_DETECTION[1] = 1;
+            *this->collidables[area_key][k]->ready_to_interact = 0;
         }
-        if (this->check_right_edge(this->collidables[area_key][k]))
+        else if (this->check_right_edge(this->collidables[area_key][k]))
         {
             EDGE_DETECTION[0] = 1;
+            *this->collidables[area_key][k]->ready_to_interact = 0;
         }
-        if (this->check_up_edge(this->collidables[area_key][k]))
+        else if (this->check_up_edge(this->collidables[area_key][k]))
         {
             EDGE_DETECTION[3] = 1;
+            *this->collidables[area_key][k]->ready_to_interact = 0;
         }
-        if (this->check_down_edge(this->collidables[area_key][k]))
+        else if (this->check_down_edge(this->collidables[area_key][k]))
         {
             EDGE_DETECTION[2] = 1;
             *this->collidables[area_key][k]->ready_to_interact = 1;
