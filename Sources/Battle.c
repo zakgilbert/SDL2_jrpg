@@ -19,12 +19,10 @@ static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
     {
         this->textures[i] = create_texture(renderer, ENEMY_PATHS->list[BATTLE_LINEUP[this->area]->list[this->roll][i]], &this->rect);
     }
-    this->back_ground->set_texture(this->back_ground, renderer, BATTLE_BACKGROUNDS->list[this->area]);
-    
 }
 static void _render(Battle *this, struct SDL_Renderer *renderer)
 {
-    this->back_ground->render_floor(this->back_ground, renderer);
+    SDL_RenderCopy(renderer, this->back_ground, NULL, &this->bg_rect);
     for (size_t i = 0; i < this->num_enemies; i++)
     {
         SDL_RenderCopy(renderer, this->textures[i], NULL, &this->rect);
@@ -37,7 +35,10 @@ Battle *CREATE_BATTLE(int area, int roll, struct SDL_Renderer *renderer)
     this->destroy = _destroy;
     this->render = _render;
     this->create_battle_textures = _create_battle_textures;
-    this->back_ground = create_floor(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    this->bg_rect.x = 0;
+    this->bg_rect.y = 0;
+
+    this->back_ground = create_texture(renderer, BATTLE_BACKGROUNDS->list[area], &this->bg_rect);
 
     this->roll = roll;
     this->area = area;

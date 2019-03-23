@@ -25,7 +25,8 @@ typedef struct _battle
 
     struct SDL_Texture **textures;
     struct SDL_Rect rect;
-    Floor * back_ground;
+    struct SDL_Texture * back_ground;
+    struct SDL_Rect bg_rect;
 
 } Battle;
 Battle *CREATE_BATTLE(int area, int roll, struct SDL_Renderer * renderer);
