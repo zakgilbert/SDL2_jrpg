@@ -21,6 +21,7 @@
 #include "Npc.h"
 #include "Collision.h"
 #include "Battle.h"
+#include "Assets.h"
 
 void SET_GLOBALS()
 {
@@ -126,10 +127,7 @@ int main(int argc, char **argv)
     Items *bag = CREATE_BAG();
     Collision *game_collision = CREATE_COLLISION();
 
-    int party_items[3] = {POTION, ETHER, SOFT};
-    int quat[3] = {4, 3, 2};
-
-    bag->fill_bag(bag, party_items, quat, 3);
+    bag = load_bag(bag, 0);
 
     Character **party = (Character **)malloc(sizeof(Character *) * NUM_CHARACTERS);
 
@@ -283,6 +281,7 @@ int main(int argc, char **argv)
     hero->destroy(hero);
     menu->destroy(menu);
     hand->destroy(hand);
+    save_bag(bag, 0);
     bag->destroy(bag);
 
     free(STAT_MATRIX);
