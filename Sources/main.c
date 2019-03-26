@@ -23,83 +23,6 @@
 #include "Battle.h"
 #include "Assets.h"
 
-void SET_GLOBALS()
-{
-    TICK = 0;
-    ITEM_QUANTITY = 4;
-    NUM_CHARACTERS = 4;
-    READY_TO_INTERACT = -1;
-    WAITING_FOR_MESSAGE = 0;
-    INTERACT = OFF;
-    NUM_STATS = 4;
-    INPUT = NONE;
-    NUM_AREAS = 1;
-    IN_BATTLE = 0;
-    NUM_STEPS = 0;
-
-    HERO_WIDTH = 32;
-    HERO_HEIGHT = 32;
-
-    WHITE.r = 255;
-    WHITE.g = 255;
-    WHITE.b = 255;
-
-    GREY.r = 160;
-    GREY.g = 160;
-    GREY.b = 160;
-
-    MENU_BACKGROUND.r = 52;
-    MENU_BACKGROUND.g = 104;
-    MENU_BACKGROUND.b = 188;
-
-    RED.r = 255;
-    RED.g = 66;
-    RED.b = 66;
-
-    GRN.r = 66;
-    GRN.g = 255;
-    GRN.b = 66;
-
-    BLU.r = 66;
-    BLU.g = 66;
-    BLU.b = 255;
-
-    MOVEMENT_DISABLED = 0;
-    state = DARK_FOREST;
-    DIALOGUES = malloc(sizeof(struct STRING_LIST) * 2);
-    char *d_temp[8] = {"I am a giant, but im nice",
-                       "as long as Im not hungry.",
-                       "Where are you traveling",
-                       "too? I've seen a lot of",
-                       "treasure lately you should",
-                       "look around, and see if",
-                       "you can find some. I bet",
-                       "You'll get lucky..."};
-
-    char *d_yeti[1] = {"I am yeti..."};
-
-    DIALOGUES[0] = CREATE_LIST_STRING(d_temp, 8);
-    DIALOGUES[1] = CREATE_LIST_STRING(d_yeti, 1);
-
-    char *p_temp[2] = {"graphics/giga.png", "graphics/yeti.png"};
-    NPC_PATHS = CREATE_LIST_STRING(p_temp, 2);
-
-    BATTLE_LINEUP = malloc(sizeof(struct INTEGER_LIST) * NUM_AREAS);
-    char *enemy_paths_temp[1] = {"graphics/knight_bez.png"};
-    ENEMY_PATHS = CREATE_LIST_STRING(enemy_paths_temp, 1);
-    int forest_lineup[1][1] = {KNIGHT_BEZ_MOUNT};
-    int num_forest_lineup[1] = {1};
-
-    BATTLE_LINEUP[0] = CREATE_LIST_INT(forest_lineup, num_forest_lineup, 1);
-
-    BATTLE_BACKGROUNDS = malloc(sizeof(struct STRING_LIST) * NUM_AREAS);
-    char *b_bgs_df[1] = {"graphics/dark_forest.png"};
-    BATTLE_BACKGROUNDS = CREATE_LIST_STRING(b_bgs_df, 1);
-
-    BATTLE_CHARACTER_GRAPHICS = malloc(sizeof(struct STRING_LIST));
-    char *character_battle_graphics[1] = {"graphics/Locke_battle.png"};
-    BATTLE_CHARACTER_GRAPHICS = CREATE_LIST_STRING(character_battle_graphics, 1);
-}
 
 int main(int argc, char **argv)
 {
@@ -120,44 +43,24 @@ int main(int argc, char **argv)
     struct SDL_Renderer *renderer = NULL;
 
     window = make_window("Window");
+    renderer = make_renderer(&window);
+
     Area *dark_forest = CREATE_AREA(DARK_FOREST);
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Menu *menu = CREATE_MENU();
-    Items *bag = CREATE_BAG();
+    Item *bag = CREATE_BAG();
     Collision *game_collision = CREATE_COLLISION();
 
     bag = load_bag(bag, 0);
-
-    Character **party = (Character **)malloc(sizeof(Character *) * NUM_CHARACTERS);
-
-    party[0] = CREATE_CHARACTER(LOCKE);
-    party[1] = CREATE_CHARACTER(TERRA);
-    party[2] = CREATE_CHARACTER(SABIN);
-    party[3] = CREATE_CHARACTER(GAU);
-
-    party[0]->set_stats(party[0], "Locke", "32", "Thief", 1000, 48, 1000, "graphics/locke_bio.jpg");
-    party[0]->check_stats(party[0]);
-
-    party[1]->set_stats(party[1], "Terra", "23", "Wizard", 311, 151, 811, "graphics/terra_bio.jpg");
-    party[1]->check_stats(party[1]);
-
-    party[2]->set_stats(party[2], "Sabin", "21", "Monk", 422, 23, 1522, "graphics/sabin_bio.jpg");
-    party[2]->check_stats(party[2]);
-
-    party[3]->set_stats(party[3], "Gau", "14", "Bezerker", 353, 3, 933, "graphics/gau_bio.jpg");
-    party[3]->check_stats(party[3]);
 
     SDL_Thread *player_input_thread;
     SDL_Thread *hand_thread;
     SDL_Thread *matrix_thread;
 
-    renderer = make_renderer(&window);
     Battle *current_battle = NULL;
-    party[0]->create_character_texture(party[0], renderer);
-    party[1]->create_character_texture(party[1], renderer);
-    party[2]->create_character_texture(party[2], renderer);
-    party[3]->create_character_texture(party[3], renderer);
+
+    Character **party = load_party(0, renderer);
 
     int dark_forest_npcs[2] = {GIGAS, SASH};
     int dark_forest_npc_types[2] = {ONE_FRAME, SPRITE};
@@ -178,8 +81,6 @@ int main(int argc, char **argv)
     player_input_thread = SDL_CreateThread(input_thread, "input_thread", NULL);
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
     matrix_thread = SDL_CreateThread(stat_matrix_thread, "stat_matrix_thread", party);
-    party[0]->HP.current = 100;
-    party[1]->MP.current = 0;
 
     while (running)
     {

@@ -41,11 +41,11 @@ typedef struct _menu
 
     int (*render_main_menu_options)(struct _menu *, struct SDL_Renderer *, int);
 
-    void (*render_items_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Items *);
+    void (*render_items_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Item *);
 
-    int (*render_items_menu_options)(struct _menu *, struct SDL_Renderer *, Items *, int);
+    int (*render_items_menu_options)(struct _menu *, struct SDL_Renderer *, Item *, int);
 
-    void (*render_use_item_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Character **, Items *);
+    void (*render_use_item_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Character **, Item *);
 
     void (*render_config_menu)(struct _menu *, struct SDL_Renderer *, Hand *);
 

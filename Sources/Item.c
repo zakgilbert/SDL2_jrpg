@@ -4,7 +4,7 @@
 static char *ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)};
 
-static void _destroy(Items *this)
+static void _destroy(Item *this)
 {
     if (NULL != this)
     {
@@ -27,7 +27,7 @@ static void _destroy(Items *this)
  *      int quantities[2] =  {4,5}
  *      int num_items =      2;
  */
-static void _fill_bag(Items *this, int *items, int *quantities, int len)
+static void _fill_bag(Item *this, int *items, int *quantities, int len)
 {
     this->items = (int *)malloc(sizeof(int) * len);
     this->item_quantities = (int *)malloc(sizeof(int) * len);
@@ -46,7 +46,7 @@ static void _fill_bag(Items *this, int *items, int *quantities, int len)
     }
     this->items_in_bag = len;
 }
-static char *_add_item(Items *this, ITEM_ENUM item_enum)
+static char *_add_item(Item *this, ITEM_ENUM item_enum)
 {
     size_t new_size = this->items_in_bag + 1;
 
@@ -59,7 +59,7 @@ static char *_add_item(Items *this, ITEM_ENUM item_enum)
     return ITEMS[this->items[this->items_in_bag - 1]];
 }
 
-static int _remove_item(Items *this, int item_index)
+static int _remove_item(Item *this, int item_index)
 {
 
     int last_index = this->items_in_bag - 1;
@@ -80,7 +80,7 @@ static int _remove_item(Items *this, int item_index)
     this->items_in_bag = last_index;
     return -1;
 }
-static int _decrement_item(Items *this, ITEM_ENUM item_enum)
+static int _decrement_item(Item *this, ITEM_ENUM item_enum)
 {
 
     int item_index, item_was_removed;
@@ -107,7 +107,7 @@ static int _decrement_item(Items *this, ITEM_ENUM item_enum)
     return item_was_removed;
 }
 
-static int _find_item(Items *this, ITEM_ENUM item_enum)
+static int _find_item(Item *this, ITEM_ENUM item_enum)
 {
     int i, item_index;
     item_index = -1;
@@ -122,7 +122,7 @@ static int _find_item(Items *this, ITEM_ENUM item_enum)
     return item_index;
 }
 
-static int _quaff_item(Items *this, Affect *affect)
+static int _quaff_item(Item *this, Affect *affect)
 {
     int item_was_quaffed, item_was_removed;
 
@@ -145,7 +145,7 @@ static int _quaff_item(Items *this, Affect *affect)
  * Otherwise increment the existing item.
  * Return the name of the item added as a char *.
 */
-static char *_loot(Items *this, ITEM_ENUM item_enum)
+static char *_loot(Item *this, ITEM_ENUM item_enum)
 {
     int item_index;
 
@@ -163,9 +163,9 @@ static char *_loot(Items *this, ITEM_ENUM item_enum)
     }
 }
 
-Items *CREATE_BAG()
+Item *CREATE_BAG()
 {
-    Items *this = (Items *)malloc(sizeof(*this));
+    Item *this = (Item *)malloc(sizeof(*this));
 
     this->destroy = _destroy;
     this->fill_bag = _fill_bag;

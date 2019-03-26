@@ -30,7 +30,7 @@ typedef struct _area
 
     void (*destroy)(struct _area *);
     void (*create_assets)(struct _area *, struct SDL_Renderer *renderer, Collision *collidables, int *item_keys, int num_items, int *npc_keys, int * npc_types, int num_npcs, int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y);
-    Message *(*render_area)(struct _area *, struct SDL_Renderer *, Hero *, Items *);
+    Message *(*render_area)(struct _area *, struct SDL_Renderer *, Hero *, Item *);
     int (*check_wait_thread)(struct _area *);
     int area_map_width;
     int area_map_height;
@@ -39,7 +39,7 @@ typedef struct _area
     int area_key;
     int num_collidables;
     int num_npcs;
-    Items *bag;
+    Item *bag;
     Lootable **lootables;
     Npc **npcs;
     int last_x;

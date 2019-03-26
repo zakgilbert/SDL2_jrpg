@@ -23,7 +23,7 @@ typedef struct _item
     int *items;
     int *item_quantities;
     int items_in_bag;
-} Items;
+} Item;
 
-Items *CREATE_BAG();
+Item *CREATE_BAG();
 #endif

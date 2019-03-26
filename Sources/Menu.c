@@ -217,7 +217,7 @@ static void _render_character_main_menu_image(Menu *this, struct SDL_Renderer *r
     }
 }
 
-static void _render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Items *bag)
+static void _render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Item *bag)
 {
     if (INPUT == CANCEL)
     {
@@ -249,7 +249,7 @@ static void _render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
     }
 }
 
-static int _render_items_menu_options(Menu *this, struct SDL_Renderer *renderer, Items *bag, int current_state)
+static int _render_items_menu_options(Menu *this, struct SDL_Renderer *renderer, Item *bag, int current_state)
 {
     int skip;
     char font_path[] = "ponde___.ttf";
@@ -304,7 +304,7 @@ static int _render_items_menu_options(Menu *this, struct SDL_Renderer *renderer,
     return skip;
 }
 
-static void _render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **party, Items *bag)
+static void _render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **party, Item *bag)
 {
     if (INPUT == CANCEL)
     {
