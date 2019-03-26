@@ -23,7 +23,6 @@
 #include "Battle.h"
 #include "Assets.h"
 
-
 int main(int argc, char **argv)
 {
     set_up_timer(60);
@@ -111,6 +110,7 @@ int main(int argc, char **argv)
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;
+
         case USE_ITEM:
             TICK = 1;
             SDL_RenderClear(renderer);
@@ -118,10 +118,19 @@ int main(int argc, char **argv)
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;
+
         case CONFIG:
             TICK = 1;
             SDL_RenderClear(renderer);
             menu->render_config_menu(menu, renderer, hand);
+            hand->render(hand, renderer);
+            SDL_RenderPresent(renderer);
+            break;
+
+        case SAVE:
+            TICK = 1;
+            SDL_RenderClear(renderer);
+            menu->render_save_menu(menu, renderer, hand);
             hand->render(hand, renderer);
             SDL_RenderPresent(renderer);
             break;

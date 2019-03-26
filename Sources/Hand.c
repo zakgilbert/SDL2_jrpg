@@ -54,6 +54,13 @@ static void _config_menu_position(Hand *this)
     this->current_state = 0;
 }
 
+static void _save_menu_position(Hand *this)
+{
+    this->position.x = 15;
+    this->position.y = 15;
+    this->current_state = 0;
+}
+
 static void _main_menu_position(Hand *this)
 {
     this->position.x = 233;
@@ -189,7 +196,8 @@ static int _move_vertical(Hand *this, int distance)
         this->position.y -= distance;
         this->current_state--;
         refresh_inputs(USER_INPUTS, 6, 1);
-    } else if (USER_INPUTS[0] && this->current_state < this->number_of_states)
+    }
+    else if (USER_INPUTS[0] && this->current_state < this->number_of_states)
     {
         this->position.y += distance;
         this->current_state++;
@@ -287,6 +295,8 @@ Hand *CREATE_HAND()
     this->main_menu_position = _main_menu_position;
     this->use_item_position = _use_item_position;
     this->config_menu_position = _config_menu_position;
+    this->save_menu_position = _save_menu_position;
+
     this->vertical_horizontal = _vertical_horizontal;
     this->set_states = _set_states;
     // -o>

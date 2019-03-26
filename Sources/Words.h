@@ -36,7 +36,7 @@ enum STAT_ENUM
 typedef enum
 {
     FOREACH_MENU_OPTION(GERERATE_ENUM)
-} MENU_OPTIONS;
+} MENU_OPTION_ENUM;
 
 extern int ITEM_QUANTITY;
 #endif

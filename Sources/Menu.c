@@ -4,10 +4,13 @@
 
 #include "Menu.h"
 
- uint32_t transition_delay = 200;
+uint32_t transition_delay = 200;
 
 static const char *ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)};
+
+static const char *MENU_OPTIONS[] = {
+    FOREACH_MENU_OPTION(GENERATE_STRING)};
 /**
  * Destructor for the Menu "class"
  * 
@@ -47,7 +50,7 @@ static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
     this->render_character_main_menu_image(this, renderer, hand, characters);
     this->render_character_stats(this, renderer, hand, 80, 15, 9, MAIN_MENU);
 
-    if (hand->current_state == 0 && USER_INPUTS[4])
+    if (hand->current_state == Items && USER_INPUTS[4])
     {
         state = ITEMS_MENU;
         hand->items_menu_position(hand);
@@ -57,7 +60,7 @@ static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
         SDL_RenderPresent(renderer);
         SDL_Delay(transition_delay);
     }
-    if (hand->current_state == 4 && USER_INPUTS[4])
+    else if (hand->current_state == Config && USER_INPUTS[4])
     {
         state = CONFIG;
         hand->config_menu_position(hand);
@@ -67,7 +70,17 @@ static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
         SDL_RenderPresent(renderer);
         SDL_Delay(transition_delay);
     }
-    if (hand->current_state == 6 && USER_INPUTS[4])
+    else if (hand->current_state == Save && USER_INPUTS[4])
+    {
+        state = SAVE;
+        hand->save_menu_position(hand);
+        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+        SDL_RenderFillRect(renderer, &this->transition);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(transition_delay);
+    }
+    else if (hand->current_state == Exit && USER_INPUTS[4])
     {
         INPUT = QUIT;
     }
@@ -77,14 +90,6 @@ static int _render_main_menu_options(Menu *this, struct SDL_Renderer *renderer, 
 {
     int skip;
     char font_path[] = "ponde___.ttf";
-    const char main_menu_options[7][7] = {
-        {"Items"},
-        {"Skills"},
-        {"Magic"},
-        {"Status"},
-        {"Config"},
-        {"Save"},
-        {"Exit"}};
     this->font = TTF_OpenFont(font_path, 12);
 
     if (!this->font)
@@ -97,15 +102,15 @@ static int _render_main_menu_options(Menu *this, struct SDL_Renderer *renderer, 
     this->rect.y = 15;
     for (int i = 0; i < 7; i++)
     {
-        TTF_SizeText(this->font, main_menu_options[i], &this->rect.w, &this->rect.h);
+        TTF_SizeText(this->font, MENU_OPTIONS[i], &this->rect.w, &this->rect.h);
 
         if (i == current_state)
         {
-            this->surface = TTF_RenderText_Solid(this->font, main_menu_options[i], WHITE);
+            this->surface = TTF_RenderText_Solid(this->font, MENU_OPTIONS[i], WHITE);
         }
         else
         {
-            this->surface = TTF_RenderText_Solid(this->font, main_menu_options[i], GREY);
+            this->surface = TTF_RenderText_Solid(this->font, MENU_OPTIONS[i], GREY);
         }
         this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
         SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
@@ -328,7 +333,7 @@ static void _render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Han
     hand->render(hand, renderer);
     if (USER_INPUTS[4])
     {
-        int was_item_removed = bag->quaff_item(bag, CREATE_AFFECT(bag->items[this->item_being_used] , party[hand->current_state]));
+        int was_item_removed = bag->quaff_item(bag, CREATE_AFFECT(bag->items[this->item_being_used], party[hand->current_state]));
 
         this->previous_number_of_states += was_item_removed;
         if (was_item_removed == -1)
@@ -434,6 +439,33 @@ void _change_window_color(Window **color_bars, int current_state)
     else
         MENU_BACKGROUND.b = color_bars[2]->adjust_menu_colors(color_bars[2]);
 }
+static void _render_save_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand)
+{
+    if (INPUT == CANCEL)
+    {
+        state = MAIN_MENU;
+        INPUT = NONE;
+        hand->main_menu_position(hand);
+        hand->current_state = 0;
+        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+        SDL_RenderFillRect(renderer, &this->transition);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(transition_delay);
+        return;
+    }
+    MOVEMENT_DISABLED = 1;
+    hand->change_state_quantity(hand, 2, 0);
+    this->main_menu_bg->render(this->main_menu_bg, renderer);
+}
+
+static int _render_save_menu_options(Menu *this, struct SDL_Renderer *renderer, Hand *hand, int current_state)
+{
+    /*
+    int skip, i, num_saves;
+    char font_path[] = "ponde___.ttf"; */
+    return 0;
+}
 Menu *CREATE_MENU()
 {
     Menu *this = (Menu *)malloc(sizeof(*this));
@@ -448,10 +480,13 @@ Menu *CREATE_MENU()
     this->render_items_menu = _render_items_menu;
     this->render_items_menu_options = _render_items_menu_options;
     this->render_use_item_menu = _render_use_item_menu;
+
     this->render_config_menu = _render_config_menu;
     this->render_config_menu_options = _render_config_menu_options;
-
     this->change_window_color = _change_window_color;
+
+    this->render_save_menu = _render_save_menu;
+    this->render_save_menu_options = _render_save_menu_options;
 
     this->main_menu_bg = CREATE_WINDOW(12, 8, 336, 306);
     this->select_character_bg = CREATE_WINDOW(12, 200, 336, 120);

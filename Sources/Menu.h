@@ -52,6 +52,11 @@ typedef struct _menu
     int (*render_config_menu_options)(struct _menu *, struct SDL_Renderer *, Hand *, int);
     
     void (*change_window_color)(Window ** color_bars, int current_state);
+    
+    void (*render_save_menu)(struct _menu *, struct SDL_Renderer *, Hand *);
+
+    int (*render_save_menu_options)(struct _menu *, struct SDL_Renderer *, Hand *, int);
+
     TTF_Font *font;
     struct SDL_Rect rect;
     struct SDL_Rect transition;

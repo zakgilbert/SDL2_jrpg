@@ -77,6 +77,7 @@ enum states
     USE_ITEM,
     MESSAGE,
     CONFIG,
+    SAVE,
     BATTLE
 };
 enum states state, previous_state;
