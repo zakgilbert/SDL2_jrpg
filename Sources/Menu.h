@@ -5,9 +5,9 @@
 #ifndef JRPG_MENU_H
 #define JRPG_MENU_H
 
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include <math.h>
 #include <SDL2/SDL.h>
@@ -32,6 +32,8 @@ typedef struct _menu
     Window *main_menu_bg;
 
     Window *select_character_bg;
+
+    Window *load_save_bg;
 
     void (*render_character_stats)(struct _menu *, struct SDL_Renderer *, Hand *, int, int, int, int);
 

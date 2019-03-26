@@ -5,18 +5,44 @@
 
 #include "Assets.h"
 
+void create_load_info()
+{
+    LOAD_SAVE_INFO_STRINGS = malloc(sizeof(struct STRING_LIST) * 3);
+    for (size_t i = 0; i < 3; i++)
+    {
+        LOAD_SAVE_INFO_STRINGS[i] = CREATE_LIST_STRING(get_state_info(i), 1);
+        printf("%s\n", LOAD_SAVE_INFO_STRINGS[i]->list[0]);
+    }
+}
+char **get_state_info(int save_state)
+{
+    FILE *in;
+    int *info = malloc(sizeof(int));
+    char *path = malloc(50);
+    in = fopen(strcat(strcpy(path, SAVE_PATHS->list[save_state]), "save_state_info.txt"), "r");
+
+    fscanf(in, "%d", &info[0]);
+
+    fclose(in);
+    free(path);
+    return &CHARACTER_NAMES->list[info[0]];
+}
+void save(Character **party, Item *bag, int save_state)
+{
+}
 Item *load_bag(Item *bag, int save_state)
 {
     FILE *in;
     int num_items;
     int *items;
     int *item_quantities;
+    char *path = malloc(50);
 
     num_items = 0;
     items = NULL;
     item_quantities = NULL;
 
-    in = fopen("data/bag.txt", "r");
+    in = fopen(strcat(strcpy(path, SAVE_PATHS->list[save_state]), "bag.txt"), "r");
 
     fscanf(in, "%d", &num_items);
 
@@ -35,6 +61,7 @@ Item *load_bag(Item *bag, int save_state)
     bag->items = items;
     bag->item_quantities = item_quantities;
     bag->items_in_bag = num_items;
+    free(path);
     return bag;
 }
 
@@ -44,11 +71,12 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
     Character **party;
     int *character_keys;
     int num_members;
+    char *path = malloc(50);
 
     num_members = 0;
     character_keys = NULL;
 
-    in = fopen("data/party.txt", "r");
+    in = fopen(strcat(strcpy(path, SAVE_PATHS->list[save_state]), "party.txt"), "r");
 
     fscanf(in, "%d", &num_members);
 
@@ -84,13 +112,15 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
         sprintf(party[i]->EXP.str_max, "%d", party[i]->EXP.max);
     }
     fclose(in);
+    free(path);
     return party;
 }
 void save_bag(Item *bag, int save_state)
 {
     FILE *out;
+    char *path = malloc(50);
 
-    out = fopen("data/bag.txt", "w");
+    out = fopen(strcat(strcpy(path, SAVE_PATHS->list[save_state]), "bag.txt"), "w");
 
     fprintf(out, "%d\n", bag->items_in_bag);
 
@@ -105,6 +135,7 @@ void save_bag(Item *bag, int save_state)
     }
     fprintf(out, "%d\n", bag->items[bag->items_in_bag - 1]);
     fclose(out);
+    free(path);
 }
 
 void SET_GLOBALS()
@@ -198,4 +229,10 @@ void SET_GLOBALS()
                            "graphics/sabin_bio.jpg",
                            "graphics/gau_bio.jpg"};
     CHARACTER_BIO_PATHS = CREATE_LIST_STRING(char_paths, 4);
+
+    char *save_paths[3] = {"data/save/save1/",
+                           "data/save/save2/",
+                           "data/save/save3/"};
+
+    SAVE_PATHS = CREATE_LIST_STRING(save_paths, 3);
 }

@@ -30,6 +30,7 @@ int main(int argc, char **argv)
     SET_GLOBALS();
     running = 1;
 
+    create_load_info();
     refresh_inputs(USER_INPUTS, 6, 1);
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
@@ -158,7 +159,6 @@ int main(int argc, char **argv)
                 previous_state = MESSAGE;
                 message_being_displayed->destroy(message_being_displayed);
                 message_being_displayed = NULL;
-                printf("\nwe are finished here\n\n");
             }
             break;
         case BATTLE:

@@ -457,15 +457,37 @@ static void _render_save_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
     MOVEMENT_DISABLED = 1;
     hand->change_state_quantity(hand, 2, 0);
     this->main_menu_bg->render(this->main_menu_bg, renderer);
+    hand->move_vertical(hand, this->render_save_menu_options(this, renderer, hand, hand->current_state));
 }
 
 static int _render_save_menu_options(Menu *this, struct SDL_Renderer *renderer, Hand *hand, int current_state)
 {
-    /*
+
     int skip, i, num_saves;
-    char font_path[] = "ponde___.ttf"; */
-    return 0;
+    char font_path[] = "ponde___.ttf";
+    skip = 50;
+    num_saves = 3;
+    this->rect.x = 45;
+    this->rect.y = skip;
+    this->font = TTF_OpenFont(font_path, 10);
+    for (size_t i = 0; i < num_saves; i++)
+    {
+        this->load_save_bg->render(this->load_save_bg, renderer);
+        TTF_SizeText(this->font, LOAD_SAVE_INFO_STRINGS[i]->list[0], &this->rect.w, &this->rect.h);
+        this->surface = TTF_RenderText_Solid(this->font, LOAD_SAVE_INFO_STRINGS[i]->list[0], WHITE);
+        this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+        SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+        this->rect.y += skip;
+        this->load_save_bg->rect.y += skip;
+    }
+    TTF_CloseFont(this->font);
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+    this->surface = NULL;
+    this->texture = NULL;
+    return skip;
 }
+
 Menu *CREATE_MENU()
 {
     Menu *this = (Menu *)malloc(sizeof(*this));
@@ -490,6 +512,7 @@ Menu *CREATE_MENU()
 
     this->main_menu_bg = CREATE_WINDOW(12, 8, 336, 306);
     this->select_character_bg = CREATE_WINDOW(12, 200, 336, 120);
+    this->load_save_bg = CREATE_WINDOW(30, 30, 280, 90);
     this->font = NULL;
     this->surface = NULL;
     this->texture = NULL;
