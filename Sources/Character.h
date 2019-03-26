@@ -39,10 +39,11 @@ typedef struct __character
     struct Main_Attribute HP;
     struct Main_Attribute MP;
     struct Main_Attribute EXP;
+    int key;
 
 } Character;
 
-Character *CREATE_CHARACTER();
+Character *CREATE_CHARACTER(int key);
 
 struct Party {
     Character * character_0;

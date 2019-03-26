@@ -1,4 +1,6 @@
+
 #include "Header.h"
+#include "H.h"
 #include "Words.h"
 #include "Graphics.h"
 #include "Window_and_Renderer.h"
@@ -18,21 +20,8 @@
 #include "Lootable.h"
 #include "Npc.h"
 #include "Collision.h"
+#include "Battle.h"
 
-LIST *CREATE_LIST(char **list, int num_items)
-{
-    LIST *this = malloc(sizeof(*this));
-
-    this->list = malloc(sizeof(char *) * num_items);
-    for (size_t i = 0; i < num_items; i++)
-    {
-        this->list[i] = malloc(strlen(list[i]));
-        this->list[i] = list[i];
-    }
-
-    this->num_items = num_items;
-    return this;
-}
 void SET_GLOBALS()
 {
     TICK = 0;
@@ -44,6 +33,8 @@ void SET_GLOBALS()
     NUM_STATS = 4;
     INPUT = NONE;
     NUM_AREAS = 1;
+    IN_BATTLE = 0;
+    NUM_STEPS = 0;
 
     HERO_WIDTH = 32;
     HERO_HEIGHT = 32;
@@ -74,9 +65,7 @@ void SET_GLOBALS()
 
     MOVEMENT_DISABLED = 0;
     state = DARK_FOREST;
-    char *p_temp[2] = {"graphics/giga.png", "graphics/yeti.png"};
-
-    DIALOGUES = malloc(sizeof(struct LIST_STRUCT) * 2);
+    DIALOGUES = malloc(sizeof(struct STRING_LIST) * 2);
     char *d_temp[8] = {"I am a giant, but im nice",
                        "as long as Im not hungry.",
                        "Where are you traveling",
@@ -88,9 +77,27 @@ void SET_GLOBALS()
 
     char *d_yeti[1] = {"I am yeti..."};
 
-    DIALOGUES[0] = CREATE_LIST(d_temp, 8);
-    DIALOGUES[1] = CREATE_LIST(d_yeti, 1);
-    NPC_PATHS = CREATE_LIST(p_temp, 2);
+    DIALOGUES[0] = CREATE_LIST_STRING(d_temp, 8);
+    DIALOGUES[1] = CREATE_LIST_STRING(d_yeti, 1);
+
+    char *p_temp[2] = {"graphics/giga.png", "graphics/yeti.png"};
+    NPC_PATHS = CREATE_LIST_STRING(p_temp, 2);
+
+    BATTLE_LINEUP = malloc(sizeof(struct INTEGER_LIST) * NUM_AREAS);
+    char *enemy_paths_temp[1] = {"graphics/knight_bez.png"};
+    ENEMY_PATHS = CREATE_LIST_STRING(enemy_paths_temp, 1);
+    int forest_lineup[1][1] = {KNIGHT_BEZ_MOUNT};
+    int num_forest_lineup[1] = {1};
+
+    BATTLE_LINEUP[0] = CREATE_LIST_INT(forest_lineup, num_forest_lineup, 1);
+
+    BATTLE_BACKGROUNDS = malloc(sizeof(struct STRING_LIST) * NUM_AREAS);
+    char *b_bgs_df[1] = {"graphics/dark_forest.png"};
+    BATTLE_BACKGROUNDS = CREATE_LIST_STRING(b_bgs_df, 1);
+
+    BATTLE_CHARACTER_GRAPHICS = malloc(sizeof(struct STRING_LIST));
+    char *character_battle_graphics[1] = {"graphics/Locke_battle.png"};
+    BATTLE_CHARACTER_GRAPHICS = CREATE_LIST_STRING(character_battle_graphics, 1);
 }
 
 int main(int argc, char **argv)
@@ -126,10 +133,10 @@ int main(int argc, char **argv)
 
     Character **party = (Character **)malloc(sizeof(Character *) * NUM_CHARACTERS);
 
-    party[0] = CREATE_CHARACTER();
-    party[1] = CREATE_CHARACTER();
-    party[2] = CREATE_CHARACTER();
-    party[3] = CREATE_CHARACTER();
+    party[0] = CREATE_CHARACTER(LOCKE);
+    party[1] = CREATE_CHARACTER(TERRA);
+    party[2] = CREATE_CHARACTER(SABIN);
+    party[3] = CREATE_CHARACTER(GAU);
 
     party[0]->set_stats(party[0], "Locke", "32", "Thief", 1000, 48, 1000, "graphics/locke_bio.jpg");
     party[0]->check_stats(party[0]);
@@ -148,6 +155,7 @@ int main(int argc, char **argv)
     SDL_Thread *matrix_thread;
 
     renderer = make_renderer(&window);
+    Battle *current_battle = NULL;
     party[0]->create_character_texture(party[0], renderer);
     party[1]->create_character_texture(party[1], renderer);
     party[2]->create_character_texture(party[2], renderer);
@@ -162,9 +170,9 @@ int main(int argc, char **argv)
     int dark_forest_items_x[2] = {300, 400};
     int dark_forest_items_y[2] = {300, 300};
 
-    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 2, 
-                                dark_forest_npcs, dark_forest_npc_types, 2, 
-                                dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
+    dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 2,
+                               dark_forest_npcs, dark_forest_npc_types, 2,
+                               dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
 
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
@@ -244,6 +252,16 @@ int main(int argc, char **argv)
                 message_being_displayed = NULL;
                 printf("\nwe are finished here\n\n");
             }
+            break;
+        case BATTLE:
+            if (current_battle == NULL)
+            {
+                current_battle = CREATE_BATTLE(previous_state, 0, renderer, party, 1);
+            }
+
+            SDL_RenderClear(renderer);
+            current_battle->render(current_battle, renderer);
+            SDL_RenderPresent(renderer);
             break;
         default:
             break;

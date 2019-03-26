@@ -75,6 +75,13 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
 
         return NULL;
     }
+    else if (NUM_STEPS > 300)
+    {
+        state = BATTLE;
+        previous_state = this->area_key;
+
+        return NULL;
+    }
     int item_to_be_obtained = -1;
     int npc_to_interact_with = -1;
 
@@ -85,8 +92,13 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
     this->floor->render_floor(this->floor, renderer);
     for (int k = 0; k < this->bag->items_in_bag; k++)
     {
-        if (this->lootables[k]->ready_to_interact > 0 && (0 <= ((item_to_be_obtained) = (this->lootables[k]->loot(this->lootables[k])))))
+        if (this->current_index == -1 &&
+            this->lootables[k]->ready_to_interact > 0 &&
+            (0 <= ((item_to_be_obtained) = (this->lootables[k]->loot(this->lootables[k])))))
         {
+            this->last_x = X;
+            this->last_y = Y;
+            this->current_index = k;
             dungeon_message = CREATE_MESSAGE((char *)ITEMS[item_to_be_obtained], 0, 0, 10, ONE_LINER, item_to_be_obtained);
             state = MESSAGE;
             previous_state = this->area_key;
@@ -97,8 +109,8 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
     }
     for (int i = 0; i < this->num_npcs; i++)
     {
-        this->npcs[i]->render(this->npcs[i], renderer);
         if (this->current_index == -1 &&
+            this->npcs[i]->ready_to_interact != 0 &&
             (0 <= ((npc_to_interact_with) = (this->npcs[i]->interact(this->npcs[i])))))
         {
             this->last_x = X;
@@ -110,6 +122,7 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
             WAITING_FOR_MESSAGE = 0;
             USER_INPUTS[4] = 0;
         }
+        this->npcs[i]->render(this->npcs[i], renderer);
     }
     hero->render(hero, renderer);
     this->trees->render_floor(this->trees, renderer);
