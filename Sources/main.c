@@ -55,7 +55,6 @@ int main(int argc, char **argv)
     bag = load_bag(bag, 0);
 
     SDL_Thread *hand_thread;
-    SDL_Thread *matrix_thread;
 
     Battle *current_battle = NULL;
 
@@ -78,7 +77,6 @@ int main(int argc, char **argv)
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
 
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
-    matrix_thread = SDL_CreateThread(stat_matrix_thread, "stat_matrix_thread", party);
     while (running)
     {
         start_timer();
@@ -182,7 +180,6 @@ int main(int argc, char **argv)
     SDL_RenderFillRect(renderer, &menu->transition);
     SDL_RenderPresent(renderer);
     SDL_WaitThread(hand_thread, NULL);
-    SDL_WaitThread(matrix_thread, NULL);
 
     dark_forest->destroy(dark_forest);
     hero->destroy(hero);

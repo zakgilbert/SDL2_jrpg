@@ -22,7 +22,7 @@ int revive(int num, Character *character)
 
 int affect_mp(int num, Character *character)
 {
-    if(character->MP.current >= character->MP.max)
+    if (character->MP.current >= character->MP.max)
     {
         return 0;
     }
@@ -73,6 +73,7 @@ static int __cause_affect(Affect *this)
     default:
         break;
     }
+    this->character->check_stats(this->character);
     return used;
 }
 

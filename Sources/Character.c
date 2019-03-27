@@ -26,23 +26,14 @@ static void __destroy_party(Character **party)
     party = NULL;
 }
 
-int stat_matrix_thread(void *ptr)
+static int _update_party_stats(Character **these)
 {
     int is_running;
     is_running = 1;
-    Character **p = ptr;
 
-    while (is_running)
+    for (size_t i = 0; i < NUM_CHARACTERS; i++)
     {
-        for (size_t i = 0; i < NUM_CHARACTERS; i++)
-        {
-            p[i]->check_stats(p[i]);
-        }
-        if (INPUT == QUIT)
-        {
-            is_running = 0;
-        }
-        SDL_Delay(1);
+        these[i]->check_stats(these[i]);
     }
     return 0;
 }
@@ -133,6 +124,7 @@ Character *CREATE_CHARACTER(int key)
     this->check_stats = __check_stats;
     this->create_character_texture = __create_character_texture;
     this->destroy_party = __destroy_party;
+    this->update_party_stats = _update_party_stats;
     // this->get_stat_matrix = __get_stat_matrix;
     this->key = key;
     this->num_stats = 1;

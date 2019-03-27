@@ -34,12 +34,14 @@ static void _render_line(Menu *this, struct SDL_Renderer *renderer, const char *
     this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
     SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
     SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
 }
 
 static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **characters)
 {
     if (INPUT == CANCEL)
     {
+        characters[0]->update_party_stats(characters);
         state = previous_state;
         previous_state = MAIN_MENU;
         INPUT = NONE;
@@ -50,7 +52,6 @@ static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
         SDL_Delay(transition_delay);
         return;
     }
-
     hand->change_state_quantity(hand, this->option_states, 0);
     MOVEMENT_DISABLED = 1;
     this->main_menu_bg->render(this->main_menu_bg, renderer);
@@ -58,40 +59,43 @@ static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
 
     this->render_character_main_menu_image(this, renderer, hand, characters);
     this->render_character_stats(this, renderer, hand, characters, 80, 15, 9, MAIN_MENU);
-
-    if (hand->current_state == Items && USER_INPUTS[4])
+    if (USER_INPUTS[4])
     {
-        state = ITEMS_MENU;
-        hand->items_menu_position(hand);
-        SDL_RenderClear(renderer);
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-        SDL_RenderFillRect(renderer, &this->transition);
-        SDL_RenderPresent(renderer);
-        SDL_Delay(transition_delay);
-    }
-    else if (hand->current_state == Config && USER_INPUTS[4])
-    {
-        state = CONFIG;
-        hand->config_menu_position(hand);
-        SDL_RenderClear(renderer);
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-        SDL_RenderFillRect(renderer, &this->transition);
-        SDL_RenderPresent(renderer);
-        SDL_Delay(transition_delay);
-    }
-    else if (hand->current_state == Save && USER_INPUTS[4])
-    {
-        state = SAVE;
-        hand->save_menu_position(hand);
-        SDL_RenderClear(renderer);
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-        SDL_RenderFillRect(renderer, &this->transition);
-        SDL_RenderPresent(renderer);
-        SDL_Delay(transition_delay);
-    }
-    else if (hand->current_state == Exit && USER_INPUTS[4])
-    {
-        INPUT = QUIT;
+        switch (hand->current_state)
+        {
+        case Items:
+            state = ITEMS_MENU;
+            hand->items_menu_position(hand);
+            SDL_RenderClear(renderer);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+            SDL_RenderFillRect(renderer, &this->transition);
+            SDL_RenderPresent(renderer);
+            SDL_Delay(transition_delay);
+            break;
+        case Config:
+            state = CONFIG;
+            hand->config_menu_position(hand);
+            SDL_RenderClear(renderer);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+            SDL_RenderFillRect(renderer, &this->transition);
+            SDL_RenderPresent(renderer);
+            SDL_Delay(transition_delay);
+            break;
+        case Save:
+            state = SAVE;
+            hand->save_menu_position(hand);
+            SDL_RenderClear(renderer);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+            SDL_RenderFillRect(renderer, &this->transition);
+            SDL_RenderPresent(renderer);
+            SDL_Delay(transition_delay);
+            break;
+        case Exit:
+            INPUT = QUIT;
+            break;
+        default:
+            break;
+        }
     }
 }
 
@@ -138,16 +142,14 @@ static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, H
 {
     int skip;
     char font_path[] = "ponde___.ttf";
-    size_t len = NUM_CHARACTERS * 4;
-    int prev_y;
-    int j = 0;
-
+    int prev_y, W, H;
     this->font = TTF_OpenFont(font_path, font_size);
     if (!this->font)
     {
         printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
     }
 
+    party[0]->update_party_stats(party);
     skip = TTF_FontLineSkip(this->font);
     this->rect.x = x;
     this->rect.y = y;
@@ -195,13 +197,6 @@ static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, H
             {
                 this->render_line(this, renderer, party[i]->name, WHITE);
                 this->rect.y += skip;
-                this->render_line(this, renderer, party[i]->age, WHITE);
-                this->rect.y += skip;
-                this->render_line(this, renderer, party[i]->job, WHITE);
-
-                this->rect.y = prev_y;
-                this->rect.x = x + 50;
-
                 this->render_line(this, renderer, party[i]->HP.display, WHITE);
                 this->rect.y += skip;
                 this->render_line(this, renderer, party[i]->MP.display, WHITE);
@@ -212,89 +207,21 @@ static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, H
             {
                 this->render_line(this, renderer, party[i]->name, GREY);
                 this->rect.y += skip;
-                this->render_line(this, renderer, party[i]->age, GREY);
-                this->rect.y += skip;
-                this->render_line(this, renderer, party[i]->job, GREY);
-
-                this->rect.y = prev_y;
-                this->rect.x = x + 50;
-
                 this->render_line(this, renderer, party[i]->HP.display, GREY);
                 this->rect.y += skip;
                 this->render_line(this, renderer, party[i]->MP.display, GREY);
                 this->rect.y += skip;
                 this->render_line(this, renderer, party[i]->EXP.display, GREY);
             }
-            this->rect.x = x;
-            prev_y += 80;
-            this->rect.y = prev_y;
-        }
-
-        break;
-    default:
-        break;
-    }
-    /*
-    switch (cas)
-    {
-    case MAIN_MENU:
-        for (size_t i = 0; i < len; i++)
-        {
-            TTF_SizeText(this->font, STAT_MATRIX[i], &this->rect.w, &this->rect.h);
-            this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[i], WHITE);
-            this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
-            SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-            if ((i + 1) % 4 == 0 && i != 0)
-            {
-                this->rect.y += 50;
-            }
-            else
-            {
-                this->rect.y += skip;
-            }
-        }
-        break;
-
-    case USE_ITEM:
-
-        for (size_t i = 0; i < NUM_CHARACTERS; i++)
-        {
-            if (i == 2)
-            {
-                this->rect.x = x;
-                this->rect.y = y + 50;
-            }
-            else if (i == 3)
-            {
-                this->rect.y = y + 50;
-            }
-
-            for (; j < NUM_STATS + (i * NUM_STATS); j++)
-            {
-                TTF_SizeText(this->font, STAT_MATRIX[j], &this->rect.w, &this->rect.h);
-                if (i == hand->current_state)
-                {
-                    this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[j], WHITE);
-                }
-                else
-                {
-                    this->surface = TTF_RenderText_Solid(this->font, STAT_MATRIX[j], GREY);
-                }
-                this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
-                SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-                this->rect.y += skip;
-            }
-
             this->rect.x += 165;
             this->rect.y = y;
         }
+
         break;
     default:
         break;
     }
-    */
     TTF_CloseFont(this->font);
-    SDL_DestroyTexture(this->texture);
     this->surface = NULL;
     this->texture = NULL;
 }
@@ -414,6 +341,7 @@ static void _render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Han
         hand->number_of_states = this->previous_number_of_states;
         return;
     }
+    party[0]->update_party_stats(party);
     MOVEMENT_DISABLED = 1;
     hand->change_state_quantity(hand, NUM_CHARACTERS - 1, 0);
     // printf ("\nState Q: %d", hand->number_of_states);
