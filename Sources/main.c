@@ -54,7 +54,6 @@ int main(int argc, char **argv)
 
     bag = load_bag(bag, 0);
 
-    SDL_Thread *player_input_thread;
     SDL_Thread *hand_thread;
     SDL_Thread *matrix_thread;
 
@@ -78,16 +77,14 @@ int main(int argc, char **argv)
     hero->set_texture(hero, renderer, "graphics/LOCKE.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
 
-    player_input_thread = SDL_CreateThread(input_thread, "input_thread", NULL);
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
     matrix_thread = SDL_CreateThread(stat_matrix_thread, "stat_matrix_thread", party);
-
     while (running)
     {
         start_timer();
+        get_player_input();
         refresh_inputs(EDGE_DETECTION, 4, movement());
         game_collision->update_collidables(game_collision, state);
-
         switch (state)
         {
         case DARK_FOREST:
@@ -175,16 +172,15 @@ int main(int argc, char **argv)
         default:
             break;
         }
-        running = quit();
         FRAMES_RENDERED++;
         delay();
         reset_timer();
+        running = quit();
     }
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &menu->transition);
     SDL_RenderPresent(renderer);
-    SDL_WaitThread(player_input_thread, NULL);
     SDL_WaitThread(hand_thread, NULL);
     SDL_WaitThread(matrix_thread, NULL);
 

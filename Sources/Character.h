@@ -16,6 +16,8 @@ struct Main_Attribute
     int max;
     char str_current[10];
     char str_max[10];
+    char display[50];
+    char name[10];
 };
 
 

@@ -27,6 +27,15 @@ static void _destroy(Menu *this)
     }
 }
 
+static void _render_line(Menu *this, struct SDL_Renderer *renderer, const char *str, SDL_Color color)
+{
+    TTF_SizeText(this->font, str, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, str, color);
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+    SDL_FreeSurface(this->surface);
+}
+
 static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **characters)
 {
     if (INPUT == CANCEL)
@@ -48,7 +57,7 @@ static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
     hand->move_vertical(hand, this->render_main_menu_options(this, renderer, hand->current_state));
 
     this->render_character_main_menu_image(this, renderer, hand, characters);
-    this->render_character_stats(this, renderer, hand, 80, 15, 9, MAIN_MENU);
+    this->render_character_stats(this, renderer, hand, characters, 80, 15, 9, MAIN_MENU);
 
     if (hand->current_state == Items && USER_INPUTS[4])
     {
@@ -125,11 +134,12 @@ static int _render_main_menu_options(Menu *this, struct SDL_Renderer *renderer, 
     return skip;
 }
 
-static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, Hand *hand, int x, int y, int font_size, int cas)
+static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **party, int x, int y, int font_size, int cas)
 {
     int skip;
     char font_path[] = "ponde___.ttf";
     size_t len = NUM_CHARACTERS * 4;
+    int prev_y;
     int j = 0;
 
     this->font = TTF_OpenFont(font_path, font_size);
@@ -141,6 +151,90 @@ static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, H
     skip = TTF_FontLineSkip(this->font);
     this->rect.x = x;
     this->rect.y = y;
+    prev_y = y;
+
+    switch (cas)
+    {
+    case MAIN_MENU:
+        for (size_t i = 0; i < NUM_CHARACTERS; i++)
+        {
+            this->render_line(this, renderer, party[i]->name, WHITE);
+            this->rect.y += skip;
+            this->render_line(this, renderer, party[i]->age, WHITE);
+            this->rect.y += skip;
+            this->render_line(this, renderer, party[i]->job, WHITE);
+
+            this->rect.y = prev_y;
+            this->rect.x = x + 50;
+
+            this->render_line(this, renderer, party[i]->HP.display, WHITE);
+            this->rect.y += skip;
+            this->render_line(this, renderer, party[i]->MP.display, WHITE);
+            this->rect.y += skip;
+            this->render_line(this, renderer, party[i]->EXP.display, WHITE);
+
+            this->rect.x = x;
+            prev_y += 80;
+            this->rect.y = prev_y;
+        }
+
+        break;
+    case USE_ITEM:
+        for (size_t i = 0; i < NUM_CHARACTERS; i++)
+        {
+            if (i == 2)
+            {
+                this->rect.x = x;
+                this->rect.y = y + 50;
+            }
+            else if (i == 3)
+            {
+                this->rect.y = y + 50;
+            }
+            if (i == hand->current_state)
+            {
+                this->render_line(this, renderer, party[i]->name, WHITE);
+                this->rect.y += skip;
+                this->render_line(this, renderer, party[i]->age, WHITE);
+                this->rect.y += skip;
+                this->render_line(this, renderer, party[i]->job, WHITE);
+
+                this->rect.y = prev_y;
+                this->rect.x = x + 50;
+
+                this->render_line(this, renderer, party[i]->HP.display, WHITE);
+                this->rect.y += skip;
+                this->render_line(this, renderer, party[i]->MP.display, WHITE);
+                this->rect.y += skip;
+                this->render_line(this, renderer, party[i]->EXP.display, WHITE);
+            }
+            else
+            {
+                this->render_line(this, renderer, party[i]->name, GREY);
+                this->rect.y += skip;
+                this->render_line(this, renderer, party[i]->age, GREY);
+                this->rect.y += skip;
+                this->render_line(this, renderer, party[i]->job, GREY);
+
+                this->rect.y = prev_y;
+                this->rect.x = x + 50;
+
+                this->render_line(this, renderer, party[i]->HP.display, GREY);
+                this->rect.y += skip;
+                this->render_line(this, renderer, party[i]->MP.display, GREY);
+                this->rect.y += skip;
+                this->render_line(this, renderer, party[i]->EXP.display, GREY);
+            }
+            this->rect.x = x;
+            prev_y += 80;
+            this->rect.y = prev_y;
+        }
+
+        break;
+    default:
+        break;
+    }
+    /*
     switch (cas)
     {
     case MAIN_MENU:
@@ -198,8 +292,8 @@ static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, H
     default:
         break;
     }
+    */
     TTF_CloseFont(this->font);
-    SDL_FreeSurface(this->surface);
     SDL_DestroyTexture(this->texture);
     this->surface = NULL;
     this->texture = NULL;
@@ -329,7 +423,7 @@ static void _render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Han
     hand->vertical_horizontal(hand);
     //printf("\nCurrent_State: %d", hand->current_state);
     //  this->render_use_item_menu_options(this, renderer, party, hand->current_state);
-    this->render_character_stats(this, renderer, hand, 49, 205, 9, USE_ITEM);
+    this->render_character_stats(this, renderer, hand, party, 49, 205, 9, USE_ITEM);
     hand->render(hand, renderer);
     if (USER_INPUTS[4])
     {
@@ -500,6 +594,7 @@ Menu *CREATE_MENU()
     Menu *this = (Menu *)malloc(sizeof(*this));
 
     this->destroy = _destroy;
+    this->render_line = _render_line;
 
     this->render_main_menu = _render_main_menu;
     this->render_main_menu_options = _render_main_menu_options;

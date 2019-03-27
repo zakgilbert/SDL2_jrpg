@@ -4,6 +4,20 @@
 
 #include "Player_Input.h"
 
+int event_handler()
+{
+    int result = 1;
+
+    for (size_t i = 0; i < 6; i++)
+    {
+        if (USER_INPUTS[i])
+        {
+            result = 0;
+        }
+    }
+    return result;
+}
+
 int wait_for_okay()
 {
     MOVEMENT_DISABLED = 1;
@@ -32,11 +46,6 @@ int input_thread(void *data)
 void get_player_input()
 {
     union SDL_Event ev;
-    // printf("\nInput: ");
-    /* for (int i = 0; i < 6; i++)
-    {
-        printf(" %d", USER_INPUTS[i]);
-    }*/
 
     while (SDL_PollEvent(&ev) != 0)
     {
@@ -116,17 +125,8 @@ void get_player_input()
             default:
                 break;
             }
-            break;
         default:
             break;
-        }
-        if (!anything_pressed)
-        {
-            IS_MOVING = 0;
-        }
-        else
-        {
-            IS_MOVING = 1;
         }
     }
 }

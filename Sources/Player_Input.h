@@ -16,4 +16,5 @@
 int input_thread (void *data);
 void get_player_input();
 int wait_for_okay();
+int event_handler();
 #endif //JRPG_PLAYER_INPUT_H
