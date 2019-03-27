@@ -28,38 +28,11 @@ static void __destroy_party(Character **party)
 
 static int _update_party_stats(Character **these)
 {
-    int is_running;
-    is_running = 1;
-
     for (size_t i = 0; i < NUM_CHARACTERS; i++)
     {
         these[i]->check_stats(these[i]);
     }
     return 0;
-}
-
-void set_party_null(struct Party *party)
-{
-    party->character_0 = NULL;
-    party->character_1 = NULL;
-    party->character_2 = NULL;
-    party->character_3 = NULL;
-}
-
-int count_party(struct Party *party)
-{
-    int count;
-    count = 0;
-    if (party->character_0 != NULL)
-        count++;
-    if (party->character_1 != NULL)
-        count++;
-    if (party->character_2 != NULL)
-        count++;
-    if (party->character_3 != NULL)
-        count++;
-
-    return count;
 }
 
 static void __create_character_texture(Character *this, struct SDL_Renderer *renderer)
@@ -125,7 +98,6 @@ Character *CREATE_CHARACTER(int key)
     this->create_character_texture = __create_character_texture;
     this->destroy_party = __destroy_party;
     this->update_party_stats = _update_party_stats;
-    // this->get_stat_matrix = __get_stat_matrix;
     this->key = key;
     this->num_stats = 1;
     strcpy(this->HP.name, "HP:   ");

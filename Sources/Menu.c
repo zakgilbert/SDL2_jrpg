@@ -11,21 +11,6 @@ static const char *ITEMS[] = {
 
 static const char *MENU_OPTIONS[] = {
     FOREACH_MENU_OPTION(GENERATE_STRING)};
-/**
- * Destructor for the Menu "class"
- * 
- * @args:    Menu * this
- * @returns: void
- */
-static void _destroy(Menu *this)
-{
-    this->main_menu_bg->destroy(this->main_menu_bg);
-    if (NULL != this)
-    {
-        free(this);
-        this = NULL;
-    }
-}
 
 static void _render_line(Menu *this, struct SDL_Renderer *renderer, const char *str, SDL_Color color)
 {
@@ -142,7 +127,7 @@ static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, H
 {
     int skip;
     char font_path[] = "ponde___.ttf";
-    int prev_y, W, H;
+    int prev_y;
     this->font = TTF_OpenFont(font_path, font_size);
     if (!this->font)
     {
@@ -167,7 +152,7 @@ static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, H
             this->render_line(this, renderer, party[i]->job, WHITE);
 
             this->rect.y = prev_y;
-            this->rect.x = x + 50;
+            this->rect.x = x + 55;
 
             this->render_line(this, renderer, party[i]->HP.display, WHITE);
             this->rect.y += skip;
@@ -344,13 +329,10 @@ static void _render_use_item_menu(Menu *this, struct SDL_Renderer *renderer, Han
     party[0]->update_party_stats(party);
     MOVEMENT_DISABLED = 1;
     hand->change_state_quantity(hand, NUM_CHARACTERS - 1, 0);
-    // printf ("\nState Q: %d", hand->number_of_states);
     this->main_menu_bg->render(this->main_menu_bg, renderer);
     this->render_items_menu_options(this, renderer, bag, this->item_being_used);
     this->select_character_bg->render(this->select_character_bg, renderer);
     hand->vertical_horizontal(hand);
-    //printf("\nCurrent_State: %d", hand->current_state);
-    //  this->render_use_item_menu_options(this, renderer, party, hand->current_state);
     this->render_character_stats(this, renderer, hand, party, 49, 205, 9, USE_ITEM);
     hand->render(hand, renderer);
     if (USER_INPUTS[4])
@@ -397,20 +379,15 @@ static int _render_config_menu_options(Menu *this, struct SDL_Renderer *renderer
     char font_path[] = "ponde___.ttf";
 
     char rgb_matrix[3][50];
-    Window **rgb_bars = (Window **)malloc(sizeof(Window *) * 3);
 
     skip = 20;
-    rgb_bars[0] = CREATE_WINDOW(110, skip, 150, 15);
-    rgb_bars[1] = CREATE_WINDOW(110, skip * 2, 150, 15);
-    rgb_bars[2] = CREATE_WINDOW(110, skip * 3, 150, 15);
+    this->rgb_bars[0]->color_value = MENU_BACKGROUND.r;
+    this->rgb_bars[1]->color_value = MENU_BACKGROUND.g;
+    this->rgb_bars[2]->color_value = MENU_BACKGROUND.b;
 
-    rgb_bars[0]->color_value = MENU_BACKGROUND.r;
-    rgb_bars[1]->color_value = MENU_BACKGROUND.g;
-    rgb_bars[2]->color_value = MENU_BACKGROUND.b;
-
-    rgb_bars[0]->color_bar_color = RED;
-    rgb_bars[1]->color_bar_color = GRN;
-    rgb_bars[2]->color_bar_color = BLU;
+    this->rgb_bars[0]->color_bar_color = RED;
+    this->rgb_bars[1]->color_bar_color = GRN;
+    this->rgb_bars[2]->color_bar_color = BLU;
 
     sprintf(rgb_matrix[0], "RED                          %d", (int)MENU_BACKGROUND.r);
     sprintf(rgb_matrix[1], "GREEN                        %d", (int)MENU_BACKGROUND.g);
@@ -427,14 +404,14 @@ static int _render_config_menu_options(Menu *this, struct SDL_Renderer *renderer
 
     for (i = 0; i < 3; i++)
     {
-        rgb_bars[i]->render_color_bar(rgb_bars, renderer, this->rect.x, this->rect.y, skip, i);
+        this->rgb_bars[i]->render_color_bar(this->rgb_bars, renderer, this->rect.x, this->rect.y, skip, i);
 
         TTF_SizeText(this->font, rgb_matrix[i], &this->rect.w, &this->rect.h);
 
         if (i == current_state)
         {
             this->surface = TTF_RenderText_Solid(this->font, rgb_matrix[i], WHITE);
-            this->change_window_color(rgb_bars, i);
+            this->change_window_color(this->rgb_bars, i);
         }
         else
         {
@@ -517,6 +494,23 @@ static int _render_save_menu_options(Menu *this, struct SDL_Renderer *renderer, 
     return skip;
 }
 
+static void _destroy(Menu *this)
+{
+    this->main_menu_bg->destroy(this->main_menu_bg);
+    this->select_character_bg->destroy(this->select_character_bg);
+    for(size_t i = 0; i < 3; i++)
+    {
+        this->rgb_bars[i]->destroy(this->rgb_bars[i]);
+        this->load_save_bg[i]->destroy(this->load_save_bg[i]);
+    }
+    
+    if (NULL != this)
+    {
+        free(this);
+        this = NULL;
+    }
+}
+
 Menu *CREATE_MENU()
 {
     Menu *this = (Menu *)malloc(sizeof(*this));
@@ -542,10 +536,17 @@ Menu *CREATE_MENU()
 
     this->main_menu_bg = CREATE_WINDOW(12, 8, 336, 306);
     this->select_character_bg = CREATE_WINDOW(12, 200, 336, 120);
-    this->load_save_bg = malloc(sizeof(Window *) * 3);
+   
+    this->load_save_bg = (Window **)malloc(sizeof(Window *) * 3);
     this->load_save_bg[0] = CREATE_WINDOW(40, 30, 280, 75);
     this->load_save_bg[1] = CREATE_WINDOW(40, 120, 280, 75);
     this->load_save_bg[2] = CREATE_WINDOW(40, 210, 280, 75);
+
+    this->rgb_bars = (Window **)malloc(sizeof(Window *) * 3);
+    this->rgb_bars[0] = CREATE_WINDOW(110, 20, 150, 15);
+    this->rgb_bars[1] = CREATE_WINDOW(110, 40, 150, 15);
+    this->rgb_bars[2] = CREATE_WINDOW(110, 60, 150, 15);
+    
     this->font = NULL;
     this->surface = NULL;
     this->texture = NULL;

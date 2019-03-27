@@ -55,6 +55,7 @@ int main(int argc, char **argv)
     bag = load_bag(bag, 0);
 
     SDL_Thread *hand_thread;
+    SDL_Thread *input_thread;
 
     Battle *current_battle = NULL;
 
@@ -80,7 +81,7 @@ int main(int argc, char **argv)
     while (running)
     {
         start_timer();
-        get_player_input();
+        input_thread = SDL_CreateThread(input_handler, "input_handler", NULL);
         refresh_inputs(EDGE_DETECTION, 4, movement());
         game_collision->update_collidables(game_collision, state);
         switch (state)
@@ -174,11 +175,13 @@ int main(int argc, char **argv)
         delay();
         reset_timer();
         running = quit();
+        SDL_WaitThread(input_thread, NULL);
     }
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &menu->transition);
     SDL_RenderPresent(renderer);
+    
     SDL_WaitThread(hand_thread, NULL);
 
     dark_forest->destroy(dark_forest);
@@ -220,63 +223,3 @@ int quit()
     }
     return 1;
 }
-/*
-void set_up_timer()
-{
-    FPS = 60;
-    DELTA = 0;
-    TIME_PER_TICK = 1000000000 / (FPS / 2);
-    TIME_LAST = SDL_GetPerformanceCounter();
-    NANO_TIMER = 0;
-    FRAMES_RENDERED = 0;
-    TICKS_PER_SECOND = 0;
-    TIME_DELAY_PER_SECOND = 0;
-}
-
-void start_timer()
-{
-    TIME_NOW = SDL_GetPerformanceCounter();
-    DELTA += (double)((TIME_NOW - TIME_LAST) / TIME_PER_TICK);
-    NANO_TIMER = TIME_NOW - TIME_LAST;
-    TICKS_PER_SECOND += NANO_TIMER;
-    TIME_LAST = TIME_NOW;
-}
-
-int check_delta()
-{
-    if (DELTA >= 1)
-    {
-        return 1;
-    }
-    return 0;
-}
-
-void update_delta()
-{
-    DELTA--;
-    FRAMES_RENDERED++;
-}
-
-void reset_timer()
-{
-
-    if (TICKS_PER_SECOND >= SDL_GetPerformanceFrequency())
-    {
-        // printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED);
-        // printf("\nTicks Per Second: %ld", TICKS_PER_SECOND);
-        FRAMES_RENDERED = 0;
-        TICKS_PER_SECOND = 0;
-    }
-}
-
-void delay()
-{
-    if (NANO_TIMER < TIME_PER_TICK)
-    {
-        TIME_DELAY_PER_SECOND = ((TIME_PER_TICK - NANO_TIMER) / (SDL_GetPerformanceFrequency() * 0.001));
-        SDL_Delay(TIME_DELAY_PER_SECOND);
-        // printf("\nTimeDelayed is: %Lf", TIME_DELAY_PER_SECOND);
-        //   printf("\nTimeDelayed int is: %Lf", TIME_DELAY_PER_SECOND);
-    }
-}
-*/
