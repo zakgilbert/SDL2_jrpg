@@ -13,20 +13,21 @@ static void _destroy(Battle *this)
         this = NULL;
     }
 }
+
 static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
 {
-    this->textures = malloc(sizeof(struct SDL_Texture *) * BATTLE_LINEUP[this->area]->num_ints[this->roll]);
-    this->party_textures = malloc(sizeof(struct SDL_Texture *));
+    this->textures_mob = malloc(sizeof(struct SDL_Texture *) * BATTLE_LINEUP[this->area]->num_ints[this->roll]);
+    this->textures_party = malloc(sizeof(struct SDL_Texture *) * NUM_CHARACTERS);
     for (size_t i = 0; i < this->num_enemies; i++)
     {
-        this->textures[i] = create_texture(renderer, ENEMY_PATHS->list[BATTLE_LINEUP[this->area]->list[this->roll][i]], &this->rect);
+        this->textures_mob[i] = create_texture(renderer, ENEMY_PATHS->list[BATTLE_LINEUP[this->area]->list[this->roll][i]], &this->rect);
     }
     for (size_t k = 0; k < this->num_party; k++)
     {
-        this->party_textures[k] = create_texture(renderer, BATTLE_CHARACTER_GRAPHICS->list[k], &this->party_rect_2);
+        this->textures_party[k] = create_texture(renderer, BATTLE_CHARACTER_GRAPHICS->list[k], &this->party_rect_2);
     }
-    this->party_rect_1.x = 200;
-    this->party_rect_1.y = 100;
+    this->party_rect_1.x = 240;
+    this->party_rect_1.y = 90;
     this->party_rect_2.x = 0;
     this->party_rect_2.y = 0;
     this->party_rect_1.w = SPRITE_FRAME_WIDTH;
@@ -34,6 +35,7 @@ static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
     this->party_rect_2.w = SPRITE_FRAME_WIDTH;
     this->party_rect_2.h = SPRITE_FRAME_HEIGHT;
 }
+
 static void _render(Battle *this, struct SDL_Renderer *renderer)
 {
     if (INPUT == CANCEL)
@@ -49,16 +51,23 @@ static void _render(Battle *this, struct SDL_Renderer *renderer)
         NUM_STEPS = 0;
         return;
     }
+    int party_x, party_y;
+    party_x = this->party_rect_1.x;
+    party_y = this->party_rect_1.y;
     SDL_RenderCopy(renderer, this->back_ground, NULL, &this->bg_rect);
     this->window->render(this->window, renderer);
     for (size_t i = 0; i < this->num_enemies; i++)
     {
-        SDL_RenderCopy(renderer, this->textures[i], NULL, &this->rect);
+        SDL_RenderCopy(renderer, this->textures_mob[i], NULL, &this->rect);
     }
     for (size_t k = 0; k < this->num_party; k++)
     {
-        SDL_RenderCopy(renderer, this->party_textures[k], &this->party_rect_2, &this->party_rect_1);
+        SDL_RenderCopy(renderer, this->textures_party[k], &this->party_rect_2, &this->party_rect_1);
+        this->party_rect_1.x += 15;
+        this->party_rect_1.y += 30;
     }
+    this->party_rect_1.x = party_x;
+    this->party_rect_1.y = party_y;
 }
 
 Battle *CREATE_BATTLE(int area, int roll, struct SDL_Renderer *renderer, Character **party, int num_party)

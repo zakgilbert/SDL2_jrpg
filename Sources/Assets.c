@@ -212,8 +212,8 @@ void SET_GLOBALS()
     BATTLE_BACKGROUNDS = CREATE_LIST_STRING(b_bgs_df, 1);
 
     BATTLE_CHARACTER_GRAPHICS = malloc(sizeof(struct STRING_LIST));
-    char *character_battle_graphics[1] = {"graphics/Locke_battle.png"};
-    BATTLE_CHARACTER_GRAPHICS = CREATE_LIST_STRING(character_battle_graphics, 1);
+    char *character_battle_graphics[4] = {"graphics/Locke_battle.png", "graphics/Terra_battle.png", "graphics/Sabin_battle.png", "graphics/Gau_battle.png"};
+    BATTLE_CHARACTER_GRAPHICS = CREATE_LIST_STRING(character_battle_graphics, 4);
 
     char *char_names[4] = {"Locke", "Terra", "Sabin", "GAU"};
     CHARACTER_NAMES = CREATE_LIST_STRING(char_names, 4);

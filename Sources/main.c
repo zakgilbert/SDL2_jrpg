@@ -161,7 +161,7 @@ int main(int argc, char **argv)
         case BATTLE:
             if (current_battle == NULL)
             {
-                current_battle = CREATE_BATTLE(previous_state, 0, renderer, party, 1);
+                current_battle = CREATE_BATTLE(previous_state, 0, renderer, party, 4);
             }
 
             SDL_RenderClear(renderer);
