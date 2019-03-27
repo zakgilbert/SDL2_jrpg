@@ -64,6 +64,12 @@ extern struct STRING_LIST *NPC_PATHS;
 extern struct STRING_LIST *ENEMY_PATHS;
 extern struct STRING_LIST *BATTLE_BACKGROUNDS;
 extern struct STRING_LIST *BATTLE_CHARACTER_GRAPHICS;
+extern struct STRING_LIST *CHARACTER_NAMES;
+extern struct STRING_LIST *CHARACTER_AGES;
+extern struct STRING_LIST *CHARACTER_JOBS;
+extern struct STRING_LIST *CHARACTER_BIO_PATHS;
+extern struct STRING_LIST *SAVE_PATHS;
+extern struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 
 enum states
 {
@@ -73,6 +79,7 @@ enum states
     USE_ITEM,
     MESSAGE,
     CONFIG,
+    SAVE,
     BATTLE
 };
 enum states state, previous_state;
@@ -83,6 +90,18 @@ enum CHARACTERS
     TERRA,
     SABIN,
     GAU
+};
+enum SAVE_STATES
+{
+    SAVE_1,
+    SAVE_2,
+    SAVE_3
+};
+enum SAVE_STATES SAVE_STATE;
+
+enum LOAD_SAVE_INFO
+{
+    LEAD_CHARACTER
 };
 
 enum INPUTS
@@ -182,10 +201,15 @@ struct STRING_LIST *NPC_PATHS;
 struct STRING_LIST *ENEMY_PATHS;
 struct STRING_LIST *BATTLE_BACKGROUNDS;
 struct STRING_LIST *BATTLE_CHARACTER_GRAPHICS;
+struct STRING_LIST *CHARACTER_NAMES;
+struct STRING_LIST *CHARACTER_AGES;
+struct STRING_LIST *CHARACTER_JOBS;
+struct STRING_LIST *CHARACTER_BIO_PATHS;
+struct STRING_LIST *SAVE_PATHS;
+struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 
 int refresh_inputs(int *, int, int);
 void set_items(int *);
 int quit();
 int render_thread(void *);
-void SET_GLOBALS();
 #endif //JRPG_HEADER_H

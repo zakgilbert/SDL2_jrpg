@@ -11,7 +11,7 @@
 typedef struct _item
 {
     void (*destroy)(struct _item *);
-    void (*fill_bag)(struct _item *, int *, int *, int);
+    void (*fill_bag)(struct _item *, int * items, int * quantities, int len);
     char *(*add_item)(struct _item *, ITEM_ENUM);
     int (*quaff_item)(struct _item *, Affect *);
     int (*find_item)(struct _item *, ITEM_ENUM);
@@ -23,7 +23,7 @@ typedef struct _item
     int *items;
     int *item_quantities;
     int items_in_bag;
-} Items;
+} Item;
 
-Items *CREATE_BAG();
+Item *CREATE_BAG();
 #endif

@@ -1,5 +1,7 @@
-/**
- * Affect.c
+/*
+ * Affect
+ *     An affect abject is created whenever an instance for which a character or
+ *     enemies status needs to be changed. 
  */
 
 #include "Affect.h"

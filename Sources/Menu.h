@@ -5,9 +5,9 @@
 #ifndef JRPG_MENU_H
 #define JRPG_MENU_H
 
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include <math.h>
 #include <SDL2/SDL.h>
@@ -33,6 +33,8 @@ typedef struct _menu
 
     Window *select_character_bg;
 
+    Window **load_save_bg;
+
     void (*render_character_stats)(struct _menu *, struct SDL_Renderer *, Hand *, int, int, int, int);
 
     void (*render_character_main_menu_image)(struct _menu *, struct SDL_Renderer *, Hand *, Character **);
@@ -41,17 +43,22 @@ typedef struct _menu
 
     int (*render_main_menu_options)(struct _menu *, struct SDL_Renderer *, int);
 
-    void (*render_items_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Items *);
+    void (*render_items_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Item *);
 
-    int (*render_items_menu_options)(struct _menu *, struct SDL_Renderer *, Items *, int);
+    int (*render_items_menu_options)(struct _menu *, struct SDL_Renderer *, Item *, int);
 
-    void (*render_use_item_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Character **, Items *);
+    void (*render_use_item_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Character **, Item *);
 
     void (*render_config_menu)(struct _menu *, struct SDL_Renderer *, Hand *);
 
     int (*render_config_menu_options)(struct _menu *, struct SDL_Renderer *, Hand *, int);
     
     void (*change_window_color)(Window ** color_bars, int current_state);
+    
+    void (*render_save_menu)(struct _menu *, struct SDL_Renderer *, Hand *);
+
+    int (*render_save_menu_options)(struct _menu *, struct SDL_Renderer *, Hand *, int);
+
     TTF_Font *font;
     struct SDL_Rect rect;
     struct SDL_Rect transition;

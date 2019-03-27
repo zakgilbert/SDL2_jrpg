@@ -19,6 +19,7 @@ typedef struct __affect
     Character * character;
     ITEM_ENUM affect_enum;
     int item_used;
+    int type;
 }Affect;
 
 Affect * CREATE_AFFECT(ITEM_ENUM , Character *);

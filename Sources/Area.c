@@ -64,7 +64,7 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
     collidables->add_collision(collidables, this->lootables, num_items, this->npcs, num_npcs, this->num_collidables, this->area_key);
 }
 
-static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Items *bag)
+static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Item *bag)
 {
     if (INPUT == CANCEL)
     {
