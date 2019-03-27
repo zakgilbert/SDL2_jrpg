@@ -33,7 +33,7 @@ typedef struct _menu
 
     Window *select_character_bg;
 
-    Window *load_save_bg;
+    Window **load_save_bg;
 
     void (*render_character_stats)(struct _menu *, struct SDL_Renderer *, Hand *, int, int, int, int);
 

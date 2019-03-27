@@ -463,22 +463,29 @@ static void _render_save_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
 static int _render_save_menu_options(Menu *this, struct SDL_Renderer *renderer, Hand *hand, int current_state)
 {
 
-    int skip, i, num_saves;
+    int skip, num_saves;
     char font_path[] = "ponde___.ttf";
-    skip = 50;
+    skip = 90;
     num_saves = 3;
-    this->rect.x = 45;
-    this->rect.y = skip;
+    this->rect.x = 55;
+    this->rect.y = 40;
     this->font = TTF_OpenFont(font_path, 10);
     for (size_t i = 0; i < num_saves; i++)
     {
-        this->load_save_bg->render(this->load_save_bg, renderer);
+        this->load_save_bg[i]->render(this->load_save_bg[i], renderer);
         TTF_SizeText(this->font, LOAD_SAVE_INFO_STRINGS[i]->list[0], &this->rect.w, &this->rect.h);
-        this->surface = TTF_RenderText_Solid(this->font, LOAD_SAVE_INFO_STRINGS[i]->list[0], WHITE);
+        if (i == current_state)
+        {
+            this->surface = TTF_RenderText_Solid(this->font, LOAD_SAVE_INFO_STRINGS[i]->list[0], WHITE);
+        }
+        else
+        {
+            this->surface = TTF_RenderText_Solid(this->font, LOAD_SAVE_INFO_STRINGS[i]->list[0], GREY);
+        }
+
         this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
         SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
         this->rect.y += skip;
-        this->load_save_bg->rect.y += skip;
     }
     TTF_CloseFont(this->font);
     SDL_FreeSurface(this->surface);
@@ -512,7 +519,10 @@ Menu *CREATE_MENU()
 
     this->main_menu_bg = CREATE_WINDOW(12, 8, 336, 306);
     this->select_character_bg = CREATE_WINDOW(12, 200, 336, 120);
-    this->load_save_bg = CREATE_WINDOW(30, 30, 280, 90);
+    this->load_save_bg = malloc(sizeof(Window *) * 3);
+    this->load_save_bg[0] = CREATE_WINDOW(40, 30, 280, 75);
+    this->load_save_bg[1] = CREATE_WINDOW(40, 120, 280, 75);
+    this->load_save_bg[2] = CREATE_WINDOW(40, 210, 280, 75);
     this->font = NULL;
     this->surface = NULL;
     this->texture = NULL;

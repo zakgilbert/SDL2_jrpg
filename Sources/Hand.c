@@ -57,7 +57,7 @@ static void _config_menu_position(Hand *this)
 static void _save_menu_position(Hand *this)
 {
     this->position.x = 15;
-    this->position.y = 15;
+    this->position.y = 40;
     this->current_state = 0;
 }
 

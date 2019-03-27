@@ -155,6 +155,7 @@ int main(int argc, char **argv)
                     wait_for_okay();
                     USER_INPUTS[4] = 0;
                 }
+                USER_INPUTS[4] = 0;
                 state = previous_state;
                 previous_state = MESSAGE;
                 message_being_displayed->destroy(message_being_displayed);
