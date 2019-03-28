@@ -16,7 +16,14 @@ int wait_for_okay()
 }
 int input_handler(void *data)
 {
-    get_player_input();
+    int is_running;
+
+    is_running = 1;
+    while (is_running)
+    {
+        get_player_input();
+    }
+
     return 0;
 }
 

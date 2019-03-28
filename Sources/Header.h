@@ -51,6 +51,7 @@ extern int HERO_HEIGHT;
 extern int IN_BATTLE;
 extern int NUM_STEPS;
 extern int WAITING_FOR_MESSAGE;
+extern int TICKS;
 extern struct SDL_Color WHITE;
 extern struct SDL_Color GREY;
 extern struct SDL_Color GREY;
@@ -188,6 +189,7 @@ int WAITING_FOR_MESSAGE;
 char **STAT_MATRIX;
 int IN_BATTLE;
 int NUM_STEPS;
+int TICKS;
 
 struct SDL_Color WHITE;
 struct SDL_Color GREY;

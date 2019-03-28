@@ -111,6 +111,11 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
         fscanf(in, "%d %d", &party[i]->EXP.current, &party[i]->EXP.max);
         sprintf(party[i]->EXP.str_max, "%d", party[i]->EXP.max);
     }
+
+    for (size_t i = 0; i < num_members; i++)
+    {
+        fscanf(in, "%d", &party[i]->SPD);
+    }
     fclose(in);
     free(path);
     return party;
@@ -151,6 +156,7 @@ void SET_GLOBALS()
     NUM_AREAS = 1;
     IN_BATTLE = 0;
     NUM_STEPS = 0;
+    TICKS = 0;
 
     HERO_WIDTH = 32;
     HERO_HEIGHT = 32;

@@ -40,6 +40,7 @@ typedef struct __character
     struct Main_Attribute HP;
     struct Main_Attribute MP;
     struct Main_Attribute EXP;
+    int SPD;
     int key;
 
 } Character;

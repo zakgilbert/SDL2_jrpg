@@ -66,6 +66,7 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
 
 static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Item *bag)
 {
+    srand(time(NULL));
     if (INPUT == CANCEL)
     {
         state = MAIN_MENU;
@@ -75,7 +76,7 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
 
         return NULL;
     }
-    else if (NUM_STEPS > 300)
+    else if (NUM_STEPS > (300 + (rand() % 500)))
     {
         state = BATTLE;
         previous_state = this->area_key;

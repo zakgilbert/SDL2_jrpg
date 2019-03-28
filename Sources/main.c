@@ -171,6 +171,7 @@ int main(int argc, char **argv)
         default:
             break;
         }
+        TICKS++;
         FRAMES_RENDERED++;
         delay();
         reset_timer();

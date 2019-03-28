@@ -13,13 +13,16 @@
 #include "Floor.h"
 #include "Character.h"
 #include "Window.h"
+#include "Hero.h"
 
 uint32_t transition_delay1;
+int calculate_time_bar(int seconds, int width);
 typedef struct _battle
 {
     void (*destroy)(struct _battle *);
     void (*create_battle_textures)(struct _battle *, struct SDL_Renderer *renderer);
     void (*render)(struct _battle *, struct SDL_Renderer *renderer);
+    void (*update_time_bar)(Window * time_bar, Character * character);
 
     int num_enemies;
     char *enemy_paths;
@@ -35,6 +38,7 @@ typedef struct _battle
     struct SDL_Rect party_rect_2;
     struct SDL_Rect transition;
     Window * window;
+    Window ** time_bars;
 
     Character **party;
     int num_party;
