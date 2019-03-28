@@ -78,10 +78,11 @@ int main(int argc, char **argv)
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
 
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
+    input_thread = SDL_CreateThread(input_handler, "input_handler", NULL);
+
     while (running)
     {
         start_timer();
-        input_thread = SDL_CreateThread(input_handler, "input_handler", NULL);
         refresh_inputs(EDGE_DETECTION, 4, movement());
         game_collision->update_collidables(game_collision, state);
         switch (state)
@@ -176,14 +177,14 @@ int main(int argc, char **argv)
         delay();
         reset_timer();
         running = quit();
-        SDL_WaitThread(input_thread, NULL);
     }
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &menu->transition);
     SDL_RenderPresent(renderer);
-    
+
     SDL_WaitThread(hand_thread, NULL);
+    SDL_WaitThread(input_thread, NULL);
 
     dark_forest->destroy(dark_forest);
     hero->destroy(hero);

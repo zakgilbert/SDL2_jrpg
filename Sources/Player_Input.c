@@ -16,14 +16,17 @@ int wait_for_okay()
 }
 int input_handler(void *data)
 {
-    int is_running;
+    int in_loop = 1;
 
-    is_running = 1;
-    while (is_running)
+    while (in_loop)
     {
         get_player_input();
+        if (INPUT == QUIT)
+        {
+            in_loop = 0;
+        }
+        SDL_Delay(1);
     }
-
     return 0;
 }
 
