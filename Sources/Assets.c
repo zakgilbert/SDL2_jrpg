@@ -30,6 +30,22 @@ char **get_state_info(int save_state)
 void save(Character **party, Item *bag, int save_state)
 {
 }
+Enemy *load_enemy(int key, struct SDL_Renderer * renderer)
+{
+    FILE *in;
+    char *path = malloc(50);
+    Enemy * enemy = CREATE_ENEMY(key, renderer);
+    in = fopen(strcat(strcat(strcpy(path, "data/Enemies/"), ENEMIES->list[key]), ".txt"), "r");
+
+    fscanf(in, "%d", &enemy->HP.hp_current);
+    enemy->HP.hp_max = enemy->HP.hp_current;
+    
+    fscanf(in, "%d", &enemy->MP.mp_current);
+    enemy->MP.mp_max = enemy->MP.mp_current;
+
+    fscanf(in, "%d", &enemy->SPD);
+    return enemy;
+}
 Item *load_bag(Item *bag, int save_state)
 {
     FILE *in;
@@ -206,10 +222,12 @@ void SET_GLOBALS()
     NPC_PATHS = CREATE_LIST_STRING(p_temp, 2);
 
     BATTLE_LINEUP = malloc(sizeof(struct INTEGER_LIST) * NUM_AREAS);
-    char *enemy_paths_temp[1] = {"graphics/knight_bez.png"};
+    char *enemy_paths_temp[1] = {"graphics/Kiros.png"};
     ENEMY_PATHS = CREATE_LIST_STRING(enemy_paths_temp, 1);
-    int forest_lineup[1][1] = {KNIGHT_BEZ_MOUNT};
+    int forest_lineup[1][1] = {Kiros};
     int num_forest_lineup[1] = {1};
+    char *enemy_names[1] = {"Kiros"};
+    ENEMIES = CREATE_LIST_STRING(enemy_names, 1);
 
     BATTLE_LINEUP[0] = CREATE_LIST_INT(forest_lineup, num_forest_lineup, 1);
 

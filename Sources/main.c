@@ -22,6 +22,7 @@
 #include "Collision.h"
 #include "Battle.h"
 #include "Assets.h"
+#include "Enemy.h"
 
 int main(int argc, char **argv)
 {
@@ -168,6 +169,11 @@ int main(int argc, char **argv)
             SDL_RenderClear(renderer);
             current_battle->render(current_battle, renderer);
             SDL_RenderPresent(renderer);
+            if(previous_state == BATTLE)
+            {
+                current_battle->destroy(current_battle);
+                current_battle = NULL;
+            }
             break;
         default:
             break;

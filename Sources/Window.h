@@ -33,6 +33,9 @@ typedef struct __window
     int original_width;
     int color_value;
     struct SDL_Color color_bar_color;
+    int seconds_passed;
+    int now;
+    int before;
 
 } Window;
 

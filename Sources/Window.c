@@ -95,6 +95,8 @@ Window *CREATE_WINDOW(int x, int y, int w, int h)
     this->rect.h = h;
     this->original_width = w;
     this->color_value = 0;
+    this->seconds_passed = 0;
+    this->now = GAME_SECS;
     this->create_borders(this, 0, &this->border_1);
     this->create_borders(this, 1, &this->border_2);
     this->create_borders(this, 2, &this->border_3);

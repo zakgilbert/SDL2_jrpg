@@ -19,6 +19,7 @@ void set_up_timer(int fps)
     FRAMES_RENDERED = 0;
     ticks_per_second = 0;
     time_delay_per_second = 0;
+    GAME_SECS = 0;
 }
 
 void start_timer()
@@ -54,6 +55,7 @@ void reset_timer()
         // printf("\nTicks Per Second: %ld", ticks_per_second);
         FRAMES_RENDERED = 0;
         ticks_per_second = 0;
+        GAME_SECS++;
     }
 }
 
