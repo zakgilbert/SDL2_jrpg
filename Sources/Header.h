@@ -53,6 +53,7 @@ extern int NUM_STEPS;
 extern int WAITING_FOR_MESSAGE;
 extern int TICKS;
 extern int GAME_SECS;
+extern int ROLL;
 extern struct SDL_Color WHITE;
 extern struct SDL_Color GREY;
 extern struct SDL_Color GREY;
@@ -126,7 +127,8 @@ enum COLLIDABLE_TYPES
 
 enum ENEMIES
 {
-    Kiros
+    Kiros,
+    Samurai
 };
 
 enum BUTTON
@@ -193,6 +195,7 @@ int IN_BATTLE;
 int NUM_STEPS;
 int TICKS;
 int GAME_SECS;
+int ROLL;
 
 struct SDL_Color WHITE;
 struct SDL_Color GREY;

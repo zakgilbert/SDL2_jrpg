@@ -163,7 +163,7 @@ int main(int argc, char **argv)
         case BATTLE:
             if (current_battle == NULL)
             {
-                current_battle = CREATE_BATTLE(previous_state, 0, renderer, party, 4);
+                current_battle = CREATE_BATTLE(previous_state, ROLL, renderer, party, 4);
             }
 
             SDL_RenderClear(renderer);
@@ -173,6 +173,7 @@ int main(int argc, char **argv)
             {
                 current_battle->destroy(current_battle);
                 current_battle = NULL;
+                ROLL = -1;
             }
             break;
         default:

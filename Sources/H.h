@@ -21,5 +21,5 @@ typedef struct INTEGER_LIST
     int * num_ints;
 } LIST_INT;
 
-LIST_INT *CREATE_LIST_INT(int list[1][1], int *num_ints, int num_items);
+LIST_INT *CREATE_LIST_INT(int **list, int *num_ints, int num_items);
 #endif /* H_H */

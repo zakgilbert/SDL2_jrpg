@@ -19,7 +19,7 @@ LIST_STRING *CREATE_LIST_STRING(char **list, int num_items)
     return this;
 }
 
-LIST_INT *CREATE_LIST_INT(int list[1][1], int * num_ints, int num_items)
+LIST_INT *CREATE_LIST_INT(int **list, int * num_ints, int num_items)
 {
     LIST_INT *this = malloc(sizeof(*this));
 

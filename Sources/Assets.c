@@ -30,20 +30,22 @@ char **get_state_info(int save_state)
 void save(Character **party, Item *bag, int save_state)
 {
 }
-Enemy *load_enemy(int key, struct SDL_Renderer * renderer)
+Enemy *load_enemy(int key, struct SDL_Renderer *renderer)
 {
     FILE *in;
     char *path = malloc(50);
-    Enemy * enemy = CREATE_ENEMY(key, renderer);
+    Enemy *enemy = CREATE_ENEMY(key, renderer);
     in = fopen(strcat(strcat(strcpy(path, "data/Enemies/"), ENEMIES->list[key]), ".txt"), "r");
 
     fscanf(in, "%d", &enemy->HP.hp_current);
     enemy->HP.hp_max = enemy->HP.hp_current;
-    
+
     fscanf(in, "%d", &enemy->MP.mp_current);
     enemy->MP.mp_max = enemy->MP.mp_current;
 
     fscanf(in, "%d", &enemy->SPD);
+    free(path);
+    fclose(in);
     return enemy;
 }
 Item *load_bag(Item *bag, int save_state)
@@ -173,6 +175,7 @@ void SET_GLOBALS()
     IN_BATTLE = 0;
     NUM_STEPS = 0;
     TICKS = 0;
+    ROLL = -1;
 
     HERO_WIDTH = 32;
     HERO_HEIGHT = 32;
@@ -222,14 +225,32 @@ void SET_GLOBALS()
     NPC_PATHS = CREATE_LIST_STRING(p_temp, 2);
 
     BATTLE_LINEUP = malloc(sizeof(struct INTEGER_LIST) * NUM_AREAS);
-    char *enemy_paths_temp[1] = {"graphics/Kiros.png"};
-    ENEMY_PATHS = CREATE_LIST_STRING(enemy_paths_temp, 1);
-    int forest_lineup[1][1] = {Kiros};
-    int num_forest_lineup[1] = {1};
-    char *enemy_names[1] = {"Kiros"};
-    ENEMIES = CREATE_LIST_STRING(enemy_names, 1);
+    char *enemy_paths_temp[2] = {"graphics/Kiros.png", "graphics/Samurai.png"};
+    ENEMY_PATHS = CREATE_LIST_STRING(enemy_paths_temp, 2);
+    int **forest_lineup = malloc(sizeof(int *) * 3);
+    int num_forest_lineup[3] = {1, 2, 1};
+    for (size_t i = 0; i < 3; i++)
+    {
+        forest_lineup[i] = malloc(sizeof(int) * num_forest_lineup[i]);
+        if (i == 0)
+        {
+            forest_lineup[i][0] = Kiros;
+        }
+        else if (i == 1)
+        {
+            forest_lineup[i][0] = Kiros;
+            forest_lineup[i][1] = Samurai;
+        }
+        else if (i == 2)
+        {
+            forest_lineup[i][1] = Samurai;
+        }
+    }
 
-    BATTLE_LINEUP[0] = CREATE_LIST_INT(forest_lineup, num_forest_lineup, 1);
+    char *enemy_names[2] = {"Kiros", "Samurai"};
+    ENEMIES = CREATE_LIST_STRING(enemy_names, 2);
+
+    BATTLE_LINEUP[0] = CREATE_LIST_INT(forest_lineup, num_forest_lineup, 3);
 
     BATTLE_BACKGROUNDS = malloc(sizeof(struct STRING_LIST) * NUM_AREAS);
     char *b_bgs_df[1] = {"graphics/dark_forest.png"};

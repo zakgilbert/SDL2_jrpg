@@ -80,6 +80,7 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
     {
         state = BATTLE;
         previous_state = this->area_key;
+        ROLL = rand() % 3;
 
         return NULL;
     }
