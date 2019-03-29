@@ -63,9 +63,9 @@ static void __check_stats(Character *this)
     sprintf(this->HP.str_current, "%d", this->HP.current);
     sprintf(this->MP.str_current, "%d", this->MP.current);
     sprintf(this->EXP.str_current, "%d", this->EXP.current);
-    strcat(strcat(strcat(strcpy(this->HP.display, this->HP.name), this->HP.str_current), " /"), this->HP.str_max);
-    strcat(strcat(strcat(strcpy(this->MP.display, this->MP.name), this->MP.str_current), " /"), this->MP.str_max);
-    strcat(strcat(strcat(strcpy(this->EXP.display, this->EXP.name), this->EXP.str_current), " /"), this->EXP.str_max);
+    strcat(strcat(strcat(strcpy(this->HP.display, this->HP.name), this->HP.str_current), "/"), this->HP.str_max);
+    strcat(strcat(strcat(strcpy(this->MP.display, this->MP.name), this->MP.str_current), "/"), this->MP.str_max);
+    strcat(strcat(strcat(strcpy(this->EXP.display, this->EXP.name), this->EXP.str_current), "/"), this->EXP.str_max);
 }
 static void __set_stats(Character *this, const char *name, const char *age, char *job, int HP, int MP, int EXP, const char *image_path)
 {
@@ -100,9 +100,9 @@ Character *CREATE_CHARACTER(int key)
     this->update_party_stats = _update_party_stats;
     this->key = key;
     this->num_stats = 1;
-    strcpy(this->HP.name, "HP:   ");
-    strcpy(this->MP.name, "MP:   ");
-    strcpy(this->EXP.name, "EXP:  ");
+    strcpy(this->HP.name, "HP: ");
+    strcpy(this->MP.name, "MP: ");
+    strcpy(this->EXP.name, "EXP:");
 
     return this;
 }

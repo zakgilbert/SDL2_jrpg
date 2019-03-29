@@ -37,6 +37,52 @@ static void _destroy(Battle *this)
     }
 }
 
+static void _render_line(Battle *this, struct SDL_Renderer *renderer, const char *str, SDL_Color color)
+{
+    TTF_SizeText(this->font, str, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, str, color);
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+}
+
+static void _render_battle_menu_text(Battle *this, struct SDL_Renderer *renderer)
+{
+    int skip, x, y;
+    char font_path[] = "ponde___.ttf";
+
+    this->font = TTF_OpenFont(font_path, 10);
+
+    if (!this->font)
+    {
+        printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
+    }
+    x = 15;
+    y = 250;
+    this->rect.x = x;
+    this->rect.y = y;
+    skip = TTF_FontLineSkip(this->font);
+
+    for (size_t i = 0; i < this->num_enemies; i++)
+    {
+        this->render_line(this, renderer, ENEMIES->list[this->enemies[i]->key], WHITE);
+        this->rect.y += skip;
+    }
+    this->rect.y = y - 1;
+
+    for (size_t i = 0; i < NUM_CHARACTERS; i++)
+    {
+        this->party[i]->check_stats(this->party[i]);
+        this->rect.x = 130;
+        this->render_line(this, renderer, this->party[i]->name, WHITE);
+        this->rect.x += 60;
+        this->render_line(this, renderer, this->party[i]->HP.display, WHITE);
+        this->rect.y += skip + 4;
+    }
+    TTF_CloseFont(this->font);
+}
+
 static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
 {
     int time_bar_x, time_bar_y;
@@ -100,6 +146,7 @@ static void _render(Battle *this, struct SDL_Renderer *renderer)
         this->party_rect_1.x += 15;
         this->party_rect_1.y += 30;
     }
+    this->render_battle_menu_text(this, renderer);
     this->party_rect_1.x = party_x;
     this->party_rect_1.y = party_y;
 }
@@ -111,6 +158,8 @@ Battle *CREATE_BATTLE(int area, int roll, struct SDL_Renderer *renderer, Charact
     this->render = _render;
     this->create_battle_textures = _create_battle_textures;
     this->update_time_bar = _update_time_bar;
+    this->render_battle_menu_text = _render_battle_menu_text;
+    this->render_line = _render_line;
 
     this->bg_rect.x = 0;
     this->bg_rect.y = 0;
