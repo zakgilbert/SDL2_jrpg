@@ -20,23 +20,27 @@ static void __destroy(Window *this)
         this = NULL;
     }
 }
+static int __timer_is_maxed(Window *this)
+{
+    return this->rect.w >= this->original_width;
+}
 static int __adjust_menu_colors(Window *this)
 {
-    if(USER_INPUTS[2])
+    if (USER_INPUTS[2])
     {
         this->color_value--;
     }
-    else if(USER_INPUTS[3])
+    else if (USER_INPUTS[3])
     {
         this->color_value++;
     }
-    if (this-> color_value >= 254)
+    if (this->color_value >= 254)
     {
-        this-> color_value = 254;
+        this->color_value = 254;
     }
-    else if (this -> color_value <= 1)
+    else if (this->color_value <= 1)
     {
-        this -> color_value = 1;
+        this->color_value = 1;
     }
     return this->color_value;
 }
@@ -49,12 +53,19 @@ static void __render_color_bar(Window **this, struct SDL_Renderer *renderer, int
 
     color_bar.w = (this[i] -> rect.w *(this[i] -> color_value)) / 255;
 
-    SDL_SetRenderDrawColor(renderer, this[i]->color_bar_color.r,this[i]->color_bar_color.g, this[i]->color_bar_color.b, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, this[i] -> color_bar_color.r, this[i] -> color_bar_color.g, this[i] -> color_bar_color.b, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &color_bar);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
     SDL_RenderDrawRect(renderer, &this[i] -> border_1);
     SDL_RenderDrawRect(renderer, &this[i] -> border_2);
     SDL_RenderDrawRect(renderer, &this[i] -> border_3);
+}
+static void __render_time_bar(Window *this, struct SDL_Renderer *renderer)
+{
+    SDL_SetRenderDrawColor(renderer, RED.r, RED.g, RED.b, SDL_ALPHA_OPAQUE);
+    SDL_RenderFillRect(renderer, &this->rect);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+    SDL_RenderDrawRect(renderer, &this->border_1);
 }
 static void __render(Window *this, struct SDL_Renderer *renderer)
 {
@@ -75,11 +86,17 @@ Window *CREATE_WINDOW(int x, int y, int w, int h)
     this->create_borders = __create_borders;
     this->render_color_bar = __render_color_bar;
     this->adjust_menu_colors = __adjust_menu_colors;
+    this->render_time_bar = __render_time_bar;
+    this->timer_is_maxed = __timer_is_maxed;
+
     this->rect.x = x;
     this->rect.y = y;
     this->rect.w = w;
     this->rect.h = h;
+    this->original_width = w;
     this->color_value = 0;
+    this->seconds_passed = 0;
+    this->now = GAME_SECS;
     this->create_borders(this, 0, &this->border_1);
     this->create_borders(this, 1, &this->border_2);
     this->create_borders(this, 2, &this->border_3);

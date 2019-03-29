@@ -16,19 +16,20 @@ struct Main_Attribute
     int max;
     char str_current[10];
     char str_max[10];
+    char display[50];
+    char name[10];
 };
 
-
-int stat_matrix_thread(void * ptr);
 typedef struct __character
 {
     void (*destroy)(struct __character *);
     void (*destroy_party)(struct __character **);
     void (*set_stats)(struct __character *, const char *name, const char *age, char *job, int HP, int MP, int EXP, const char *image_path);
     void (*check_stats)(struct __character *);
-    void (*create_character_texture) (struct __character *, struct SDL_Renderer *);
+    void (*create_character_texture)(struct __character *, struct SDL_Renderer *);
+    int (*update_party_stats)(struct __character **);
     int update_stats;
-    struct SDL_Texture * character_texture;
+    struct SDL_Texture *character_texture;
     struct SDL_Rect character_rect;
 
     const char *image_path;
@@ -39,17 +40,19 @@ typedef struct __character
     struct Main_Attribute HP;
     struct Main_Attribute MP;
     struct Main_Attribute EXP;
+    int SPD;
     int key;
 
 } Character;
 
 Character *CREATE_CHARACTER(int key);
 
-struct Party {
-    Character * character_0;
-    Character * character_1;
-    Character * character_2;
-    Character * character_3;
+struct Party
+{
+    Character *character_0;
+    Character *character_1;
+    Character *character_2;
+    Character *character_3;
 };
 
 int count_party(struct Party *);

@@ -51,6 +51,9 @@ extern int HERO_HEIGHT;
 extern int IN_BATTLE;
 extern int NUM_STEPS;
 extern int WAITING_FOR_MESSAGE;
+extern int TICKS;
+extern int GAME_SECS;
+extern int ROLL;
 extern struct SDL_Color WHITE;
 extern struct SDL_Color GREY;
 extern struct SDL_Color GREY;
@@ -70,6 +73,7 @@ extern struct STRING_LIST *CHARACTER_JOBS;
 extern struct STRING_LIST *CHARACTER_BIO_PATHS;
 extern struct STRING_LIST *SAVE_PATHS;
 extern struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
+extern struct STRING_LIST *ENEMIES;
 
 enum states
 {
@@ -123,7 +127,8 @@ enum COLLIDABLE_TYPES
 
 enum ENEMIES
 {
-    KNIGHT_BEZ_MOUNT
+    Kiros,
+    Samurai
 };
 
 enum BUTTON
@@ -188,6 +193,9 @@ int WAITING_FOR_MESSAGE;
 char **STAT_MATRIX;
 int IN_BATTLE;
 int NUM_STEPS;
+int TICKS;
+int GAME_SECS;
+int ROLL;
 
 struct SDL_Color WHITE;
 struct SDL_Color GREY;
@@ -207,6 +215,7 @@ struct STRING_LIST *CHARACTER_JOBS;
 struct STRING_LIST *CHARACTER_BIO_PATHS;
 struct STRING_LIST *SAVE_PATHS;
 struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
+struct STRING_LIST *ENEMIES;
 
 int refresh_inputs(int *, int, int);
 void set_items(int *);

@@ -1,7 +1,7 @@
 
 #include "Area.h"
 
-/*
+/**
  * Name:    Area.c    
  * Project: jrpg     
  * Author:  Zachary Gilbert
@@ -66,6 +66,7 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
 
 static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Item *bag)
 {
+    srand(time(NULL));
     if (INPUT == CANCEL)
     {
         state = MAIN_MENU;
@@ -75,10 +76,11 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
 
         return NULL;
     }
-    else if (NUM_STEPS > 300)
+    else if (NUM_STEPS > (300 + (rand() % 500)))
     {
         state = BATTLE;
         previous_state = this->area_key;
+        ROLL = rand() % 3;
 
         return NULL;
     }
@@ -146,8 +148,8 @@ Area *CREATE_AREA(int area_key)
     this->bag = CREATE_BAG();
     this->num_collidables = 0;
     this->num_npcs = 0;
-    this->map_w = 2048;
-    this->map_h = 1792;
+    this->map_w = 1239;
+    this->map_h = 1024;
     this->area_key = area_key;
     this->destroy = _destroy;
     this->last_x = 0;

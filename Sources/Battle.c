@@ -4,7 +4,30 @@
 */
 
 #include "Battle.h"
+
 uint32_t transition_delay1 = 200;
+
+int calculate_time_bar(int seconds, int width)
+{
+    if ((FRAMES_RENDERED % (60 / (width / seconds))) == 0)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+static void _update_time_bar(Window *time_bar, Character *character)
+{
+    if (calculate_time_bar(character->SPD, time_bar->original_width))
+    {
+        time_bar->rect.w++;
+        if (time_bar->timer_is_maxed(time_bar))
+        {
+            time_bar->rect.w = 0;
+        }
+    }
+}
+
 static void _destroy(Battle *this)
 {
     if (NULL != this)
@@ -13,20 +36,76 @@ static void _destroy(Battle *this)
         this = NULL;
     }
 }
-static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
+
+static void _render_line(Battle *this, struct SDL_Renderer *renderer, const char *str, SDL_Color color)
 {
-    this->textures = malloc(sizeof(struct SDL_Texture *) * BATTLE_LINEUP[this->area]->num_ints[this->roll]);
-    this->party_textures = malloc(sizeof(struct SDL_Texture *));
+    TTF_SizeText(this->font, str, &this->rect.w, &this->rect.h);
+    this->surface = TTF_RenderText_Solid(this->font, str, color);
+    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(this->texture);
+}
+
+static void _render_battle_menu_text(Battle *this, struct SDL_Renderer *renderer)
+{
+    int skip, x, y;
+    char font_path[] = "ponde___.ttf";
+
+    this->font = TTF_OpenFont(font_path, 10);
+
+    if (!this->font)
+    {
+        printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
+    }
+    x = 15;
+    y = 250;
+    this->rect.x = x;
+    this->rect.y = y;
+    skip = TTF_FontLineSkip(this->font);
+
     for (size_t i = 0; i < this->num_enemies; i++)
     {
-        this->textures[i] = create_texture(renderer, ENEMY_PATHS->list[BATTLE_LINEUP[this->area]->list[this->roll][i]], &this->rect);
+        this->render_line(this, renderer, ENEMIES->list[this->enemies[i]->key], WHITE);
+        this->rect.y += skip;
+    }
+    this->rect.y = y - 1;
+
+    for (size_t i = 0; i < NUM_CHARACTERS; i++)
+    {
+        this->party[i]->check_stats(this->party[i]);
+        this->rect.x = 130;
+        this->render_line(this, renderer, this->party[i]->name, WHITE);
+        this->rect.x += 60;
+        this->render_line(this, renderer, this->party[i]->HP.display, WHITE);
+        this->rect.y += skip + 4;
+    }
+    TTF_CloseFont(this->font);
+}
+
+static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
+{
+    int time_bar_x, time_bar_y;
+
+    time_bar_x = 290;
+    time_bar_y = 250;
+    this->enemies = (Enemy **)malloc(sizeof(Enemy *) * this->num_enemies);
+    this->textures_party = malloc(sizeof(struct SDL_Texture *) * NUM_CHARACTERS);
+    for (size_t i = 0; i < this->num_enemies; i++)
+    {
+        this->enemies[i] = load_enemy(BATTLE_LINEUP[this->area]->list[this->roll][i], renderer);
+        this->enemies[i]->rect.x = 35;
+        this->enemies[i]->rect.y = (WINDOW_HEIGHT / 2) - 50;
     }
     for (size_t k = 0; k < this->num_party; k++)
     {
-        this->party_textures[k] = create_texture(renderer, BATTLE_CHARACTER_GRAPHICS->list[k], &this->party_rect_2);
+        this->textures_party[k] = create_texture(renderer, BATTLE_CHARACTER_GRAPHICS->list[k], &this->party_rect_2);
+        this->time_bars[k] = CREATE_WINDOW(time_bar_x, time_bar_y, 50, 8);
+        this->time_bars[k]->rect.w = 0;
+        time_bar_y += 15;
     }
-    this->party_rect_1.x = 200;
-    this->party_rect_1.y = 100;
+    this->party_rect_1.x = 240;
+    this->party_rect_1.y = 90;
     this->party_rect_2.x = 0;
     this->party_rect_2.y = 0;
     this->party_rect_1.w = SPRITE_FRAME_WIDTH;
@@ -34,6 +113,7 @@ static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
     this->party_rect_2.w = SPRITE_FRAME_WIDTH;
     this->party_rect_2.h = SPRITE_FRAME_HEIGHT;
 }
+
 static void _render(Battle *this, struct SDL_Renderer *renderer)
 {
     if (INPUT == CANCEL)
@@ -49,16 +129,26 @@ static void _render(Battle *this, struct SDL_Renderer *renderer)
         NUM_STEPS = 0;
         return;
     }
+    int party_x, party_y;
+    party_x = this->party_rect_1.x;
+    party_y = this->party_rect_1.y;
     SDL_RenderCopy(renderer, this->back_ground, NULL, &this->bg_rect);
     this->window->render(this->window, renderer);
     for (size_t i = 0; i < this->num_enemies; i++)
     {
-        SDL_RenderCopy(renderer, this->textures[i], NULL, &this->rect);
+        this->enemies[i]->render(this->enemies[i], renderer);
     }
     for (size_t k = 0; k < this->num_party; k++)
     {
-        SDL_RenderCopy(renderer, this->party_textures[k], &this->party_rect_2, &this->party_rect_1);
+        this->update_time_bar(this->time_bars[k], this->party[k]);
+        SDL_RenderCopy(renderer, this->textures_party[k], &this->party_rect_2, &this->party_rect_1);
+        this->time_bars[k]->render_time_bar(this->time_bars[k], renderer);
+        this->party_rect_1.x += 15;
+        this->party_rect_1.y += 30;
     }
+    this->render_battle_menu_text(this, renderer);
+    this->party_rect_1.x = party_x;
+    this->party_rect_1.y = party_y;
 }
 
 Battle *CREATE_BATTLE(int area, int roll, struct SDL_Renderer *renderer, Character **party, int num_party)
@@ -67,6 +157,10 @@ Battle *CREATE_BATTLE(int area, int roll, struct SDL_Renderer *renderer, Charact
     this->destroy = _destroy;
     this->render = _render;
     this->create_battle_textures = _create_battle_textures;
+    this->update_time_bar = _update_time_bar;
+    this->render_battle_menu_text = _render_battle_menu_text;
+    this->render_line = _render_line;
+
     this->bg_rect.x = 0;
     this->bg_rect.y = 0;
     this->party = party;
@@ -74,6 +168,8 @@ Battle *CREATE_BATTLE(int area, int roll, struct SDL_Renderer *renderer, Charact
 
     this->back_ground = create_texture(renderer, BATTLE_BACKGROUNDS->list[area], &this->bg_rect);
     this->window = CREATE_WINDOW(5, 240, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 245);
+
+    this->time_bars = (Window **)malloc(sizeof(Window *) * NUM_CHARACTERS);
 
     this->roll = roll;
     this->area = area;

@@ -5,7 +5,6 @@
 #ifndef JRPG_WINDOW_H
 #define JRPG_WINDOW_H
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -17,9 +16,13 @@
 
 typedef struct __window
 {
-    void (*destroy) (struct __window *);
-
-    void (*create_borders) (struct __window *, int, struct SDL_Rect *);
+    void (*destroy)(struct __window *);
+    void (*create_borders)(struct __window *, int, struct SDL_Rect *);
+    void (*render)(struct __window *, struct SDL_Renderer *);
+    void (*render_color_bar)(struct __window **, struct SDL_Renderer *, int x, int y, int skip, int i);
+    int (*adjust_menu_colors)(struct __window *);
+    void (*render_time_bar)(struct __window *, struct SDL_Renderer *);
+    int (*timer_is_maxed)(struct __window *);
 
     struct SDL_Rect border_1;
     struct SDL_Rect border_2;
@@ -29,14 +32,13 @@ typedef struct __window
     struct SDL_Rect rect;
     int original_width;
     int color_value;
-
-    void (*render) (struct __window *, struct SDL_Renderer *);
-    void (*render_color_bar)(struct __window **, struct SDL_Renderer *, int x, int y, int skip, int i);
-    int (*adjust_menu_colors)(struct __window *);
     struct SDL_Color color_bar_color;
+    int seconds_passed;
+    int now;
+    int before;
 
 } Window;
 
-Window *CREATE_WINDOW (int, int, int, int);
+Window *CREATE_WINDOW(int, int, int, int);
 
 #endif //JRPG_WINDOW_H

@@ -24,18 +24,23 @@
 #include "Words.h"
 
 uint32_t transition_delay;
+void render_line(TTF_Font, char *str);
 
 typedef struct _menu
 {
     void (*destroy)(struct _menu *);
+    void (*render_line)(struct _menu *, struct SDL_Renderer * renderer, const char *str, SDL_Color color);
 
     Window *main_menu_bg;
 
     Window *select_character_bg;
 
     Window **load_save_bg;
+    Window **rgb_bars;
 
-    void (*render_character_stats)(struct _menu *, struct SDL_Renderer *, Hand *, int, int, int, int);
+    void (*render_character_stats)(struct _menu *, struct SDL_Renderer *,
+                                   Hand *, Character **party, int, int,
+                                   int, int);
 
     void (*render_character_main_menu_image)(struct _menu *, struct SDL_Renderer *, Hand *, Character **);
 
@@ -52,9 +57,9 @@ typedef struct _menu
     void (*render_config_menu)(struct _menu *, struct SDL_Renderer *, Hand *);
 
     int (*render_config_menu_options)(struct _menu *, struct SDL_Renderer *, Hand *, int);
-    
-    void (*change_window_color)(Window ** color_bars, int current_state);
-    
+
+    void (*change_window_color)(Window **color_bars, int current_state);
+
     void (*render_save_menu)(struct _menu *, struct SDL_Renderer *, Hand *);
 
     int (*render_save_menu_options)(struct _menu *, struct SDL_Renderer *, Hand *, int);

@@ -14,7 +14,7 @@ int wait_for_okay()
     MOVEMENT_DISABLED = 0;
     return 0;
 }
-int input_thread(void *data)
+int input_handler(void *data)
 {
     int in_loop = 1;
 
@@ -29,18 +29,13 @@ int input_thread(void *data)
     }
     return 0;
 }
+
 void get_player_input()
 {
     union SDL_Event ev;
-    // printf("\nInput: ");
-    /* for (int i = 0; i < 6; i++)
-    {
-        printf(" %d", USER_INPUTS[i]);
-    }*/
 
     while (SDL_PollEvent(&ev) != 0)
     {
-        int anything_pressed = 0;
         switch (ev.type)
         {
         case SDL_QUIT:
@@ -52,32 +47,26 @@ void get_player_input()
             case SDL_SCANCODE_S:
             case SDL_SCANCODE_DOWN:
                 USER_INPUTS[0] = 1;
-                anything_pressed = 1;
                 continue;
             case SDL_SCANCODE_W:
             case SDL_SCANCODE_UP:
                 USER_INPUTS[1] = 1;
-                anything_pressed = 1;
                 continue;
             case SDL_SCANCODE_A:
             case SDL_SCANCODE_LEFT:
                 USER_INPUTS[2] = 1;
-                anything_pressed = 1;
                 continue;
             case SDL_SCANCODE_D:
             case SDL_SCANCODE_RIGHT:
                 USER_INPUTS[3] = 1;
-                anything_pressed = 1;
                 continue;
             case SDL_SCANCODE_J:
                 USER_INPUTS[4] = 1;
                 INPUT = OKAY;
-                anything_pressed = 1;
                 continue;
             case SDL_SCANCODE_L:
                 USER_INPUTS[5] = 1;
                 INPUT = CANCEL;
-                anything_pressed = 1;
                 continue;
             default:
                 break;
@@ -116,17 +105,8 @@ void get_player_input()
             default:
                 break;
             }
-            break;
         default:
             break;
-        }
-        if (!anything_pressed)
-        {
-            IS_MOVING = 0;
-        }
-        else
-        {
-            IS_MOVING = 1;
         }
     }
 }

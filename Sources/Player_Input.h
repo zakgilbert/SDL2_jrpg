@@ -13,7 +13,7 @@
 #include <SDL2/SDL_image.h>
 #include "Header.h"
 
-int input_thread (void *data);
+int input_handler (void *data);
 void get_player_input();
 int wait_for_okay();
 #endif //JRPG_PLAYER_INPUT_H
