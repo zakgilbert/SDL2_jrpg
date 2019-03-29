@@ -118,7 +118,7 @@ static int _render_battle_menu_text(Battle *this, struct SDL_Renderer *renderer,
         {
             this->render_line(this, renderer, this->party[i]->name, GOLD);
         }
-        else 
+        else
         {
             this->render_line(this, renderer, this->party[i]->name, WHITE);
         }
@@ -164,7 +164,7 @@ static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
 
 static void _render(Battle *this, struct SDL_Renderer *renderer, Hand *hand)
 {
-    if (INPUT == CANCEL)
+    if (!this->battle_rages_on)
     {
         state = previous_state;
         previous_state = BATTLE;
@@ -215,9 +215,26 @@ static void _render(Battle *this, struct SDL_Renderer *renderer, Hand *hand)
             USER_INPUTS[4] = 0;
             hand->current_state = 0;
         }
+        else if (INPUT == CANCEL)
+        {
+            INPUT = NONE;
+            this->q->re_q(this->q, this->q->pop(this->q));
+        }
     }
     this->party_rect_1.x = party_x;
     this->party_rect_1.y = party_y;
+}
+
+static int _battle_rages_on(Battle *this)
+{
+    int hp_tot;
+    hp_tot = 0;
+
+    for (size_t i = 0; i < this->num_enemies; i++)
+    {
+        hp_tot += this->enemies[i]->HP.hp_current;
+    }
+    return hp_tot;
 }
 
 Battle *CREATE_BATTLE(int area, int roll, struct SDL_Renderer *renderer, Character **party, int num_party)
@@ -230,6 +247,7 @@ Battle *CREATE_BATTLE(int area, int roll, struct SDL_Renderer *renderer, Charact
     this->render_battle_menu_text = _render_battle_menu_text;
     this->render_action_menu_text = _render_action_menu_text;
     this->render_line = _render_line;
+    this->battle_rages_on = _battle_rages_on;
 
     this->bg_rect.x = 0;
     this->bg_rect.y = 0;

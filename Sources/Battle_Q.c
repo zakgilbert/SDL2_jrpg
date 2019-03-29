@@ -85,6 +85,18 @@ static struct node *_pop(Battle_Q *this)
     }
     return temp;
 }
+static void _re_q(Battle_Q *this, struct node *ode)
+{
+    struct node *data = ode;
+    if (NULL == this->rear)
+    {
+        this->front = data;
+        this->rear = data;
+        return;
+    }
+    this->rear->next = data;
+    this->rear = data;
+}
 
 Battle_Q *CREATE_BATTLE_Q()
 {
@@ -94,6 +106,7 @@ Battle_Q *CREATE_BATTLE_Q()
     this->print_q = _print_q;
     this->destroy = _destroy;
     this->new_node = _new_node;
+    this->re_q = _re_q;
     this->front = NULL;
     this->rear = NULL;
 

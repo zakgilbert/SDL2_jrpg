@@ -31,6 +31,7 @@ typedef struct _battle
     int (*render_battle_menu_text)(struct _battle *, struct SDL_Renderer *renderer, int index);
     int (*render_action_menu_text)(struct _battle *, Character * character, struct SDL_Renderer *renderer, int i, int current_state);
     void (*render_line)(struct _battle *, struct SDL_Renderer *renderer, const char *str, SDL_Color color);
+    int (*battle_rages_on)(struct _battle *);
 
     int num_enemies;
     char *enemy_paths;
