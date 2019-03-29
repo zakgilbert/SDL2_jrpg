@@ -49,9 +49,6 @@ typedef struct _battle
     struct SDL_Rect rect;
     struct SDL_Texture *back_ground;
     struct SDL_Rect bg_rect;
-    struct SDL_Texture **textures_party;
-    struct SDL_Rect party_rect_1;
-    struct SDL_Rect party_rect_2;
     struct SDL_Rect transition;
     Battle_Q *q;
     Window *window;

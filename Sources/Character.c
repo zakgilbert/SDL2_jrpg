@@ -67,6 +67,37 @@ static void __check_stats(Character *this)
     strcat(strcat(strcat(strcpy(this->MP.display, this->MP.name), this->MP.str_current), "/"), this->MP.str_max);
     strcat(strcat(strcat(strcpy(this->EXP.display, this->EXP.name), this->EXP.str_current), "/"), this->EXP.str_max);
 }
+static void __create_battle_textures(Character *this, struct SDL_Renderer *renderer)
+{
+    this->textures_party = malloc(sizeof(struct SDL_Texture *) * NUM_CHARACTERS);
+    for (size_t k = 0; k < NUM_CHARACTERS; k++)
+    {
+        this->textures_party[k] = create_texture(renderer, BATTLE_CHARACTER_GRAPHICS->list[k], &this->party_rect_2);
+    }
+    this->party_rect_1.x = 240;
+    this->party_rect_1.y = 90;
+    this->party_rect_2.x = 0;
+    this->party_rect_2.y = 0;
+    this->party_rect_1.w = SPRITE_FRAME_WIDTH;
+    this->party_rect_1.h = SPRITE_FRAME_HEIGHT;
+    this->party_rect_2.w = SPRITE_FRAME_WIDTH;
+    this->party_rect_2.h = SPRITE_FRAME_HEIGHT;
+}
+static void __render_battle_textures(Character *this, struct SDL_Renderer *renderer)
+{
+    int party_x, party_y;
+    party_x = this->party_rect_1.x;
+    party_y = this->party_rect_1.y;
+
+    for (size_t k = 0; k < NUM_CHARACTERS; k++)
+    {
+        SDL_RenderCopy(renderer, this->textures_party[k], &this->party_rect_2, &this->party_rect_1);
+        this->party_rect_1.x += 15;
+        this->party_rect_1.y += 30;
+    }
+    this->party_rect_1.x = party_x;
+    this->party_rect_1.y = party_y;
+}
 static void __set_stats(Character *this, const char *name, const char *age, char *job, int HP, int MP, int EXP, const char *image_path)
 {
     this->name = name;
@@ -98,6 +129,8 @@ Character *CREATE_CHARACTER(int key)
     this->create_character_texture = __create_character_texture;
     this->destroy_party = __destroy_party;
     this->update_party_stats = _update_party_stats;
+    this->create_battle_textures = __create_battle_textures;
+    this->render_battle_textures = __render_battle_textures;
     this->key = key;
     this->num_stats = 1;
     this->in_action_queue = 0;

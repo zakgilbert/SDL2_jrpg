@@ -9,6 +9,7 @@
 #include <SDL2/SDL_thread.h>
 
 #include "Header.h"
+#include "Graphics.h"
 
 struct Main_Attribute
 {
@@ -27,10 +28,15 @@ typedef struct __character
     void (*set_stats)(struct __character *, const char *name, const char *age, char *job, int HP, int MP, int EXP, const char *image_path);
     void (*check_stats)(struct __character *);
     void (*create_character_texture)(struct __character *, struct SDL_Renderer *);
+    void (*create_battle_textures)(struct __character *, struct SDL_Renderer *renderer);
+    void (*render_battle_textures)(struct __character *, struct SDL_Renderer *renderer);
     int (*update_party_stats)(struct __character **);
     int update_stats;
     struct SDL_Texture *character_texture;
     struct SDL_Rect character_rect;
+    struct SDL_Texture **textures_party;
+    struct SDL_Rect party_rect_1;
+    struct SDL_Rect party_rect_2;
 
     const char *image_path;
     const char *name;
