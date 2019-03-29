@@ -23,6 +23,7 @@
 #include "Battle.h"
 #include "Assets.h"
 #include "Enemy.h"
+#include "Battle_Q.h"
 
 int main(int argc, char **argv)
 {
@@ -167,7 +168,7 @@ int main(int argc, char **argv)
             }
 
             SDL_RenderClear(renderer);
-            current_battle->render(current_battle, renderer);
+            current_battle->render(current_battle, renderer, hand);
             SDL_RenderPresent(renderer);
             if(previous_state == BATTLE)
             {

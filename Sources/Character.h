@@ -36,12 +36,16 @@ typedef struct __character
     const char *name;
     const char *age;
     char *job;
+    int *actions;
+    int num_actions;
     int num_stats;
+    int in_action_queue;
     struct Main_Attribute HP;
     struct Main_Attribute MP;
     struct Main_Attribute EXP;
     int SPD;
     int key;
+    int type;
 
 } Character;
 

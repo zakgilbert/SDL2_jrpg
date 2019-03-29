@@ -32,6 +32,7 @@ typedef struct _Enemy
     struct SDL_Rect rect;
     int SPD;
     int key;
+    int type;
 } Enemy;
 Enemy *CREATE_ENEMY(int key, struct SDL_Renderer * renderer);
 #endif /* ENEMY_H */

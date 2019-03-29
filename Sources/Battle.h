@@ -16,6 +16,9 @@
 #include "Hero.h"
 #include "Enemy.h"
 #include "Assets.h"
+#include "Hand.h"
+#include "Words.h"
+#include "Battle_Q.h"
 
 uint32_t transition_delay1;
 int calculate_time_bar(int seconds, int width);
@@ -23,10 +26,11 @@ typedef struct _battle
 {
     void (*destroy)(struct _battle *);
     void (*create_battle_textures)(struct _battle *, struct SDL_Renderer *renderer);
-    void (*render)(struct _battle *, struct SDL_Renderer *renderer);
-    void (*update_time_bar)(Window *time_bar, Character *character);
-    void (*render_battle_menu_text)(struct _battle *, struct SDL_Renderer * renderer);
-    void (*render_line)(struct _battle *, struct SDL_Renderer * renderer, const char * str, SDL_Color color);
+    void (*render)(struct _battle *, struct SDL_Renderer *renderer, Hand *hand);
+    int (*update_time_bar)(Window *time_bar, Character *character);
+    int (*render_battle_menu_text)(struct _battle *, struct SDL_Renderer *renderer, int index);
+    int (*render_action_menu_text)(struct _battle *, Character * character, struct SDL_Renderer *renderer, int i, int current_state);
+    void (*render_line)(struct _battle *, struct SDL_Renderer *renderer, const char *str, SDL_Color color);
 
     int num_enemies;
     char *enemy_paths;
@@ -35,9 +39,12 @@ typedef struct _battle
     TTF_Font *font;
 
     Enemy **enemies;
-    struct SDL_Texture * texture;
-    struct SDL_Surface * surface;
-    
+    struct SDL_Texture *texture;
+    struct SDL_Surface *surface;
+    int *action_queue;
+    int action_q_index;
+    int action_q_count;
+
     struct SDL_Rect rect;
     struct SDL_Texture *back_ground;
     struct SDL_Rect bg_rect;
@@ -45,8 +52,10 @@ typedef struct _battle
     struct SDL_Rect party_rect_1;
     struct SDL_Rect party_rect_2;
     struct SDL_Rect transition;
+    Battle_Q *q;
     Window *window;
     Window **time_bars;
+    Window *action_window;
 
     Character **party;
     int num_party;

@@ -24,6 +24,7 @@ Enemy *CREATE_ENEMY(int key, struct SDL_Renderer *renderer)
     this->key = key;
     this->destroy = _destroy;
     this->render = _render;
+    this->type = MONSTER;
 
     this->texture = create_texture(renderer, ENEMY_PATHS->list[key], &this->rect);
     return this;

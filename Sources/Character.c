@@ -100,6 +100,8 @@ Character *CREATE_CHARACTER(int key)
     this->update_party_stats = _update_party_stats;
     this->key = key;
     this->num_stats = 1;
+    this->in_action_queue = 0;
+    this->type = PARTY_MEMBER;
     strcpy(this->HP.name, "HP: ");
     strcpy(this->MP.name, "MP: ");
     strcpy(this->EXP.name, "EXP:");

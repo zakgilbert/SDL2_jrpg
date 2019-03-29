@@ -89,9 +89,11 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
     Character **party;
     int *character_keys;
     int num_members;
+    int num_actions;
     char *path = malloc(50);
 
     num_members = 0;
+    num_actions = 0;
     character_keys = NULL;
 
     in = fopen(strcat(strcpy(path, SAVE_PATHS->list[save_state]), "party.txt"), "r");
@@ -133,6 +135,16 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
     for (size_t i = 0; i < num_members; i++)
     {
         fscanf(in, "%d", &party[i]->SPD);
+    }
+    for (size_t i = 0; i < num_members; i++)
+    {
+        fscanf(in, "%d", &num_actions);
+        party[i]->actions = (int *)malloc(sizeof(int) * num_actions);
+        for (size_t k = 0; k < num_actions; k++)
+        {
+            fscanf(in, "%d", &party[i]->actions[k]);
+        }
+        party[i]->num_actions = num_actions;
     }
     fclose(in);
     free(path);
@@ -191,6 +203,10 @@ void SET_GLOBALS()
     MENU_BACKGROUND.r = 52;
     MENU_BACKGROUND.g = 104;
     MENU_BACKGROUND.b = 188;
+
+    GOLD.r = 244;
+    GOLD.g = 182;
+    GOLD.b = 66;
 
     RED.r = 255;
     RED.g = 66;

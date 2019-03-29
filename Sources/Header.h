@@ -56,8 +56,8 @@ extern int GAME_SECS;
 extern int ROLL;
 extern struct SDL_Color WHITE;
 extern struct SDL_Color GREY;
-extern struct SDL_Color GREY;
 extern struct SDL_Color MENU_BACKGROUND;
+extern struct SDL_Color GOLD;
 extern struct SDL_Color RED;
 extern struct SDL_Color BLU;
 extern struct SDL_Color GRN;
@@ -87,6 +87,11 @@ enum states
     BATTLE
 };
 enum states state, previous_state;
+
+enum BATTLE_TYPES{
+    PARTY_MEMBER,
+    MONSTER
+};
 
 enum CHARACTERS
 {
@@ -157,6 +162,7 @@ enum NPC_TYPES
     ONE_FRAME
 };
 
+
 enum DIRECTION_FACING
 {
     DOWN,
@@ -200,6 +206,7 @@ int ROLL;
 struct SDL_Color WHITE;
 struct SDL_Color GREY;
 struct SDL_Color MENU_BACKGROUND;
+struct SDL_Color GOLD;
 struct SDL_Color RED;
 struct SDL_Color BLU;
 struct SDL_Color GRN;

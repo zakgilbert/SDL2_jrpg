@@ -20,6 +20,11 @@
     MENU_OPTION(Save)                    \
     MENU_OPTION(Exit)
 
+#define FOREACH_ACTION_OPTION(ACTION_OPTION) \
+    ACTION_OPTION(Attack)                    \
+    ACTION_OPTION(Spell)                     \
+    ACTION_OPTION(Quaff)
+
 #define GERERATE_ENUM(ENUM) ENUM,
 #define GENERATE_STRING(STRING) #STRING,
 
@@ -37,6 +42,11 @@ typedef enum
 {
     FOREACH_MENU_OPTION(GERERATE_ENUM)
 } MENU_OPTION_ENUM;
+
+typedef enum
+{
+    FOREACH_ACTION_OPTION(GERERATE_ENUM)
+} ACTION_OPTION_ENUM;
 
 extern int ITEM_QUANTITY;
 #endif

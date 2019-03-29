@@ -7,6 +7,9 @@
 
 uint32_t transition_delay1 = 200;
 
+static const char *ACTION_STRS[] = {
+    FOREACH_ACTION_OPTION(GENERATE_STRING)};
+
 int calculate_time_bar(int seconds, int width)
 {
     if ((FRAMES_RENDERED % (60 / (width / seconds))) == 0)
@@ -16,16 +19,19 @@ int calculate_time_bar(int seconds, int width)
     return 0;
 }
 
-static void _update_time_bar(Window *time_bar, Character *character)
+static int _update_time_bar(Window *time_bar, Character *character)
 {
-    if (calculate_time_bar(character->SPD, time_bar->original_width))
+    int result = 0;
+    if (time_bar->timer_is_maxed(time_bar))
+    {
+        character->in_action_queue = 1;
+        result = 1;
+    }
+    else if (calculate_time_bar(character->SPD, time_bar->original_width))
     {
         time_bar->rect.w++;
-        if (time_bar->timer_is_maxed(time_bar))
-        {
-            time_bar->rect.w = 0;
-        }
     }
+    return result;
 }
 
 static void _destroy(Battle *this)
@@ -47,7 +53,40 @@ static void _render_line(Battle *this, struct SDL_Renderer *renderer, const char
     SDL_DestroyTexture(this->texture);
 }
 
-static void _render_battle_menu_text(Battle *this, struct SDL_Renderer *renderer)
+static int _render_action_menu_text(Battle *this, Character *character, struct SDL_Renderer *renderer, int i, int current_state)
+{
+    int skip, x, y;
+    char font_path[] = "ponde___.ttf";
+
+    this->font = TTF_OpenFont(font_path, 10);
+
+    if (!this->font)
+    {
+        printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
+    }
+    x = 200;
+    y = 250;
+    this->rect.x = x;
+    this->rect.y = y;
+
+    skip = TTF_FontLineSkip(this->font);
+    for (size_t k = 0; k < character->num_actions; k++)
+    {
+        if (k == current_state)
+        {
+            this->render_line(this, renderer, ACTION_STRS[character->actions[k]], GOLD);
+        }
+        else
+        {
+            this->render_line(this, renderer, ACTION_STRS[character->actions[k]], WHITE);
+        }
+        this->rect.y += skip;
+    }
+
+    TTF_CloseFont(this->font);
+    return skip;
+}
+static int _render_battle_menu_text(Battle *this, struct SDL_Renderer *renderer, int index)
 {
     int skip, x, y;
     char font_path[] = "ponde___.ttf";
@@ -75,12 +114,20 @@ static void _render_battle_menu_text(Battle *this, struct SDL_Renderer *renderer
     {
         this->party[i]->check_stats(this->party[i]);
         this->rect.x = 130;
-        this->render_line(this, renderer, this->party[i]->name, WHITE);
+        if (index == i)
+        {
+            this->render_line(this, renderer, this->party[i]->name, GOLD);
+        }
+        else 
+        {
+            this->render_line(this, renderer, this->party[i]->name, WHITE);
+        }
         this->rect.x += 60;
         this->render_line(this, renderer, this->party[i]->HP.display, WHITE);
         this->rect.y += skip + 4;
     }
     TTF_CloseFont(this->font);
+    return 0;
 }
 
 static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
@@ -89,6 +136,7 @@ static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
 
     time_bar_x = 290;
     time_bar_y = 250;
+    this->action_window = CREATE_WINDOW(192, 240, 85, WINDOW_HEIGHT - 245);
     this->enemies = (Enemy **)malloc(sizeof(Enemy *) * this->num_enemies);
     this->textures_party = malloc(sizeof(struct SDL_Texture *) * NUM_CHARACTERS);
     for (size_t i = 0; i < this->num_enemies; i++)
@@ -114,7 +162,7 @@ static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
     this->party_rect_2.h = SPRITE_FRAME_HEIGHT;
 }
 
-static void _render(Battle *this, struct SDL_Renderer *renderer)
+static void _render(Battle *this, struct SDL_Renderer *renderer, Hand *hand)
 {
     if (INPUT == CANCEL)
     {
@@ -140,13 +188,34 @@ static void _render(Battle *this, struct SDL_Renderer *renderer)
     }
     for (size_t k = 0; k < this->num_party; k++)
     {
-        this->update_time_bar(this->time_bars[k], this->party[k]);
+        if (!this->party[k]->in_action_queue && this->update_time_bar(this->time_bars[k], this->party[k]))
+        {
+            this->q->add(this->q, this->party[k]->key, this->party[k]->type, k);
+        }
         SDL_RenderCopy(renderer, this->textures_party[k], &this->party_rect_2, &this->party_rect_1);
         this->time_bars[k]->render_time_bar(this->time_bars[k], renderer);
         this->party_rect_1.x += 15;
         this->party_rect_1.y += 30;
     }
-    this->render_battle_menu_text(this, renderer);
+    if (NULL == this->q->front)
+    {
+        this->render_battle_menu_text(this, renderer, -1);
+    }
+    else if (NULL != this->q->front)
+    {
+        this->render_battle_menu_text(this, renderer, this->q->front->index);
+        hand->change_state_quantity(hand, this->party[this->q->front->index]->num_actions - 1, 0);
+        this->action_window->render(this->action_window, renderer);
+        hand->move_vertical(hand, this->render_action_menu_text(this, this->party[this->q->front->index], renderer, this->q->front->index, hand->current_state));
+        if (USER_INPUTS[4])
+        {
+            this->time_bars[this->q->front->index]->rect.w = 0;
+            this->party[this->q->front->index]->in_action_queue = 0;
+            this->q->pop(this->q);
+            USER_INPUTS[4] = 0;
+            hand->current_state = 0;
+        }
+    }
     this->party_rect_1.x = party_x;
     this->party_rect_1.y = party_y;
 }
@@ -159,6 +228,7 @@ Battle *CREATE_BATTLE(int area, int roll, struct SDL_Renderer *renderer, Charact
     this->create_battle_textures = _create_battle_textures;
     this->update_time_bar = _update_time_bar;
     this->render_battle_menu_text = _render_battle_menu_text;
+    this->render_action_menu_text = _render_action_menu_text;
     this->render_line = _render_line;
 
     this->bg_rect.x = 0;
@@ -181,5 +251,8 @@ Battle *CREATE_BATTLE(int area, int roll, struct SDL_Renderer *renderer, Charact
     this->transition.y = 0;
     this->transition.w = WINDOW_WIDTH;
     this->transition.h = WINDOW_HEIGHT;
+
+    this->q = CREATE_BATTLE_Q();
+
     return this;
 }
