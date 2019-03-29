@@ -21,37 +21,46 @@ struct Main_Attribute
     char name[10];
 };
 
-typedef struct __character
+typedef struct _Character
 {
-    void (*destroy)(struct __character *);
-    void (*destroy_party)(struct __character **);
-    void (*set_stats)(struct __character *, const char *name, const char *age, char *job, int HP, int MP, int EXP, const char *image_path);
-    void (*check_stats)(struct __character *);
-    void (*create_character_texture)(struct __character *, struct SDL_Renderer *);
-    void (*create_battle_textures)(struct __character *, struct SDL_Renderer *renderer);
-    void (*render_battle_textures)(struct __character *, struct SDL_Renderer *renderer);
-    int (*update_party_stats)(struct __character **);
-    int update_stats;
+    /**
+     * destroy
+     */
+    void (*destroy)(struct _Character *);
+    void (*destroy_party)(struct _Character **);
+    void (*check_stats)(struct _Character *);
+    void (*create_battle_textures)(struct _Character *, struct SDL_Renderer *renderer);
+    void (*render_battle_textures)(struct _Character *, struct SDL_Renderer *renderer);
+    int (*update_party_stats)(struct _Character **);
+    int (*animate)(struct _Character *, int key);
+    int (*cast)(struct _Character *);
+    int (*in_animation)(struct _Character *);
+
     struct SDL_Texture *character_texture;
     struct SDL_Rect character_rect;
     struct SDL_Texture **textures_party;
     struct SDL_Rect party_rect_1;
     struct SDL_Rect party_rect_2;
 
+    struct Main_Attribute HP;
+    struct Main_Attribute MP;
+    struct Main_Attribute EXP;
+
     const char *image_path;
     const char *name;
     const char *age;
     char *job;
+    int SPD;
+    int key;
+    int type;
     int *actions;
     int num_actions;
     int num_stats;
     int in_action_queue;
-    struct Main_Attribute HP;
-    struct Main_Attribute MP;
-    struct Main_Attribute EXP;
-    int SPD;
-    int key;
-    int type;
+    int update_stats;
+    int animation_duration;
+    int current_animation_time;
+    
 
 } Character;
 

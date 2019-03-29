@@ -111,7 +111,7 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
         party[i]->age = CHARACTER_AGES->list[character_keys[i]];
         party[i]->job = CHARACTER_JOBS->list[character_keys[i]];
         party[i]->image_path = CHARACTER_BIO_PATHS->list[character_keys[i]];
-        party[i]->create_character_texture(party[i], renderer);
+        party[i]->character_texture = create_texture(renderer, party[i]->image_path, &party[i]->character_rect);
     }
 
     for (size_t i = 0; i < num_members; i++)

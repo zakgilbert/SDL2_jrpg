@@ -87,11 +87,12 @@ enum states
     BATTLE
 };
 enum states state, previous_state;
-
-enum BATTLE_TYPES{
-    PARTY_MEMBER,
-    MONSTER
+enum CHARACTER_BATTLE_ANIMATION
+{
+    ATK,
+    CST
 };
+enum CHARACTER_BATTLE_ANIMATION CURRENT_CHARACTER_BATTLE_ANIMATION;
 
 enum CHARACTERS
 {
@@ -150,6 +151,12 @@ enum MESSAGE_TYPES
 };
 enum MESSAGE_TYPES MESSAGE_TYPE;
 
+enum BATTLE_MEMBER_TYPE
+{
+    PARTY_MEMBER,
+    MONSTER
+};
+
 enum NPCS
 {
     GIGAS,
@@ -161,7 +168,6 @@ enum NPC_TYPES
     SPRITE,
     ONE_FRAME
 };
-
 
 enum DIRECTION_FACING
 {
