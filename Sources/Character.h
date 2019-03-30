@@ -10,6 +10,7 @@
 
 #include "Header.h"
 #include "Graphics.h"
+#include "Hero.h"
 
 struct Main_Attribute
 {
@@ -21,6 +22,9 @@ struct Main_Attribute
     char name[10];
 };
 
+void stand_battle_ani(struct SDL_Rect *rect);
+int cast_1_battle_ani(struct SDL_Rect *rect);
+int cast_2_battle_ani(struct SDL_Rect *rect);
 typedef struct _Character
 {
     /**
@@ -32,9 +36,9 @@ typedef struct _Character
     void (*create_battle_textures)(struct _Character *, struct SDL_Renderer *renderer);
     void (*render_battle_textures)(struct _Character *, struct SDL_Renderer *renderer);
     int (*update_party_stats)(struct _Character **);
-    int (*animate)(struct _Character *, int key);
+    int (*animate)(struct _Character *);
     int (*cast)(struct _Character *);
-    int (*in_animation)(struct _Character *);
+    int (*cast_ptr[2])(struct SDL_Rect *rect);
 
     struct SDL_Texture *character_texture;
     struct SDL_Rect character_rect;
@@ -58,9 +62,10 @@ typedef struct _Character
     int num_stats;
     int in_action_queue;
     int update_stats;
-    int animation_duration;
-    int current_animation_time;
-    
+    int animation_total_frames;
+    int current_animation_frame;
+    int ani_i;
+    int in_animation;
 
 } Character;
 

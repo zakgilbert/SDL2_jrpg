@@ -2,6 +2,23 @@
 
 #include "Character.h"
 
+void stand_battle_ani(struct SDL_Rect *rect)
+{
+    rect->x = 0;
+    rect->y = 0;
+}
+int cast_1_battle_ani(struct SDL_Rect *rect)
+{
+    rect->x = 32;
+    rect->y = 0;
+    return 0;
+}
+int cast_2_battle_ani(struct SDL_Rect *rect)
+{
+    rect->x = 32;
+    rect->y = 32;
+    return 0;
+}
 static void _destroy(Character *this)
 {
     SDL_DestroyTexture(this->character_texture);
@@ -61,12 +78,50 @@ static void _create_battle_textures(Character *this, struct SDL_Renderer *render
     this->party_rect_2.w = SPRITE_FRAME_WIDTH;
     this->party_rect_2.h = SPRITE_FRAME_HEIGHT;
 }
+static int _cast(Character *this)
+{
+    if (!this->in_animation)
+    {
+        this->in_animation = 1;
+        this->current_animation_frame = 0;
+        this->animation_total_frames = 1000;
+    }
+    else if (this->current_animation_frame >= this->animation_total_frames)
+    {
+        this->in_animation = 0;
+    }
+    if (time_to_animate())
+    {
+        (*this->cast_ptr[this->ani_i])(&this->party_rect_2);
+        this->ani_i = !(this->ani_i);
+    }
+    return this->in_animation;
+}
+
+static int _animate(Character *this)
+{
+    switch (CURRENT_CHARACTER_BATTLE_ANIMATION)
+    {
+    case ATK:
+
+        break;
+    case CST:
+
+        break;
+    case NOT_ANIMATING_BATTLE_CHARACTER:
+        break;
+
+    default:
+        break;
+    }
+}
 static void _render_battle_textures(Character *this, struct SDL_Renderer *renderer)
 {
     int party_x, party_y;
     party_x = this->party_rect_1.x;
     party_y = this->party_rect_1.y;
 
+    this->cast(this);
     for (size_t k = 0; k < NUM_CHARACTERS; k++)
     {
         SDL_RenderCopy(renderer, this->textures_party[k], &this->party_rect_2, &this->party_rect_1);
@@ -87,12 +142,16 @@ Character *CREATE_CHARACTER(int key)
     this->update_party_stats = _update_party_stats;
     this->create_battle_textures = _create_battle_textures;
     this->render_battle_textures = _render_battle_textures;
-    
+    this->animate = _animate;
+    this->cast = _cast;
+    this->cast_ptr[0] = cast_1_battle_ani;
+    this->cast_ptr[1] = cast_2_battle_ani;
     this->key = key;
     this->num_stats = 1;
     this->in_action_queue = 0;
     this->type = PARTY_MEMBER;
     this->in_animation = 0;
+    this->ani_i = 0;
 
     strcpy(this->HP.name, "HP: ");
     strcpy(this->MP.name, "MP: ");

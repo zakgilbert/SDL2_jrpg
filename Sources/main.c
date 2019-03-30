@@ -60,7 +60,6 @@ int main(int argc, char **argv)
     SDL_Thread *input_thread;
 
     Battle *current_battle = NULL;
-
     Character **party = load_party(0, renderer);
 
     int dark_forest_npcs[2] = {GIGAS, SASH};
