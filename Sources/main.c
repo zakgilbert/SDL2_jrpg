@@ -215,13 +215,21 @@ void set_fullscreen(struct SDL_Window *window, Hero *hero)
     if (FULLSCREEN_ON)
     {
         SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+        hero->rect_pos.x = get_middle_x(WINDOW_WIDTH, HERO_WIDTH);
+        hero->rect_pos.y = get_middle_y(WINDOW_HEIGHT, HERO_HEIGHT);
+        printf("X: %d\nY: %d\n", hero->rect_pos.x, hero->rect_pos.y);
+        COLLISION_X = 246;
+        COLLISION_Y = 186;
     }
     else
     {
         SDL_SetWindowFullscreen(window, 0);
+        hero->rect_pos.x = get_middle_x(WINDOW_WIDTH, HERO_WIDTH);
+        hero->rect_pos.y = get_middle_y(WINDOW_HEIGHT, HERO_HEIGHT);
+        printf("X: %d\nY: %d\n", hero->rect_pos.x, hero->rect_pos.y);
+        COLLISION_X = 162;
+        COLLISION_Y = 142;
     }
-    hero->rect_pos.x = get_middle_x(WINDOW_WIDTH, 16);
-    hero->rect_pos.y = get_middle_y(WINDOW_HEIGHT, 24);
 }
 int refresh_inputs(int *array, int size, int bol)
 {

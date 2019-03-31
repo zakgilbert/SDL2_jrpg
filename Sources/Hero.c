@@ -62,12 +62,12 @@ static void __set_texture(Hero *obj, struct SDL_Renderer *renderer, char *path)
 
     obj->rect.x = 0;
     obj->rect.y = 0;
-    obj->rect.w = 16;
-    obj->rect.h = 24;
-    obj->rect_pos.x = get_middle_x(WINDOW_WIDTH, 16);
-    obj->rect_pos.y = get_middle_y(WINDOW_HEIGHT, 24);
-    obj->rect_pos.w = 16;
-    obj->rect_pos.h = 24;
+    obj->rect.w = HERO_WIDTH;
+    obj->rect.h = HERO_HEIGHT;
+    obj->rect_pos.x = get_middle_x(WINDOW_WIDTH, HERO_WIDTH);
+    obj->rect_pos.y = get_middle_y(WINDOW_HEIGHT, HERO_HEIGHT);
+    obj->rect_pos.w = HERO_WIDTH;
+    obj->rect_pos.h = HERO_HEIGHT;
 
     obj->texture = texture;
 }
@@ -84,7 +84,7 @@ static SDL_Rect *__get_rect_pos_pointer(Hero *obj)
 
 static void __render(Hero *obj, struct SDL_Renderer *renderer)
 {
-    SDL_RenderCopy(renderer, obj->texture, obj->get_rect_pointer(obj), obj->get_rect_pos_pointer(obj));
+    SDL_RenderCopy(renderer, obj->texture, &obj->rect, &obj->rect_pos);
 }
 
 static void __animate_down(Hero *obj)

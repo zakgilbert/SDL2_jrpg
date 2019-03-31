@@ -41,6 +41,8 @@ extern int Y;
 extern int TICK;
 extern int MAP_WIDTH;
 extern int MAP_HEIGHT;
+extern int COLLISION_X;
+extern int COLLISION_Y;
 extern int REFRESH_ITEMS;
 extern int HERO_WIDTH;
 extern int HERO_HEIGHT;
@@ -194,6 +196,8 @@ int HERO_HEIGHT;
 
 int NUM_STATS;
 int NUM_AREAS;
+int COLLISION_X;
+int COLLISION_Y;
 int X;
 int Y;
 int TICK;
