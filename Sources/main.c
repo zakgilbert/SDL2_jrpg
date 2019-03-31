@@ -80,7 +80,7 @@ int main(int argc, char **argv)
 
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
     input_thread = SDL_CreateThread(input_handler, "input_handler", NULL);
-
+    party[0]->in_animation = -1;
     while (running)
     {
         start_timer();
@@ -220,8 +220,6 @@ void set_fullscreen(struct SDL_Window *window, Hero *hero)
     else
     {
         SDL_SetWindowFullscreen(window, 0);
-        hero->rect_pos.x = get_middle_x(WINDOW_WIDTH, HERO_WIDTH);
-        hero->rect_pos.y = get_middle_y(WINDOW_HEIGHT, HERO_HEIGHT);
     }
 }
 int refresh_inputs(int *array, int size, int bol)
