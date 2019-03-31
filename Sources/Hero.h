@@ -11,7 +11,8 @@
 #include <SDL2/SDL_image.h>
 #include "Header.h"
 
-int get_middle (int, int);
+int get_middle_x (int, int);
+int get_middle_y (int, int);
 
 int time_to_animate ();
 

@@ -1,8 +1,20 @@
 
 #include "Hero.h"
 
-int get_middle(int frame_size, int sprite_size)
+int get_middle_x(int frame_size, int sprite_size)
 {
+    if (FULLSCREEN_ON)
+    {
+        return (frame_size / 2) + (sprite_size * 4) + (sprite_size / 4);
+    }
+    return (frame_size / 2) - (sprite_size / 2);
+}
+int get_middle_y(int frame_size, int sprite_size)
+{
+    if (FULLSCREEN_ON)
+    {
+        return (frame_size / 2) + (sprite_size);
+    }
     return (frame_size / 2) - (sprite_size / 2);
 }
 
@@ -50,12 +62,12 @@ static void __set_texture(Hero *obj, struct SDL_Renderer *renderer, char *path)
 
     obj->rect.x = 0;
     obj->rect.y = 0;
-    obj->rect.w = SPRITE_FRAME_WIDTH;
-    obj->rect.h = SPRITE_FRAME_HEIGHT;
-    obj->rect_pos.x = get_middle(WINDOW_WIDTH, SPRITE_FRAME_WIDTH);
-    obj->rect_pos.y = get_middle(WINDOW_HEIGHT, SPRITE_FRAME_HEIGHT);
-    obj->rect_pos.w = SPRITE_FRAME_WIDTH;
-    obj->rect_pos.h = SPRITE_FRAME_HEIGHT;
+    obj->rect.w = 16;
+    obj->rect.h = 24;
+    obj->rect_pos.x = get_middle_x(WINDOW_WIDTH, 16);
+    obj->rect_pos.y = get_middle_y(WINDOW_HEIGHT, 24);
+    obj->rect_pos.w = 16;
+    obj->rect_pos.h = 24;
 
     obj->texture = texture;
 }

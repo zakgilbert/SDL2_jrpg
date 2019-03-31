@@ -74,7 +74,7 @@ int main(int argc, char **argv)
                                dark_forest_npcs, dark_forest_npc_types, 2,
                                dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
 
-    hero->set_texture(hero, renderer, "graphics/LOCKE.png");
+    hero->set_texture(hero, renderer, "graphics/locke_map.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
 
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
@@ -85,7 +85,7 @@ int main(int argc, char **argv)
         start_timer();
         refresh_inputs(EDGE_DETECTION, 4, movement());
         game_collision->update_collidables(game_collision, state);
-        set_fullscreen(window);
+        set_fullscreen(window, hero);
         switch (state)
         {
         case DARK_FOREST:
@@ -210,15 +210,18 @@ int main(int argc, char **argv)
     return 0;
 }
 
-void set_fullscreen(struct SDL_Window *window)
+void set_fullscreen(struct SDL_Window *window, Hero *hero)
 {
     if (FULLSCREEN_ON)
     {
         SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
-        
-    }else {
+    }
+    else
+    {
         SDL_SetWindowFullscreen(window, 0);
     }
+    hero->rect_pos.x = get_middle_x(WINDOW_WIDTH, 16);
+    hero->rect_pos.y = get_middle_y(WINDOW_HEIGHT, 24);
 }
 int refresh_inputs(int *array, int size, int bol)
 {

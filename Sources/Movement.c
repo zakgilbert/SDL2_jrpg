@@ -25,6 +25,7 @@ int movement()
     }
     if (change_position())
     {
+        bounds();
         result = 1;
     }
     return result;
@@ -86,24 +87,24 @@ int change_position()
 
 void bounds()
 {
-    if (X < 0)
+    if (X > 0)
     {
         EDGE_DETECTION[0] = 1;
         X = 0;
     }
-    if (X > (MAP_WIDTH - WINDOW_WIDTH))
+    if (X < -(MAP_WIDTH - (WINDOW_WIDTH / 2)))
     {
-        X = (MAP_WIDTH - WINDOW_WIDTH);
+        X = -(MAP_WIDTH - (WINDOW_WIDTH / 2));
         EDGE_DETECTION[1] = 1;
     }
-    if (Y < 0)
+    if (Y > 0)
     {
         Y = 0;
         EDGE_DETECTION[2] = 1;
     }
-    if (Y > (MAP_HEIGHT - WINDOW_HEIGHT))
+    if (Y < -(MAP_HEIGHT - (WINDOW_HEIGHT / 2)))
     {
-        Y = (MAP_HEIGHT - WINDOW_HEIGHT);
+        Y = -(MAP_HEIGHT - (WINDOW_HEIGHT / 2));
         EDGE_DETECTION[3] = 1;
     }
 }

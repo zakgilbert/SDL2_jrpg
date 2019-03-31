@@ -233,5 +233,4 @@ int refresh_inputs(int *, int, int);
 void set_items(int *);
 int quit();
 int render_thread(void *);
-void set_fullscreen(struct SDL_Window * window);
 #endif 
