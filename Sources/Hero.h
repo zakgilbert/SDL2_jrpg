@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/24/19.
-//
 
 #ifndef JRPG_HERO_H
 #define JRPG_HERO_H
@@ -51,4 +48,4 @@ typedef struct __hero
 
 Hero *CREATE_HERO ();
 
-#endif //JRPG_HERO_H
+#endif 

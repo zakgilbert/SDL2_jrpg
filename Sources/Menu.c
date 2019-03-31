@@ -1,7 +1,3 @@
-//
-// Created by zachary on 1/24/19.
-//
-
 #include "Menu.h"
 
 uint32_t transition_delay = 200;
@@ -86,7 +82,7 @@ static void _render_main_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
 
 static int _render_main_menu_options(Menu *this, struct SDL_Renderer *renderer, int current_state)
 {
-    int skip;
+    int skip, i;
     char font_path[] = "ponde___.ttf";
     this->font = TTF_OpenFont(font_path, 12);
 
@@ -98,7 +94,7 @@ static int _render_main_menu_options(Menu *this, struct SDL_Renderer *renderer, 
     skip = TTF_FontLineSkip(this->font) + 6;
     this->rect.x = 270;
     this->rect.y = 15;
-    for (int i = 0; i < 7; i++)
+    for (i = 0; i < 7; i++)
     {
         TTF_SizeText(this->font, MENU_OPTIONS[i], &this->rect.w, &this->rect.h);
 
@@ -125,7 +121,7 @@ static int _render_main_menu_options(Menu *this, struct SDL_Renderer *renderer, 
 
 static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, Hand *hand, Character **party, int x, int y, int font_size, int cas)
 {
-    int skip;
+    int skip, i;
     char font_path[] = "ponde___.ttf";
     int prev_y;
     this->font = TTF_OpenFont(font_path, font_size);
@@ -143,7 +139,7 @@ static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, H
     switch (cas)
     {
     case MAIN_MENU:
-        for (size_t i = 0; i < NUM_CHARACTERS; i++)
+        for (i = 0; i < NUM_CHARACTERS; i++)
         {
             this->render_line(this, renderer, party[i]->name, WHITE);
             this->rect.y += skip;
@@ -167,7 +163,7 @@ static void _render_character_stats(Menu *this, struct SDL_Renderer *renderer, H
 
         break;
     case USE_ITEM:
-        for (size_t i = 0; i < NUM_CHARACTERS; i++)
+        for (i = 0; i < NUM_CHARACTERS; i++)
         {
             if (i == 2)
             {
@@ -219,11 +215,11 @@ static void _render_character_main_menu_image(Menu *this, struct SDL_Renderer *r
 
     for (i = 0; i < NUM_CHARACTERS; i++)
     {
-        characters[i]->character_rect.x = 20;
-        characters[i]->character_rect.w = 45;
-        characters[i]->character_rect.h = 45;
-        characters[i]->character_rect.y = j;
-        SDL_RenderCopy(renderer, characters[i]->character_texture, NULL, &characters[i]->character_rect);
+        characters[i]->rect.x = 20;
+        characters[i]->rect.w = 45;
+        characters[i]->rect.h = 45;
+        characters[i]->rect.y = j;
+        SDL_RenderCopy(renderer, characters[i]->texture, NULL, &characters[i]->rect);
         j += 80;
     }
 }
@@ -262,7 +258,7 @@ static void _render_items_menu(Menu *this, struct SDL_Renderer *renderer, Hand *
 
 static int _render_items_menu_options(Menu *this, struct SDL_Renderer *renderer, Item *bag, int current_state)
 {
-    int skip;
+    int skip, i;
     char font_path[] = "ponde___.ttf";
     struct SDL_Surface *quat;
     struct SDL_Rect quat_rect;
@@ -282,7 +278,7 @@ static int _render_items_menu_options(Menu *this, struct SDL_Renderer *renderer,
     this->rect.y = 15;
     quat_rect.x = 200;
     quat_rect.y = 15;
-    for (int i = 0; i < bag->items_in_bag; i++)
+    for (i = 0; i < bag->items_in_bag; i++)
     {
         TTF_SizeText(this->font, ITEMS[bag->items[i]], &this->rect.w, &this->rect.h);
         sprintf(quat_array, "%d", bag->item_quantities[i]);
@@ -462,14 +458,14 @@ static void _render_save_menu(Menu *this, struct SDL_Renderer *renderer, Hand *h
 static int _render_save_menu_options(Menu *this, struct SDL_Renderer *renderer, Hand *hand, int current_state)
 {
 
-    int skip, num_saves;
+    int skip, num_saves, i;
     char font_path[] = "ponde___.ttf";
     skip = 90;
     num_saves = 3;
     this->rect.x = 55;
     this->rect.y = 40;
     this->font = TTF_OpenFont(font_path, 10);
-    for (size_t i = 0; i < num_saves; i++)
+    for (i = 0; i < num_saves; i++)
     {
         this->load_save_bg[i]->render(this->load_save_bg[i], renderer);
         TTF_SizeText(this->font, LOAD_SAVE_INFO_STRINGS[i]->list[0], &this->rect.w, &this->rect.h);
@@ -496,9 +492,11 @@ static int _render_save_menu_options(Menu *this, struct SDL_Renderer *renderer, 
 
 static void _destroy(Menu *this)
 {
+    int i;
+
     this->main_menu_bg->destroy(this->main_menu_bg);
     this->select_character_bg->destroy(this->select_character_bg);
-    for(size_t i = 0; i < 3; i++)
+    for(i = 0; i < 3; i++)
     {
         this->rgb_bars[i]->destroy(this->rgb_bars[i]);
         this->load_save_bg[i]->destroy(this->load_save_bg[i]);

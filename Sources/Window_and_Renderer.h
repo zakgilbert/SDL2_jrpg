@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/23/19.
-//
 
 #ifndef JRPG_WINDOW_AND_RENDERER_H
 #define JRPG_WINDOW_AND_RENDERER_H
@@ -17,4 +14,4 @@ SDL_Window *make_window(char *);
 
 SDL_Renderer *make_renderer(struct SDL_Window **window);
 
-#endif //JRPG_WINDOW_AND_RENDERER_H
+#endif 

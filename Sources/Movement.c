@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/24/19.
-//
 
 #include "Movement.h"
 
@@ -28,7 +25,6 @@ int movement()
     }
     if (change_position())
     {
-       // printf("\nX: %d\nY: %d", X, Y);
         bounds();
         result = 1;
     }
@@ -39,44 +35,48 @@ int change_position()
 {
     int is_moving = 0;
 
+    /* on left */
     if (EDGE_DETECTION[0])
-    { //on left
+    {
         USER_INPUTS[2] = 0;
     }
+    /* on right */
     else if (EDGE_DETECTION[1])
-    { //on right
+    {
         USER_INPUTS[3] = 0;
     }
+    /* on up */
     else if (EDGE_DETECTION[2])
-    { //on up
+    { 
         USER_INPUTS[1] = 0;
     }
+    /* on down */
     else if (EDGE_DETECTION[3])
-    { //on down
+    { 
         USER_INPUTS[0] = 0;
     }
     if (!MOVEMENT_DISABLED)
     {
         if (USER_INPUTS[0])
-        { //down
+        { 
             Y++;
             is_moving = 1;
             NUM_STEPS++;
         }
         else if (USER_INPUTS[1])
-        { //up
+        { 
             Y--;
             is_moving = 1;
             NUM_STEPS++;
         }
         else if (USER_INPUTS[2])
-        { //left
+        { 
             X--;
             is_moving = 1;
             NUM_STEPS++;
         }
         else if (USER_INPUTS[3])
-        { //right
+        { 
             X++;
             is_moving = 1;
             NUM_STEPS++;

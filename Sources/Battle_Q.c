@@ -73,11 +73,12 @@ static void _add(Battle_Q *this, int key, int type, int index)
 }
 static struct node *_pop(Battle_Q *this)
 {
+    struct node *temp;
     if (NULL == this->front)
     {
         return NULL;
     }
-    struct node *temp = this->front;
+    temp = this->front;
     this->front = this->front->next;
     if (NULL == this->front)
     {
@@ -87,7 +88,8 @@ static struct node *_pop(Battle_Q *this)
 }
 static void _re_q(Battle_Q *this, struct node *ode)
 {
-    struct node *data = ode;
+    struct node *data;
+    data = ode;
     if (NULL == this->rear)
     {
         this->front = data;

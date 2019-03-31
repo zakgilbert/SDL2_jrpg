@@ -6,7 +6,6 @@
 #include "Battle.h"
 
 uint32_t transition_delay1 = 200;
-
 static const char *ACTION_STRS[] = {
     FOREACH_ACTION_OPTION(GENERATE_STRING)};
 
@@ -55,7 +54,7 @@ static void _render_line(Battle *this, struct SDL_Renderer *renderer, const char
 
 static int _render_action_menu_text(Battle *this, Character *character, struct SDL_Renderer *renderer, int i, int current_state)
 {
-    int skip, x, y;
+    int skip, x, y, k;
     char font_path[] = "ponde___.ttf";
 
     this->font = TTF_OpenFont(font_path, 10);
@@ -70,7 +69,7 @@ static int _render_action_menu_text(Battle *this, Character *character, struct S
     this->rect.y = y;
 
     skip = TTF_FontLineSkip(this->font);
-    for (size_t k = 0; k < character->num_actions; k++)
+    for (k = 0; k < character->num_actions; k++)
     {
         if (k == current_state)
         {
@@ -88,7 +87,7 @@ static int _render_action_menu_text(Battle *this, Character *character, struct S
 }
 static int _render_battle_menu_text(Battle *this, struct SDL_Renderer *renderer, int index)
 {
-    int skip, x, y;
+    int skip, x, y, i;
     char font_path[] = "ponde___.ttf";
 
     this->font = TTF_OpenFont(font_path, 10);
@@ -103,14 +102,14 @@ static int _render_battle_menu_text(Battle *this, struct SDL_Renderer *renderer,
     this->rect.y = y;
     skip = TTF_FontLineSkip(this->font);
 
-    for (size_t i = 0; i < this->num_enemies; i++)
+    for (i = 0; i < this->num_enemies; i++)
     {
         this->render_line(this, renderer, ENEMIES->list[this->enemies[i]->key], WHITE);
         this->rect.y += skip;
     }
     this->rect.y = y - 1;
 
-    for (size_t i = 0; i < NUM_CHARACTERS; i++)
+    for (i = 0; i < NUM_CHARACTERS; i++)
     {
         this->party[i]->check_stats(this->party[i]);
         this->rect.x = 130;
@@ -132,21 +131,20 @@ static int _render_battle_menu_text(Battle *this, struct SDL_Renderer *renderer,
 
 static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
 {
-    int time_bar_x, time_bar_y;
-
+    int time_bar_x, time_bar_y, i, k;
     time_bar_x = 290;
     time_bar_y = 250;
     this->enemies = (Enemy **)malloc(sizeof(Enemy *) * this->num_enemies);
-    this->party[0]->create_battle_textures(this->party[0], renderer);
-    
-    for (size_t i = 0; i < this->num_enemies; i++)
+
+    for (i = 0; i < this->num_enemies; i++)
     {
         this->enemies[i] = load_enemy(BATTLE_LINEUP[this->area]->list[this->roll][i], renderer);
         this->enemies[i]->rect.x = 35;
         this->enemies[i]->rect.y = (WINDOW_HEIGHT / 2) - 50;
     }
-    for (size_t k = 0; k < this->num_party; k++)
+    for (k = 0; k < this->num_party; k++)
     {
+        this->party[k]->create_battle_textures(this->party[k], renderer, k);
         this->time_bars[k] = CREATE_WINDOW(time_bar_x, time_bar_y, 50, 8);
         this->time_bars[k]->rect.w = 0;
         time_bar_y += 15;
@@ -155,6 +153,8 @@ static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
 
 static void _render(Battle *this, struct SDL_Renderer *renderer, Hand *hand)
 {
+    int i, k;
+
     if (!this->battle_rages_on)
     {
         state = previous_state;
@@ -174,20 +174,19 @@ static void _render(Battle *this, struct SDL_Renderer *renderer, Hand *hand)
     }
     SDL_RenderCopy(renderer, this->back_ground, NULL, &this->bg_rect);
     this->window->render(this->window, renderer);
-    for (size_t i = 0; i < this->num_enemies; i++)
+    for (i = 0; i < this->num_enemies; i++)
     {
         this->enemies[i]->render(this->enemies[i], renderer);
     }
-    for (size_t k = 0; k < this->num_party; k++)
+    for (k = 0; k < this->num_party; k++)
     {
         if (!this->party[k]->in_action_queue && this->update_time_bar(this->time_bars[k], this->party[k]))
         {
             this->q->add(this->q, this->party[k]->key, this->party[k]->type, k);
         }
         this->time_bars[k]->render_time_bar(this->time_bars[k], renderer);
+        this->party[k]->render_battle_textures(this->party[k], renderer);
     }
-
-    this->party[0]->render_battle_textures(this->party[0], renderer);
 
     if (NULL == this->q->front)
     {
@@ -223,10 +222,10 @@ static void _render(Battle *this, struct SDL_Renderer *renderer, Hand *hand)
 
 static int _battle_rages_on(Battle *this)
 {
-    int hp_tot;
+    int hp_tot, i;
     hp_tot = 0;
 
-    for (size_t i = 0; i < this->num_enemies; i++)
+    for (i = 0; i < this->num_enemies; i++)
     {
         hp_tot += this->enemies[i]->HP.hp_current;
     }

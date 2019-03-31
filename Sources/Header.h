@@ -1,7 +1,3 @@
-//
-// Created by zachary on 1/24/19.
-//
-
 #ifndef JRPG_HEADER_H
 #define JRPG_HEADER_H
 
@@ -235,4 +231,4 @@ int refresh_inputs(int *, int, int);
 void set_items(int *);
 int quit();
 int render_thread(void *);
-#endif //JRPG_HEADER_H
+#endif 

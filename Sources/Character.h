@@ -33,18 +33,17 @@ typedef struct _Character
     void (*destroy)(struct _Character *);
     void (*destroy_party)(struct _Character **);
     void (*check_stats)(struct _Character *);
-    void (*create_battle_textures)(struct _Character *, struct SDL_Renderer *renderer);
+    void (*create_battle_textures)(struct _Character *, struct SDL_Renderer *renderer, int i);
     void (*render_battle_textures)(struct _Character *, struct SDL_Renderer *renderer);
     int (*update_party_stats)(struct _Character **);
-    int (*animate)(struct _Character *);
     int (*cast)(struct _Character *);
     int (*cast_ptr[2])(struct SDL_Rect *rect);
 
-    struct SDL_Texture *character_texture;
-    struct SDL_Rect character_rect;
-    struct SDL_Texture **textures_party;
-    struct SDL_Rect party_rect_1;
-    struct SDL_Rect party_rect_2;
+    struct SDL_Texture *texture;
+    struct SDL_Rect rect;
+    struct SDL_Texture *b_texture;
+    struct SDL_Rect b_rect_1;
+    struct SDL_Rect b_rect_2;
 
     struct Main_Attribute HP;
     struct Main_Attribute MP;
@@ -81,4 +80,4 @@ struct Party
 
 int count_party(struct Party *);
 void set_party_null(struct Party *);
-#endif //JRPG_CHARACTER_H
+#endif 

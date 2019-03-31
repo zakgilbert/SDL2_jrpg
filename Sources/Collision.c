@@ -59,7 +59,8 @@ static int _check_right_edge(struct Collidable *collidable)
 }
 static void _add_lootables(Collision *this, Lootable **lootables, int num_lootables, int area_key)
 {
-    for (int k = 0; k < num_lootables; k++)
+    int k;
+    for (k = 0; k < num_lootables; k++)
     {
         this->collidables[area_key][this->current_index] = malloc(sizeof(struct Collidable));
         this->collidables[area_key][this->current_index]->rect = &lootables[k]->rect;
@@ -73,7 +74,8 @@ static void _add_lootables(Collision *this, Lootable **lootables, int num_lootab
 }
 static void _add_npcs(Collision *this, Npc **npcs, int num_npcs, int area_key)
 {
-    for (int k = 0; k < num_npcs; k++)
+    int k;
+    for (k = 0; k < num_npcs; k++)
     {
         this->collidables[area_key][this->current_index] = malloc(sizeof(struct Collidable));
         this->collidables[area_key][this->current_index]->rect = &npcs[k]->rect;
@@ -88,11 +90,12 @@ static void _add_npcs(Collision *this, Npc **npcs, int num_npcs, int area_key)
 
 static void _update_collidables(Collision *this, int area_key)
 {
+    int k;
     if (area_key >= NUM_AREAS)
     {
         return;
     }
-    for (int k = 0; k < this->num_collibables[area_key]; k++)
+    for (k = 0; k < this->num_collibables[area_key]; k++)
     {
         this->collidables[area_key][k]->rect->x = ((this->collidables[area_key][k]->x) - X);
         this->collidables[area_key][k]->rect->y = ((this->collidables[area_key][k]->y) - Y);
