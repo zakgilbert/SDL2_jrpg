@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/24/19.
-//
 
 #ifndef JRPG_WINDOW_H
 #define JRPG_WINDOW_H
@@ -41,4 +38,4 @@ typedef struct __window
 
 Window *CREATE_WINDOW(int, int, int, int);
 
-#endif //JRPG_WINDOW_H
+#endif 

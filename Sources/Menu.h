@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/24/19.
-//
 
 #ifndef JRPG_MENU_H
 #define JRPG_MENU_H
@@ -76,4 +73,4 @@ typedef struct _menu
 
 Menu *CREATE_MENU();
 
-#endif //JRPG_MENU_H
+#endif 

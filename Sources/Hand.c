@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/27/19.
-//
 
 #include "Hand.h"
 
@@ -211,13 +208,13 @@ static void _vertical_horizontal(Hand *this)
     switch (this->current_state)
     {
     case 0:
-        if (USER_INPUTS[0]) //down
+        if (USER_INPUTS[0]) 
         {
             this->position.y = this->state_2[1];
             this->current_state = 2;
             break;
         }
-        else if (USER_INPUTS[3]) // right
+        else if (USER_INPUTS[3]) 
         {
             this->position.x = this->state_1[0];
             this->current_state = 1;
@@ -226,13 +223,13 @@ static void _vertical_horizontal(Hand *this)
         break;
 
     case 1:
-        if (USER_INPUTS[0]) //down
+        if (USER_INPUTS[0]) 
         {
             this->position.y = this->state_3[1];
             this->current_state = 3;
             break;
         }
-        else if (USER_INPUTS[2]) //left
+        else if (USER_INPUTS[2]) 
         {
             this->position.x = this->state_0[0];
             this->current_state = 0;
@@ -241,13 +238,13 @@ static void _vertical_horizontal(Hand *this)
         break;
 
     case 2:
-        if (USER_INPUTS[1]) //up
+        if (USER_INPUTS[1]) 
         {
             this->position.y = this->state_0[1];
             this->current_state = 0;
             break;
         }
-        else if (USER_INPUTS[3]) //right
+        else if (USER_INPUTS[3]) 
         {
             this->position.x = this->state_3[0];
             this->current_state = 3;
@@ -255,13 +252,13 @@ static void _vertical_horizontal(Hand *this)
         }
         break;
     case 3:
-        if (USER_INPUTS[1]) //up
+        if (USER_INPUTS[1]) 
         {
             this->position.y = this->state_1[1];
             this->current_state = 1;
             break;
         }
-        else if (USER_INPUTS[2]) //left
+        else if (USER_INPUTS[2]) 
         {
             this->position.x = this->state_2[0];
             this->current_state = 2;
@@ -277,7 +274,6 @@ Hand *CREATE_HAND()
 {
     Hand *this = (Hand *)malloc(sizeof(*this));
 
-    // -n>
     this->destroy = _destroy;
     this->render = _render;
     this->create_texture = _create_texture;
@@ -299,7 +295,6 @@ Hand *CREATE_HAND()
 
     this->vertical_horizontal = _vertical_horizontal;
     this->set_states = _set_states;
-    // -o>
     this->set_states(this, 15, 215, 180, 215, 15, 265, 180, 265);
     this->current_state = 0;
     return this;

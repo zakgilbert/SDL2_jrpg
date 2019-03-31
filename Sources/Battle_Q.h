@@ -18,6 +18,7 @@ typedef struct _Battle_Q
 {
     void (*destroy)(struct _Battle_Q *this);
     void (*add)(struct _Battle_Q *this, int key, int type, int index);
+    void (*re_q)(struct _Battle_Q * this, struct node * ode);
     void (*print_q)(struct _Battle_Q *this);
     struct node *(*new_node)(struct _Battle_Q *this, int key, int type, int index);
     struct node *(*pop)(struct _Battle_Q *this);

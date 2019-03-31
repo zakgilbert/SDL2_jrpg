@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/23/19.
-//
 
 #include "Floor.h"
 static void __destroy(Floor *obj)
@@ -32,7 +29,7 @@ static void __set_texture(Floor *obj, struct SDL_Renderer *renderer, char *path)
         printf("error creating Texture: %s\n", SDL_GetError());
         SDL_Quit();
     }
-    SDL_QueryTexture(texture, NULL, NULL, &MAP_WIDTH, &MAP_HEIGHT);
+    SDL_QueryTexture(texture, NULL, NULL, &obj->rect.w, &obj->rect.h);
     obj->texture = texture;
 }
 
@@ -43,12 +40,13 @@ static SDL_Rect *__get_rect_pointer(Floor *obj)
 
 static void __render_floor(Floor *obj, struct SDL_Renderer *renderer)
 {
+    struct SDL_Rect ref = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
     if (!MOVEMENT_DISABLED)
     {
         obj->rect.x = X;
         obj->rect.y = Y;
     }
-    SDL_RenderCopy(renderer, obj->texture, obj->get_rect_pointer(obj), NULL);
+    SDL_RenderCopy(renderer, obj->texture, NULL, &obj->rect);
 }
 
 Floor *create_floor(int x, int y, int w, int h)

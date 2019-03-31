@@ -29,10 +29,12 @@ static void _destroy(Item *this)
  */
 static void _fill_bag(Item *this, int *items, int *quantities, int len)
 {
+    int i;
+
     this->items = (int *)malloc(sizeof(int) * len);
     this->item_quantities = (int *)malloc(sizeof(int) * len);
 
-    for (int i = 0; i < len; i++)
+    for (i = 0; i < len; i++)
     {
         this->items[i] = items[i];
         if (NULL == quantities)
@@ -61,14 +63,14 @@ static char *_add_item(Item *this, ITEM_ENUM item_enum)
 
 static int _remove_item(Item *this, int item_index)
 {
-
+    int i;
     int last_index = this->items_in_bag - 1;
 
     this->items = realloc(this->items, sizeof(int) * (this->items_in_bag - 1));
     this->item_quantities = realloc(this->items, sizeof(int) * (this->items_in_bag - 1));
     if (last_index != item_index)
     {
-        for (int i = item_index; i < last_index; i++)
+        for (i = item_index; i < last_index; i++)
         {
             this->items[i] = this->items[i + 1];
             this->item_quantities[i] = this->item_quantities[i + 1];

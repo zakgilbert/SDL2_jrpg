@@ -7,8 +7,9 @@
 
 void create_load_info()
 {
+    int i;
     LOAD_SAVE_INFO_STRINGS = malloc(sizeof(struct STRING_LIST) * 3);
-    for (size_t i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
     {
         LOAD_SAVE_INFO_STRINGS[i] = CREATE_LIST_STRING(get_state_info(i), 1);
         printf("%s\n", LOAD_SAVE_INFO_STRINGS[i]->list[0]);
@@ -51,7 +52,7 @@ Enemy *load_enemy(int key, struct SDL_Renderer *renderer)
 Item *load_bag(Item *bag, int save_state)
 {
     FILE *in;
-    int num_items;
+    int num_items, i, k;
     int *items;
     int *item_quantities;
     char *path = malloc(50);
@@ -67,11 +68,11 @@ Item *load_bag(Item *bag, int save_state)
     items = malloc(sizeof(int) * num_items);
     item_quantities = malloc(sizeof(int) * num_items);
 
-    for (size_t i = 0; i < num_items; i++)
+    for (i = 0; i < num_items; i++)
     {
         fscanf(in, "%d", &item_quantities[i]);
     }
-    for (size_t k = 0; k < num_items; k++)
+    for (k = 0; k < num_items; k++)
     {
         fscanf(in, "%d", &items[k]);
     }
@@ -88,7 +89,7 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
     FILE *in;
     Character **party;
     int *character_keys;
-    int num_members;
+    int num_members, i, k;
     int num_actions;
     char *path = malloc(50);
 
@@ -103,7 +104,7 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
     party = malloc(sizeof(Character *) * num_members);
     character_keys = malloc(sizeof(int) * num_members);
 
-    for (size_t i = 0; i < num_members; i++)
+    for (i = 0; i < num_members; i++)
     {
         fscanf(in, "%d", &character_keys[i]);
         party[i] = CREATE_CHARACTER(character_keys[i]);
@@ -111,36 +112,36 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
         party[i]->age = CHARACTER_AGES->list[character_keys[i]];
         party[i]->job = CHARACTER_JOBS->list[character_keys[i]];
         party[i]->image_path = CHARACTER_BIO_PATHS->list[character_keys[i]];
-        party[i]->create_character_texture(party[i], renderer);
+        party[i]->texture = create_texture(renderer, party[i]->image_path, &party[i]->rect);
     }
 
-    for (size_t i = 0; i < num_members; i++)
+    for (i = 0; i < num_members; i++)
     {
         fscanf(in, "%d %d", &party[i]->HP.current, &party[i]->HP.max);
         sprintf(party[i]->HP.str_max, "%d", party[i]->HP.max);
     }
 
-    for (size_t i = 0; i < num_members; i++)
+    for (i = 0; i < num_members; i++)
     {
         fscanf(in, "%d %d", &party[i]->MP.current, &party[i]->MP.max);
         sprintf(party[i]->MP.str_max, "%d", party[i]->MP.max);
     }
 
-    for (size_t i = 0; i < num_members; i++)
+    for (i = 0; i < num_members; i++)
     {
         fscanf(in, "%d %d", &party[i]->EXP.current, &party[i]->EXP.max);
         sprintf(party[i]->EXP.str_max, "%d", party[i]->EXP.max);
     }
 
-    for (size_t i = 0; i < num_members; i++)
+    for (i = 0; i < num_members; i++)
     {
         fscanf(in, "%d", &party[i]->SPD);
     }
-    for (size_t i = 0; i < num_members; i++)
+    for (i = 0; i < num_members; i++)
     {
         fscanf(in, "%d", &num_actions);
         party[i]->actions = (int *)malloc(sizeof(int) * num_actions);
-        for (size_t k = 0; k < num_actions; k++)
+        for (k = 0; k < num_actions; k++)
         {
             fscanf(in, "%d", &party[i]->actions[k]);
         }
@@ -154,17 +155,18 @@ void save_bag(Item *bag, int save_state)
 {
     FILE *out;
     char *path = malloc(50);
+    int i;
 
     out = fopen(strcat(strcpy(path, SAVE_PATHS->list[save_state]), "bag.txt"), "w");
 
     fprintf(out, "%d\n", bag->items_in_bag);
 
-    for (size_t i = 0; i < bag->items_in_bag - 1; i++)
+    for (i = 0; i < bag->items_in_bag - 1; i++)
     {
         fprintf(out, "%d ", bag->item_quantities[i]);
     }
     fprintf(out, "%d\n", bag->item_quantities[bag->items_in_bag - 1]);
-    for (size_t i = 0; i < bag->items_in_bag - 1; i++)
+    for (i = 0; i < bag->items_in_bag - 1; i++)
     {
         fprintf(out, "%d ", bag->items[i]);
     }
@@ -175,6 +177,8 @@ void save_bag(Item *bag, int save_state)
 
 void SET_GLOBALS()
 {
+    int i;
+
     TICK = 0;
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;
@@ -191,7 +195,8 @@ void SET_GLOBALS()
 
     HERO_WIDTH = 32;
     HERO_HEIGHT = 32;
-
+    MAP_WIDTH = 356;
+    MAP_HEIGHT = 324;
     WHITE.r = 255;
     WHITE.g = 255;
     WHITE.b = 255;
@@ -245,7 +250,7 @@ void SET_GLOBALS()
     ENEMY_PATHS = CREATE_LIST_STRING(enemy_paths_temp, 2);
     int **forest_lineup = malloc(sizeof(int *) * 3);
     int num_forest_lineup[3] = {1, 2, 1};
-    for (size_t i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
     {
         forest_lineup[i] = malloc(sizeof(int) * num_forest_lineup[i]);
         if (i == 0)

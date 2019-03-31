@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/23/19.
-//
 
 #ifndef JRPG_AREA_H
 #define JRPG_AREA_H
@@ -49,4 +46,4 @@ typedef struct _area
 } Area;
 
 Area *CREATE_AREA(int area_key);
-#endif //JRPG_FOREST_H
+#endif 

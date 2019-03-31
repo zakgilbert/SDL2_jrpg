@@ -31,6 +31,7 @@ typedef struct _battle
     int (*render_battle_menu_text)(struct _battle *, struct SDL_Renderer *renderer, int index);
     int (*render_action_menu_text)(struct _battle *, Character * character, struct SDL_Renderer *renderer, int i, int current_state);
     void (*render_line)(struct _battle *, struct SDL_Renderer *renderer, const char *str, SDL_Color color);
+    int (*battle_rages_on)(struct _battle *);
 
     int num_enemies;
     char *enemy_paths;
@@ -48,9 +49,6 @@ typedef struct _battle
     struct SDL_Rect rect;
     struct SDL_Texture *back_ground;
     struct SDL_Rect bg_rect;
-    struct SDL_Texture **textures_party;
-    struct SDL_Rect party_rect_1;
-    struct SDL_Rect party_rect_2;
     struct SDL_Rect transition;
     Battle_Q *q;
     Window *window;

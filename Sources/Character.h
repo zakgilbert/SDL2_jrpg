@@ -9,6 +9,8 @@
 #include <SDL2/SDL_thread.h>
 
 #include "Header.h"
+#include "Graphics.h"
+#include "Hero.h"
 
 struct Main_Attribute
 {
@@ -20,32 +22,49 @@ struct Main_Attribute
     char name[10];
 };
 
-typedef struct __character
+void stand_battle_ani(struct SDL_Rect *rect);
+int cast_1_battle_ani(struct SDL_Rect *rect);
+int cast_2_battle_ani(struct SDL_Rect *rect);
+typedef struct _Character
 {
-    void (*destroy)(struct __character *);
-    void (*destroy_party)(struct __character **);
-    void (*set_stats)(struct __character *, const char *name, const char *age, char *job, int HP, int MP, int EXP, const char *image_path);
-    void (*check_stats)(struct __character *);
-    void (*create_character_texture)(struct __character *, struct SDL_Renderer *);
-    int (*update_party_stats)(struct __character **);
-    int update_stats;
-    struct SDL_Texture *character_texture;
-    struct SDL_Rect character_rect;
+    /**
+     * destroy
+     */
+    void (*destroy)(struct _Character *);
+    void (*destroy_party)(struct _Character **);
+    void (*check_stats)(struct _Character *);
+    void (*create_battle_textures)(struct _Character *, struct SDL_Renderer *renderer, int i);
+    void (*render_battle_textures)(struct _Character *, struct SDL_Renderer *renderer);
+    int (*update_party_stats)(struct _Character **);
+    int (*cast)(struct _Character *);
+    int (*cast_ptr[2])(struct SDL_Rect *rect);
+
+    struct SDL_Texture *texture;
+    struct SDL_Rect rect;
+    struct SDL_Texture *b_texture;
+    struct SDL_Rect b_rect_1;
+    struct SDL_Rect b_rect_2;
+
+    struct Main_Attribute HP;
+    struct Main_Attribute MP;
+    struct Main_Attribute EXP;
 
     const char *image_path;
     const char *name;
     const char *age;
     char *job;
+    int SPD;
+    int key;
+    int type;
     int *actions;
     int num_actions;
     int num_stats;
     int in_action_queue;
-    struct Main_Attribute HP;
-    struct Main_Attribute MP;
-    struct Main_Attribute EXP;
-    int SPD;
-    int key;
-    int type;
+    int update_stats;
+    int animation_total_frames;
+    int current_animation_frame;
+    int ani_i;
+    int in_animation;
 
 } Character;
 
@@ -61,4 +80,4 @@ struct Party
 
 int count_party(struct Party *);
 void set_party_null(struct Party *);
-#endif //JRPG_CHARACTER_H
+#endif 

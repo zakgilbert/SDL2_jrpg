@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/27/19.
-//
 
 #ifndef JRPG_HAND_H
 #define JRPG_HAND_H
@@ -67,4 +64,4 @@ typedef struct _hand
 
 Hand *CREATE_HAND();
 
-#endif //JRPG_HAND_H
+#endif 

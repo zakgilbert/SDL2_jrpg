@@ -41,6 +41,7 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
                            int *item_keys, int num_items, int *npc_keys, int *npc_types, int num_npcs,
                            int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y)
 {
+    int i, k;
     this->floor = create_floor(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     this->trees = create_floor(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     this->floor->set_texture(this->floor, renderer, "graphics/map.png");
@@ -50,12 +51,12 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
     this->lootables = (Lootable **)malloc(sizeof(Lootable *) * num_items);
     this->npcs = (Npc **)malloc(sizeof(Npc *) * num_npcs);
 
-    for (int k = 0; k < num_items; k++)
+    for (k = 0; k < num_items; k++)
     {
         this->lootables[k] = CREATE_LOOTABLE(renderer, loot_cords_x[k], loot_cords_y[k], k, item_keys[k]);
         this->num_collidables++;
     }
-    for (int i = 0; i < num_npcs; i++)
+    for (i = 0; i < num_npcs; i++)
     {
         this->npcs[i] = CREATE_NPC(renderer, npc_cords_x[i], npc_cords_y[i], i, npc_keys[i], NPC_PATHS->list[npc_keys[i]], npc_types[i]);
         this->num_npcs++;
@@ -66,6 +67,7 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
 
 static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Item *bag)
 {
+    int i, k;
     srand(time(NULL));
     if (INPUT == CANCEL)
     {
@@ -92,7 +94,7 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
     hero->animate(hero);
 
     this->floor->render_floor(this->floor, renderer);
-    for (int k = 0; k < this->bag->items_in_bag; k++)
+    for (k = 0; k < this->bag->items_in_bag; k++)
     {
         if (this->current_index == -1 &&
             this->lootables[k]->ready_to_interact > 0 &&
@@ -109,7 +111,7 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
         }
         this->lootables[k]->render(this->lootables[k], renderer);
     }
-    for (int i = 0; i < this->num_npcs; i++)
+    for (i = 0; i < this->num_npcs; i++)
     {
         if (this->current_index == -1 &&
             this->npcs[i]->ready_to_interact != 0 &&

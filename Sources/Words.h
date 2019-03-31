@@ -25,6 +25,7 @@
     ACTION_OPTION(Spell)                     \
     ACTION_OPTION(Quaff)
 
+
 #define GERERATE_ENUM(ENUM) ENUM,
 #define GENERATE_STRING(STRING) #STRING,
 

@@ -1,7 +1,3 @@
-//
-// Created by zachary on 1/24/19.
-//
-
 #ifndef JRPG_HEADER_H
 #define JRPG_HEADER_H
 
@@ -87,11 +83,13 @@ enum states
     BATTLE
 };
 enum states state, previous_state;
-
-enum BATTLE_TYPES{
-    PARTY_MEMBER,
-    MONSTER
+enum CHARACTER_BATTLE_ANIMATION
+{
+    ATK,
+    CST,
+    NOT_ANIMATING_BATTLE_CHARACTER
 };
+enum CHARACTER_BATTLE_ANIMATION CURRENT_CHARACTER_BATTLE_ANIMATION;
 
 enum CHARACTERS
 {
@@ -150,6 +148,12 @@ enum MESSAGE_TYPES
 };
 enum MESSAGE_TYPES MESSAGE_TYPE;
 
+enum BATTLE_MEMBER_TYPE
+{
+    PARTY_MEMBER,
+    MONSTER
+};
+
 enum NPCS
 {
     GIGAS,
@@ -161,7 +165,6 @@ enum NPC_TYPES
     SPRITE,
     ONE_FRAME
 };
-
 
 enum DIRECTION_FACING
 {
@@ -228,4 +231,4 @@ int refresh_inputs(int *, int, int);
 void set_items(int *);
 int quit();
 int render_thread(void *);
-#endif //JRPG_HEADER_H
+#endif 

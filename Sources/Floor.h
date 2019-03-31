@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/23/19.
-//
 
 #ifndef JRPG_FLOOR_H
 #define JRPG_FLOOR_H
@@ -37,4 +34,4 @@ typedef struct __floor
 
 Floor *create_floor(int, int, int, int);
 
-#endif //JRPG_FLOOR_H
+#endif 

@@ -3,26 +3,25 @@ EXCEC = game
 
 SRCDIR  = Sources 
 OBJDIR  = Objects
+CC = gcc
 
 SRCS    := $(shell find $(SRCDIR) -name '*.c')
 HDRS    := $(shell find $(SRCDIR) -name '*.h')
 SRCDIRS := $(shell find . -name '*.c' -exec dirname {} \; | uniq)
 OBJS    := $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
-CFLAGS = -ansi --pedantic-errors -Wall
+CFLAGS := -Wall -ggdb3
 
-CFLAGS := `sdl2-config --libs --cflags` -ggdb3 -O0 --std=c99 -Wall -lSDL2_image -lSDL2_ttf -lm
-
-LDFLAGS =
+LDFLAGS := `sdl2-config --libs --cflags` -lSDL2_image -lSDL2_ttf  
 
 
 all: $(EXCEC)
 
 $(EXCEC) : buildrepo $(OBJS)
-	$(CC) $(OBJS) $(CFLAGS) -o $@
+	$(CC) $(OBJS) $(LDFLAGS) -o $@
 
 $(OBJDIR)/%.o: %.c $(HDRS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -c $< -o $@ $(CFLAGS)
 
 clean:
 	$(RM) $(OBJS)

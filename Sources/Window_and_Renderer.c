@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/23/19.
-//
 
 #include "Window_and_Renderer.h"
 
@@ -8,7 +5,8 @@ SDL_Window * make_window(char * name)
 {
     struct SDL_Window *window = NULL;
     window = SDL_CreateWindow(name, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH,
-                              WINDOW_HEIGHT, 0);
+                              WINDOW_HEIGHT, SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_GRABBED);
+
     if (!window) {
         printf("\nERROR: SDL window failed--\n%s\n", SDL_GetError());
     }
@@ -29,4 +27,3 @@ SDL_Renderer * make_renderer(SDL_Window ** window)
     }
     return renderer;
 }
-

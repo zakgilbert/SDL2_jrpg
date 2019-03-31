@@ -1,6 +1,3 @@
-//
-// Created by zachary on 1/23/19.
-//
 
 #include "Player_Input.h"
 
