@@ -3,18 +3,10 @@
 
 int get_middle_x(int frame_size, int sprite_size)
 {
-    if (FULLSCREEN_ON)
-    {
-        return (frame_size / 2) + (sprite_size * 4) + (sprite_size / 4);
-    }
     return (frame_size / 2) - (sprite_size / 2);
 }
 int get_middle_y(int frame_size, int sprite_size)
 {
-    if (FULLSCREEN_ON)
-    {
-        return (frame_size / 2) + (sprite_size);
-    }
     return (frame_size / 2) - (sprite_size / 2);
 }
 

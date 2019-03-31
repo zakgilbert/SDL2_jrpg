@@ -531,8 +531,8 @@ Menu *CREATE_MENU()
 
     this->render_save_menu = _render_save_menu;
     this->render_save_menu_options = _render_save_menu_options;
-
-    this->main_menu_bg = CREATE_WINDOW(12, 8, 336, 306);
+    
+    this->main_menu_bg = CREATE_WINDOW(0, 0, 356, 326);
     this->select_character_bg = CREATE_WINDOW(12, 200, 336, 120);
    
     this->load_save_bg = (Window **)malloc(sizeof(Window *) * 3);

@@ -5,7 +5,7 @@ SDL_Window *make_window(char *name)
 {
     struct SDL_Window *window = NULL;
     window = SDL_CreateWindow(name, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH,
-                              WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_GRABBED);
+                              WINDOW_HEIGHT, 0);
 
     if (!window)
     {

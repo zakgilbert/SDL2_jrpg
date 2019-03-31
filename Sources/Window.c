@@ -56,6 +56,7 @@ static void __render_color_bar(Window **this, struct SDL_Renderer *renderer, int
     SDL_RenderDrawRect(renderer, &this[i] -> border_1);
     SDL_RenderDrawRect(renderer, &this[i] -> border_2);
     SDL_RenderDrawRect(renderer, &this[i] -> border_3);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 static void __render_time_bar(Window *this, struct SDL_Renderer *renderer)
 {
@@ -63,6 +64,7 @@ static void __render_time_bar(Window *this, struct SDL_Renderer *renderer)
     SDL_RenderFillRect(renderer, &this->rect);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
     SDL_RenderDrawRect(renderer, &this->border_1);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 static void __render(Window *this, struct SDL_Renderer *renderer)
 {
@@ -73,6 +75,7 @@ static void __render(Window *this, struct SDL_Renderer *renderer)
     SDL_RenderDrawRect(renderer, &this->border_2);
     SDL_RenderDrawRect(renderer, &this->border_3);
     SDL_RenderDrawRect(renderer, &this->border_4);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
 Window *CREATE_WINDOW(int x, int y, int w, int h)

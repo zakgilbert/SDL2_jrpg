@@ -28,6 +28,7 @@ int main(int argc, char **argv)
 {
     set_up_timer(60);
     int running;
+    int w, h;
     SET_GLOBALS();
     running = 1;
 
@@ -42,9 +43,9 @@ int main(int argc, char **argv)
     TTF_Init();
     struct SDL_Window *window = NULL;
     struct SDL_Renderer *renderer = NULL;
-    SDL_SetHint(SDL_HINT_VIDEO_X11_XVIDMODE, "0");
-    window = make_window("Window");
-    renderer = make_renderer(&window);
+    SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
+    SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     Area *dark_forest = CREATE_AREA(DARK_FOREST);
     Hero *hero = CREATE_HERO();
@@ -215,20 +216,12 @@ void set_fullscreen(struct SDL_Window *window, Hero *hero)
     if (FULLSCREEN_ON)
     {
         SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
-        hero->rect_pos.x = get_middle_x(WINDOW_WIDTH, HERO_WIDTH);
-        hero->rect_pos.y = get_middle_y(WINDOW_HEIGHT, HERO_HEIGHT);
-        printf("X: %d\nY: %d\n", hero->rect_pos.x, hero->rect_pos.y);
-        COLLISION_X = 246;
-        COLLISION_Y = 186;
     }
     else
     {
         SDL_SetWindowFullscreen(window, 0);
         hero->rect_pos.x = get_middle_x(WINDOW_WIDTH, HERO_WIDTH);
         hero->rect_pos.y = get_middle_y(WINDOW_HEIGHT, HERO_HEIGHT);
-        printf("X: %d\nY: %d\n", hero->rect_pos.x, hero->rect_pos.y);
-        COLLISION_X = 162;
-        COLLISION_Y = 142;
     }
 }
 int refresh_inputs(int *array, int size, int bol)

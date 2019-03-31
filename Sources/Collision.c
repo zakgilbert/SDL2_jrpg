@@ -23,8 +23,8 @@ static void _add_collision(Collision *this, Lootable **lootables, int num_lootab
 }
 static int _check_down_edge(struct Collidable *collidable)
 {
-    if (((collidable->rect->x - COLLISION_X) < (22) && (collidable->rect->x - COLLISION_X) > (((16 / 2) - (collidable->rect->w + (16 / 8))))) &&
-        ((collidable->rect->y - COLLISION_Y) == ((16 / 2) - collidable->rect->h)))
+    if (((collidable->rect->x - COLLISION_X) < (22) && (collidable->rect->x - COLLISION_X) > (((32 / 2) - (collidable->rect->w + (32 / 8))))) &&
+        ((collidable->rect->y - COLLISION_Y) == ((32 / 2) - collidable->rect->h)))
     {
         return 1;
     }
@@ -32,7 +32,7 @@ static int _check_down_edge(struct Collidable *collidable)
 }
 static int _check_up_edge(struct Collidable *collidable)
 {
-    if (((collidable->rect->x - COLLISION_X) < (22) && (collidable->rect->x - COLLISION_X) > (((16 / 2) - (collidable->rect->w + (16 / 8))))) &&
+    if (((collidable->rect->x - COLLISION_X) < (22) && (collidable->rect->x - COLLISION_X) > (((32 / 2) - (collidable->rect->w + (32 / 8))))) &&
         ((collidable->rect->y - COLLISION_Y) == 26))
     {
         return 1;
@@ -41,7 +41,7 @@ static int _check_up_edge(struct Collidable *collidable)
 }
 static int _check_left_edge(struct Collidable *collidable)
 {
-    if (((collidable->rect->y - COLLISION_Y) < (16) && (collidable->rect->y - COLLISION_Y) > (((16 / 2) - (collidable->rect->h + (16 / 8))))) &&
+    if (((collidable->rect->y - COLLISION_Y) < (32) && (collidable->rect->y - COLLISION_Y) > (((32 / 2) - (collidable->rect->h + (32 / 8))))) &&
         ((collidable->rect->x - COLLISION_X) == 22))
     {
         return 1;
@@ -50,8 +50,8 @@ static int _check_left_edge(struct Collidable *collidable)
 }
 static int _check_right_edge(struct Collidable *collidable)
 {
-    if (((collidable->rect->y - COLLISION_Y) < (16) && (collidable->rect->y - COLLISION_Y) > (((16 / 2) - (collidable->rect->h + (16 / 8))))) &&
-        ((collidable->rect->x - COLLISION_X) == ((16 / 2) - collidable->rect->w)))
+    if (((collidable->rect->y - COLLISION_Y) < (32) && (collidable->rect->y - COLLISION_Y) > (((32 / 2) - (collidable->rect->h + (32 / 8))))) &&
+        ((collidable->rect->x - COLLISION_X) == ((32 / 2) - collidable->rect->w)))
     {
         return 1;
     }
