@@ -3,7 +3,6 @@
 #include "H.h"
 #include "Words.h"
 #include "Graphics.h"
-#include "Window_and_Renderer.h"
 #include "Floor.h"
 #include "Hero.h"
 #include "Item.h"
@@ -86,6 +85,7 @@ int main(int argc, char **argv)
         start_timer();
         refresh_inputs(EDGE_DETECTION, 4, movement());
         game_collision->update_collidables(game_collision, state);
+        set_fullscreen(window);
         switch (state)
         {
         case DARK_FOREST:
@@ -210,6 +210,16 @@ int main(int argc, char **argv)
     return 0;
 }
 
+void set_fullscreen(struct SDL_Window *window)
+{
+    if (FULLSCREEN_ON)
+    {
+        SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+        
+    }else {
+        SDL_SetWindowFullscreen(window, 0);
+    }
+}
 int refresh_inputs(int *array, int size, int bol)
 {
     if (!bol)

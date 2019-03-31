@@ -50,6 +50,7 @@ extern int WAITING_FOR_MESSAGE;
 extern int TICKS;
 extern int GAME_SECS;
 extern int ROLL;
+extern int FULLSCREEN_ON;
 extern struct SDL_Color WHITE;
 extern struct SDL_Color GREY;
 extern struct SDL_Color MENU_BACKGROUND;
@@ -205,6 +206,7 @@ int NUM_STEPS;
 int TICKS;
 int GAME_SECS;
 int ROLL;
+int FULLSCREEN_ON;
 
 struct SDL_Color WHITE;
 struct SDL_Color GREY;
@@ -231,4 +233,5 @@ int refresh_inputs(int *, int, int);
 void set_items(int *);
 int quit();
 int render_thread(void *);
+void set_fullscreen(struct SDL_Window * window);
 #endif 

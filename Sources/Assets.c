@@ -192,6 +192,7 @@ void SET_GLOBALS()
     NUM_STEPS = 0;
     TICKS = 0;
     ROLL = -1;
+    FULLSCREEN_ON = 0;
 
     HERO_WIDTH = 32;
     HERO_HEIGHT = 32;

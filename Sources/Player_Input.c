@@ -99,6 +99,9 @@ void get_player_input()
                 INPUT = NONE;
                 USER_INPUTS[5] = 0;
                 continue;
+            case SDL_SCANCODE_F:
+                FULLSCREEN_ON = !(FULLSCREEN_ON);
+                break;
             default:
                 break;
             }
