@@ -1,7 +1,11 @@
 
 #include "Hero.h"
 
-int get_middle(int frame_size, int sprite_size)
+int get_middle_x(int frame_size, int sprite_size)
+{
+    return (frame_size / 2) - (sprite_size / 2);
+}
+int get_middle_y(int frame_size, int sprite_size)
 {
     return (frame_size / 2) - (sprite_size / 2);
 }
@@ -50,12 +54,12 @@ static void __set_texture(Hero *obj, struct SDL_Renderer *renderer, char *path)
 
     obj->rect.x = 0;
     obj->rect.y = 0;
-    obj->rect.w = SPRITE_FRAME_WIDTH;
-    obj->rect.h = SPRITE_FRAME_HEIGHT;
-    obj->rect_pos.x = get_middle(WINDOW_WIDTH, SPRITE_FRAME_WIDTH);
-    obj->rect_pos.y = get_middle(WINDOW_HEIGHT, SPRITE_FRAME_HEIGHT);
-    obj->rect_pos.w = SPRITE_FRAME_WIDTH;
-    obj->rect_pos.h = SPRITE_FRAME_HEIGHT;
+    obj->rect.w = HERO_WIDTH;
+    obj->rect.h = HERO_HEIGHT;
+    obj->rect_pos.x = get_middle_x(WINDOW_WIDTH, HERO_WIDTH);
+    obj->rect_pos.y = get_middle_y(WINDOW_HEIGHT, HERO_HEIGHT);
+    obj->rect_pos.w = HERO_WIDTH;
+    obj->rect_pos.h = HERO_HEIGHT;
 
     obj->texture = texture;
 }
@@ -72,7 +76,7 @@ static SDL_Rect *__get_rect_pos_pointer(Hero *obj)
 
 static void __render(Hero *obj, struct SDL_Renderer *renderer)
 {
-    SDL_RenderCopy(renderer, obj->texture, obj->get_rect_pointer(obj), obj->get_rect_pos_pointer(obj));
+    SDL_RenderCopy(renderer, obj->texture, &obj->rect, &obj->rect_pos);
 }
 
 static void __animate_down(Hero *obj)

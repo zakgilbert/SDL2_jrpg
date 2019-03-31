@@ -15,7 +15,7 @@
 #include "Words.h"
 #include "H.h"
 #include "Enemy.h"
-
+#include "Hero.h"
 void SET_GLOBALS();
 Item *load_bag(Item *bag, int save_state);
 Enemy *load_enemy(int key, struct SDL_Renderer * renderer);
@@ -26,5 +26,6 @@ void save_bag(Item *bag, int save_state);
 void save(Character **party, Item *bag, int save_state);
 void create_load_info();
 char **get_state_info(int save_state);
+void set_fullscreen(struct SDL_Window * window, Hero * hero);
 
 #endif /* ASSETS_H */

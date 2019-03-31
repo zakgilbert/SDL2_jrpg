@@ -3,7 +3,6 @@
 #include "H.h"
 #include "Words.h"
 #include "Graphics.h"
-#include "Window_and_Renderer.h"
 #include "Floor.h"
 #include "Hero.h"
 #include "Item.h"
@@ -29,6 +28,7 @@ int main(int argc, char **argv)
 {
     set_up_timer(60);
     int running;
+    int w, h;
     SET_GLOBALS();
     running = 1;
 
@@ -43,9 +43,9 @@ int main(int argc, char **argv)
     TTF_Init();
     struct SDL_Window *window = NULL;
     struct SDL_Renderer *renderer = NULL;
-    SDL_SetHint(SDL_HINT_VIDEO_X11_XVIDMODE, "0");
-    window = make_window("Window");
-    renderer = make_renderer(&window);
+    SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
+    SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     Area *dark_forest = CREATE_AREA(DARK_FOREST);
     Hero *hero = CREATE_HERO();
@@ -75,17 +75,18 @@ int main(int argc, char **argv)
                                dark_forest_npcs, dark_forest_npc_types, 2,
                                dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
 
-    hero->set_texture(hero, renderer, "graphics/LOCKE.png");
+    hero->set_texture(hero, renderer, "graphics/locke_map.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
 
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
     input_thread = SDL_CreateThread(input_handler, "input_handler", NULL);
-
+    party[0]->in_animation = -1;
     while (running)
     {
         start_timer();
         refresh_inputs(EDGE_DETECTION, 4, movement());
         game_collision->update_collidables(game_collision, state);
+        set_fullscreen(window, hero);
         switch (state)
         {
         case DARK_FOREST:
@@ -210,6 +211,17 @@ int main(int argc, char **argv)
     return 0;
 }
 
+void set_fullscreen(struct SDL_Window *window, Hero *hero)
+{
+    if (FULLSCREEN_ON)
+    {
+        SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+    }
+    else
+    {
+        SDL_SetWindowFullscreen(window, 0);
+    }
+}
 int refresh_inputs(int *array, int size, int bol)
 {
     if (!bol)

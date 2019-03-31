@@ -40,7 +40,6 @@ static SDL_Rect *__get_rect_pointer(Floor *obj)
 
 static void __render_floor(Floor *obj, struct SDL_Renderer *renderer)
 {
-    struct SDL_Rect ref = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
     if (!MOVEMENT_DISABLED)
     {
         obj->rect.x = X;

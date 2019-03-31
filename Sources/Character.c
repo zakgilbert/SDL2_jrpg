@@ -80,7 +80,7 @@ static void _create_battle_textures(Character *this, struct SDL_Renderer *render
 }
 static int _cast(Character *this)
 {
-    if (!this->in_animation)
+    if (this->in_animation == -1)
     {
         this->in_animation = 1;
         this->current_animation_frame = 0;
@@ -90,8 +90,9 @@ static int _cast(Character *this)
     {
         this->in_animation = 0;
     }
-    if (time_to_animate())
+    if (time_to_animate() && this->in_animation)
     {
+        this->current_animation_frame++;
         (*this->cast_ptr[this->ani_i])(&this->b_rect_2);
         this->ani_i = !(this->ani_i);
     }
