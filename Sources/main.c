@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     TTF_Init();
     struct SDL_Window *window = NULL;
     struct SDL_Renderer *renderer = NULL;
-
+    SDL_SetHint(SDL_HINT_VIDEO_X11_XVIDMODE, "0");
     window = make_window("Window");
     renderer = make_renderer(&window);
 
@@ -169,7 +169,7 @@ int main(int argc, char **argv)
             SDL_RenderClear(renderer);
             current_battle->render(current_battle, renderer, hand);
             SDL_RenderPresent(renderer);
-            if(previous_state == BATTLE)
+            if (previous_state == BATTLE)
             {
                 current_battle->destroy(current_battle);
                 current_battle = NULL;

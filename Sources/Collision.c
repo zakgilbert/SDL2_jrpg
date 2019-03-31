@@ -97,8 +97,8 @@ static void _update_collidables(Collision *this, int area_key)
     }
     for (k = 0; k < this->num_collibables[area_key]; k++)
     {
-        this->collidables[area_key][k]->rect->x = ((this->collidables[area_key][k]->x) - X);
-        this->collidables[area_key][k]->rect->y = ((this->collidables[area_key][k]->y) - Y);
+        this->collidables[area_key][k]->rect->x = ((this->collidables[area_key][k]->x) + X);
+        this->collidables[area_key][k]->rect->y = ((this->collidables[area_key][k]->y) + Y);
 
         if (this->check_left_edge(this->collidables[area_key][k]))
         {

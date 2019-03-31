@@ -195,7 +195,8 @@ void SET_GLOBALS()
 
     HERO_WIDTH = 32;
     HERO_HEIGHT = 32;
-
+    MAP_WIDTH = 356;
+    MAP_HEIGHT = 324;
     WHITE.r = 255;
     WHITE.g = 255;
     WHITE.b = 255;

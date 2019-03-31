@@ -25,7 +25,6 @@ int movement()
     }
     if (change_position())
     {
-        bounds();
         result = 1;
     }
     return result;
@@ -59,25 +58,25 @@ int change_position()
     {
         if (USER_INPUTS[0])
         { 
-            Y++;
+            Y--;
             is_moving = 1;
             NUM_STEPS++;
         }
         else if (USER_INPUTS[1])
         { 
-            Y--;
+            Y++;
             is_moving = 1;
             NUM_STEPS++;
         }
         else if (USER_INPUTS[2])
         { 
-            X--;
+            X++;
             is_moving = 1;
             NUM_STEPS++;
         }
         else if (USER_INPUTS[3])
         { 
-            X++;
+            X--;
             is_moving = 1;
             NUM_STEPS++;
         }
