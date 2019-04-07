@@ -16,10 +16,10 @@
 #include "H.h"
 #include "Enemy.h"
 #include "Hero.h"
+#include "Render.h"
 void SET_GLOBALS();
 Item *load_bag(Item *bag, int save_state);
 Enemy *load_enemy(int key, struct SDL_Renderer * renderer);
-
 Character **load_party(int save_state, struct SDL_Renderer *renderer);
 
 void save_bag(Item *bag, int save_state);

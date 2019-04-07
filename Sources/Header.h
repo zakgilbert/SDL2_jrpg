@@ -53,6 +53,7 @@ extern int TICKS;
 extern int GAME_SECS;
 extern int ROLL;
 extern int FULLSCREEN_ON;
+extern int NUM_TARGETS;
 extern struct SDL_Color WHITE;
 extern struct SDL_Color GREY;
 extern struct SDL_Color MENU_BACKGROUND;
@@ -74,6 +75,12 @@ extern struct STRING_LIST *SAVE_PATHS;
 extern struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 extern struct STRING_LIST *ENEMIES;
 
+typedef void render_function(void *obj, struct SDL_Renderer *renderer);
+typedef void *Target;
+
+extern Target targets[50];
+
+extern render_function *buffer[];
 enum states
 {
     DARK_FOREST,
@@ -193,6 +200,7 @@ int IS_MOVING;
 int REFRESH_ITEMS;
 int HERO_WIDTH;
 int HERO_HEIGHT;
+int NUM_TARGETS;
 
 int NUM_STATS;
 int NUM_AREAS;
@@ -233,8 +241,10 @@ struct STRING_LIST *SAVE_PATHS;
 struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 struct STRING_LIST *ENEMIES;
 
+Target targets[50];
+
 int refresh_inputs(int *, int, int);
 void set_items(int *);
 int quit();
 int render_thread(void *);
-#endif 
+#endif

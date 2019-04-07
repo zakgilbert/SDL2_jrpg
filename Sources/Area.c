@@ -65,6 +65,11 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
     collidables->add_collision(collidables, this->lootables, num_items, this->npcs, num_npcs, this->num_collidables, this->area_key);
 }
 
+Message *_r_a(struct SDL_Renderer *renderer, void *obj, void *hero, void *bag)
+{
+    Area *this = (Area *)obj;
+    return this->render_area(this, renderer, (Hero *)hero, (Item *)bag);
+}
 static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Item *bag)
 {
     int i, k;
@@ -78,14 +83,14 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
 
         return NULL;
     }
-   else if (NUM_STEPS > (300 + (rand() % 500)))
+    else if (NUM_STEPS > (300 + (rand() % 500)))
     {
         state = BATTLE;
         previous_state = this->area_key;
         ROLL = rand() % 3;
 
         return NULL;
-    } 
+    }
     int item_to_be_obtained = -1;
     int npc_to_interact_with = -1;
 
@@ -93,7 +98,10 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
     MOVEMENT_DISABLED = 0;
     hero->animate(hero);
 
-    this->floor->render_floor(this->floor, renderer);
+    /**
+        this->floor->render_floor(this->floor, renderer);
+*/
+    add_target_function(add_target(this->floor, render_forest_floor));
     for (k = 0; k < this->bag->items_in_bag; k++)
     {
         if (this->current_index == -1 &&
@@ -128,8 +136,14 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
         }
         this->npcs[i]->render(this->npcs[i], renderer);
     }
-    hero->render(hero, renderer);
-    this->trees->render_floor(this->trees, renderer);
+    /**
+        hero->render(hero, renderer);
+*/
+    add_target_function(add_target(hero, render_hero));
+    add_target_function(add_target(this->trees, render_forest_trees));
+    /**
+        this->trees->render_floor(this->trees, renderer);
+*/
     if (this->current_index != -1 && (this->last_x != X || this->last_y != Y))
     {
         this->npcs[this->current_index]->ready_to_interact = 0;
@@ -146,6 +160,7 @@ Area *CREATE_AREA(int area_key)
 
     this->create_assets = _create_assets;
     this->render_area = _render_area;
+    this->r_a = _r_a;
 
     this->bag = CREATE_BAG();
     this->num_collidables = 0;

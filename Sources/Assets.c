@@ -193,12 +193,14 @@ void SET_GLOBALS()
     TICKS = 0;
     ROLL = -1;
     FULLSCREEN_ON = 0;
-COLLISION_X = 162;
-COLLISION_Y = 142;
+    COLLISION_X = 162;
+    COLLISION_Y = 142;
     HERO_WIDTH = 16;
     HERO_HEIGHT = 24;
     MAP_WIDTH = 2048;
     MAP_HEIGHT = 1792;
+    NUM_TARGETS = 0;
+
     WHITE.r = 255;
     WHITE.g = 255;
     WHITE.b = 255;

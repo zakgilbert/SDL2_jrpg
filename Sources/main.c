@@ -92,6 +92,7 @@ int main(int argc, char **argv)
         case DARK_FOREST:
             SDL_RenderClear(renderer);
             Message *message_being_displayed = dark_forest->render_area(dark_forest, renderer, hero, bag);
+            render_buffer(renderer);
             SDL_RenderPresent(renderer);
             break;
 
