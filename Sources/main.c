@@ -49,10 +49,10 @@ int main(int argc, char **argv)
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
     SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    Area *dark_forest = CREATE_AREA(DARK_FOREST);
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Item *bag = CREATE_BAG();
+    Area *dark_forest = CREATE_AREA(DARK_FOREST, hero, bag);
     Collision *game_collision = CREATE_COLLISION();
     r_Q = CREATE_RENDER_Q();
 
@@ -60,6 +60,7 @@ int main(int argc, char **argv)
 
     SDL_Thread *hand_thread;
     SDL_Thread *input_thread;
+    SDL_Thread *area_thread;
 
     Battle *current_battle = NULL;
     Character **party = load_party(0, renderer);
@@ -90,21 +91,21 @@ int main(int argc, char **argv)
         refresh_inputs(EDGE_DETECTION, 4, movement());
         game_collision->update_collidables(game_collision, state);
         set_fullscreen(window, hero);
-
-        SDL_RenderClear(renderer);
-        r_Q = r_Q->render(r_Q, renderer);
-        SDL_RenderPresent(renderer);
-
+        r_Q->render(r_Q, renderer);
         switch (state)
         {
         case DARK_FOREST:;
-            Message *message_being_displayed = dark_forest->render_area(dark_forest, renderer, hero, bag);
+            dark_forest->render_area(dark_forest);
+            /**
+            area_thread = SDL_CreateThread(handler_area, "handler_area", (void *)dark_forest);
+*/
             break;
 
         case MAIN_MENU:
             TICK = 1;
             menu->update_main_menu(menu);
             break;
+
             /*
         case ITEMS_MENU:
             TICK = 1;

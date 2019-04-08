@@ -1,0 +1,5041 @@
+Script started on 2019-04-08 06:57:49-1000
+🦆
+]0;zachary@peaquod: ~/Documents/c/jrpg[01;32mzachary:🖕:peaquod[00m@[01;34mjrpg[00m$ ./game
+Locke
+Locke
+Locke
+node_ptr 0x7f0180000b20
+
+node_ptr 0x7f0180000b40
+
+node_ptr 0x7f0180000b60
+
+node_ptr 0x7f0180000b80
+
+node_ptr 0x7f0180000ba0
+
+node_ptr 0x7f0180000bc0
+
+node_ptr 0x7f0180000be0
+
+node_ptr 0x7f0180000c00
+
+node_ptr 0x7f0180000c20
+
+node_ptr 0x7f0180000c40
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000d40
+
+node_ptr 0x7f0180000d40
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000d60
+
+node_ptr 0x7f0180000d60
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000d80
+
+node_ptr 0x7f0180000d80
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000da0
+
+node_ptr 0x7f0180000da0
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000dc0
+
+node_ptr 0x7f0180000dc0
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000de0
+
+node_ptr 0x7f0180000de0
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000e00
+
+node_ptr 0x7f0180000e00
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000e20
+
+node_ptr 0x7f0180000e20
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000e40
+
+node_ptr 0x7f0180000e40
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000e60
+
+node_ptr 0x7f0180000e60
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000e80
+
+node_ptr 0x7f0180000e80
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000ea0
+
+node_ptr 0x7f0180000ea0
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000ec0
+
+node_ptr 0x7f0180000ec0
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000ee0
+
+node_ptr 0x7f0180000ee0
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000f00
+
+node_ptr 0x7f0180000f00
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000f20
+
+node_ptr 0x7f0180000f20
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000f40
+
+node_ptr 0x7f0180000f40
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000f60
+
+node_ptr 0x7f0180000f60
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000f80
+
+node_ptr 0x7f0180000f80
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000fa0
+
+node_ptr 0x7f0180000fa0
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000fc0
+
+node_ptr 0x7f0180000fc0
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000fe0
+
+node_ptr 0x7f0180000fe0
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180001000
+
+node_ptr 0x7f0180001000
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180001020
+
+node_ptr 0x7f0180001020
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180001040
+
+node_ptr 0x7f0180001040
+
+node_ptr 0x7f0180000c60
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180001060
+
+node_ptr 0x7f0180001080
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001180
+
+node_ptr 0x7f0180001180
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001080
+
+node_ptr 0x7f0180001080
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001060
+
+node_ptr 0x7f0180001060
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f0180000d20
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f0180000d00
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f0180000ce0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f0180000cc0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f0180000ca0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f0180000c80
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800011a0
+
+node_ptr 0x7f01800011a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800011c0
+
+node_ptr 0x7f01800011c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800011e0
+
+node_ptr 0x7f01800011e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001200
+
+node_ptr 0x7f0180001200
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001220
+
+node_ptr 0x7f0180001220
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001240
+
+node_ptr 0x7f0180001240
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001260
+
+node_ptr 0x7f0180001260
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001280
+
+node_ptr 0x7f0180001280
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800012a0
+
+node_ptr 0x7f01800012a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800012c0
+
+node_ptr 0x7f01800012c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800012e0
+
+node_ptr 0x7f01800012e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001300
+
+node_ptr 0x7f0180001300
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001320
+
+node_ptr 0x7f0180001320
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001340
+
+node_ptr 0x7f0180001340
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001360
+
+node_ptr 0x7f0180001360
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001380
+
+node_ptr 0x7f0180001380
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800013a0
+
+node_ptr 0x7f01800013a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800013c0
+
+node_ptr 0x7f01800013c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800013e0
+
+node_ptr 0x7f01800013e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001400
+
+node_ptr 0x7f0180001400
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001420
+
+node_ptr 0x7f0180001420
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001440
+
+node_ptr 0x7f0180001440
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001460
+
+node_ptr 0x7f0180001460
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001480
+
+node_ptr 0x7f0180001480
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800014a0
+
+node_ptr 0x7f01800014a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800014c0
+
+node_ptr 0x7f01800014c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800014e0
+
+node_ptr 0x7f01800014e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001500
+
+node_ptr 0x7f0180001500
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001520
+
+node_ptr 0x7f0180001520
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001540
+
+node_ptr 0x7f0180001540
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001560
+
+node_ptr 0x7f0180001560
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001580
+
+node_ptr 0x7f0180001580
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800015a0
+
+node_ptr 0x7f01800015a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800015c0
+
+node_ptr 0x7f01800015c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800015e0
+
+node_ptr 0x7f01800015e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001600
+
+node_ptr 0x7f0180001600
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001620
+
+node_ptr 0x7f0180001620
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001640
+
+node_ptr 0x7f0180001640
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001660
+
+node_ptr 0x7f0180001660
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001680
+
+node_ptr 0x7f0180001680
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800016a0
+
+node_ptr 0x7f01800016a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800016c0
+
+node_ptr 0x7f01800016c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800016e0
+
+node_ptr 0x7f01800016e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001700
+
+node_ptr 0x7f0180001700
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001720
+
+node_ptr 0x7f0180001720
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001740
+
+node_ptr 0x7f0180001740
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001760
+
+node_ptr 0x7f0180001760
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001780
+
+node_ptr 0x7f0180001780
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800017a0
+
+node_ptr 0x7f01800017a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800017c0
+
+node_ptr 0x7f01800017c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800017e0
+
+node_ptr 0x7f01800017e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001800
+
+node_ptr 0x7f0180001800
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001820
+
+node_ptr 0x7f0180001820
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001840
+
+node_ptr 0x7f0180001840
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001860
+
+node_ptr 0x7f0180001860
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001880
+
+node_ptr 0x7f0180001880
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800018a0
+
+node_ptr 0x7f01800018a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800018c0
+
+node_ptr 0x7f01800018c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800018e0
+
+node_ptr 0x7f01800018e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001900
+
+node_ptr 0x7f0180001900
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001920
+
+node_ptr 0x7f0180001920
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001940
+
+node_ptr 0x7f0180001940
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001960
+
+node_ptr 0x7f0180001960
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001980
+
+node_ptr 0x7f0180001980
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800019a0
+
+node_ptr 0x7f01800019a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800019c0
+
+node_ptr 0x7f01800019c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800019e0
+
+node_ptr 0x7f01800019e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001a00
+
+node_ptr 0x7f0180001a00
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001a20
+
+node_ptr 0x7f0180001a20
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001a40
+
+node_ptr 0x7f0180001a40
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001a60
+
+node_ptr 0x7f0180001a60
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001a80
+
+node_ptr 0x7f0180001a80
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001aa0
+
+node_ptr 0x7f0180001aa0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001ac0
+
+node_ptr 0x7f0180001ac0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001ae0
+
+node_ptr 0x7f0180001ae0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001b00
+
+node_ptr 0x7f0180001b00
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001b20
+
+node_ptr 0x7f0180001b20
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001b40
+
+node_ptr 0x7f0180001b40
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001b60
+
+node_ptr 0x7f0180001b60
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001b80
+
+node_ptr 0x7f0180001b80
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001ba0
+
+node_ptr 0x7f0180001ba0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001bc0
+
+node_ptr 0x7f0180001bc0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001be0
+
+node_ptr 0x7f0180001be0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001c00
+
+node_ptr 0x7f0180001c00
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001c20
+
+node_ptr 0x7f0180001c20
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001c40
+
+node_ptr 0x7f0180001c40
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001c60
+
+node_ptr 0x7f0180001c60
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001c80
+
+node_ptr 0x7f0180001c80
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001ca0
+
+node_ptr 0x7f0180001ca0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001cc0
+
+node_ptr 0x7f0180001cc0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001ce0
+
+node_ptr 0x7f0180001ce0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001d00
+
+node_ptr 0x7f0180001d00
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001d20
+
+node_ptr 0x7f0180001d20
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001d40
+
+node_ptr 0x7f0180001d40
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001d60
+
+node_ptr 0x7f0180001d60
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001d80
+
+node_ptr 0x7f0180001d80
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001da0
+
+node_ptr 0x7f0180001da0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001dc0
+
+node_ptr 0x7f0180001dc0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001de0
+
+node_ptr 0x7f0180001de0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001e00
+
+node_ptr 0x7f0180001e00
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001e20
+
+node_ptr 0x7f0180001e20
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001e40
+
+node_ptr 0x7f0180001e40
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001e60
+
+node_ptr 0x7f0180001e60
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001e80
+
+node_ptr 0x7f0180001e80
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001ea0
+
+node_ptr 0x7f0180001ea0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001ec0
+
+node_ptr 0x7f0180001ec0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001ee0
+
+node_ptr 0x7f0180001ee0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001f00
+
+node_ptr 0x7f0180001f00
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001f20
+
+node_ptr 0x7f0180001f20
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001f40
+
+node_ptr 0x7f0180001f40
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001f60
+
+node_ptr 0x7f0180001f60
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001f80
+
+node_ptr 0x7f0180001f80
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001fa0
+
+node_ptr 0x7f0180001fa0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001fc0
+
+node_ptr 0x7f0180001fc0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001fe0
+
+node_ptr 0x7f0180001fe0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002000
+
+node_ptr 0x7f0180002000
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002020
+
+node_ptr 0x7f0180002020
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002040
+
+node_ptr 0x7f0180002040
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002060
+
+node_ptr 0x7f0180002060
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002080
+
+node_ptr 0x7f0180002080
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800020a0
+
+node_ptr 0x7f01800020a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800020c0
+
+node_ptr 0x7f01800020c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800020e0
+
+node_ptr 0x7f01800020e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002100
+
+node_ptr 0x7f0180002100
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002120
+
+node_ptr 0x7f0180002120
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002140
+
+node_ptr 0x7f0180002140
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002160
+
+node_ptr 0x7f0180002160
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002180
+
+node_ptr 0x7f0180002180
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800021a0
+
+node_ptr 0x7f01800021a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800021c0
+
+node_ptr 0x7f01800021c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800021e0
+
+node_ptr 0x7f01800021e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002200
+
+node_ptr 0x7f0180002200
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002220
+
+node_ptr 0x7f0180002220
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002240
+
+node_ptr 0x7f0180002240
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002260
+
+node_ptr 0x7f0180002260
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002280
+
+node_ptr 0x7f0180002280
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800022a0
+
+node_ptr 0x7f01800022a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800022c0
+
+node_ptr 0x7f01800022c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800022e0
+
+node_ptr 0x7f01800022e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002300
+
+node_ptr 0x7f0180002300
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002320
+
+node_ptr 0x7f0180002320
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002340
+
+node_ptr 0x7f0180002340
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002360
+
+node_ptr 0x7f0180002360
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002380
+
+node_ptr 0x7f0180002380
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800023a0
+
+node_ptr 0x7f01800023a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800023c0
+
+node_ptr 0x7f01800023c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800023e0
+
+node_ptr 0x7f01800023e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002400
+
+node_ptr 0x7f0180002400
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002420
+
+node_ptr 0x7f0180002420
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002440
+
+node_ptr 0x7f0180002440
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002460
+
+node_ptr 0x7f0180002460
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002480
+
+node_ptr 0x7f0180002480
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800024a0
+
+node_ptr 0x7f01800024a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800024c0
+
+node_ptr 0x7f01800024c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800024e0
+
+node_ptr 0x7f01800024e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002500
+
+node_ptr 0x7f0180002500
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002520
+
+node_ptr 0x7f0180002520
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002540
+
+node_ptr 0x7f0180002540
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002560
+
+node_ptr 0x7f0180002560
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002580
+
+node_ptr 0x7f0180002580
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800025a0
+
+node_ptr 0x7f01800025a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800025c0
+
+node_ptr 0x7f01800025c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800025e0
+
+node_ptr 0x7f01800025e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002600
+
+node_ptr 0x7f0180002600
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002620
+
+node_ptr 0x7f0180002620
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002640
+
+node_ptr 0x7f0180002640
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002660
+
+node_ptr 0x7f0180002660
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002680
+
+node_ptr 0x7f0180002680
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800026a0
+
+node_ptr 0x7f01800026a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800026c0
+
+node_ptr 0x7f01800026c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800026e0
+
+node_ptr 0x7f01800026e0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002700
+
+node_ptr 0x7f0180002700
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002720
+
+node_ptr 0x7f0180002720
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002740
+
+node_ptr 0x7f0180002740
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002760
+
+node_ptr 0x7f0180002760
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002780
+
+node_ptr 0x7f0180002780
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800027a0
+
+node_ptr 0x7f01800027a0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800027c0
+
+node_ptr 0x7f01800027c0
+
+node_ptr 0x7f01800010a0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f01800027e0
+
+node_ptr 0x7f0180002800
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002900
+
+node_ptr 0x7f0180002900
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002800
+
+node_ptr 0x7f0180002800
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f01800027e0
+
+node_ptr 0x7f01800027e0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180001160
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180001140
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180001120
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180001100
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f01800010e0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f01800010c0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002920
+
+node_ptr 0x7f0180002920
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002940
+
+node_ptr 0x7f0180002940
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002960
+
+node_ptr 0x7f0180002960
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002980
+
+node_ptr 0x7f0180002980
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f01800029a0
+
+node_ptr 0x7f01800029a0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f01800029c0
+
+node_ptr 0x7f01800029c0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f01800029e0
+
+node_ptr 0x7f01800029e0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002a00
+
+node_ptr 0x7f0180002a00
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002a20
+
+node_ptr 0x7f0180002a20
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002a40
+
+node_ptr 0x7f0180002a40
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002a60
+
+node_ptr 0x7f0180002a60
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002a80
+
+node_ptr 0x7f0180002a80
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002aa0
+
+node_ptr 0x7f0180002aa0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002ac0
+
+node_ptr 0x7f0180002ac0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002ae0
+
+node_ptr 0x7f0180002ae0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002b00
+
+node_ptr 0x7f0180002b00
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002b20
+
+node_ptr 0x7f0180002b20
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002b40
+
+node_ptr 0x7f0180002b40
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002b60
+
+node_ptr 0x7f0180002b60
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002b80
+
+node_ptr 0x7f0180002b80
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002ba0
+
+node_ptr 0x7f0180002ba0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002bc0
+
+node_ptr 0x7f0180002bc0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002be0
+
+node_ptr 0x7f0180002be0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002c00
+
+node_ptr 0x7f0180002c00
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002c20
+
+node_ptr 0x7f0180002c20
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002c40
+
+node_ptr 0x7f0180002c40
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002c60
+
+node_ptr 0x7f0180002c60
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002c80
+
+node_ptr 0x7f0180002c80
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002ca0
+
+node_ptr 0x7f0180002ca0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002cc0
+
+node_ptr 0x7f0180002cc0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002ce0
+
+node_ptr 0x7f0180002ce0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002d00
+
+node_ptr 0x7f0180002d00
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002d20
+
+node_ptr 0x7f0180002d20
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002d40
+
+node_ptr 0x7f0180002d40
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002d60
+
+node_ptr 0x7f0180002d60
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002d80
+
+node_ptr 0x7f0180002d80
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002da0
+
+node_ptr 0x7f0180002da0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002dc0
+
+node_ptr 0x7f0180002dc0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002de0
+
+node_ptr 0x7f0180002de0
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002e00
+
+node_ptr 0x7f0180002e00
+
+node_ptr 0x7f0180002820
+
+node_ptr 0x7f0180002840
+
+node_ptr 0x7f0180002860
+
+node_ptr 0x7f0180002880
+
+node_ptr 0x7f01800028a0
+
+node_ptr 0x7f01800028c0
+
+node_ptr 0x7f01800028e0
+
+node_ptr 0x7f0180002e20
+
+]0;zachary@peaquod: ~/Documents/c/jrpg[01;32mzachary:🤮:peaquod[00m@[01;34mjrpg[00m$ ./game[2Pexit./game[2Pmakesort list.txt | uniq -cd
+   2269 
+      3 Locke
+     26 node_ptr 0x7f0180000c60
+     28 node_ptr 0x7f0180000c80
+     28 node_ptr 0x7f0180000ca0
+     28 node_ptr 0x7f0180000cc0
+     28 node_ptr 0x7f0180000ce0
+     28 node_ptr 0x7f0180000d00
+     28 node_ptr 0x7f0180000d20
+      2 node_ptr 0x7f0180000d40
+      2 node_ptr 0x7f0180000d60
+      2 node_ptr 0x7f0180000d80
+      2 node_ptr 0x7f0180000da0
+      2 node_ptr 0x7f0180000dc0
+      2 node_ptr 0x7f0180000de0
+      2 node_ptr 0x7f0180000e00
+      2 node_ptr 0x7f0180000e20
+      2 node_ptr 0x7f0180000e40
+      2 node_ptr 0x7f0180000e60
+      2 node_ptr 0x7f0180000e80
+      2 node_ptr 0x7f0180000ea0
+      2 node_ptr 0x7f0180000ec0
+      2 node_ptr 0x7f0180000ee0
+      2 node_ptr 0x7f0180000f00
+      2 node_ptr 0x7f0180000f20
+      2 node_ptr 0x7f0180000f40
+      2 node_ptr 0x7f0180000f60
+      2 node_ptr 0x7f0180000f80
+      2 node_ptr 0x7f0180000fa0
+      2 node_ptr 0x7f0180000fc0
+      2 node_ptr 0x7f0180000fe0
+      2 node_ptr 0x7f0180001000
+      2 node_ptr 0x7f0180001020
+      2 node_ptr 0x7f0180001040
+      3 node_ptr 0x7f0180001060
+      3 node_ptr 0x7f0180001080
+    188 node_ptr 0x7f01800010a0
+    190 node_ptr 0x7f01800010c0
+    190 node_ptr 0x7f01800010e0
+    190 node_ptr 0x7f0180001100
+    190 node_ptr 0x7f0180001120
+    190 node_ptr 0x7f0180001140
+    190 node_ptr 0x7f0180001160
+      2 node_ptr 0x7f0180001180
+      2 node_ptr 0x7f01800011a0
+      2 node_ptr 0x7f01800011c0
+      2 node_ptr 0x7f01800011e0
+      2 node_ptr 0x7f0180001200
+      2 node_ptr 0x7f0180001220
+      2 node_ptr 0x7f0180001240
+      2 node_ptr 0x7f0180001260
+      2 node_ptr 0x7f0180001280
+      2 node_ptr 0x7f01800012a0
+      2 node_ptr 0x7f01800012c0
+      2 node_ptr 0x7f01800012e0
+      2 node_ptr 0x7f0180001300
+      2 node_ptr 0x7f0180001320
+      2 node_ptr 0x7f0180001340
+      2 node_ptr 0x7f0180001360
+      2 node_ptr 0x7f0180001380
+      2 node_ptr 0x7f01800013a0
+      2 node_ptr 0x7f01800013c0
+      2 node_ptr 0x7f01800013e0
+      2 node_ptr 0x7f0180001400
+      2 node_ptr 0x7f0180001420
+      2 node_ptr 0x7f0180001440
+      2 node_ptr 0x7f0180001460
+      2 node_ptr 0x7f0180001480
+      2 node_ptr 0x7f01800014a0
+      2 node_ptr 0x7f01800014c0
+      2 node_ptr 0x7f01800014e0
+      2 node_ptr 0x7f0180001500
+      2 node_ptr 0x7f0180001520
+      2 node_ptr 0x7f0180001540
+      2 node_ptr 0x7f0180001560
+      2 node_ptr 0x7f0180001580
+      2 node_ptr 0x7f01800015a0
+      2 node_ptr 0x7f01800015c0
+      2 node_ptr 0x7f01800015e0
+      2 node_ptr 0x7f0180001600
+      2 node_ptr 0x7f0180001620
+      2 node_ptr 0x7f0180001640
+      2 node_ptr 0x7f0180001660
+      2 node_ptr 0x7f0180001680
+      2 node_ptr 0x7f01800016a0
+      2 node_ptr 0x7f01800016c0
+      2 node_ptr 0x7f01800016e0
+      2 node_ptr 0x7f0180001700
+      2 node_ptr 0x7f0180001720
+      2 node_ptr 0x7f0180001740
+      2 node_ptr 0x7f0180001760
+      2 node_ptr 0x7f0180001780
+      2 node_ptr 0x7f01800017a0
+      2 node_ptr 0x7f01800017c0
+      2 node_ptr 0x7f01800017e0
+      2 node_ptr 0x7f0180001800
+      2 node_ptr 0x7f0180001820
+      2 node_ptr 0x7f0180001840
+      2 node_ptr 0x7f0180001860
+      2 node_ptr 0x7f0180001880
+      2 node_ptr 0x7f01800018a0
+      2 node_ptr 0x7f01800018c0
+      2 node_ptr 0x7f01800018e0
+      2 node_ptr 0x7f0180001900
+      2 node_ptr 0x7f0180001920
+      2 node_ptr 0x7f0180001940
+      2 node_ptr 0x7f0180001960
+      2 node_ptr 0x7f0180001980
+      2 node_ptr 0x7f01800019a0
+      2 node_ptr 0x7f01800019c0
+      2 node_ptr 0x7f01800019e0
+      2 node_ptr 0x7f0180001a00
+      2 node_ptr 0x7f0180001a20
+      2 node_ptr 0x7f0180001a40
+      2 node_ptr 0x7f0180001a60
+      2 node_ptr 0x7f0180001a80
+      2 node_ptr 0x7f0180001aa0
+      2 node_ptr 0x7f0180001ac0
+      2 node_ptr 0x7f0180001ae0
+      2 node_ptr 0x7f0180001b00
+      2 node_ptr 0x7f0180001b20
+      2 node_ptr 0x7f0180001b40
+      2 node_ptr 0x7f0180001b60
+      2 node_ptr 0x7f0180001b80
+      2 node_ptr 0x7f0180001ba0
+      2 node_ptr 0x7f0180001bc0
+      2 node_ptr 0x7f0180001be0
+      2 node_ptr 0x7f0180001c00
+      2 node_ptr 0x7f0180001c20
+      2 node_ptr 0x7f0180001c40
+      2 node_ptr 0x7f0180001c60
+      2 node_ptr 0x7f0180001c80
+      2 node_ptr 0x7f0180001ca0
+      2 node_ptr 0x7f0180001cc0
+      2 node_ptr 0x7f0180001ce0
+      2 node_ptr 0x7f0180001d00
+      2 node_ptr 0x7f0180001d20
+      2 node_ptr 0x7f0180001d40
+      2 node_ptr 0x7f0180001d60
+      2 node_ptr 0x7f0180001d80
+      2 node_ptr 0x7f0180001da0
+      2 node_ptr 0x7f0180001dc0
+      2 node_ptr 0x7f0180001de0
+      2 node_ptr 0x7f0180001e00
+      2 node_ptr 0x7f0180001e20
+      2 node_ptr 0x7f0180001e40
+      2 node_ptr 0x7f0180001e60
+      2 node_ptr 0x7f0180001e80
+      2 node_ptr 0x7f0180001ea0
+      2 node_ptr 0x7f0180001ec0
+      2 node_ptr 0x7f0180001ee0
+      2 node_ptr 0x7f0180001f00
+      2 node_ptr 0x7f0180001f20
+      2 node_ptr 0x7f0180001f40
+      2 node_ptr 0x7f0180001f60
+      2 node_ptr 0x7f0180001f80
+      2 node_ptr 0x7f0180001fa0
+      2 node_ptr 0x7f0180001fc0
+      2 node_ptr 0x7f0180001fe0
+      2 node_ptr 0x7f0180002000
+      2 node_ptr 0x7f0180002020
+      2 node_ptr 0x7f0180002040
+      2 node_ptr 0x7f0180002060
+      2 node_ptr 0x7f0180002080
+      2 node_ptr 0x7f01800020a0
+      2 node_ptr 0x7f01800020c0
+      2 node_ptr 0x7f01800020e0
+      2 node_ptr 0x7f0180002100
+      2 node_ptr 0x7f0180002120
+      2 node_ptr 0x7f0180002140
+      2 node_ptr 0x7f0180002160
+      2 node_ptr 0x7f0180002180
+      2 node_ptr 0x7f01800021a0
+      2 node_ptr 0x7f01800021c0
+      2 node_ptr 0x7f01800021e0
+      2 node_ptr 0x7f0180002200
+      2 node_ptr 0x7f0180002220
+      2 node_ptr 0x7f0180002240
+      2 node_ptr 0x7f0180002260
+      2 node_ptr 0x7f0180002280
+      2 node_ptr 0x7f01800022a0
+      2 node_ptr 0x7f01800022c0
+      2 node_ptr 0x7f01800022e0
+      2 node_ptr 0x7f0180002300
+      2 node_ptr 0x7f0180002320
+      2 node_ptr 0x7f0180002340
+      2 node_ptr 0x7f0180002360
+      2 node_ptr 0x7f0180002380
+      2 node_ptr 0x7f01800023a0
+      2 node_ptr 0x7f01800023c0
+      2 node_ptr 0x7f01800023e0
+      2 node_ptr 0x7f0180002400
+      2 node_ptr 0x7f0180002420
+      2 node_ptr 0x7f0180002440
+      2 node_ptr 0x7f0180002460
+      2 node_ptr 0x7f0180002480
+      2 node_ptr 0x7f01800024a0
+      2 node_ptr 0x7f01800024c0
+      2 node_ptr 0x7f01800024e0
+      2 node_ptr 0x7f0180002500
+      2 node_ptr 0x7f0180002520
+      2 node_ptr 0x7f0180002540
+      2 node_ptr 0x7f0180002560
+      2 node_ptr 0x7f0180002580
+      2 node_ptr 0x7f01800025a0
+      2 node_ptr 0x7f01800025c0
+      2 node_ptr 0x7f01800025e0
+      2 node_ptr 0x7f0180002600
+      2 node_ptr 0x7f0180002620
+      2 node_ptr 0x7f0180002640
+      2 node_ptr 0x7f0180002660
+      2 node_ptr 0x7f0180002680
+      2 node_ptr 0x7f01800026a0
+      2 node_ptr 0x7f01800026c0
+      2 node_ptr 0x7f01800026e0
+      2 node_ptr 0x7f0180002700
+      2 node_ptr 0x7f0180002720
+      2 node_ptr 0x7f0180002740
+      2 node_ptr 0x7f0180002760
+      2 node_ptr 0x7f0180002780
+      2 node_ptr 0x7f01800027a0
+      2 node_ptr 0x7f01800027c0
+      3 node_ptr 0x7f01800027e0
+      3 node_ptr 0x7f0180002800
+     37 node_ptr 0x7f0180002820
+     37 node_ptr 0x7f0180002840
+     37 node_ptr 0x7f0180002860
+     37 node_ptr 0x7f0180002880
+     37 node_ptr 0x7f01800028a0
+     37 node_ptr 0x7f01800028c0
+     37 node_ptr 0x7f01800028e0
+      2 node_ptr 0x7f0180002900
+      2 node_ptr 0x7f0180002920
+      2 node_ptr 0x7f0180002940
+      2 node_ptr 0x7f0180002960
+      2 node_ptr 0x7f0180002980
+      2 node_ptr 0x7f01800029a0
+      2 node_ptr 0x7f01800029c0
+      2 node_ptr 0x7f01800029e0
+      2 node_ptr 0x7f0180002a00
+      2 node_ptr 0x7f0180002a20
+      2 node_ptr 0x7f0180002a40
+      2 node_ptr 0x7f0180002a60
+      2 node_ptr 0x7f0180002a80
+      2 node_ptr 0x7f0180002aa0
+      2 node_ptr 0x7f0180002ac0
+      2 node_ptr 0x7f0180002ae0
+      2 node_ptr 0x7f0180002b00
+      2 node_ptr 0x7f0180002b20
+      2 node_ptr 0x7f0180002b40
+      2 node_ptr 0x7f0180002b60
+      2 node_ptr 0x7f0180002b80
+      2 node_ptr 0x7f0180002ba0
+      2 node_ptr 0x7f0180002bc0
+      2 node_ptr 0x7f0180002be0
+      2 node_ptr 0x7f0180002c00
+      2 node_ptr 0x7f0180002c20
+      2 node_ptr 0x7f0180002c40
+      2 node_ptr 0x7f0180002c60
+      2 node_ptr 0x7f0180002c80
+]0;zachary@peaquod: ~/Documents/c/jrpg[01;32mzachary:🙈:peaquod[00m@[01;34mjrpg[00m$ q
+exit
+
+Script done on 2019-04-08 06:59:11-1000

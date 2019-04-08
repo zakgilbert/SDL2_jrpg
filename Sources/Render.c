@@ -5,6 +5,14 @@
 
 #include "Render.h"
 
+void print_node(struct Node *targ)
+{
+    if (NULL == targ->obj)
+    {
+        printf("NULL:   ");
+    }
+    printf("node_ptr %p\n\n", targ);
+}
 static void _destroy(Render_Q *this)
 {
     if (NULL != this)
@@ -49,15 +57,28 @@ static struct Node *_pop(Render_Q *this)
 }
 Render_Q *_render(Render_Q *this, struct SDL_Renderer *renderer)
 {
-    Render_Q *new_q = CREATE_RENDER_Q();
     struct Node *temp;
     while (NULL != this->front)
     {
-        temp = this->pop(this);
+        temp = r_Q->pop(this);
         (*temp->funct)(temp->obj, renderer);
-        new_q->add(new_q, temp);
+        free(temp);
+        temp = NULL;
     }
-    return new_q;
+    return NULL;
+}
+static void _copy(Render_Q *this)
+{
+    struct Node *current;
+    current = this->front;
+    r_Q->in_copy = 1;
+    r_Q->add(r_Q, r_Q->new_node(NULL, render_clear));
+    while (current != NULL)
+    {
+        r_Q->add(r_Q, r_Q->new_node(current->obj, current->funct));
+        current = current->next;
+    }
+    r_Q->add(r_Q, r_Q->new_node(NULL, render_present));
 }
 Render_Q *CREATE_RENDER_Q()
 {
@@ -66,10 +87,20 @@ Render_Q *CREATE_RENDER_Q()
     this->destroy = _destroy;
     this->new_node = _new_node;
     this->render = _render;
+    this->copy = _copy;
     this->pop = _pop;
     this->size = 0;
-
+    this->in_copy = 0;
+    this->rendering = 0;
     this->front = NULL;
     this->rear = NULL;
     return this;
+}
+void render_clear(void *obj, struct SDL_Renderer *renderer)
+{
+    SDL_RenderClear(renderer);
+}
+void render_present(void *obj, struct SDL_Renderer *renderer)
+{
+    SDL_RenderPresent(renderer);
 }

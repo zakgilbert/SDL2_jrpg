@@ -82,6 +82,7 @@ typedef struct _Menu
     int previous_number_of_states;
     int first_load;
     int skip;
+    Render_Q * main_menu_q;
 
     Character **party;
     Item *bag;

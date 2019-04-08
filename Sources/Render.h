@@ -17,7 +17,8 @@
  * Q as a function pointer
  */
 typedef void render_function(void *obj, struct SDL_Renderer *renderer);
-
+void render_clear(void *obj, struct SDL_Renderer *renderer);
+void render_present(void *obj, struct SDL_Renderer *renderer);
 /**
  * Node
  * 
@@ -30,6 +31,7 @@ struct Node
     struct Node *next;
 };
 
+void print_node(struct Node *targ);
 /**
  * Render_Q: 
  * 
@@ -51,10 +53,13 @@ typedef struct _Render_Q
     struct _Render_Q *(*render)(struct _Render_Q *this, struct SDL_Renderer *renderer);
     void (*add)(struct _Render_Q *this, struct Node *data);
     struct Node *(*new_node)(void *obj, render_function target);
+    void (*copy)(struct _Render_Q *this);
     struct Node *(*pop)(struct _Render_Q *this);
     struct Node *front;
     struct Node *rear;
     int size;
+    int in_copy;
+    int rendering;
 
 } Render_Q;
 Render_Q *CREATE_RENDER_Q();

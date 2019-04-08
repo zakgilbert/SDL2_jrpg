@@ -21,6 +21,12 @@
 static const char *ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)};
 
+int handler_area(void *ptr)
+{
+    Area *area = (Area *)ptr;
+    area->render_area(area);
+    return 1;
+}
 /*
  * destroy
  * the Area struct
@@ -37,23 +43,24 @@ static void _destroy(Area *this)
     }
 }
 
-static void _set_q(struct _area *this, Hero *hero)
+static Render_Q *_set_q(struct _area *this)
 {
     int i;
-
-    r_Q->add(r_Q, r_Q->new_node(this->floor, render_floor));
-    r_Q->add(r_Q, r_Q->new_node(hero, render_hero));
+    this->q = CREATE_RENDER_Q();
+    this->q->add(this->q, this->q->new_node(this->floor, render_floor));
+    this->q->add(this->q, this->q->new_node(this->hero, render_hero));
 
     for (i = 0; i < this->bag->items_in_bag; i++)
     {
-        r_Q->add(r_Q, r_Q->new_node(this->lootables[i], render_lootable));
+        this->q->add(this->q, this->q->new_node(this->lootables[i], render_lootable));
     }
     for (i = 0; i < this->num_npcs; i++)
     {
-        r_Q->add(r_Q, r_Q->new_node(this->npcs[i], render_npc));
+        this->q->add(this->q, this->q->new_node(this->npcs[i], render_npc));
     }
-    r_Q->add(r_Q, r_Q->new_node(this->trees, render_floor));
+    this->q->add(this->q, this->q->new_node(this->trees, render_floor));
     this->first_load = 0;
+    return this->q;
 }
 
 static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision *collidables,
@@ -82,9 +89,10 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
         this->num_collidables++;
     }
     collidables->add_collision(collidables, this->lootables, num_items, this->npcs, num_npcs, this->num_collidables, this->area_key);
+    this->q = this->set_q(this);
 }
 
-static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Item *bag)
+static Message *_render_area(Area *this)
 {
     int i, k;
     srand(time(NULL));
@@ -93,8 +101,6 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
         state = MAIN_MENU;
         previous_state = this->area_key;
         INPUT = NONE;
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-        this->first_load = 1;
 
         return NULL;
     }
@@ -103,25 +109,15 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
         state = BATTLE;
         previous_state = this->area_key;
         ROLL = rand() % 3;
-        this->first_load = 1;
 
         return NULL;
-    }
-    if (this->first_load)
-    {
-        while (NULL != r_Q->front)
-        {
-            r_Q->pop(r_Q);
-        }
-        this->set_q(this, hero);
-        this->first_load = 0;
     }
     int item_to_be_obtained = -1;
     int npc_to_interact_with = -1;
 
     Message *dungeon_message = NULL;
     MOVEMENT_DISABLED = 0;
-    hero->animate(hero);
+    this->hero->animate(this->hero);
 
     for (k = 0; k < this->bag->items_in_bag; k++)
     {
@@ -136,7 +132,7 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
             state = MESSAGE;
             previous_state = this->area_key;
             USER_INPUTS[4] = 0;
-            bag->loot(bag, item_to_be_obtained);
+            this->party_bag->loot(this->party_bag, item_to_be_obtained);
         }
     }
     for (i = 0; i < this->num_npcs; i++)
@@ -162,18 +158,19 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
         this->last_x = X;
         this->last_y = Y;
     }
+    this->q->copy(this->q);
     return dungeon_message;
 }
 
-Area *CREATE_AREA(int area_key)
+Area *CREATE_AREA(int area_key, Hero *hero, Item *party_bag)
 {
     Area *this = (Area *)malloc(sizeof(*this));
 
     this->create_assets = _create_assets;
     this->render_area = _render_area;
     this->set_q = _set_q;
-
     this->bag = CREATE_BAG();
+    this->party_bag = party_bag;
     this->num_collidables = 0;
     this->num_npcs = 0;
     this->map_w = 1239;
@@ -187,5 +184,6 @@ Area *CREATE_AREA(int area_key)
     this->last_x = X;
     this->last_y = Y;
     this->first_load = 1;
+    this->hero = hero;
     return this;
 }
