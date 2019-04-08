@@ -29,8 +29,10 @@ typedef struct _Menu
 {
     void (*destroy)(struct _Menu *);
     void (*render_line)(struct _Menu *, struct SDL_Renderer *renderer, const char *str, SDL_Color color);
-    void (*set_q)(struct _Menu *this);
-    void (*update)(struct _Menu *this);
+    void (*set_q_main_menu)(struct _Menu *this);
+    void (*set_q_items_menu)(struct _Menu *this);
+    void (*update_main_menu)(struct _Menu *this);
+    void (*update_items_menu)(struct _Menu *this);
 
     Window *main_menu_bg;
 
@@ -44,18 +46,18 @@ typedef struct _Menu
     int (*set_main_menu_text_options)(struct _Menu *this, int _x, int _y, int size, int num_options);
 
     int (*set_stat_text)(struct _Menu *this, int _x, int _y, int size, int key);
+    void (*set_character_main_menu_image)(struct _Menu *this);
+    int (*set_items_menu_options)(struct _Menu *);
     /**
     
         void (*render_character_stats)(struct _Menu *, struct SDL_Renderer *,
                                        Hand *, Character **party, int, int,
                                        int, int);
     
-        void (*render_character_main_menu_image)(struct _Menu *, struct SDL_Renderer *, Hand *, Character **);
     
     
         void (*render_items_menu)(struct _Menu *, struct SDL_Renderer *, Hand *, Item *);
     
-        int (*render_items_menu_options)(struct _Menu *, struct SDL_Renderer *, Item *, int);
     
         void (*render_use_item_menu)(struct _Menu *, struct SDL_Renderer *, Hand *, Character **, Item *);
     
@@ -79,6 +81,7 @@ typedef struct _Menu
     int item_being_used;
     int previous_number_of_states;
     int first_load;
+    int skip;
 
     Character **party;
     Item *bag;

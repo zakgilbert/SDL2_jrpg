@@ -64,4 +64,6 @@ typedef struct _hand
 
 Hand *CREATE_HAND();
 
+void render_hand(void * obj, struct SDL_Renderer * renderer);
+
 #endif 

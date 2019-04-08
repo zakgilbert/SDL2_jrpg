@@ -21,7 +21,7 @@ typedef void render_function(void *obj, struct SDL_Renderer *renderer);
 /**
  * Node
  * 
- * for the render_q
+ * for the r_Q
 */
 struct Node
 {
@@ -59,6 +59,6 @@ typedef struct _Render_Q
 } Render_Q;
 Render_Q *CREATE_RENDER_Q();
 
-extern Render_Q *render_q;
-Render_Q *render_q;
+extern Render_Q *r_Q;
+Render_Q *r_Q;
 #endif /* RENDER_H */

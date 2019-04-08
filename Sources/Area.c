@@ -41,18 +41,18 @@ static void _set_q(struct _area *this, Hero *hero)
 {
     int i;
 
-    render_q->add(render_q, render_q->new_node(this->floor, render_floor));
-    render_q->add(render_q, render_q->new_node(hero, render_hero));
+    r_Q->add(r_Q, r_Q->new_node(this->floor, render_floor));
+    r_Q->add(r_Q, r_Q->new_node(hero, render_hero));
 
     for (i = 0; i < this->bag->items_in_bag; i++)
     {
-        render_q->add(render_q, render_q->new_node(this->lootables[i], render_lootable));
+        r_Q->add(r_Q, r_Q->new_node(this->lootables[i], render_lootable));
     }
     for (i = 0; i < this->num_npcs; i++)
     {
-        render_q->add(render_q, render_q->new_node(this->npcs[i], render_npc));
+        r_Q->add(r_Q, r_Q->new_node(this->npcs[i], render_npc));
     }
-    render_q->add(render_q, render_q->new_node(this->trees, render_floor));
+    r_Q->add(r_Q, r_Q->new_node(this->trees, render_floor));
     this->first_load = 0;
 }
 
@@ -109,7 +109,12 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
     }
     if (this->first_load)
     {
+        while (NULL != r_Q->front)
+        {
+            r_Q->pop(r_Q);
+        }
         this->set_q(this, hero);
+        this->first_load = 0;
     }
     int item_to_be_obtained = -1;
     int npc_to_interact_with = -1;

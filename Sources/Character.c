@@ -104,6 +104,10 @@ static void _render_battle_textures(Character *this, struct SDL_Renderer *render
     this->cast(this);
     SDL_RenderCopy(renderer, this->b_texture, &this->b_rect_2, &this->b_rect_1);
 }
+static void _render_bio_image(Character *this, struct SDL_Renderer *renderer)
+{
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+}
 
 Character *CREATE_CHARACTER(int key)
 {
@@ -115,6 +119,7 @@ Character *CREATE_CHARACTER(int key)
     this->update_party_stats = _update_party_stats;
     this->create_battle_textures = _create_battle_textures;
     this->render_battle_textures = _render_battle_textures;
+    this->render_bio_image = _render_bio_image;
     this->cast = _cast;
     this->cast_ptr[0] = cast_1_battle_ani;
     this->cast_ptr[1] = cast_2_battle_ani;
@@ -130,4 +135,9 @@ Character *CREATE_CHARACTER(int key)
     strcpy(this->EXP.name, "EXP:");
 
     return this;
+}
+void render_character_bio_image(void *obj, struct SDL_Renderer *renderer)
+{
+    Character *this = (Character *)obj;
+    this->render_bio_image(this, renderer);
 }

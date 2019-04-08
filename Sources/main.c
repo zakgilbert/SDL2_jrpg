@@ -54,7 +54,7 @@ int main(int argc, char **argv)
     Hand *hand = CREATE_HAND();
     Item *bag = CREATE_BAG();
     Collision *game_collision = CREATE_COLLISION();
-    render_q = CREATE_RENDER_Q();
+    r_Q = CREATE_RENDER_Q();
 
     bag = load_bag(bag, 0);
 
@@ -92,7 +92,7 @@ int main(int argc, char **argv)
         set_fullscreen(window, hero);
 
         SDL_RenderClear(renderer);
-        render_q = render_q->render(render_q, renderer);
+        r_Q = r_Q->render(r_Q, renderer);
         SDL_RenderPresent(renderer);
 
         switch (state)
@@ -103,18 +103,15 @@ int main(int argc, char **argv)
 
         case MAIN_MENU:
             TICK = 1;
-            menu->update(menu);
+            menu->update_main_menu(menu);
             break;
-
+            /*
+        case ITEMS_MENU:
+            TICK = 1;
+            menu->update_items_menu(menu);
+            break;
+*/
             /**
-            case ITEMS_MENU:
-                TICK = 1;
-                SDL_RenderClear(renderer);
-                menu->render_items_menu(menu, renderer, hand, bag);
-                hand->render(hand, renderer);
-                SDL_RenderPresent(renderer);
-                break;
-    
             case USE_ITEM:
                 TICK = 1;
                 SDL_RenderClear(renderer);
@@ -138,7 +135,6 @@ int main(int argc, char **argv)
                 hand->render(hand, renderer);
                 SDL_RenderPresent(renderer);
                 break;
-*/
 
         case MESSAGE:
             if (message_being_displayed->type == ONE_LINER)
@@ -181,6 +177,7 @@ int main(int argc, char **argv)
                 current_battle = NULL;
                 ROLL = -1;
             }
+*/
             break;
         default:
             break;
