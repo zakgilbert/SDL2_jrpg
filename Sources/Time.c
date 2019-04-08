@@ -51,8 +51,10 @@ void reset_timer()
 
     if (ticks_per_second >= SDL_GetPerformanceFrequency())
     {
-        /* printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED); */
-        /* printf("\nTicks Per Second: %ld", ticks_per_second); */
+        /**
+            printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED);
+            printf("\nTicks Per Second: %ld", ticks_per_second);
+*/
         FRAMES_RENDERED = 0;
         ticks_per_second = 0;
         GAME_SECS++;
@@ -65,7 +67,9 @@ void delay()
     {
         time_delay_per_second = ((time_per_tick - nano_timer) / (SDL_GetPerformanceFrequency() * 0.001));
         SDL_Delay(time_delay_per_second);
-        /* printf("\nTimeDelayed is: %Lf", time_delay_per_second); */
-        /*   printf("\nTimeDelayed int is: %Lf", time_delay_per_second);*/
+        /**
+             printf("\nTimeDelayed is: %Lf", time_delay_per_second); 
+             printf("\nTimeDelayed int is: %Lf", time_delay_per_second);
+*/
     }
 }

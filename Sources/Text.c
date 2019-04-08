@@ -16,9 +16,6 @@ static void _destroy(Text *this)
 static void _render(Text *this, struct SDL_Renderer *renderer)
 {
     TTF_SizeText(this->font, this->text, &this->rect.w, &this->rect.h);
-    /**
-        this->surface = TTF_RenderText_Solid(this->font, this->text, this->color);
-*/
     SDL_RenderCopy(renderer,
                    SDL_CreateTextureFromSurface(renderer,
                                                 TTF_RenderText_Solid(this->font, this->text, this->color)),

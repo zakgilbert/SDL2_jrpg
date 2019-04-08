@@ -25,6 +25,7 @@ struct Main_Attribute
 void stand_battle_ani(struct SDL_Rect *rect);
 int cast_1_battle_ani(struct SDL_Rect *rect);
 int cast_2_battle_ani(struct SDL_Rect *rect);
+int handler_party_stats(void *party);
 typedef struct _Character
 {
     /**
@@ -35,7 +36,7 @@ typedef struct _Character
     void (*check_stats)(struct _Character *);
     void (*create_battle_textures)(struct _Character *, struct SDL_Renderer *renderer, int i);
     void (*render_battle_textures)(struct _Character *, struct SDL_Renderer *renderer);
-    void (*render_bio_image)(struct _Character * this, struct SDL_Renderer *renderer);
+    void (*render_bio_image)(struct _Character *this, struct SDL_Renderer *renderer);
     int (*update_party_stats)(struct _Character **);
     int (*cast)(struct _Character *);
     int (*cast_ptr[2])(struct SDL_Rect *rect);
@@ -81,5 +82,5 @@ struct Party
 
 int count_party(struct Party *);
 void set_party_null(struct Party *);
-void render_character_bio_image(void * obj, struct SDL_Renderer * renderer);
-#endif 
+void render_character_bio_image(void *obj, struct SDL_Renderer *renderer);
+#endif

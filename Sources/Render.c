@@ -21,6 +21,15 @@ static void _destroy(Render_Q *this)
         this = NULL;
     }
 }
+static void _free(Render_Q *this)
+{
+    struct Node *temp;
+    while (NULL != this->front)
+    {
+        free(temp = this->pop(this));
+        temp = NULL;
+    }
+}
 static struct Node *_new_node(void *obj, render_function target)
 {
     struct Node *data = malloc(sizeof(struct Node));
@@ -89,6 +98,7 @@ Render_Q *CREATE_RENDER_Q()
     this->render = _render;
     this->copy = _copy;
     this->pop = _pop;
+    this->free = _free;
     this->size = 0;
     this->in_copy = 0;
     this->rendering = 0;

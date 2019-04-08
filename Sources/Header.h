@@ -75,7 +75,7 @@ extern struct STRING_LIST *SAVE_PATHS;
 extern struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 extern struct STRING_LIST *ENEMIES;
 
-
+typedef struct SDL_Renderer Renderer;
 enum states
 {
     DARK_FOREST,

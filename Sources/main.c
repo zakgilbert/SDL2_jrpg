@@ -60,7 +60,6 @@ int main(int argc, char **argv)
 
     SDL_Thread *hand_thread;
     SDL_Thread *input_thread;
-    SDL_Thread *area_thread;
 
     Battle *current_battle = NULL;
     Character **party = load_party(0, renderer);
@@ -91,14 +90,13 @@ int main(int argc, char **argv)
         refresh_inputs(EDGE_DETECTION, 4, movement());
         game_collision->update_collidables(game_collision, state);
         set_fullscreen(window, hero);
+
         r_Q->render(r_Q, renderer);
+
         switch (state)
         {
         case DARK_FOREST:;
             dark_forest->render_area(dark_forest);
-            /**
-            area_thread = SDL_CreateThread(handler_area, "handler_area", (void *)dark_forest);
-*/
             break;
 
         case MAIN_MENU:
@@ -106,12 +104,11 @@ int main(int argc, char **argv)
             menu->update_main_menu(menu);
             break;
 
-            /*
         case ITEMS_MENU:
             TICK = 1;
             menu->update_items_menu(menu);
             break;
-*/
+
             /**
             case USE_ITEM:
                 TICK = 1;

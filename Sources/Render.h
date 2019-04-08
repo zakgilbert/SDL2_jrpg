@@ -57,6 +57,7 @@ typedef struct _Render_Q
     struct Node *(*pop)(struct _Render_Q *this);
     struct Node *front;
     struct Node *rear;
+    void (*free)(struct _Render_Q *this);
     int size;
     int in_copy;
     int rendering;

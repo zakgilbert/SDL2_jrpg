@@ -34,6 +34,9 @@ typedef struct _Menu
     void (*update_main_menu)(struct _Menu *this);
     void (*update_items_menu)(struct _Menu *this);
 
+    void (*update)(struct _Menu *this);
+    void (*set_q)(struct _Menu *this);
+
     Window *main_menu_bg;
 
     Window *select_character_bg;
@@ -82,13 +85,13 @@ typedef struct _Menu
     int previous_number_of_states;
     int first_load;
     int skip;
-    Render_Q * main_menu_q;
-
+    Render_Q *q;
+    Uint32 delay;
     Character **party;
     Item *bag;
     Hand *hand;
 } Menu;
 
 Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag);
-
+void render_transition(void *obj, struct SDL_Renderer *renderer);
 #endif

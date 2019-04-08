@@ -164,6 +164,28 @@ static char *_loot(Item *this, ITEM_ENUM item_enum)
         return ITEMS[this->items[item_index]];
     }
 }
+void _update_quant_disp(Item *this)
+{
+    int i;
+    char temp[10];
+    if (NULL != this->display)
+    {
+        for (i = 0; i < this->items_in_bag; i++)
+            free(this->display[i]);
+        this->display = NULL;
+    }
+    this->display = (char **)malloc(sizeof(char *) * this->items_in_bag);
+    for (i = 0; i < this->items_in_bag; i++)
+    {
+        sprintf(temp, "%d", this->item_quantities[i]);
+        this->display[i] = (char *)malloc(strlen(temp));
+        this->display[i] = strcpy(this->display[i], temp);
+    }
+}
+static const char *_get_display(Item *this, int index)
+{
+    return this->display[index];
+}
 
 Item *CREATE_BAG()
 {
@@ -177,11 +199,14 @@ Item *CREATE_BAG()
     this->quaff_item = _quaff_item;
     this->remove_item = _remove_item;
     this->loot = _loot;
+    this->get_display = _get_display;
+    this->update_quant_disp = _update_quant_disp;
 
     this->item_quantities = NULL;
     this->items = NULL;
     this->items_in_bag = 0;
     this->affect = NULL;
+    this->display = NULL;
 
     return this;
 }
