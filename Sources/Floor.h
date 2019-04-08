@@ -2,7 +2,6 @@
 #ifndef JRPG_FLOOR_H
 #define JRPG_FLOOR_H
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -11,27 +10,24 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
-#include "Hero.h"
 #include "Header.h"
 
-
-typedef struct __floor
+typedef struct _Floor
 {
     struct SDL_Texture *texture;
 
-    void (*set_texture)(struct __floor *, struct SDL_Renderer *, char *);
+    void (*set_texture)(struct _Floor *this, struct SDL_Renderer *renderer, char *path);
 
     struct SDL_Rect rect;
     int tex_width;
     int tex_height;
-    void (*destroy)(struct __floor *);
+    void (*destroy)(struct _Floor *);
 
-    struct SDL_Rect * (*get_rect_pointer) (struct __floor *);
-
-    void (*render_floor) (struct __floor *, struct SDL_Renderer *);
+    void (*render)(struct _Floor *this, struct SDL_Renderer *renderer);
 
 } Floor;
 
 Floor *create_floor(int, int, int, int);
 
-#endif 
+void render_floor(void *obj, struct SDL_Renderer *renderer);
+#endif

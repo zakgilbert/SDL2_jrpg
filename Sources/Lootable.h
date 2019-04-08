@@ -11,16 +11,16 @@
 #include "Header.h"
 #include "Graphics.h"
 
-typedef struct _lootable
+typedef struct _Lootable
 {
-    void (*destroy)(struct _lootable *);
-    int (*loot)(struct _lootable *);
-    struct _lootable * (*render)(struct _lootable *, struct SDL_Renderer * renderer);
+    void (*destroy)(struct _Lootable *this);
+    int (*loot)(struct _Lootable *this);
+    struct _Lootable *(*render)(struct _Lootable *this, struct SDL_Renderer *renderer);
 
-    struct SDL_Texture * texture;
-    struct SDL_Texture * alt_tex;
+    struct SDL_Texture *texture;
+    struct SDL_Texture *alt_tex;
     struct SDL_Rect rect;
-    
+
     int key;
     int looted;
     int index;
@@ -29,6 +29,7 @@ typedef struct _lootable
 
 } Lootable;
 
-Lootable *CREATE_LOOTABLE(struct SDL_Renderer * renderer, int x, int y, int index, int key);
+Lootable *CREATE_LOOTABLE(struct SDL_Renderer *renderer, int x, int y, int index, int key);
+void render_lootable(void *obj, struct SDL_Renderer *renderer);
 
 #endif

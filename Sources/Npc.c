@@ -68,3 +68,8 @@ Npc *CREATE_NPC(struct SDL_Renderer *renderer, int x, int y, int index, int key,
 
     return this;
 }
+void render_npc(void *obj, struct SDL_Renderer *renderer)
+{
+    Npc *this = (Npc *)obj;
+    this->render(this, renderer);
+}

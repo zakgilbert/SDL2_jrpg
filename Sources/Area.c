@@ -37,6 +37,25 @@ static void _destroy(Area *this)
     }
 }
 
+static void _set_q(struct _area *this, Hero *hero)
+{
+    int i;
+
+    render_q->add(render_q, render_q->new_node(this->floor, render_floor));
+    render_q->add(render_q, render_q->new_node(hero, render_hero));
+
+    for (i = 0; i < this->bag->items_in_bag; i++)
+    {
+        render_q->add(render_q, render_q->new_node(this->lootables[i], render_lootable));
+    }
+    for (i = 0; i < this->num_npcs; i++)
+    {
+        render_q->add(render_q, render_q->new_node(this->npcs[i], render_npc));
+    }
+    render_q->add(render_q, render_q->new_node(this->trees, render_floor));
+    this->first_load = 0;
+}
+
 static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision *collidables,
                            int *item_keys, int num_items, int *npc_keys, int *npc_types, int num_npcs,
                            int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y)
@@ -65,11 +84,6 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
     collidables->add_collision(collidables, this->lootables, num_items, this->npcs, num_npcs, this->num_collidables, this->area_key);
 }
 
-Message *_r_a(struct SDL_Renderer *renderer, void *obj, void *hero, void *bag)
-{
-    Area *this = (Area *)obj;
-    return this->render_area(this, renderer, (Hero *)hero, (Item *)bag);
-}
 static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *hero, Item *bag)
 {
     int i, k;
@@ -80,6 +94,7 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
         previous_state = this->area_key;
         INPUT = NONE;
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+        this->first_load = 1;
 
         return NULL;
     }
@@ -88,8 +103,13 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
         state = BATTLE;
         previous_state = this->area_key;
         ROLL = rand() % 3;
+        this->first_load = 1;
 
         return NULL;
+    }
+    if (this->first_load)
+    {
+        this->set_q(this, hero);
     }
     int item_to_be_obtained = -1;
     int npc_to_interact_with = -1;
@@ -98,10 +118,6 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
     MOVEMENT_DISABLED = 0;
     hero->animate(hero);
 
-    /**
-        this->floor->render_floor(this->floor, renderer);
-*/
-    add_target_function(add_target(this->floor, render_forest_floor));
     for (k = 0; k < this->bag->items_in_bag; k++)
     {
         if (this->current_index == -1 &&
@@ -117,7 +133,6 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
             USER_INPUTS[4] = 0;
             bag->loot(bag, item_to_be_obtained);
         }
-        this->lootables[k]->render(this->lootables[k], renderer);
     }
     for (i = 0; i < this->num_npcs; i++)
     {
@@ -134,16 +149,7 @@ static Message *_render_area(Area *this, struct SDL_Renderer *renderer, Hero *he
             WAITING_FOR_MESSAGE = 0;
             USER_INPUTS[4] = 0;
         }
-        this->npcs[i]->render(this->npcs[i], renderer);
     }
-    /**
-        hero->render(hero, renderer);
-*/
-    add_target_function(add_target(hero, render_hero));
-    add_target_function(add_target(this->trees, render_forest_trees));
-    /**
-        this->trees->render_floor(this->trees, renderer);
-*/
     if (this->current_index != -1 && (this->last_x != X || this->last_y != Y))
     {
         this->npcs[this->current_index]->ready_to_interact = 0;
@@ -160,7 +166,7 @@ Area *CREATE_AREA(int area_key)
 
     this->create_assets = _create_assets;
     this->render_area = _render_area;
-    this->r_a = _r_a;
+    this->set_q = _set_q;
 
     this->bag = CREATE_BAG();
     this->num_collidables = 0;
@@ -175,5 +181,6 @@ Area *CREATE_AREA(int area_key)
     this->last_index = -1;
     this->last_x = X;
     this->last_y = Y;
+    this->first_load = 1;
     return this;
 }

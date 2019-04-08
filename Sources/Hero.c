@@ -19,17 +19,17 @@ int time_to_animate()
     return 0;
 }
 
-static void __destroy(Hero *obj)
+static void _destroy(Hero *this)
 {
-    SDL_DestroyTexture(obj->texture);
-    if (NULL != obj)
+    SDL_DestroyTexture(this->texture);
+    if (NULL != this)
     {
-        free(obj);
-        obj = NULL;
+        free(this);
+        this = NULL;
     }
 }
 
-static void __set_texture(Hero *obj, struct SDL_Renderer *renderer, char *path)
+static void _set_texture(Hero *this, struct SDL_Renderer *renderer, char *path)
 {
     struct SDL_Surface *surface = NULL;
     struct SDL_Texture *texture = NULL;
@@ -52,124 +52,130 @@ static void __set_texture(Hero *obj, struct SDL_Renderer *renderer, char *path)
     }
     SDL_QueryTexture(texture, NULL, NULL, &width, &height);
 
-    obj->rect.x = 0;
-    obj->rect.y = 0;
-    obj->rect.w = HERO_WIDTH;
-    obj->rect.h = HERO_HEIGHT;
-    obj->rect_pos.x = get_middle_x(WINDOW_WIDTH, HERO_WIDTH);
-    obj->rect_pos.y = get_middle_y(WINDOW_HEIGHT, HERO_HEIGHT);
-    obj->rect_pos.w = HERO_WIDTH;
-    obj->rect_pos.h = HERO_HEIGHT;
+    this->rect.x = 0;
+    this->rect.y = 0;
+    this->rect.w = HERO_WIDTH;
+    this->rect.h = HERO_HEIGHT;
+    this->rect_pos.x = get_middle_x(WINDOW_WIDTH, HERO_WIDTH);
+    this->rect_pos.y = get_middle_y(WINDOW_HEIGHT, HERO_HEIGHT);
+    this->rect_pos.w = HERO_WIDTH;
+    this->rect_pos.h = HERO_HEIGHT;
 
-    obj->texture = texture;
+    this->texture = texture;
 }
 
-static SDL_Rect *__get_rect_pointer(Hero *obj)
+static SDL_Rect *_get_rect_pointer(Hero *this)
 {
-    return &obj->rect;
+    return &this->rect;
 }
 
-static SDL_Rect *__get_rect_pos_pointer(Hero *obj)
+static SDL_Rect *_get_rect_pos_pointer(Hero *this)
 {
-    return &obj->rect_pos;
+    return &this->rect_pos;
 }
 
-static void __render(Hero *obj, struct SDL_Renderer *renderer)
+static void _render(Hero *this, struct SDL_Renderer *renderer)
 {
-    SDL_RenderCopy(renderer, obj->texture, &obj->rect, &obj->rect_pos);
+    SDL_RenderCopy(renderer, this->texture, &this->rect, &this->rect_pos);
 }
 
-static void __animate_down(Hero *obj)
+static void _animate_down(Hero *this)
 {
-    obj->rect.y = 0;
-    obj->rect.x += obj->rect.w;
+    this->rect.y = 0;
+    this->rect.x += this->rect.w;
 
-    if (obj->rect.x >= obj->rect.w * 4)
+    if (this->rect.x >= this->rect.w * 4)
     {
-        obj->rect.x = 0;
+        this->rect.x = 0;
     }
 }
 
-static void __animate_up(Hero *obj)
+static void _animate_up(Hero *this)
 {
-    obj->rect.y = obj->rect.h;
-    obj->rect.x += obj->rect.w;
+    this->rect.y = this->rect.h;
+    this->rect.x += this->rect.w;
 
-    if (obj->rect.x >= obj->rect.w * 4)
+    if (this->rect.x >= this->rect.w * 4)
     {
-        obj->rect.x = 0;
+        this->rect.x = 0;
     }
 }
 
-static void __animate_left(Hero *obj)
+static void _animate_left(Hero *this)
 {
-    obj->rect.y = obj->rect.h * 2;
-    obj->rect.x += obj->rect.w;
+    this->rect.y = this->rect.h * 2;
+    this->rect.x += this->rect.w;
 
-    if (obj->rect.x >= obj->rect.w * 4)
+    if (this->rect.x >= this->rect.w * 4)
     {
-        obj->rect.x = 0;
+        this->rect.x = 0;
     }
 }
 
-static void __animate_right(Hero *obj)
+static void _animate_right(Hero *this)
 {
-    obj->rect.y = obj->rect.h * 3;
-    obj->rect.x += obj->rect.w;
+    this->rect.y = this->rect.h * 3;
+    this->rect.x += this->rect.w;
 
-    if (obj->rect.x >= obj->rect.w * 4)
+    if (this->rect.x >= this->rect.w * 4)
     {
-        obj->rect.x = 0;
+        this->rect.x = 0;
     }
 }
 
-static void __check_direction(Hero *obj)
+static void _check_direction(Hero *this)
 {
     if (USER_INPUTS[0])
     {
-        obj->animate_down(obj);
+        this->animate_down(this);
         FACING = DOWN;
     }
     else if (USER_INPUTS[1])
     {
-        obj->animate_up(obj);
+        this->animate_up(this);
         FACING = UP;
     }
     else if (USER_INPUTS[2])
     {
-        obj->animate_left(obj);
+        this->animate_left(this);
         FACING = LEFT;
     }
     else if (USER_INPUTS[3])
     {
-        obj->animate_right(obj);
+        this->animate_right(this);
         FACING = RIGHT;
     }
 }
 
-static void __animate(Hero *obj)
+static void _animate(Hero *this)
 {
     if (time_to_animate() && !MOVEMENT_DISABLED)
     {
-        obj->check_direction(obj);
+        this->check_direction(this);
     }
 }
 
 Hero *CREATE_HERO()
 {
-    Hero *obj = (Hero *)malloc(sizeof(*obj));
-    obj->set_texture = __set_texture;
-    obj->destroy = __destroy;
-    obj->render = __render;
-    obj->get_rect_pointer = __get_rect_pointer;
-    obj->get_rect_pos_pointer = __get_rect_pos_pointer;
+    Hero *this = (Hero *)malloc(sizeof(*this));
+    this->set_texture = _set_texture;
+    this->destroy = _destroy;
+    this->render = _render;
+    this->get_rect_pointer = _get_rect_pointer;
+    this->get_rect_pos_pointer = _get_rect_pos_pointer;
 
-    obj->animate = __animate;
-    obj->check_direction = __check_direction;
+    this->animate = _animate;
+    this->check_direction = _check_direction;
 
-    obj->animate_down = __animate_down;
-    obj->animate_up = __animate_up;
-    obj->animate_left = __animate_left;
-    obj->animate_right = __animate_right;
-    return obj;
+    this->animate_down = _animate_down;
+    this->animate_up = _animate_up;
+    this->animate_left = _animate_left;
+    this->animate_right = _animate_right;
+    return this;
+}
+
+void render_hero(void *obj, struct SDL_Renderer *renderer)
+{
+    Hero *this = (Hero *)obj;
+    this->render(this, renderer);
 }

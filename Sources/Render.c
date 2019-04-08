@@ -5,41 +5,71 @@
 
 #include "Render.h"
 
-render_function *buffer[50];
-render_function *add_target(Target this, render_function *render_f)
+static void _destroy(Render_Q *this)
 {
-    targets[NUM_TARGETS] = this;
-    return render_f;
-}
-void add_target_function(render_function *target_function)
-{
-    buffer[NUM_TARGETS] = target_function;
-    NUM_TARGETS++;
-}
-void render_buffer(struct SDL_Renderer *renderer)
-{
-    int i;
-
-    for (i = 0; i < NUM_TARGETS; i++)
+    if (NULL != this)
     {
-        (*buffer[i])(targets[i], renderer);
-        buffer[i] = NULL;
-        targets[i] = NULL;
+        free(this);
+        this = NULL;
     }
-    NUM_TARGETS = 0;
 }
-void render_forest_floor(void *obj, struct SDL_Renderer *renderer)
+static struct Node *_new_node(void *obj, render_function target)
 {
-    Floor *this = (Floor *)obj;
-    this->render_floor(this, renderer);
+    struct Node *data = malloc(sizeof(struct Node));
+    data->obj = obj;
+    data->funct = target;
+    data->next = NULL;
+    return data;
 }
-void render_forest_trees(void *obj, struct SDL_Renderer *renderer)
+static void _add(Render_Q *this, struct Node *data)
 {
-    Floor *this = (Floor *)obj;
-    this->render_floor(this, renderer);
+    if (NULL == this->rear)
+    {
+        this->front = data;
+        this->rear = data;
+        return;
+    }
+    this->rear->next = data;
+    this->rear = data;
 }
-void render_hero(void *obj, struct SDL_Renderer *renderer)
+static struct Node *_pop(Render_Q *this)
 {
-    Hero *this = (Hero *)obj;
-    this->render(this, renderer);
+    struct Node *temp;
+    if (NULL == this->front)
+    {
+        return NULL;
+    }
+    temp = this->front;
+    this->front = this->front->next;
+    if (NULL == this->front)
+    {
+        this->rear = NULL;
+    }
+    return temp;
+}
+Render_Q *_render(Render_Q *this, struct SDL_Renderer *renderer)
+{
+    Render_Q *new_q = CREATE_RENDER_Q();
+    struct Node *temp;
+    while (NULL != this->front)
+    {
+        temp = this->pop(this);
+        (*temp->funct)(temp->obj, renderer);
+        new_q->add(new_q, temp);
+    }
+    return new_q;
+}
+Render_Q *CREATE_RENDER_Q()
+{
+    Render_Q *this = malloc(sizeof(*this));
+    this->add = _add;
+    this->destroy = _destroy;
+    this->new_node = _new_node;
+    this->render = _render;
+    this->pop = _pop;
+    this->size = 0;
+
+    this->front = NULL;
+    this->rear = NULL;
+    return this;
 }

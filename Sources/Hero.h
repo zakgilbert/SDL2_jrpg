@@ -11,35 +11,34 @@
 #include <SDL2/SDL_image.h>
 #include "Header.h"
 
-int get_middle_x (int, int);
-int get_middle_y (int, int);
+int get_middle_x(int, int);
+int get_middle_y(int, int);
 
-int time_to_animate ();
+int time_to_animate();
 
-typedef struct __hero
+typedef struct _Hero
 {
-    void (*destroy) (struct __hero *);
+    void (*destroy)(struct _Hero *);
 
-    void (*set_texture) (struct __hero *, struct SDL_Renderer *, char *);
+    void (*set_texture)(struct _Hero *, struct SDL_Renderer *, char *);
 
-    void (*render) (struct __hero *, struct SDL_Renderer *);
+    void (*render)(struct _Hero *, struct SDL_Renderer *);
 
-    struct SDL_Rect *(*get_rect_pointer) (struct __hero *);
+    struct SDL_Rect *(*get_rect_pointer)(struct _Hero *);
 
-    struct SDL_Rect *(*get_rect_pos_pointer) (struct __hero *);
+    struct SDL_Rect *(*get_rect_pos_pointer)(struct _Hero *);
 
-    void (*animate) (struct __hero *);
+    void (*animate)(struct _Hero *);
 
-    void (*check_direction) (struct __hero *);
+    void (*check_direction)(struct _Hero *);
 
-    void (*animate_down) (struct __hero *);
+    void (*animate_down)(struct _Hero *);
 
-    void (*animate_up) (struct __hero *);
+    void (*animate_up)(struct _Hero *);
 
-    void (*animate_left) (struct __hero *);
+    void (*animate_left)(struct _Hero *);
 
-    void (*animate_right) (struct __hero *);
-
+    void (*animate_right)(struct _Hero *);
 
     struct SDL_Texture *texture;
     struct SDL_Rect rect;
@@ -47,6 +46,7 @@ typedef struct __hero
 
 } Hero;
 
-Hero *CREATE_HERO ();
+Hero *CREATE_HERO();
 
-#endif 
+void render_hero(void *obj, struct SDL_Renderer *renderer);
+#endif

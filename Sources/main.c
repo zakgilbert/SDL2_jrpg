@@ -1,6 +1,7 @@
 
 #include "Header.h"
 #include "H.h"
+#include "Render.h"
 #include "Words.h"
 #include "Graphics.h"
 #include "Floor.h"
@@ -53,6 +54,7 @@ int main(int argc, char **argv)
     Menu *menu = CREATE_MENU();
     Item *bag = CREATE_BAG();
     Collision *game_collision = CREATE_COLLISION();
+    render_q = CREATE_RENDER_Q();
 
     bag = load_bag(bag, 0);
 
@@ -87,13 +89,15 @@ int main(int argc, char **argv)
         refresh_inputs(EDGE_DETECTION, 4, movement());
         game_collision->update_collidables(game_collision, state);
         set_fullscreen(window, hero);
+
+        SDL_RenderClear(renderer);
+        render_q = render_q->render(render_q, renderer);
+        SDL_RenderPresent(renderer);
+
         switch (state)
         {
-        case DARK_FOREST:
-            SDL_RenderClear(renderer);
+        case DARK_FOREST:;
             Message *message_being_displayed = dark_forest->render_area(dark_forest, renderer, hero, bag);
-            render_buffer(renderer);
-            SDL_RenderPresent(renderer);
             break;
 
         case MAIN_MENU:

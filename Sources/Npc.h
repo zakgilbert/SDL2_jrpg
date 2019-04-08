@@ -11,11 +11,11 @@
 #include "Header.h"
 #include "Graphics.h"
 
-typedef struct _npc
+typedef struct _Npc
 {
-    void (*destroy)(struct _npc *);
-    void (*render)(struct _npc *, struct SDL_Renderer *renderer);
-    int (*interact)(struct _npc *);
+    void (*destroy)(struct _Npc *);
+    void (*render)(struct _Npc *, struct SDL_Renderer *renderer);
+    int (*interact)(struct _Npc *);
     struct SDL_Texture *texture;
     struct SDL_Rect rect;
     struct SDL_Rect rect2;
@@ -28,5 +28,6 @@ typedef struct _npc
 } Npc;
 
 Npc *CREATE_NPC(struct SDL_Renderer *renderer, int x, int y, int index, int key, char *path, int type);
+void render_npc(void *obj, struct SDL_Renderer *renderer);
 
 #endif

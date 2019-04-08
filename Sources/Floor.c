@@ -1,16 +1,16 @@
 
 #include "Floor.h"
-static void __destroy(Floor *obj)
+static void _destroy(Floor *this)
 {
-    SDL_DestroyTexture(obj->texture);
-    if (NULL != obj)
+    SDL_DestroyTexture(this->texture);
+    if (NULL != this)
     {
-        free(obj);
-        obj = NULL;
+        free(this);
+        this = NULL;
     }
 }
 
-static void __set_texture(Floor *obj, struct SDL_Renderer *renderer, char *path)
+static void _set_texture(Floor *this, struct SDL_Renderer *renderer, char *path)
 {
     struct SDL_Surface *surface = NULL;
     struct SDL_Texture *texture = NULL;
@@ -29,36 +29,36 @@ static void __set_texture(Floor *obj, struct SDL_Renderer *renderer, char *path)
         printf("error creating Texture: %s\n", SDL_GetError());
         SDL_Quit();
     }
-    SDL_QueryTexture(texture, NULL, NULL, &obj->rect.w, &obj->rect.h);
-    obj->texture = texture;
+    SDL_QueryTexture(texture, NULL, NULL, &this->rect.w, &this->rect.h);
+    this->texture = texture;
 }
 
-static SDL_Rect *__get_rect_pointer(Floor *obj)
-{
-    return &obj->rect;
-}
-
-static void __render_floor(Floor *obj, struct SDL_Renderer *renderer)
+static void _render(Floor *this, struct SDL_Renderer *renderer)
 {
     if (!MOVEMENT_DISABLED)
     {
-        obj->rect.x = X;
-        obj->rect.y = Y;
+        this->rect.x = X;
+        this->rect.y = Y;
     }
-    SDL_RenderCopy(renderer, obj->texture, NULL, &obj->rect);
+    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
 }
 
 Floor *create_floor(int x, int y, int w, int h)
 {
-    Floor *obj = (Floor *)malloc(sizeof(*obj));
-    obj->set_texture = __set_texture;
-    obj->destroy = __destroy;
-    obj->get_rect_pointer = __get_rect_pointer;
-    obj->render_floor = __render_floor;
-    obj->rect.x = x;
-    obj->rect.y = y;
-    obj->rect.w = w;
-    obj->rect.h = h;
+    Floor *this = (Floor *)malloc(sizeof(*this));
+    this->set_texture = _set_texture;
+    this->destroy = _destroy;
+    this->render = _render;
+    this->rect.x = x;
+    this->rect.y = y;
+    this->rect.w = w;
+    this->rect.h = h;
 
-    return obj;
+    return this;
+}
+
+void render_floor(void *obj, struct SDL_Renderer *renderer)
+{
+    Floor *this = (Floor *)obj;
+    this->render(this, renderer);
 }

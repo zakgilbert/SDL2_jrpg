@@ -75,12 +75,7 @@ extern struct STRING_LIST *SAVE_PATHS;
 extern struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 extern struct STRING_LIST *ENEMIES;
 
-typedef void render_function(void *obj, struct SDL_Renderer *renderer);
-typedef void *Target;
 
-extern Target targets[50];
-
-extern render_function *buffer[];
 enum states
 {
     DARK_FOREST,
@@ -240,8 +235,6 @@ struct STRING_LIST *CHARACTER_BIO_PATHS;
 struct STRING_LIST *SAVE_PATHS;
 struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 struct STRING_LIST *ENEMIES;
-
-Target targets[50];
 
 int refresh_inputs(int *, int, int);
 void set_items(int *);
