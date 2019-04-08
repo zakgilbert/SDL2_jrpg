@@ -24,6 +24,7 @@
 #include "Assets.h"
 #include "Enemy.h"
 #include "Battle_Q.h"
+#include "Text.h"
 
 int main(int argc, char **argv)
 {
@@ -51,7 +52,6 @@ int main(int argc, char **argv)
     Area *dark_forest = CREATE_AREA(DARK_FOREST);
     Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
-    Menu *menu = CREATE_MENU();
     Item *bag = CREATE_BAG();
     Collision *game_collision = CREATE_COLLISION();
     render_q = CREATE_RENDER_Q();
@@ -64,6 +64,7 @@ int main(int argc, char **argv)
     Battle *current_battle = NULL;
     Character **party = load_party(0, renderer);
 
+    Menu *menu = CREATE_MENU(party, hand, bag);
     int dark_forest_npcs[2] = {GIGAS, SASH};
     int dark_forest_npc_types[2] = {ONE_FRAME, SPRITE};
     int dark_forest_npcs_x[2] = {400, 350};
@@ -102,43 +103,42 @@ int main(int argc, char **argv)
 
         case MAIN_MENU:
             TICK = 1;
-            SDL_RenderClear(renderer);
-            menu->render_main_menu(menu, renderer, hand, party);
-            hand->render(hand, renderer);
-            SDL_RenderPresent(renderer);
+            menu->update(menu);
             break;
 
-        case ITEMS_MENU:
-            TICK = 1;
-            SDL_RenderClear(renderer);
-            menu->render_items_menu(menu, renderer, hand, bag);
-            hand->render(hand, renderer);
-            SDL_RenderPresent(renderer);
-            break;
-
-        case USE_ITEM:
-            TICK = 1;
-            SDL_RenderClear(renderer);
-            menu->render_use_item_menu(menu, renderer, hand, party, bag);
-            hand->render(hand, renderer);
-            SDL_RenderPresent(renderer);
-            break;
-
-        case CONFIG:
-            TICK = 1;
-            SDL_RenderClear(renderer);
-            menu->render_config_menu(menu, renderer, hand);
-            hand->render(hand, renderer);
-            SDL_RenderPresent(renderer);
-            break;
-
-        case SAVE:
-            TICK = 1;
-            SDL_RenderClear(renderer);
-            menu->render_save_menu(menu, renderer, hand);
-            hand->render(hand, renderer);
-            SDL_RenderPresent(renderer);
-            break;
+            /**
+            case ITEMS_MENU:
+                TICK = 1;
+                SDL_RenderClear(renderer);
+                menu->render_items_menu(menu, renderer, hand, bag);
+                hand->render(hand, renderer);
+                SDL_RenderPresent(renderer);
+                break;
+    
+            case USE_ITEM:
+                TICK = 1;
+                SDL_RenderClear(renderer);
+                menu->render_use_item_menu(menu, renderer, hand, party, bag);
+                hand->render(hand, renderer);
+                SDL_RenderPresent(renderer);
+                break;
+    
+            case CONFIG:
+                TICK = 1;
+                SDL_RenderClear(renderer);
+                menu->render_config_menu(menu, renderer, hand);
+                hand->render(hand, renderer);
+                SDL_RenderPresent(renderer);
+                break;
+    
+            case SAVE:
+                TICK = 1;
+                SDL_RenderClear(renderer);
+                menu->render_save_menu(menu, renderer, hand);
+                hand->render(hand, renderer);
+                SDL_RenderPresent(renderer);
+                break;
+*/
 
         case MESSAGE:
             if (message_being_displayed->type == ONE_LINER)

@@ -1,7 +1,7 @@
 
 #include "Window.h"
 
-static void __create_borders(Window *this, int padding, struct SDL_Rect *border)
+static void _create_borders(Window *this, int padding, struct SDL_Rect *border)
 {
     border->x = (this->rect.x - padding);
     border->y = (this->rect.y - padding);
@@ -9,7 +9,7 @@ static void __create_borders(Window *this, int padding, struct SDL_Rect *border)
     border->h = (this->rect.h);
 }
 
-static void __destroy(Window *this)
+static void _destroy(Window *this)
 {
     if (NULL != this)
     {
@@ -17,11 +17,11 @@ static void __destroy(Window *this)
         this = NULL;
     }
 }
-static int __timer_is_maxed(Window *this)
+static int _timer_is_maxed(Window *this)
 {
     return this->rect.w >= this->original_width;
 }
-static int __adjust_menu_colors(Window *this)
+static int _adjust_menu_colors(Window *this)
 {
     if (USER_INPUTS[2])
     {
@@ -41,7 +41,7 @@ static int __adjust_menu_colors(Window *this)
     }
     return this->color_value;
 }
-static void __render_color_bar(Window **this, struct SDL_Renderer *renderer, int x, int y, int skip, int i)
+static void _render_color_bar(Window **this, struct SDL_Renderer *renderer, int x, int y, int skip, int i)
 {
     struct SDL_Rect color_bar;
     color_bar.x = this[i] -> rect.x;
@@ -58,7 +58,7 @@ static void __render_color_bar(Window **this, struct SDL_Renderer *renderer, int
     SDL_RenderDrawRect(renderer, &this[i] -> border_3);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
-static void __render_time_bar(Window *this, struct SDL_Renderer *renderer)
+static void _render_time_bar(Window *this, struct SDL_Renderer *renderer)
 {
     SDL_SetRenderDrawColor(renderer, RED.r, RED.g, RED.b, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &this->rect);
@@ -66,7 +66,7 @@ static void __render_time_bar(Window *this, struct SDL_Renderer *renderer)
     SDL_RenderDrawRect(renderer, &this->border_1);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
-static void __render(Window *this, struct SDL_Renderer *renderer)
+static void _render(Window *this, struct SDL_Renderer *renderer)
 {
     SDL_SetRenderDrawColor(renderer, MENU_BACKGROUND.r, MENU_BACKGROUND.g, MENU_BACKGROUND.b, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &this->rect);
@@ -81,13 +81,13 @@ static void __render(Window *this, struct SDL_Renderer *renderer)
 Window *CREATE_WINDOW(int x, int y, int w, int h)
 {
     Window *this = (Window *)malloc(sizeof(*this));
-    this->destroy = __destroy;
-    this->render = __render;
-    this->create_borders = __create_borders;
-    this->render_color_bar = __render_color_bar;
-    this->adjust_menu_colors = __adjust_menu_colors;
-    this->render_time_bar = __render_time_bar;
-    this->timer_is_maxed = __timer_is_maxed;
+    this->destroy = _destroy;
+    this->render = _render;
+    this->create_borders = _create_borders;
+    this->render_color_bar = _render_color_bar;
+    this->adjust_menu_colors = _adjust_menu_colors;
+    this->render_time_bar = _render_time_bar;
+    this->timer_is_maxed = _timer_is_maxed;
 
     this->rect.x = x;
     this->rect.y = y;
@@ -102,4 +102,9 @@ Window *CREATE_WINDOW(int x, int y, int w, int h)
     this->create_borders(this, 2, &this->border_3);
     this->create_borders(this, 3, &this->border_4);
     return this;
+}
+void render_window(void *obj, struct SDL_Renderer *renderer)
+{
+    Window *this = (Window *)obj;
+    this->render(this, renderer);
 }

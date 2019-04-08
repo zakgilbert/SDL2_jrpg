@@ -11,15 +11,15 @@
 #include <SDL2/SDL_image.h>
 #include "Header.h"
 
-typedef struct __window
+typedef struct _Window
 {
-    void (*destroy)(struct __window *);
-    void (*create_borders)(struct __window *, int, struct SDL_Rect *);
-    void (*render)(struct __window *, struct SDL_Renderer *);
-    void (*render_color_bar)(struct __window **, struct SDL_Renderer *, int x, int y, int skip, int i);
-    int (*adjust_menu_colors)(struct __window *);
-    void (*render_time_bar)(struct __window *, struct SDL_Renderer *);
-    int (*timer_is_maxed)(struct __window *);
+    void (*destroy)(struct _Window *);
+    void (*create_borders)(struct _Window *, int, struct SDL_Rect *);
+    void (*render)(struct _Window *, struct SDL_Renderer *);
+    void (*render_color_bar)(struct _Window **, struct SDL_Renderer *, int x, int y, int skip, int i);
+    int (*adjust_menu_colors)(struct _Window *);
+    void (*render_time_bar)(struct _Window *, struct SDL_Renderer *);
+    int (*timer_is_maxed)(struct _Window *);
 
     struct SDL_Rect border_1;
     struct SDL_Rect border_2;
@@ -36,6 +36,8 @@ typedef struct __window
 
 } Window;
 
-Window *CREATE_WINDOW(int, int, int, int);
+Window *CREATE_WINDOW(int x, int y, int w, int h);
 
-#endif 
+void render_window(void *obj, struct SDL_Renderer *renderer);
+
+#endif

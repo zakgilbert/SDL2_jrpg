@@ -19,14 +19,18 @@
 #include "Hand.h"
 #include "Character.h"
 #include "Words.h"
+#include "Text.h"
+#include "Render.h"
 
 uint32_t transition_delay;
 void render_line(TTF_Font, char *str);
 
-typedef struct _menu
+typedef struct _Menu
 {
-    void (*destroy)(struct _menu *);
-    void (*render_line)(struct _menu *, struct SDL_Renderer * renderer, const char *str, SDL_Color color);
+    void (*destroy)(struct _Menu *);
+    void (*render_line)(struct _Menu *, struct SDL_Renderer *renderer, const char *str, SDL_Color color);
+    void (*set_q)(struct _Menu *this);
+    void (*update)(struct _Menu *this);
 
     Window *main_menu_bg;
 
@@ -35,31 +39,36 @@ typedef struct _menu
     Window **load_save_bg;
     Window **rgb_bars;
 
-    void (*render_character_stats)(struct _menu *, struct SDL_Renderer *,
-                                   Hand *, Character **party, int, int,
-                                   int, int);
+    void (*render_main_menu)(struct _Menu *, struct SDL_Renderer *, Hand *, Character **);
 
-    void (*render_character_main_menu_image)(struct _menu *, struct SDL_Renderer *, Hand *, Character **);
+    int (*set_main_menu_text_options)(struct _Menu *this, int _x, int _y, int size, int num_options);
 
-    void (*render_main_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Character **);
-
-    int (*render_main_menu_options)(struct _menu *, struct SDL_Renderer *, int);
-
-    void (*render_items_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Item *);
-
-    int (*render_items_menu_options)(struct _menu *, struct SDL_Renderer *, Item *, int);
-
-    void (*render_use_item_menu)(struct _menu *, struct SDL_Renderer *, Hand *, Character **, Item *);
-
-    void (*render_config_menu)(struct _menu *, struct SDL_Renderer *, Hand *);
-
-    int (*render_config_menu_options)(struct _menu *, struct SDL_Renderer *, Hand *, int);
-
-    void (*change_window_color)(Window **color_bars, int current_state);
-
-    void (*render_save_menu)(struct _menu *, struct SDL_Renderer *, Hand *);
-
-    int (*render_save_menu_options)(struct _menu *, struct SDL_Renderer *, Hand *, int);
+    int (*set_stat_text)(struct _Menu *this, int _x, int _y, int size, int key);
+    /**
+    
+        void (*render_character_stats)(struct _Menu *, struct SDL_Renderer *,
+                                       Hand *, Character **party, int, int,
+                                       int, int);
+    
+        void (*render_character_main_menu_image)(struct _Menu *, struct SDL_Renderer *, Hand *, Character **);
+    
+    
+        void (*render_items_menu)(struct _Menu *, struct SDL_Renderer *, Hand *, Item *);
+    
+        int (*render_items_menu_options)(struct _Menu *, struct SDL_Renderer *, Item *, int);
+    
+        void (*render_use_item_menu)(struct _Menu *, struct SDL_Renderer *, Hand *, Character **, Item *);
+    
+        void (*render_config_menu)(struct _Menu *, struct SDL_Renderer *);
+    
+        int (*render_config_menu_options)(struct _Menu *, struct SDL_Renderer *renderer);
+    
+        void (*change_window_color)(Window **color_bars);
+    
+        void (*render_save_menu)(struct _Menu *, struct SDL_Renderer *);
+    
+        int (*render_save_menu_options)(struct _Menu *, struct SDL_Renderer *);
+*/
 
     TTF_Font *font;
     struct SDL_Rect rect;
@@ -69,8 +78,13 @@ typedef struct _menu
     int option_states;
     int item_being_used;
     int previous_number_of_states;
+    int first_load;
+
+    Character **party;
+    Item *bag;
+    Hand *hand;
 } Menu;
 
-Menu *CREATE_MENU();
+Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag);
 
-#endif 
+#endif
