@@ -136,7 +136,6 @@ static int _quaff_item(Item *this, Affect *affect)
     {
         item_was_removed = this->decrement_item(this, this->affect->affect_enum);
     }
-    this->update_quant_disp(this);
     this->affect->destroy(this->affect);
     refresh_inputs(USER_INPUTS, 6, 1);
     return item_was_removed;

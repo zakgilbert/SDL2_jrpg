@@ -104,14 +104,16 @@ static Message *_render_area(Area *this)
 
         return NULL;
     }
-    else if (NUM_STEPS > (300 + (rand() % 500)))
-    {
-        state = BATTLE;
-        previous_state = this->area_key;
-        ROLL = rand() % 3;
-
-        return NULL;
-    }
+    /**
+        else if (NUM_STEPS > (300 + (rand() % 500)))
+        {
+            state = BATTLE;
+            previous_state = this->area_key;
+            ROLL = rand() % 3;
+    
+            return NULL;
+        }
+*/
     int item_to_be_obtained = -1;
     int npc_to_interact_with = -1;
 

@@ -7,191 +7,17 @@ static const char *ITEMS[] = {
 
 static const char *MENU_OPTIONS[] = {
     FOREACH_MENU_OPTION(GENERATE_STRING)};
-static void _render_line(Menu *this, struct SDL_Renderer *renderer, const char *str, SDL_Color color)
-{
-    TTF_SizeText(this->font, str, &this->rect.w, &this->rect.h);
-    this->surface = TTF_RenderText_Solid(this->font, str, color);
-    this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
-    SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-    SDL_FreeSurface(this->surface);
-    SDL_DestroyTexture(this->texture);
-}
-static void _set_q_main_menu(Menu *this)
-{
-    this->q->add(this->q, this->q->new_node(this->main_menu_bg, render_window));
-    this->skip = this->set_main_menu_text_options(this, 270, 15, 12, 7);
-    this->set_stat_text(this, 80, 15, 9, MAIN_MENU);
-    this->q->add(this->q, this->q->new_node(this->hand, render_hand));
-    this->set_character_main_menu_image(this);
-}
-static void _update_main_menu(Menu *this)
-{
-    if (INPUT == CANCEL)
+/**
+    static void _render_line(Menu *this, struct SDL_Renderer *renderer, const char *str, SDL_Color color)
     {
-        state = previous_state;
-        previous_state = MAIN_MENU;
-        INPUT = NONE;
-        this->first_load = 1;
-        r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
-        return;
+        TTF_SizeText(this->font, str, &this->rect.w, &this->rect.h);
+        this->surface = TTF_RenderText_Solid(this->font, str, color);
+        this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
+        SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+        SDL_FreeSurface(this->surface);
+        SDL_DestroyTexture(this->texture);
     }
-    if (this->first_load == 1)
-    {
-        this->party[0]->update_party_stats(this->party);
-        this->q->free(this->q);
-        r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
-        this->set_q_main_menu(this);
-        this->first_load = 0;
-    }
-
-    this->hand->change_state_quantity(this->hand, this->option_states, 0);
-    this->hand->move_vertical(this->hand, this->skip);
-    MOVEMENT_DISABLED = 1;
-    if (USER_INPUTS[4])
-    {
-        switch (this->hand->current_state)
-        {
-        case Items:
-            state = ITEMS_MENU;
-            this->hand->items_menu_position(this->hand);
-            this->q->free(this->q);
-            r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
-            this->set_q_items_menu(this);
-            break;
-            /**
-            case Config:
-                state = CONFIG;
-                this->hand->config_menu_position(this->hand);
-                    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-                    SDL_RenderFillRect(renderer, &this->transition);
-                    SDL_RenderPresent(renderer);
-                    SDL_Delay(transition_delay);
-                break;
-            case Save:
-                state = SAVE;
-                this->hand->save_menu_position(this->hand);
-                break;
-            case Exit:
-                INPUT = QUIT;
-                break;
 */
-        default:
-            break;
-        }
-        USER_INPUTS[4] = 0;
-    }
-    this->q->copy(this->q);
-}
-static void _set_q_items_menu(Menu *this)
-{
-    this->q->add(this->q, this->q->new_node(this->main_menu_bg, render_window));
-    this->skip = this->set_items_menu_options(this);
-    this->q->add(this->q, this->q->new_node(this->hand, render_hand));
-}
-static void _update_items_menu(Menu *this)
-{
-    Render_Q *q = this->q;
-
-    if (INPUT == CANCEL)
-    {
-        state = MAIN_MENU;
-        INPUT = NONE;
-        this->hand->main_menu_position(this->hand);
-        this->hand->current_state = 0;
-        this->first_load = 1;
-        return;
-    }
-    this->hand->change_state_quantity(this->hand, this->bag->items_in_bag - 1, 0);
-    this->hand->move_vertical(this->hand, this->skip);
-    MOVEMENT_DISABLED = 1;
-
-    if (USER_INPUTS[4])
-    {
-        state = USE_ITEM;
-        this->hand->use_item_position(this->hand);
-        this->item_being_used = this->hand->current_state;
-        this->hand->current_state = 0;
-        this->previous_number_of_states = this->hand->number_of_states;
-        this->q->add(this->q, this->q->new_node(this->select_character_bg, render_window));
-        this->set_stat_text(this, 49, 205, 9, USE_ITEM);
-        this->q->add(this->q, this->q->new_node(this->hand, render_hand));
-        USER_INPUTS[4] = 0;
-    }
-    this->q->copy(this->q);
-}
-
-static void _update_use_items_menu(Menu *this)
-{
-    if (INPUT == CANCEL)
-    {
-        state = ITEMS_MENU;
-        INPUT = NONE;
-        this->hand->current_state = this->item_being_used;
-        this->hand->items_menu_position(this->hand);
-        this->hand->number_of_states = this->previous_number_of_states;
-        this->q->free(this->q);
-        this->set_q_items_menu(this);
-        this->q->copy(this->q);
-        return;
-    }
-    this->hand->change_state_quantity(this->hand, NUM_CHARACTERS - 1, 0);
-    this->hand->vertical_horizontal(this->hand);
-
-    if (USER_INPUTS[4])
-    {
-        int was_item_removed = this->bag->quaff_item(this->bag, CREATE_AFFECT(this->bag->items[this->item_being_used], this->party[this->hand->current_state]));
-
-        this->previous_number_of_states += was_item_removed;
-        if (was_item_removed == -1)
-        {
-            state = ITEMS_MENU;
-            INPUT = NONE;
-            this->hand->current_state = this->item_being_used;
-            this->hand->items_menu_position(this->hand);
-            this->hand->number_of_states = this->previous_number_of_states;
-            this->q->free(this->q);
-            this->set_q_items_menu(this);
-            SDL_Delay(300);
-        }
-        USER_INPUTS[4] = 0;
-    }
-    this->q->copy(this->q);
-}
-/*
-    
-    static void _render_use_item_menu(Menu *this, struct SDL_Renderer *renderer)
-    {
-        if (INPUT == CANCEL)
-        {
-            state = ITEMS_MENU;
-            INPUT = NONE;
-            hand->current_state = this->item_being_used;
-            hand->items_menu_position(hand);
-            hand->number_of_states = this->previous_number_of_states;
-            return;
-        }
-        party[0]->update_party_stats(party);
-        MOVEMENT_DISABLED = 1;
-        hand->change_state_quantity(hand, NUM_CHARACTERS - 1, 0);
-        this->main_menu_bg->render(this->main_menu_bg, renderer);
-        this->render_items_menu_options(this, renderer, bag, this->item_being_used);
-        this->select_character_bg->render(this->select_character_bg, renderer);
-        hand->vertical_horizontal(hand);
-        this->render_character_stats(this, renderer, hand, party, 49, 205, 9, USE_ITEM);
-        hand->render(hand, renderer);
-        if (USER_INPUTS[4])
-        {
-            int was_item_removed = bag->quaff_item(bag, CREATE_AFFECT(bag->items[this->item_being_used], party[hand->current_state]));
-    
-            this->previous_number_of_states += was_item_removed;
-            if (was_item_removed == -1)
-            {
-                INPUT = CANCEL;
-                SDL_Delay(300);
-            }
-        }
-    }
-    */
 static int _set_main_menu_text_options(Menu *this, int _x, int _y, int size, int num_options)
 {
     int skip, i, x, y;
@@ -383,7 +209,7 @@ static void _render_config_menu(Menu *this, struct SDL_Renderer *renderer)
     this->main_menu_bg->render(this->main_menu_bg, renderer);
     hand->move_vertical(hand, this->render_config_menu_options(this, renderer, hand, hand->current_state));
 }
-static int _render_config_menu_options(Menu *this, struct SDL_Renderer *renderer)
+static int _set_config_menu_options(Menu *this)
 {
     int skip, i;
     char font_path[] = "ponde___.ttf";
@@ -448,6 +274,8 @@ void _change_window_color(Window **color_bars, int current_state)
     else
         MENU_BACKGROUND.b = color_bars[2]->adjust_menu_colors(color_bars[2]);
 }
+*/
+/*
 static void _render_save_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand)
 {
     if (INPUT == CANCEL)
@@ -523,13 +351,156 @@ static void _destroy(Menu *this)
         this = NULL;
     }
 }
+static void _set_q_main_menu(Menu *this)
+{
+    this->q->add(this->q, this->q->new_node(this->main_menu_bg, render_window));
+    this->skip = this->set_main_menu_text_options(this, 270, 15, 12, 7);
+    this->set_stat_text(this, 80, 15, 9, MAIN_MENU);
+    this->q->add(this->q, this->q->new_node(this->hand, render_hand));
+    this->set_character_main_menu_image(this);
+}
+static void _update_main_menu(Menu *this)
+{
+    if (INPUT == CANCEL)
+    {
+        state = previous_state;
+        previous_state = MAIN_MENU;
+        INPUT = NONE;
+        this->first_load = 1;
+        r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
+        return;
+    }
+    if (this->first_load == 1)
+    {
+        this->party[0]->update_party_stats(this->party);
+        this->q->free(this->q);
+        r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
+        this->set_q_main_menu(this);
+        this->first_load = 0;
+    }
+
+    this->hand->change_state_quantity(this->hand, this->option_states, 0);
+    this->hand->move_vertical(this->hand, this->skip);
+    MOVEMENT_DISABLED = 1;
+    if (USER_INPUTS[4])
+    {
+        switch (this->hand->current_state)
+        {
+        case Items:
+            state = ITEMS_MENU;
+            this->hand->items_menu_position(this->hand);
+            this->q->free(this->q);
+            r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
+            this->set_q_items_menu(this);
+            break;
+        case Config:
+            state = CONFIG;
+            this->hand->config_menu_position(this->hand);
+            this->q->free(this->q);
+            r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
+            break;
+            /**
+            case Save:
+                state = SAVE;
+                this->hand->save_menu_position(this->hand);
+                break;
+            case Exit:
+                INPUT = QUIT;
+                break;
+*/
+        default:
+            break;
+        }
+        USER_INPUTS[4] = 0;
+    }
+    this->q->copy(this->q);
+}
+static void _set_q_items_menu(Menu *this)
+{
+    this->q->add(this->q, this->q->new_node(this->main_menu_bg, render_window));
+    this->skip = this->set_items_menu_options(this);
+    this->q->add(this->q, this->q->new_node(this->hand, render_hand));
+}
+static void _update_items_menu(Menu *this)
+{
+
+    if (INPUT == CANCEL)
+    {
+        state = MAIN_MENU;
+        INPUT = NONE;
+        this->hand->main_menu_position(this->hand);
+        this->hand->current_state = 0;
+        this->first_load = 1;
+        return;
+    }
+    this->hand->change_state_quantity(this->hand, this->bag->items_in_bag - 1, 0);
+    this->hand->move_vertical(this->hand, this->skip);
+    MOVEMENT_DISABLED = 1;
+
+    if (USER_INPUTS[4])
+    {
+        state = USE_ITEM;
+        this->hand->use_item_position(this->hand);
+        this->item_being_used = this->hand->current_state;
+        this->hand->current_state = 0;
+        this->previous_number_of_states = this->hand->number_of_states;
+        this->q->add(this->q, this->q->new_node(this->select_character_bg, render_window));
+        this->set_stat_text(this, 49, 205, 9, USE_ITEM);
+        this->q->add(this->q, this->q->new_node(this->hand, render_hand));
+        USER_INPUTS[4] = 0;
+    }
+    this->q->copy(this->q);
+}
+
+static void _update_use_items_menu(Menu *this)
+{
+    if (INPUT == CANCEL)
+    {
+        state = ITEMS_MENU;
+        INPUT = NONE;
+        this->hand->current_state = this->item_being_used;
+        this->hand->items_menu_position(this->hand);
+        this->hand->number_of_states = this->previous_number_of_states;
+        this->q->free(this->q);
+        this->set_q_items_menu(this);
+        this->q->copy(this->q);
+        return;
+    }
+    this->hand->change_state_quantity(this->hand, NUM_CHARACTERS - 1, 0);
+    this->hand->vertical_horizontal(this->hand);
+
+    if (USER_INPUTS[4])
+    {
+        int was_item_removed = this->bag->quaff_item(this->bag, CREATE_AFFECT(this->bag->items[this->item_being_used], this->party[this->hand->current_state]));
+
+        this->previous_number_of_states += was_item_removed;
+        if (was_item_removed == -1)
+        {
+            this->hand->items_menu_position(this->hand);
+            this->hand->number_of_states = this->previous_number_of_states;
+            state = ITEMS_MENU;
+            INPUT = NONE;
+            SDL_Delay(300);
+        }
+        this->q->free(this->q);
+        this->set_q_items_menu(this);
+        this->q->add(this->q, this->q->new_node(this->select_character_bg, render_window));
+        this->set_stat_text(this, 49, 205, 9, USE_ITEM);
+        this->q->add(this->q, this->q->new_node(this->hand, render_hand));
+        USER_INPUTS[4] = 0;
+    }
+    this->q->copy(this->q);
+}
+
+static void _update_config(Menu *this)
+{
+}
 
 Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag)
 {
     Menu *this = (Menu *)malloc(sizeof(*this));
 
     this->destroy = _destroy;
-    this->render_line = _render_line;
 
     this->update_main_menu = _update_main_menu;
     this->set_main_menu_text_options = _set_main_menu_text_options;

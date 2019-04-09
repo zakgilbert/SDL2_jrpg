@@ -28,9 +28,9 @@
 
 int main(int argc, char **argv)
 {
+    key_state = SDL_GetKeyboardState(NULL);
     set_up_timer(60);
     int running;
-    int w, h;
     SET_GLOBALS();
     running = 1;
 
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     Hand *hand = CREATE_HAND();
     Item *bag = CREATE_BAG();
     Area *dark_forest = CREATE_AREA(DARK_FOREST, hero, bag);
-    Collision *game_collision = CREATE_COLLISION();
+    Collision *game_collision = CREATE_COLLISION(&hero->rect_pos);
     r_Q = CREATE_RENDER_Q();
 
     bag = load_bag(bag, 0);
@@ -83,6 +83,7 @@ int main(int argc, char **argv)
 
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
     input_thread = SDL_CreateThread(input_handler, "input_handler", NULL);
+    SDL_DetachThread(input_thread);
     party[0]->in_animation = -1;
     while (running)
     {
@@ -95,7 +96,7 @@ int main(int argc, char **argv)
 
         switch (state)
         {
-        case DARK_FOREST:;
+        case DARK_FOREST:
             dark_forest->render_area(dark_forest);
             break;
 
@@ -114,15 +115,11 @@ int main(int argc, char **argv)
             menu->update_use_items_menu(menu);
             break;
 
+        case CONFIG:
+            TICK = 1;
+            break;
+
             /**
-            case CONFIG:
-                TICK = 1;
-                SDL_RenderClear(renderer);
-                menu->render_config_menu(menu, renderer, hand);
-                hand->render(hand, renderer);
-                SDL_RenderPresent(renderer);
-                break;
-    
             case SAVE:
                 TICK = 1;
                 SDL_RenderClear(renderer);
@@ -189,15 +186,12 @@ int main(int argc, char **argv)
     SDL_RenderPresent(renderer);
 
     SDL_WaitThread(hand_thread, NULL);
-    SDL_WaitThread(input_thread, NULL);
 
     dark_forest->destroy(dark_forest);
     hero->destroy(hero);
     menu->destroy(menu);
     hand->destroy(hand);
-    /**
-        save_bag(bag, 0);
-*/
+    save_bag(bag, 0);
     bag->destroy(bag);
 
     free(STAT_MATRIX);

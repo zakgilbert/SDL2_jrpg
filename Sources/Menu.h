@@ -36,6 +36,7 @@ typedef struct _Menu
     void (*update_main_menu)(struct _Menu *this);
     void (*update_items_menu)(struct _Menu *this);
     void (*update_use_items_menu)(struct _Menu *this);
+    void (*update_config)(struct _Menu *this);
 
     void (*update)(struct _Menu *this);
     void (*set_q)(struct _Menu *this);

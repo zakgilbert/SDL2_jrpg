@@ -17,7 +17,7 @@ struct Collidable
     struct SDL_Rect *rect;
     int x, y;
     int index;
-    int * ready_to_interact;
+    int *ready_to_interact;
 };
 
 typedef struct _collision
@@ -25,7 +25,7 @@ typedef struct _collision
     void (*destroy)(struct _collision *);
     void (*add_collision)(struct _collision *, Lootable **lootables, int num_lootables, Npc **npcs, int num_npcs, int num_collidables, int area_key);
     void (*add_lootables)(struct _collision *, Lootable **lootables, int num_lootables, int area_key);
-    void (*add_npcs)(struct _collision *, Npc ** npcs, int num_npcs, int area_key);
+    void (*add_npcs)(struct _collision *, Npc **npcs, int num_npcs, int area_key);
     void (*update_collidables)(struct _collision *, int area_key);
     int (*area_collision)(struct _collision *, int area_key);
 
@@ -36,7 +36,8 @@ typedef struct _collision
     struct Collidable ***collidables;
     int *num_collibables;
     int current_index;
+    struct SDL_Rect *hero_rect;
 } Collision;
 
-Collision *CREATE_COLLISION();
+Collision *CREATE_COLLISION(struct SDL_Rect *hero_rect);
 #endif

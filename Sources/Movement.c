@@ -35,48 +35,28 @@ int change_position()
 {
     int is_moving = 0;
 
-    /* on left */
-    if (EDGE_DETECTION[0])
-    {
-        USER_INPUTS[2] = 0;
-    }
-    /* on right */
-    else if (EDGE_DETECTION[1])
-    {
-        USER_INPUTS[3] = 0;
-    }
-    /* on up */
-    else if (EDGE_DETECTION[2])
-    { 
-        USER_INPUTS[1] = 0;
-    }
-    /* on down */
-    else if (EDGE_DETECTION[3])
-    { 
-        USER_INPUTS[0] = 0;
-    }
     if (!MOVEMENT_DISABLED)
     {
-        if (USER_INPUTS[0])
-        { 
+        if (key_state[SDL_SCANCODE_S])
+        {
             Y--;
             is_moving = 1;
             NUM_STEPS++;
         }
-        else if (USER_INPUTS[1])
-        { 
+        else if (key_state[SDL_SCANCODE_W])
+        {
             Y++;
             is_moving = 1;
             NUM_STEPS++;
         }
-        else if (USER_INPUTS[2])
-        { 
+        else if (key_state[SDL_SCANCODE_A])
+        {
             X++;
             is_moving = 1;
             NUM_STEPS++;
         }
-        else if (USER_INPUTS[3])
-        { 
+        else if (key_state[SDL_SCANCODE_D])
+        {
             X--;
             is_moving = 1;
             NUM_STEPS++;
@@ -89,22 +69,18 @@ void bounds()
 {
     if (X > 0)
     {
-        EDGE_DETECTION[0] = 1;
         X = 0;
     }
     if (X < -(MAP_WIDTH - (WINDOW_WIDTH / 2)))
     {
         X = -(MAP_WIDTH - (WINDOW_WIDTH / 2));
-        EDGE_DETECTION[1] = 1;
     }
     if (Y > 0)
     {
         Y = 0;
-        EDGE_DETECTION[2] = 1;
     }
     if (Y < -(MAP_HEIGHT - (WINDOW_HEIGHT / 2)))
     {
         Y = -(MAP_HEIGHT - (WINDOW_HEIGHT / 2));
-        EDGE_DETECTION[3] = 1;
     }
 }

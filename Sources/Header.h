@@ -74,7 +74,8 @@ extern struct STRING_LIST *CHARACTER_BIO_PATHS;
 extern struct STRING_LIST *SAVE_PATHS;
 extern struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 extern struct STRING_LIST *ENEMIES;
-
+const Uint8 *key_state;
+typedef enum SDL_SCANCODE_W W;
 typedef struct SDL_Renderer Renderer;
 enum states
 {
