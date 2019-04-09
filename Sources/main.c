@@ -109,15 +109,12 @@ int main(int argc, char **argv)
             menu->update_items_menu(menu);
             break;
 
+        case USE_ITEM:
+            TICK = 1;
+            menu->update_use_items_menu(menu);
+            break;
+
             /**
-            case USE_ITEM:
-                TICK = 1;
-                SDL_RenderClear(renderer);
-                menu->render_use_item_menu(menu, renderer, hand, party, bag);
-                hand->render(hand, renderer);
-                SDL_RenderPresent(renderer);
-                break;
-    
             case CONFIG:
                 TICK = 1;
                 SDL_RenderClear(renderer);
@@ -198,7 +195,9 @@ int main(int argc, char **argv)
     hero->destroy(hero);
     menu->destroy(menu);
     hand->destroy(hand);
-    save_bag(bag, 0);
+    /**
+        save_bag(bag, 0);
+*/
     bag->destroy(bag);
 
     free(STAT_MATRIX);

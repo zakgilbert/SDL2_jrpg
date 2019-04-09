@@ -132,10 +132,11 @@ static int _quaff_item(Item *this, Affect *affect)
     item_was_removed = 0;
     this->affect = affect;
 
-    if (0 != ((item_was_quaffed) = (this->affect->cause_affect(affect))))
+    if (((item_was_quaffed) = (this->affect->cause_affect(affect))))
     {
         item_was_removed = this->decrement_item(this, this->affect->affect_enum);
     }
+    this->update_quant_disp(this);
     this->affect->destroy(this->affect);
     refresh_inputs(USER_INPUTS, 6, 1);
     return item_was_removed;
@@ -164,14 +165,19 @@ static char *_loot(Item *this, ITEM_ENUM item_enum)
         return ITEMS[this->items[item_index]];
     }
 }
-void _update_quant_disp(Item *this)
+/**
+ * fjsdlafsldsal
+ */
+static void _update_quant_disp(Item *this)
 {
     int i;
     char temp[10];
     if (NULL != this->display)
     {
         for (i = 0; i < this->items_in_bag; i++)
+        {
             free(this->display[i]);
+        }
         this->display = NULL;
     }
     this->display = (char **)malloc(sizeof(char *) * this->items_in_bag);

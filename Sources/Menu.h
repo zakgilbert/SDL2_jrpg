@@ -29,10 +29,13 @@ typedef struct _Menu
 {
     void (*destroy)(struct _Menu *);
     void (*render_line)(struct _Menu *, struct SDL_Renderer *renderer, const char *str, SDL_Color color);
+
     void (*set_q_main_menu)(struct _Menu *this);
     void (*set_q_items_menu)(struct _Menu *this);
+
     void (*update_main_menu)(struct _Menu *this);
     void (*update_items_menu)(struct _Menu *this);
+    void (*update_use_items_menu)(struct _Menu *this);
 
     void (*update)(struct _Menu *this);
     void (*set_q)(struct _Menu *this);
