@@ -24,7 +24,7 @@ static void _render_sprite(Npc *this, struct SDL_Renderer *renderer)
 
 static int _interact(Npc *this)
 {
-    if (this->ready_to_interact && USER_INPUTS[4] && FACING == UP)
+    if (this->ready_to_interact && CONFIRM())
     {
         return this->key;
     }

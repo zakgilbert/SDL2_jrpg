@@ -159,7 +159,6 @@ static void _render(Battle *this, struct SDL_Renderer *renderer, Hand *hand)
     {
         state = previous_state;
         previous_state = BATTLE;
-        INPUT = NONE;
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
         SDL_RenderFillRect(renderer, &this->transition);
@@ -206,9 +205,8 @@ static void _render(Battle *this, struct SDL_Renderer *renderer, Hand *hand)
             USER_INPUTS[4] = 0;
             hand->current_state = 0;
         }
-        else if (INPUT == CANCEL)
+        else if (CANCEL())
         {
-            INPUT = NONE;
             this->q->re_q(this->q, this->q->pop(this->q));
             hand->current_state = 0;
         }

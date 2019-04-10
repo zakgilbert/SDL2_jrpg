@@ -14,46 +14,47 @@ int wait_for_okay()
 
 int input_handler(void *data)
 {
-    union SDL_Event ev;
-
-    while (SDL_WaitEvent(&ev) && INPUT != QUIT)
+    while (SDL_WaitEvent(&ev) && !EXIT())
     {
         switch (ev.type)
         {
         case SDL_QUIT:
-            INPUT = QUIT;
+            key_state[O] = 1;
             break;
+
         case SDL_KEYDOWN:
             switch (ev.key.keysym.scancode)
             {
             case SDL_SCANCODE_S:
             case SDL_SCANCODE_DOWN:
+                KEY = S;
                 continue;
             case SDL_SCANCODE_W:
             case SDL_SCANCODE_UP:
+                KEY = W;
                 continue;
             case SDL_SCANCODE_A:
             case SDL_SCANCODE_LEFT:
+                KEY = A;
                 continue;
             case SDL_SCANCODE_D:
             case SDL_SCANCODE_RIGHT:
+                KEY = D;
                 continue;
             case SDL_SCANCODE_J:
-                INPUT = OKAY;
+                KEY = J;
                 continue;
             case SDL_SCANCODE_L:
-                INPUT = CANCEL;
+                KEY = L;
                 continue;
             default:
                 continue;
             }
             continue;
         case SDL_KEYUP:
+            KEY = NON;
             switch (ev.key.keysym.scancode)
             {
-            case SDL_SCANCODE_O:
-                INPUT = QUIT;
-                continue;
             case SDL_SCANCODE_S:
             case SDL_SCANCODE_DOWN:
                 continue;
@@ -67,10 +68,8 @@ int input_handler(void *data)
             case SDL_SCANCODE_RIGHT:
                 continue;
             case SDL_SCANCODE_J:
-                INPUT = NONE;
                 continue;
             case SDL_SCANCODE_L:
-                INPUT = NONE;
                 continue;
             case SDL_SCANCODE_F:
                 FULLSCREEN_ON = !(FULLSCREEN_ON);

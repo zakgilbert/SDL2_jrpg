@@ -128,22 +128,22 @@ static void _check_direction(Hero *this)
     if (key_state[SDL_SCANCODE_S])
     {
         this->animate_down(this);
-        FACING = DOWN;
+        this->facing = down;
     }
     else if (key_state[SDL_SCANCODE_W])
     {
         this->animate_up(this);
-        FACING = UP;
+        this->facing = up;
     }
     else if (key_state[SDL_SCANCODE_A])
     {
         this->animate_left(this);
-        FACING = LEFT;
+        this->facing = left;
     }
     else if (key_state[SDL_SCANCODE_D])
     {
         this->animate_right(this);
-        FACING = RIGHT;
+        this->facing = right;
     }
 }
 

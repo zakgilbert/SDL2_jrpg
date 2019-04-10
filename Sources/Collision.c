@@ -50,6 +50,12 @@ static int _check_left_edge(struct Collidable *collidable)
 }
 static int _check_right_edge(struct Collidable *collidable)
 {
+    if (((collidable->rect->y - COLLISION_Y) < (32) && (collidable->rect->y - COLLISION_Y) > (((32 / 2) - (collidable->rect->h + (32 / 8))))) &&
+        ((collidable->rect->x - COLLISION_X) == ((32 / 2) - collidable->rect->w)))
+    {
+        return 1;
+    }
+    return 0;
 }
 static void _add_lootables(Collision *this, Lootable **lootables, int num_lootables, int area_key)
 {
@@ -84,7 +90,7 @@ static void _add_npcs(Collision *this, Npc **npcs, int num_npcs, int area_key)
 
 static void _update_collidables(Collision *this, int area_key)
 {
-    int k, x, y;
+    int k;
     if (area_key >= NUM_AREAS)
     {
         return;
@@ -96,25 +102,28 @@ static void _update_collidables(Collision *this, int area_key)
 
         if (SDL_HasIntersection(this->hero_rect, this->collidables[area_key][k]->rect))
         {
-            if ((this->hero_rect->y - this->collidables[area_key][k]->rect->y) > 0 && FACING != RIGHT && FACING != RIGHT)
+            struct SDL_Rect tester;
+            SDL_IntersectRect(this->hero_rect, this->collidables[area_key][k]->rect, &tester);
+            printf("INTERSCT X: %d, Y: %d  W: %d, H: %d\n", tester.x, tester.y, tester.w, tester.h);
+            if (this->hero->facing == up)
             {
                 Y--;
                 *this->collidables[area_key][k]->ready_to_interact = 1;
                 printf("Hero: x: %d Hero; y: %d\nOBJ: X: %d OBJ: Y: %d\n", this->hero_rect->x, this->hero_rect->y, this->collidables[area_key][k]->rect->x, this->collidables[area_key][k]->rect->y);
             }
-            if ((this->hero_rect->y - this->collidables[area_key][k]->rect->y) < 0 && FACING != LEFT && FACING != RIGHT)
+            else if (this->hero->facing == down)
             {
                 Y++;
                 *this->collidables[area_key][k]->ready_to_interact = 0;
                 printf("Hero: x: %d Hero; y: %d\nOBJ: X: %d OBJ: Y: %d\n", this->hero_rect->x, this->hero_rect->y, this->collidables[area_key][k]->rect->x, this->collidables[area_key][k]->rect->y);
             }
-            if ((this->hero_rect->x - this->collidables[area_key][k]->rect->x) > 0 && FACING != UP && FACING != DOWN)
+            else if (this->hero->facing == left)
             {
                 X--;
                 *this->collidables[area_key][k]->ready_to_interact = 0;
                 printf("Hero: x: %d Hero; y: %d\nOBJ: X: %d OBJ: Y: %d\n", this->hero_rect->x, this->hero_rect->y, this->collidables[area_key][k]->rect->x, this->collidables[area_key][k]->rect->y);
             }
-            if ((this->hero_rect->x - this->collidables[area_key][k]->rect->x) < 0 && FACING != UP && FACING != DOWN)
+            else if (this->hero->facing == right)
             {
                 X++;
                 *this->collidables[area_key][k]->ready_to_interact = 0;
@@ -124,7 +133,6 @@ static void _update_collidables(Collision *this, int area_key)
         else
         {
             *this->collidables[area_key][k]->ready_to_interact = 0;
-            printf("Hero: x: %d Hero; y: %d\nOBJ: X: %d OBJ: Y: %d\n", this->hero_rect->x, this->hero_rect->y, this->collidables[area_key][k]->rect->x, this->collidables[area_key][k]->rect->y);
         }
     }
 }
@@ -134,7 +142,7 @@ static int _area_collision(Collision *this, int area_key)
     return 0;
 }
 
-Collision *CREATE_COLLISION(struct SDL_Rect *hero_rect)
+Collision *CREATE_COLLISION(Hero *hero)
 {
     Collision *this = malloc(sizeof(*this));
     this->add_collision = _add_collision;
@@ -149,7 +157,8 @@ Collision *CREATE_COLLISION(struct SDL_Rect *hero_rect)
     this->check_right_edge = _check_right_edge;
     this->check_up_edge = _check_up_edge;
 
-    this->hero_rect = hero_rect;
+    this->hero_rect = &hero->rect_pos;
+    this->hero = hero;
     this->collidables = malloc(sizeof(struct Collidable **) * NUM_AREAS);
     this->num_collibables = malloc(sizeof(int) * NUM_AREAS);
     this->current_index = 0;

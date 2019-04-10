@@ -74,9 +74,34 @@ extern struct STRING_LIST *CHARACTER_BIO_PATHS;
 extern struct STRING_LIST *SAVE_PATHS;
 extern struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 extern struct STRING_LIST *ENEMIES;
-const Uint8 *key_state;
-typedef enum SDL_SCANCODE_W W;
+
+enum KEYS
+{
+    S = SDL_SCANCODE_S,
+    W = SDL_SCANCODE_W,
+    A = SDL_SCANCODE_A,
+    D = SDL_SCANCODE_D,
+    J = SDL_SCANCODE_J,
+    L = SDL_SCANCODE_L,
+    O = SDL_SCANCODE_O,
+    F = SDL_SCANCODE_F,
+    NON
+};
+int UP();
+int LEFT();
+int RIGHT();
+int DOWN();
+int CONFIRM();
+int CANCEL();
+int EXIT();
+int FULL();
+
+enum KEYS KEY;
+extern Uint8 *key_state;
+Uint8 *key_state;
+union SDL_Event ev;
 typedef struct SDL_Renderer Renderer;
+
 enum states
 {
     DARK_FOREST,
@@ -117,14 +142,6 @@ enum LOAD_SAVE_INFO
     LEAD_CHARACTER
 };
 
-enum INPUTS
-{
-    NONE,
-    OKAY,
-    QUIT,
-    CANCEL
-};
-enum INPUTS INPUT;
 
 enum COLLIDABLE_TYPES
 {
@@ -172,15 +189,6 @@ enum NPC_TYPES
     ONE_FRAME
 };
 
-enum DIRECTION_FACING
-{
-    DOWN,
-    UP,
-    LEFT,
-    RIGHT
-};
-
-enum DIRECTION_FACING FACING;
 
 int FPS;
 int FRAMES_RENDERED;
@@ -241,4 +249,5 @@ int refresh_inputs(int *, int, int);
 void set_items(int *);
 int quit();
 int render_thread(void *);
+int confirm(int val);
 #endif

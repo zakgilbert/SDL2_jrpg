@@ -96,11 +96,10 @@ static Message *_render_area(Area *this)
 {
     int i, k;
     srand(time(NULL));
-    if (INPUT == CANCEL)
+    if (CANCEL())
     {
         state = MAIN_MENU;
         previous_state = this->area_key;
-        INPUT = NONE;
 
         return NULL;
     }
@@ -133,7 +132,6 @@ static Message *_render_area(Area *this)
             dungeon_message = CREATE_MESSAGE((char *)ITEMS[item_to_be_obtained], 0, 0, 10, ONE_LINER, item_to_be_obtained);
             state = MESSAGE;
             previous_state = this->area_key;
-            USER_INPUTS[4] = 0;
             this->party_bag->loot(this->party_bag, item_to_be_obtained);
         }
     }
@@ -150,7 +148,6 @@ static Message *_render_area(Area *this)
             state = MESSAGE;
             previous_state = this->area_key;
             WAITING_FOR_MESSAGE = 0;
-            USER_INPUTS[4] = 0;
         }
     }
     if (this->current_index != -1 && (this->last_x != X || this->last_y != Y))

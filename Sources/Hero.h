@@ -43,6 +43,13 @@ typedef struct _Hero
     struct SDL_Texture *texture;
     struct SDL_Rect rect;
     struct SDL_Rect rect_pos;
+    enum direction
+    {
+        up,
+        down,
+        left,
+        right
+    } facing;
 
 } Hero;
 

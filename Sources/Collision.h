@@ -11,6 +11,7 @@
 #include "Lootable.h"
 #include "Npc.h"
 #include "Words.h"
+#include "Hero.h"
 
 struct Collidable
 {
@@ -37,7 +38,8 @@ typedef struct _collision
     int *num_collibables;
     int current_index;
     struct SDL_Rect *hero_rect;
+    Hero *hero;
 } Collision;
 
-Collision *CREATE_COLLISION(struct SDL_Rect *hero_rect);
+Collision *CREATE_COLLISION(Hero *hero);
 #endif

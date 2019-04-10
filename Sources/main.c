@@ -28,11 +28,9 @@
 
 int main(int argc, char **argv)
 {
-    key_state = SDL_GetKeyboardState(NULL);
+    key_state = (Uint8 *)SDL_GetKeyboardState(NULL);
     set_up_timer(60);
-    int running;
     SET_GLOBALS();
-    running = 1;
 
     create_load_info();
     refresh_inputs(USER_INPUTS, 6, 1);
@@ -53,7 +51,7 @@ int main(int argc, char **argv)
     Hand *hand = CREATE_HAND();
     Item *bag = CREATE_BAG();
     Area *dark_forest = CREATE_AREA(DARK_FOREST, hero, bag);
-    Collision *game_collision = CREATE_COLLISION(&hero->rect_pos);
+    Collision *game_collision = CREATE_COLLISION(hero);
     r_Q = CREATE_RENDER_Q();
 
     bag = load_bag(bag, 0);
@@ -85,13 +83,12 @@ int main(int argc, char **argv)
     input_thread = SDL_CreateThread(input_handler, "input_handler", NULL);
     SDL_DetachThread(input_thread);
     party[0]->in_animation = -1;
-    while (running)
+    while (!EXIT())
     {
         start_timer();
-        refresh_inputs(EDGE_DETECTION, 4, movement());
+        movement();
         game_collision->update_collidables(game_collision, state);
         set_fullscreen(window, hero);
-
         r_Q->render(r_Q, renderer);
 
         switch (state)
@@ -117,6 +114,7 @@ int main(int argc, char **argv)
 
         case CONFIG:
             TICK = 1;
+            menu->update_config(menu);
             break;
 
             /**
@@ -178,7 +176,6 @@ int main(int argc, char **argv)
         FRAMES_RENDERED++;
         delay();
         reset_timer();
-        running = quit();
     }
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
@@ -229,11 +226,43 @@ int refresh_inputs(int *array, int size, int bol)
     }
     return 1;
 }
-int quit()
+int confirm(int val)
 {
-    if (INPUT == QUIT)
-    {
+    if (!val)
         return 0;
-    }
+    key_state[KEY] = 0;
     return 1;
+}
+
+int UP()
+{
+    return confirm(key_state[W]);
+}
+int LEFT()
+{
+    return confirm(key_state[A]);
+}
+int RIGHT()
+{
+    return confirm(key_state[D]);
+}
+int DOWN()
+{
+    return confirm(key_state[S]);
+}
+int CONFIRM()
+{
+    return confirm(key_state[J]);
+}
+int CANCEL()
+{
+    return confirm(key_state[L]);
+}
+int EXIT()
+{
+    return confirm(key_state[O]);
+}
+int FULL()
+{
+    return confirm(key_state[F]);
 }

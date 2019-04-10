@@ -18,7 +18,7 @@ int animate_hand_thread(void *ptr)
 
     while (is_running)
     {
-        if (INPUT == QUIT)
+        if (confirm(key_state[O]))
         {
             is_running = 0;
             return 0;
@@ -188,17 +188,15 @@ static int _move_horizontal(Hand *this, int distance)
 
 static int _move_vertical(Hand *this, int distance)
 {
-    if (USER_INPUTS[1] && this->current_state > 0)
+    if (confirm(key_state[W]) && this->current_state > 0)
     {
         this->position.y -= distance;
         this->current_state--;
-        refresh_inputs(USER_INPUTS, 6, 1);
     }
-    else if (USER_INPUTS[0] && this->current_state < this->number_of_states)
+    else if (confirm(key_state[S]) && this->current_state < this->number_of_states)
     {
         this->position.y += distance;
         this->current_state++;
-        refresh_inputs(USER_INPUTS, 6, 1);
     }
     return this->current_state;
 }
@@ -208,13 +206,13 @@ static void _vertical_horizontal(Hand *this)
     switch (this->current_state)
     {
     case 0:
-        if (USER_INPUTS[0])
+        if (confirm(key_state[S]))
         {
             this->position.y = this->state_2[1];
             this->current_state = 2;
             break;
         }
-        else if (USER_INPUTS[3])
+        else if (confirm(key_state[D]))
         {
             this->position.x = this->state_1[0];
             this->current_state = 1;
@@ -223,13 +221,13 @@ static void _vertical_horizontal(Hand *this)
         break;
 
     case 1:
-        if (USER_INPUTS[0])
+        if (confirm(key_state[S]))
         {
             this->position.y = this->state_3[1];
             this->current_state = 3;
             break;
         }
-        else if (USER_INPUTS[2])
+        else if (confirm(key_state[A]))
         {
             this->position.x = this->state_0[0];
             this->current_state = 0;
@@ -238,13 +236,13 @@ static void _vertical_horizontal(Hand *this)
         break;
 
     case 2:
-        if (USER_INPUTS[1])
+        if (confirm(key_state[W]))
         {
             this->position.y = this->state_0[1];
             this->current_state = 0;
             break;
         }
-        else if (USER_INPUTS[3])
+        else if (confirm(key_state[D]))
         {
             this->position.x = this->state_3[0];
             this->current_state = 3;
@@ -252,13 +250,13 @@ static void _vertical_horizontal(Hand *this)
         }
         break;
     case 3:
-        if (USER_INPUTS[1])
+        if (confirm(key_state[W]))
         {
             this->position.y = this->state_1[1];
             this->current_state = 1;
             break;
         }
-        else if (USER_INPUTS[2])
+        else if (confirm(key_state[A]))
         {
             this->position.x = this->state_2[0];
             this->current_state = 2;

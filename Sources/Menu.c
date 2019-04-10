@@ -189,91 +189,6 @@ static int _set_items_menu_options(Menu *this)
     return skip;
 }
 /**
-static void _render_config_menu(Menu *this, struct SDL_Renderer *renderer)
-{
-    if (INPUT == CANCEL)
-    {
-        state = MAIN_MENU;
-        INPUT = NONE;
-        hand->main_menu_position(hand);
-        hand->current_state = 0;
-        SDL_RenderClear(renderer);
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-        SDL_RenderFillRect(renderer, &this->transition);
-        SDL_RenderPresent(renderer);
-        SDL_Delay(transition_delay);
-        return;
-    }
-    MOVEMENT_DISABLED = 1;
-    hand->change_state_quantity(hand, 2, 0);
-    this->main_menu_bg->render(this->main_menu_bg, renderer);
-    hand->move_vertical(hand, this->render_config_menu_options(this, renderer, hand, hand->current_state));
-}
-static int _set_config_menu_options(Menu *this)
-{
-    int skip, i;
-    char font_path[] = "ponde___.ttf";
-
-    char rgb_matrix[3][50];
-
-    skip = 20;
-    this->rgb_bars[0]->color_value = MENU_BACKGROUND.r;
-    this->rgb_bars[1]->color_value = MENU_BACKGROUND.g;
-    this->rgb_bars[2]->color_value = MENU_BACKGROUND.b;
-
-    this->rgb_bars[0]->color_bar_color = RED;
-    this->rgb_bars[1]->color_bar_color = GRN;
-    this->rgb_bars[2]->color_bar_color = BLU;
-
-    sprintf(rgb_matrix[0], "RED                          %d", (int)MENU_BACKGROUND.r);
-    sprintf(rgb_matrix[1], "GREEN                        %d", (int)MENU_BACKGROUND.g);
-    sprintf(rgb_matrix[2], "BLUE                         %d", (int)MENU_BACKGROUND.b);
-
-    this->font = TTF_OpenFont(font_path, 10);
-
-    if (!this->font)
-    {
-        printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
-    }
-    this->rect.x = 50;
-    this->rect.y = skip;
-
-    for (i = 0; i < 3; i++)
-    {
-        this->rgb_bars[i]->render_color_bar(this->rgb_bars, renderer, this->rect.x, this->rect.y, skip, i);
-
-        TTF_SizeText(this->font, rgb_matrix[i], &this->rect.w, &this->rect.h);
-
-        if (i == current_state)
-        {
-            this->surface = TTF_RenderText_Solid(this->font, rgb_matrix[i], WHITE);
-            this->change_window_color(this->rgb_bars, i);
-        }
-        else
-        {
-            this->surface = TTF_RenderText_Solid(this->font, rgb_matrix[i], GREY);
-        }
-        this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
-        SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-        this->rect.y += skip;
-    }
-    TTF_CloseFont(this->font);
-    SDL_FreeSurface(this->surface);
-    SDL_DestroyTexture(this->texture);
-    this->surface = NULL;
-    this->texture = NULL;
-    return skip;
-}
-
-void _change_window_color(Window **color_bars, int current_state)
-{
-    if (current_state == 0)
-        MENU_BACKGROUND.r = color_bars[0]->adjust_menu_colors(color_bars[0]);
-    else if (current_state == 1)
-        MENU_BACKGROUND.g = color_bars[1]->adjust_menu_colors(color_bars[1]);
-    else
-        MENU_BACKGROUND.b = color_bars[2]->adjust_menu_colors(color_bars[2]);
-}
 */
 /*
 static void _render_save_menu(Menu *this, struct SDL_Renderer *renderer, Hand *hand)
@@ -361,11 +276,10 @@ static void _set_q_main_menu(Menu *this)
 }
 static void _update_main_menu(Menu *this)
 {
-    if (INPUT == CANCEL)
+    if (CANCEL())
     {
         state = previous_state;
         previous_state = MAIN_MENU;
-        INPUT = NONE;
         this->first_load = 1;
         r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
         return;
@@ -382,7 +296,7 @@ static void _update_main_menu(Menu *this)
     this->hand->change_state_quantity(this->hand, this->option_states, 0);
     this->hand->move_vertical(this->hand, this->skip);
     MOVEMENT_DISABLED = 1;
-    if (USER_INPUTS[4])
+    if (CONFIRM())
     {
         switch (this->hand->current_state)
         {
@@ -398,6 +312,7 @@ static void _update_main_menu(Menu *this)
             this->hand->config_menu_position(this->hand);
             this->q->free(this->q);
             r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
+            this->set_q_config(this);
             break;
             /**
             case Save:
@@ -411,7 +326,6 @@ static void _update_main_menu(Menu *this)
         default:
             break;
         }
-        USER_INPUTS[4] = 0;
     }
     this->q->copy(this->q);
 }
@@ -424,10 +338,9 @@ static void _set_q_items_menu(Menu *this)
 static void _update_items_menu(Menu *this)
 {
 
-    if (INPUT == CANCEL)
+    if (CANCEL())
     {
         state = MAIN_MENU;
-        INPUT = NONE;
         this->hand->main_menu_position(this->hand);
         this->hand->current_state = 0;
         this->first_load = 1;
@@ -437,7 +350,7 @@ static void _update_items_menu(Menu *this)
     this->hand->move_vertical(this->hand, this->skip);
     MOVEMENT_DISABLED = 1;
 
-    if (USER_INPUTS[4])
+    if (CONFIRM())
     {
         state = USE_ITEM;
         this->hand->use_item_position(this->hand);
@@ -447,17 +360,15 @@ static void _update_items_menu(Menu *this)
         this->q->add(this->q, this->q->new_node(this->select_character_bg, render_window));
         this->set_stat_text(this, 49, 205, 9, USE_ITEM);
         this->q->add(this->q, this->q->new_node(this->hand, render_hand));
-        USER_INPUTS[4] = 0;
     }
     this->q->copy(this->q);
 }
 
 static void _update_use_items_menu(Menu *this)
 {
-    if (INPUT == CANCEL)
+    if (CANCEL())
     {
         state = ITEMS_MENU;
-        INPUT = NONE;
         this->hand->current_state = this->item_being_used;
         this->hand->items_menu_position(this->hand);
         this->hand->number_of_states = this->previous_number_of_states;
@@ -469,7 +380,7 @@ static void _update_use_items_menu(Menu *this)
     this->hand->change_state_quantity(this->hand, NUM_CHARACTERS - 1, 0);
     this->hand->vertical_horizontal(this->hand);
 
-    if (USER_INPUTS[4])
+    if (CONFIRM())
     {
         int was_item_removed = this->bag->quaff_item(this->bag, CREATE_AFFECT(this->bag->items[this->item_being_used], this->party[this->hand->current_state]));
 
@@ -479,7 +390,6 @@ static void _update_use_items_menu(Menu *this)
             this->hand->items_menu_position(this->hand);
             this->hand->number_of_states = this->previous_number_of_states;
             state = ITEMS_MENU;
-            INPUT = NONE;
             SDL_Delay(300);
         }
         this->q->free(this->q);
@@ -487,19 +397,87 @@ static void _update_use_items_menu(Menu *this)
         this->q->add(this->q, this->q->new_node(this->select_character_bg, render_window));
         this->set_stat_text(this, 49, 205, 9, USE_ITEM);
         this->q->add(this->q, this->q->new_node(this->hand, render_hand));
-        USER_INPUTS[4] = 0;
     }
+}
+
+static void _set_q_config(Menu *this)
+{
+    this->q->add(this->q, this->q->new_node(this->main_menu_bg, render_window));
+    this->skip = this->set_config_menu_options(this);
+    this->q->add(this->q, this->q->new_node(this->hand, render_hand));
+}
+static void _update_config(Menu *this)
+{
+    if (CANCEL())
+    {
+        state = MAIN_MENU;
+        this->hand->main_menu_position(this->hand);
+        this->first_load = 1;
+        return;
+    }
+    MOVEMENT_DISABLED = 1;
+    this->hand->change_state_quantity(this->hand, 2, 0);
+    this->hand->move_vertical(this->hand, this->skip);
+    this->q->free(this->q);
+    this->set_q_config(this);
     this->q->copy(this->q);
 }
 
-static void _update_config(Menu *this)
+static int _set_config_menu_options(Menu *this)
 {
+    int skip, i, x, y;
+    char font_path[] = "ponde___.ttf";
+
+    skip = 20;
+    this->rgb_bars[0]->color_value = MENU_BACKGROUND.r;
+    this->rgb_bars[1]->color_value = MENU_BACKGROUND.g;
+    this->rgb_bars[2]->color_value = MENU_BACKGROUND.b;
+
+    this->rgb_bars[0]->color_bar_color = RED;
+    this->rgb_bars[1]->color_bar_color = GRN;
+    this->rgb_bars[2]->color_bar_color = BLU;
+
+    sprintf(this->rgb_matrix[0], "RED                          %d", (int)MENU_BACKGROUND.r);
+    sprintf(this->rgb_matrix[1], "GREEN                        %d", (int)MENU_BACKGROUND.g);
+    sprintf(this->rgb_matrix[2], "BLUE                         %d", (int)MENU_BACKGROUND.b);
+
+    this->font = TTF_OpenFont(font_path, 10);
+
+    if (!this->font)
+    {
+        printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
+    }
+    x = 50;
+    y = skip;
+
+    for (i = 0; i < 3; i++)
+    {
+        this->q->add(this->q, this->q->new_node(this->rgb_bars[i], render_window_color_bar));
+
+        TTF_SizeText(this->font, this->rgb_matrix[i], &this->rect.w, &this->rect.h);
+
+        this->q->add(this->q, this->q->new_node(
+                                  CREATE_TEXT(
+                                      x, y, WHITE, this->font, this->rgb_matrix[i]),
+                                  render_text));
+        this->change_window_color(this->rgb_bars, this->hand->current_state);
+        y += skip;
+    }
+    return skip;
 }
 
+void _change_window_color(Window **color_bars, int current_state)
+{
+    if (current_state == 0)
+        MENU_BACKGROUND.r = color_bars[0]->adjust_menu_colors(color_bars[0]);
+    else if (current_state == 1)
+        MENU_BACKGROUND.g = color_bars[1]->adjust_menu_colors(color_bars[1]);
+    else
+        MENU_BACKGROUND.b = color_bars[2]->adjust_menu_colors(color_bars[2]);
+}
 Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag)
 {
     Menu *this = (Menu *)malloc(sizeof(*this));
-
     this->destroy = _destroy;
 
     this->update_main_menu = _update_main_menu;
@@ -507,10 +485,17 @@ Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag)
     this->set_stat_text = _set_stat_text;
     this->set_q_main_menu = _set_q_main_menu;
     this->set_character_main_menu_image = _set_character_main_menu_image;
+
     this->update_items_menu = _update_items_menu;
     this->set_items_menu_options = _set_items_menu_options;
     this->set_q_items_menu = _set_q_items_menu;
+
     this->update_use_items_menu = _update_use_items_menu;
+
+    this->update_config = _update_config;
+    this->set_config_menu_options = _set_config_menu_options;
+    this->change_window_color = _change_window_color;
+    this->set_q_config = _set_q_config;
     /**
     this->render_main_menu = _render_main_menu;
         this->render_main_menu_options = _render_main_menu_options;
@@ -522,7 +507,6 @@ Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag)
     
         this->render_config_menu = _render_config_menu;
         this->render_config_menu_options = _render_config_menu_options;
-        this->change_window_color = _change_window_color;
     
         this->render_save_menu = _render_save_menu;
         this->render_save_menu_options = _render_save_menu_options;

@@ -23,11 +23,11 @@ static int _timer_is_maxed(Window *this)
 }
 static int _adjust_menu_colors(Window *this)
 {
-    if (USER_INPUTS[2])
+    if (key_state[A] == 1)
     {
         this->color_value--;
     }
-    else if (USER_INPUTS[3])
+    else if (key_state[D] == 1)
     {
         this->color_value++;
     }
@@ -41,21 +41,21 @@ static int _adjust_menu_colors(Window *this)
     }
     return this->color_value;
 }
-static void _render_color_bar(Window **this, struct SDL_Renderer *renderer, int x, int y, int skip, int i)
+static void _render_color_bar(Window *this, struct SDL_Renderer *renderer)
 {
     struct SDL_Rect color_bar;
-    color_bar.x = this[i] -> rect.x;
-    color_bar.y = this[i] -> rect.y;
-    color_bar.h = this[i] -> rect.h;
+    color_bar.x = this->rect.x;
+    color_bar.y = this->rect.y;
+    color_bar.h = this->rect.h;
 
-    color_bar.w = (this[i] -> rect.w *(this[i] -> color_value)) / 255;
+    color_bar.w = (this->rect.w * (this->color_value)) / 255;
 
-    SDL_SetRenderDrawColor(renderer, this[i] -> color_bar_color.r, this[i] -> color_bar_color.g, this[i] -> color_bar_color.b, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, this->color_bar_color.r, this->color_bar_color.g, this->color_bar_color.b, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &color_bar);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-    SDL_RenderDrawRect(renderer, &this[i] -> border_1);
-    SDL_RenderDrawRect(renderer, &this[i] -> border_2);
-    SDL_RenderDrawRect(renderer, &this[i] -> border_3);
+    SDL_RenderDrawRect(renderer, &this->border_1);
+    SDL_RenderDrawRect(renderer, &this->border_2);
+    SDL_RenderDrawRect(renderer, &this->border_3);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 static void _render_time_bar(Window *this, struct SDL_Renderer *renderer)
@@ -107,4 +107,9 @@ void render_window(void *obj, struct SDL_Renderer *renderer)
 {
     Window *this = (Window *)obj;
     this->render(this, renderer);
+}
+void render_window_color_bar(void *obj, struct SDL_Renderer *renderer)
+{
+    Window *this = (Window *)obj;
+    this->render_color_bar(this, renderer);
 }

@@ -186,7 +186,6 @@ void SET_GLOBALS()
     WAITING_FOR_MESSAGE = 0;
     INTERACT = OFF;
     NUM_STATS = 4;
-    INPUT = NONE;
     NUM_AREAS = 1;
     IN_BATTLE = 0;
     NUM_STEPS = 0;
@@ -200,6 +199,7 @@ void SET_GLOBALS()
     MAP_WIDTH = 2048;
     MAP_HEIGHT = 1792;
     NUM_TARGETS = 0;
+
 
     WHITE.r = 255;
     WHITE.g = 255;

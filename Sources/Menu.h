@@ -24,19 +24,39 @@
 
 uint32_t transition_delay;
 void render_line(TTF_Font, char *str);
-
 typedef struct _Menu
 {
     void (*destroy)(struct _Menu *);
     void (*render_line)(struct _Menu *, struct SDL_Renderer *renderer, const char *str, SDL_Color color);
 
-    void (*set_q_main_menu)(struct _Menu *this);
-    void (*set_q_items_menu)(struct _Menu *this);
-
+    /**
+ * MAIN MENU
+ */
     void (*update_main_menu)(struct _Menu *this);
+    void (*set_q_main_menu)(struct _Menu *this);
+    int (*set_main_menu_text_options)(struct _Menu *this, int _x, int _y, int size, int num_options);
+    void (*set_character_main_menu_image)(struct _Menu *this);
+    int (*set_stat_text)(struct _Menu *this, int _x, int _y, int size, int key);
+
+    /**
+ * ITEMS MENU
+ */
     void (*update_items_menu)(struct _Menu *this);
+    void (*set_q_items_menu)(struct _Menu *this);
+    int (*set_items_menu_options)(struct _Menu *);
+
+    /**
+ * USE_ITEMS
+ */
     void (*update_use_items_menu)(struct _Menu *this);
+
+    /**
+ * CONFIG
+ */
     void (*update_config)(struct _Menu *this);
+    void (*set_q_config)(struct _Menu *this);
+    int (*set_config_menu_options)(struct _Menu *);
+    void (*change_window_color)(Window **color_bars, int current_state);
 
     void (*update)(struct _Menu *this);
     void (*set_q)(struct _Menu *this);
@@ -50,11 +70,6 @@ typedef struct _Menu
 
     void (*render_main_menu)(struct _Menu *, struct SDL_Renderer *, Hand *, Character **);
 
-    int (*set_main_menu_text_options)(struct _Menu *this, int _x, int _y, int size, int num_options);
-
-    int (*set_stat_text)(struct _Menu *this, int _x, int _y, int size, int key);
-    void (*set_character_main_menu_image)(struct _Menu *this);
-    int (*set_items_menu_options)(struct _Menu *);
     /**
     
         void (*render_character_stats)(struct _Menu *, struct SDL_Renderer *,
@@ -70,9 +85,7 @@ typedef struct _Menu
     
         void (*render_config_menu)(struct _Menu *, struct SDL_Renderer *);
     
-        int (*render_config_menu_options)(struct _Menu *, struct SDL_Renderer *renderer);
     
-        void (*change_window_color)(Window **color_bars);
     
         void (*render_save_menu)(struct _Menu *, struct SDL_Renderer *);
     
@@ -94,6 +107,7 @@ typedef struct _Menu
     Character **party;
     Item *bag;
     Hand *hand;
+    char rgb_matrix[3][50];
 } Menu;
 
 Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag);
