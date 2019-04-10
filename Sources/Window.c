@@ -23,11 +23,11 @@ static int _timer_is_maxed(Window *this)
 }
 static int _adjust_menu_colors(Window *this)
 {
-    if (key_state[A] == 1)
+    if (LEFT())
     {
         this->color_value--;
     }
-    else if (key_state[D] == 1)
+    else if (RIGHT())
     {
         this->color_value++;
     }

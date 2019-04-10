@@ -36,7 +36,7 @@ typedef struct _Menu
     void (*set_q_main_menu)(struct _Menu *this);
     int (*set_main_menu_text_options)(struct _Menu *this, int _x, int _y, int size, int num_options);
     void (*set_character_main_menu_image)(struct _Menu *this);
-    int (*set_stat_text)(struct _Menu *this, int _x, int _y, int size, int key);
+    void (*set_stat_text)(struct _Menu *this, int _x, int _y, int size, int key);
 
     /**
  * ITEMS MENU

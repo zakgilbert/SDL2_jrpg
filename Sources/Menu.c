@@ -21,15 +21,10 @@ static const char *MENU_OPTIONS[] = {
 static int _set_main_menu_text_options(Menu *this, int _x, int _y, int size, int num_options)
 {
     int skip, i, x, y;
-    char font_path[] = "ponde___.ttf";
+    char font_path[] = "ponde.ttf";
     this->font = TTF_OpenFont(font_path, size);
-
-    if (!this->font)
-    {
-        printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
-    }
-
     skip = TTF_FontLineSkip(this->font) + 6;
+    TTF_CloseFont(this->font);
     x = _x;
     y = _y;
 
@@ -37,17 +32,17 @@ static int _set_main_menu_text_options(Menu *this, int _x, int _y, int size, int
     {
         this->q->add(this->q,
                      this->q->new_node(
-                         CREATE_TEXT(x, y, WHITE, this->font, MENU_OPTIONS[i]),
+                         CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, MENU_OPTIONS[i]),
                          render_text));
         y += skip;
     }
     return skip;
 }
 
-static int _set_stat_text(Menu *this, int _x, int _y, int size, int key)
+static void _set_stat_text(Menu *this, int _x, int _y, int size, int key)
 {
     int skip, i, x, y;
-    char font_path[] = "ponde___.ttf";
+    char font_path[] = "ponde.ttf";
     int prev_y;
     this->font = TTF_OpenFont(font_path, size);
     if (!this->font)
@@ -57,6 +52,7 @@ static int _set_stat_text(Menu *this, int _x, int _y, int size, int key)
 
     this->party[0]->update_party_stats(this->party);
     skip = TTF_FontLineSkip(this->font);
+    TTF_CloseFont(this->font);
     x = _x;
     y = _y;
     prev_y = _y;
@@ -68,33 +64,33 @@ static int _set_stat_text(Menu *this, int _x, int _y, int size, int key)
         {
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->font, this->party[i]->name),
+                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->name),
                              render_text));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->font, this->party[i]->age),
+                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->age),
                              render_text));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->font, this->party[i]->job),
+                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->job),
                              render_text));
             y = prev_y;
             x += 70;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->font, this->party[i]->HP.display),
+                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->HP.display),
                              render_text));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->font, this->party[i]->MP.display),
+                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->MP.display),
                              render_text));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->font, this->party[i]->EXP.display),
+                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->EXP.display),
                              render_text));
             x = _x;
             prev_y += 80;
@@ -115,22 +111,22 @@ static int _set_stat_text(Menu *this, int _x, int _y, int size, int key)
             }
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->font, this->party[i]->name),
+                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->name),
                              render_text));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->font, this->party[i]->HP.display),
+                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->HP.display),
                              render_text));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->font, this->party[i]->MP.display),
+                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->MP.display),
                              render_text));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->font, this->party[i]->EXP.display),
+                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->EXP.display),
                              render_text));
             x += 165;
             y = _y;
@@ -139,7 +135,6 @@ static int _set_stat_text(Menu *this, int _x, int _y, int size, int key)
     default:
         break;
     }
-    return 0;
 }
 static void _set_character_main_menu_image(Menu *this)
 {
@@ -160,7 +155,7 @@ static void _set_character_main_menu_image(Menu *this)
 static int _set_items_menu_options(Menu *this)
 {
     int skip, i, x, y, quat_x, quat_y;
-    char font_path[] = "ponde___.ttf";
+    char font_path[] = "ponde.ttf";
     this->font = TTF_OpenFont(font_path, 10);
     if (!this->font)
     {
@@ -168,7 +163,7 @@ static int _set_items_menu_options(Menu *this)
     }
 
     skip = TTF_FontLineSkip(this->font);
-
+    TTF_CloseFont(this->font);
     x = 49;
     y = 15;
     quat_x = 200;
@@ -177,11 +172,11 @@ static int _set_items_menu_options(Menu *this)
     for (i = 0; i < this->bag->items_in_bag; i++)
     {
         this->q->add(this->q, this->q->new_node(CREATE_TEXT(
-                                                    x, y, WHITE, this->font, ITEMS[this->bag->items[i]]),
+                                                    x, y, WHITE, "ponde.ttf", 10, ITEMS[this->bag->items[i]]),
                                                 render_text));
 
         this->q->add(this->q, this->q->new_node(CREATE_TEXT(
-                                                    quat_x, quat_y, WHITE, this->font, this->bag->get_display(this->bag, i)),
+                                                    quat_x, quat_y, WHITE, "ponde.ttf", 10, this->bag->get_display(this->bag, i)),
                                                 render_text));
         quat_y += skip;
         y += skip;
@@ -216,7 +211,7 @@ static int _render_save_menu_options(Menu *this, struct SDL_Renderer *renderer, 
 {
 
     int skip, num_saves, i;
-    char font_path[] = "ponde___.ttf";
+    char font_path[] = "ponde.ttf";
     skip = 90;
     num_saves = 3;
     this->rect.x = 55;
@@ -413,6 +408,7 @@ static void _update_config(Menu *this)
         state = MAIN_MENU;
         this->hand->main_menu_position(this->hand);
         this->first_load = 1;
+        this->hand->current_state = 0;
         return;
     }
     MOVEMENT_DISABLED = 1;
@@ -426,7 +422,6 @@ static void _update_config(Menu *this)
 static int _set_config_menu_options(Menu *this)
 {
     int skip, i, x, y;
-    char font_path[] = "ponde___.ttf";
 
     skip = 20;
     this->rgb_bars[0]->color_value = MENU_BACKGROUND.r;
@@ -441,24 +436,15 @@ static int _set_config_menu_options(Menu *this)
     sprintf(this->rgb_matrix[1], "GREEN                        %d", (int)MENU_BACKGROUND.g);
     sprintf(this->rgb_matrix[2], "BLUE                         %d", (int)MENU_BACKGROUND.b);
 
-    this->font = TTF_OpenFont(font_path, 10);
-
-    if (!this->font)
-    {
-        printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
-    }
     x = 50;
     y = skip;
-
     for (i = 0; i < 3; i++)
     {
         this->q->add(this->q, this->q->new_node(this->rgb_bars[i], render_window_color_bar));
 
-        TTF_SizeText(this->font, this->rgb_matrix[i], &this->rect.w, &this->rect.h);
-
         this->q->add(this->q, this->q->new_node(
                                   CREATE_TEXT(
-                                      x, y, WHITE, this->font, this->rgb_matrix[i]),
+                                      x, y, WHITE, "ponde.ttf", 10, this->rgb_matrix[i]),
                                   render_text));
         this->change_window_color(this->rgb_bars, this->hand->current_state);
         y += skip;
