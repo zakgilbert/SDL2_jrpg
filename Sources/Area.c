@@ -47,18 +47,18 @@ static Render_Q *_set_q(struct _area *this)
 {
     int i;
     this->q = CREATE_RENDER_Q();
-    this->q->add(this->q, this->q->new_node(this->floor, render_floor));
-    this->q->add(this->q, this->q->new_node(this->hero, render_hero));
+    this->q->add(this->q, this->q->new_node(this->floor, render_floor, NULL));
+    this->q->add(this->q, this->q->new_node(this->hero, render_hero, NULL));
 
     for (i = 0; i < this->bag->items_in_bag; i++)
     {
-        this->q->add(this->q, this->q->new_node(this->lootables[i], render_lootable));
+        this->q->add(this->q, this->q->new_node(this->lootables[i], render_lootable, NULL));
     }
     for (i = 0; i < this->num_npcs; i++)
     {
-        this->q->add(this->q, this->q->new_node(this->npcs[i], render_npc));
+        this->q->add(this->q, this->q->new_node(this->npcs[i], render_npc, NULL));
     }
-    this->q->add(this->q, this->q->new_node(this->trees, render_floor));
+    this->q->add(this->q, this->q->new_node(this->trees, render_floor, NULL));
     this->first_load = 0;
     return this->q;
 }

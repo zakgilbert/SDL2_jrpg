@@ -22,18 +22,17 @@ static int _set_main_menu_text_options(Menu *this, int _x, int _y, int size, int
 {
     int skip, i, x, y;
     char font_path[] = "ponde.ttf";
-    this->font = TTF_OpenFont(font_path, size);
-    skip = TTF_FontLineSkip(this->font) + 6;
-    TTF_CloseFont(this->font);
+    this->f1 = TTF_OpenFont(font_path, 10);
+    skip = TTF_FontLineSkip(this->f1) + 6;
     x = _x;
     y = _y;
-
+    printf("%p\n", this->f1);
     for (i = 0; i < num_options; i++)
     {
         this->q->add(this->q,
                      this->q->new_node(
-                         CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, MENU_OPTIONS[i]),
-                         render_text));
+                         CREATE_TEXT(x, y, WHITE, this->f1, MENU_OPTIONS[i]),
+                         render_text, text_destroy));
         y += skip;
     }
     return skip;
@@ -44,15 +43,15 @@ static void _set_stat_text(Menu *this, int _x, int _y, int size, int key)
     int skip, i, x, y;
     char font_path[] = "ponde.ttf";
     int prev_y;
-    this->font = TTF_OpenFont(font_path, size);
-    if (!this->font)
+    this->f2 = TTF_OpenFont(font_path, 10);
+    if (!this->f2)
     {
         printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
     }
-
+    this->f2 = this->f2;
+    printf("%p\n", this->f2);
     this->party[0]->update_party_stats(this->party);
-    skip = TTF_FontLineSkip(this->font);
-    TTF_CloseFont(this->font);
+    skip = TTF_FontLineSkip(this->f2);
     x = _x;
     y = _y;
     prev_y = _y;
@@ -64,34 +63,34 @@ static void _set_stat_text(Menu *this, int _x, int _y, int size, int key)
         {
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->name),
-                             render_text));
+                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->name),
+                             render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->age),
-                             render_text));
+                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->age),
+                             render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->job),
-                             render_text));
+                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->job),
+                             render_text, text_destroy));
             y = prev_y;
             x += 70;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->HP.display),
-                             render_text));
+                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->HP.display),
+                             render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->MP.display),
-                             render_text));
+                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->MP.display),
+                             render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->EXP.display),
-                             render_text));
+                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->EXP.display),
+                             render_text, text_destroy));
             x = _x;
             prev_y += 80;
             y = prev_y;
@@ -111,23 +110,23 @@ static void _set_stat_text(Menu *this, int _x, int _y, int size, int key)
             }
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->name),
-                             render_text));
+                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->name),
+                             render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->HP.display),
-                             render_text));
+                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->HP.display),
+                             render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->MP.display),
-                             render_text));
+                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->MP.display),
+                             render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, "ponde.ttf", size, this->party[i]->EXP.display),
-                             render_text));
+                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->EXP.display),
+                             render_text, text_destroy));
             x += 165;
             y = _y;
         }
@@ -148,7 +147,7 @@ static void _set_character_main_menu_image(Menu *this)
         this->party[i]->rect.w = 45;
         this->party[i]->rect.h = 45;
         this->party[i]->rect.y = j;
-        this->q->add(this->q, this->q->new_node(this->party[i], render_character_bio_image));
+        this->q->add(this->q, this->q->new_node(this->party[i], render_character_bio_image, NULL));
         j += 80;
     }
 }
@@ -163,7 +162,6 @@ static int _set_items_menu_options(Menu *this)
     }
 
     skip = TTF_FontLineSkip(this->font);
-    TTF_CloseFont(this->font);
     x = 49;
     y = 15;
     quat_x = 200;
@@ -172,12 +170,12 @@ static int _set_items_menu_options(Menu *this)
     for (i = 0; i < this->bag->items_in_bag; i++)
     {
         this->q->add(this->q, this->q->new_node(CREATE_TEXT(
-                                                    x, y, WHITE, "ponde.ttf", 10, ITEMS[this->bag->items[i]]),
-                                                render_text));
+                                                    x, y, WHITE, this->font, ITEMS[this->bag->items[i]]),
+                                                render_text, text_destroy));
 
         this->q->add(this->q, this->q->new_node(CREATE_TEXT(
-                                                    quat_x, quat_y, WHITE, "ponde.ttf", 10, this->bag->get_display(this->bag, i)),
-                                                render_text));
+                                                    quat_x, quat_y, WHITE, this->font, this->bag->get_display(this->bag, i)),
+                                                render_text, text_destroy));
         quat_y += skip;
         y += skip;
     }
@@ -263,10 +261,10 @@ static void _destroy(Menu *this)
 }
 static void _set_q_main_menu(Menu *this)
 {
-    this->q->add(this->q, this->q->new_node(this->main_menu_bg, render_window));
-    this->skip = this->set_main_menu_text_options(this, 270, 15, 12, 7);
+    this->q->add(this->q, this->q->new_node(this->main_menu_bg, render_window, NULL));
     this->set_stat_text(this, 80, 15, 9, MAIN_MENU);
-    this->q->add(this->q, this->q->new_node(this->hand, render_hand));
+    this->skip = this->set_main_menu_text_options(this, 270, 15, 12, 7);
+    this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
     this->set_character_main_menu_image(this);
 }
 static void _update_main_menu(Menu *this)
@@ -276,14 +274,17 @@ static void _update_main_menu(Menu *this)
         state = previous_state;
         previous_state = MAIN_MENU;
         this->first_load = 1;
-        r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
+        printf("f1: %p   f2: %p\n", this->f1, this->f2);
+        r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition, NULL));
+        r_Q->add(r_Q, r_Q->new_node(this->f1, close_font, NULL));
+        r_Q->add(r_Q, r_Q->new_node(this->f2, close_font, NULL));
         return;
     }
     if (this->first_load == 1)
     {
         this->party[0]->update_party_stats(this->party);
         this->q->free(this->q);
-        r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
+        r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition, NULL));
         this->set_q_main_menu(this);
         this->first_load = 0;
     }
@@ -299,14 +300,14 @@ static void _update_main_menu(Menu *this)
             state = ITEMS_MENU;
             this->hand->items_menu_position(this->hand);
             this->q->free(this->q);
-            r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
+            r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition, NULL));
             this->set_q_items_menu(this);
             break;
         case Config:
             state = CONFIG;
             this->hand->config_menu_position(this->hand);
             this->q->free(this->q);
-            r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition));
+            r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition, NULL));
             this->set_q_config(this);
             break;
             /**
@@ -326,9 +327,9 @@ static void _update_main_menu(Menu *this)
 }
 static void _set_q_items_menu(Menu *this)
 {
-    this->q->add(this->q, this->q->new_node(this->main_menu_bg, render_window));
+    this->q->add(this->q, this->q->new_node(this->main_menu_bg, render_window, NULL));
     this->skip = this->set_items_menu_options(this);
-    this->q->add(this->q, this->q->new_node(this->hand, render_hand));
+    this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
 }
 static void _update_items_menu(Menu *this)
 {
@@ -352,9 +353,9 @@ static void _update_items_menu(Menu *this)
         this->item_being_used = this->hand->current_state;
         this->hand->current_state = 0;
         this->previous_number_of_states = this->hand->number_of_states;
-        this->q->add(this->q, this->q->new_node(this->select_character_bg, render_window));
+        this->q->add(this->q, this->q->new_node(this->select_character_bg, render_window, NULL));
         this->set_stat_text(this, 49, 205, 9, USE_ITEM);
-        this->q->add(this->q, this->q->new_node(this->hand, render_hand));
+        this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
     }
     this->q->copy(this->q);
 }
@@ -389,17 +390,17 @@ static void _update_use_items_menu(Menu *this)
         }
         this->q->free(this->q);
         this->set_q_items_menu(this);
-        this->q->add(this->q, this->q->new_node(this->select_character_bg, render_window));
+        this->q->add(this->q, this->q->new_node(this->select_character_bg, render_window, NULL));
         this->set_stat_text(this, 49, 205, 9, USE_ITEM);
-        this->q->add(this->q, this->q->new_node(this->hand, render_hand));
+        this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
     }
 }
 
 static void _set_q_config(Menu *this)
 {
-    this->q->add(this->q, this->q->new_node(this->main_menu_bg, render_window));
+    this->q->add(this->q, this->q->new_node(this->main_menu_bg, render_window, NULL));
     this->skip = this->set_config_menu_options(this);
-    this->q->add(this->q, this->q->new_node(this->hand, render_hand));
+    this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
 }
 static void _update_config(Menu *this)
 {
@@ -422,7 +423,7 @@ static void _update_config(Menu *this)
 static int _set_config_menu_options(Menu *this)
 {
     int skip, i, x, y;
-
+    this->font = TTF_OpenFont("ponde.ttf", 10);
     skip = 20;
     this->rgb_bars[0]->color_value = MENU_BACKGROUND.r;
     this->rgb_bars[1]->color_value = MENU_BACKGROUND.g;
@@ -440,12 +441,12 @@ static int _set_config_menu_options(Menu *this)
     y = skip;
     for (i = 0; i < 3; i++)
     {
-        this->q->add(this->q, this->q->new_node(this->rgb_bars[i], render_window_color_bar));
+        this->q->add(this->q, this->q->new_node(this->rgb_bars[i], render_window_color_bar, NULL));
 
         this->q->add(this->q, this->q->new_node(
                                   CREATE_TEXT(
-                                      x, y, WHITE, "ponde.ttf", 10, this->rgb_matrix[i]),
-                                  render_text));
+                                      x, y, WHITE, this->font, this->rgb_matrix[i]),
+                                  render_text, text_destroy));
         this->change_window_color(this->rgb_bars, this->hand->current_state);
         y += skip;
     }
@@ -516,6 +517,8 @@ Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag)
     this->rgb_bars[1] = CREATE_WINDOW(110, 40, 150, 15);
     this->rgb_bars[2] = CREATE_WINDOW(110, 60, 150, 15);
     this->font = NULL;
+    this->f1 = NULL;
+    this->f2 = NULL;
     this->surface = NULL;
     this->texture = NULL;
     this->option_states = 6;
@@ -528,7 +531,6 @@ Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag)
     this->first_load = 1;
     this->skip = 0;
     this->delay = 100;
-    this->set_q_main_menu(this);
     return this;
 }
 

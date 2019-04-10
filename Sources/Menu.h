@@ -93,6 +93,7 @@ typedef struct _Menu
 */
 
     TTF_Font *font;
+    TTF_Font *f1, *f2;
     struct SDL_Rect rect;
     struct SDL_Rect transition;
     struct SDL_Surface *surface;
@@ -107,6 +108,7 @@ typedef struct _Menu
     Character **party;
     Item *bag;
     Hand *hand;
+    int num_fonts;
     char rgb_matrix[3][50];
 } Menu;
 

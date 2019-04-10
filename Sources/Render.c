@@ -21,20 +21,39 @@ static void _destroy(Render_Q *this)
         this = NULL;
     }
 }
+void free_node(struct Node *node)
+{
+    free(node->obj);
+    node->obj = NULL;
+    free(node);
+    node = NULL;
+}
+int is_freeable(deallo_function des)
+{
+    if (NULL == des)
+        return 0;
+    return 1;
+}
 static void _free(Render_Q *this)
 {
     struct Node *temp;
     while (NULL != this->front)
     {
-        free(temp = this->pop(this));
+        temp = this->pop(this);
+        if (is_freeable(temp->des))
+        {
+            temp->des(temp->obj);
+        }
+        free(temp);
         temp = NULL;
     }
 }
-static struct Node *_new_node(void *obj, render_function target)
+static struct Node *_new_node(void *obj, render_function target, deallo_function des)
 {
     struct Node *data = malloc(sizeof(struct Node));
     data->obj = obj;
     data->funct = target;
+    data->des = des;
     data->next = NULL;
     return data;
 }
@@ -71,8 +90,10 @@ Render_Q *_render(Render_Q *this, struct SDL_Renderer *renderer)
     {
         temp = r_Q->pop(this);
         (*temp->funct)(temp->obj, renderer);
-        free(temp);
-        temp = NULL;
+/**
+            free(temp);
+            temp = NULL;
+*/
     }
     return NULL;
 }
@@ -81,13 +102,13 @@ static void _copy(Render_Q *this)
     struct Node *current;
     current = this->front;
     r_Q->in_copy = 1;
-    r_Q->add(r_Q, r_Q->new_node(NULL, render_clear));
+    r_Q->add(r_Q, r_Q->new_node(NULL, render_clear, NULL));
     while (current != NULL)
     {
-        r_Q->add(r_Q, r_Q->new_node(current->obj, current->funct));
+        r_Q->add(r_Q, r_Q->new_node(current->obj, current->funct, current->des));
         current = current->next;
     }
-    r_Q->add(r_Q, r_Q->new_node(NULL, render_present));
+    r_Q->add(r_Q, r_Q->new_node(NULL, render_present, NULL));
 }
 Render_Q *CREATE_RENDER_Q()
 {

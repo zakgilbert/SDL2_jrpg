@@ -17,6 +17,7 @@
  * Q as a function pointer
  */
 typedef void render_function(void *obj, struct SDL_Renderer *renderer);
+typedef void deallo_function(void *obj);
 void render_clear(void *obj, struct SDL_Renderer *renderer);
 void render_present(void *obj, struct SDL_Renderer *renderer);
 /**
@@ -28,9 +29,12 @@ struct Node
 {
     render_function(*funct);
     void *obj;
+    deallo_function(*des);
     struct Node *next;
 };
 
+void free_node(struct Node *node);
+int is_freeable(deallo_function des);
 void print_node(struct Node *targ);
 /**
  * Render_Q: 
@@ -52,7 +56,7 @@ typedef struct _Render_Q
      */
     struct _Render_Q *(*render)(struct _Render_Q *this, struct SDL_Renderer *renderer);
     void (*add)(struct _Render_Q *this, struct Node *data);
-    struct Node *(*new_node)(void *obj, render_function target);
+    struct Node *(*new_node)(void *obj, render_function target, deallo_function des);
     void (*copy)(struct _Render_Q *this);
     struct Node *(*pop)(struct _Render_Q *this);
     struct Node *front;

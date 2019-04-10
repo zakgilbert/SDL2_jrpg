@@ -17,13 +17,11 @@ typedef struct _Text
     struct SDL_Surface *surface;
     struct SDL_Texture *texture;
     SDL_Color color;
-    int size;
-    const char * path;
     const char *text;
     TTF_Font *font;
 } Text;
-Text *CREATE_TEXT(int x, int y, SDL_Color color, const char * path, int size, const char *text);
-
+Text *CREATE_TEXT(int x, int y, SDL_Color color, TTF_Font *font, const char *text);
+void text_destroy(void *obj);
 void render_text(void *obj, struct SDL_Renderer *renderer);
 int skip(TTF_Font *font, const char *path, int size);
 void open_font(void *obj, struct SDL_Renderer *renderer);
