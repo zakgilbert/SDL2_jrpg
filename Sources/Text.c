@@ -48,6 +48,6 @@ void text_destroy(void *obj)
 void close_font(void *obj, struct SDL_Renderer *renderer)
 {
     TTF_Font *this = (TTF_Font *)obj;
-    printf("closingfont\n");
+    printf("closingfont: %p\n", this);
     TTF_CloseFont(this);
 }

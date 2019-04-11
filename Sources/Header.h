@@ -74,7 +74,7 @@ extern struct STRING_LIST *CHARACTER_BIO_PATHS;
 extern struct STRING_LIST *SAVE_PATHS;
 extern struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 extern struct STRING_LIST *ENEMIES;
-
+extern struct SDL_Textures **alpha_textures;
 enum KEYS
 {
     S = SDL_SCANCODE_S,
@@ -142,7 +142,6 @@ enum LOAD_SAVE_INFO
     LEAD_CHARACTER
 };
 
-
 enum COLLIDABLE_TYPES
 {
     CHEST,
@@ -188,7 +187,6 @@ enum NPC_TYPES
     SPRITE,
     ONE_FRAME
 };
-
 
 int FPS;
 int FRAMES_RENDERED;
@@ -244,6 +242,7 @@ struct STRING_LIST *CHARACTER_BIO_PATHS;
 struct STRING_LIST *SAVE_PATHS;
 struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 struct STRING_LIST *ENEMIES;
+struct SDL_Textures **alpha_textures;
 
 int refresh_inputs(int *, int, int);
 void set_items(int *);

@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
@@ -26,5 +27,6 @@ void save(Character **party, Item *bag, int save_state);
 void create_load_info();
 char **get_state_info(int save_state);
 void set_fullscreen(struct SDL_Window *window, Hero *hero);
+char **get_alphabet_str();
 
 #endif /* ASSETS_H */

@@ -93,7 +93,7 @@ typedef struct _Menu
 */
 
     TTF_Font *font;
-    TTF_Font *f1, *f2;
+    TTF_Font *font_main_menu_options, *font_stats, *font_items, *font_use_item;
     struct SDL_Rect rect;
     struct SDL_Rect transition;
     struct SDL_Surface *surface;

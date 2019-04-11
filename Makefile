@@ -12,7 +12,7 @@ OBJS    := $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
 CFLAGS := -Wall -ggdb3
 
-LDFLAGS := `sdl2-config --libs --cflags` -lSDL2_image -lSDL2_ttf  
+LDFLAGS := `sdl2-config --libs --cflags` -lSDL2_image -lSDL2_ttf -lm
 
 
 all: $(EXCEC)

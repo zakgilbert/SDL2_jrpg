@@ -7,31 +7,22 @@ static const char *ITEMS[] = {
 
 static const char *MENU_OPTIONS[] = {
     FOREACH_MENU_OPTION(GENERATE_STRING)};
-/**
-    static void _render_line(Menu *this, struct SDL_Renderer *renderer, const char *str, SDL_Color color)
-    {
-        TTF_SizeText(this->font, str, &this->rect.w, &this->rect.h);
-        this->surface = TTF_RenderText_Solid(this->font, str, color);
-        this->texture = SDL_CreateTextureFromSurface(renderer, this->surface);
-        SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-        SDL_FreeSurface(this->surface);
-        SDL_DestroyTexture(this->texture);
-    }
-*/
+
+
 static int _set_main_menu_text_options(Menu *this, int _x, int _y, int size, int num_options)
 {
     int skip, i, x, y;
     char font_path[] = "ponde.ttf";
-    this->f1 = TTF_OpenFont(font_path, 10);
-    skip = TTF_FontLineSkip(this->f1) + 6;
+    this->font_main_menu_options = TTF_OpenFont(font_path, 10);
+    skip = TTF_FontLineSkip(this->font_main_menu_options) + 6;
     x = _x;
     y = _y;
-    printf("%p\n", this->f1);
+    printf("Opening font_main_menu_options: %p\n", this->font_main_menu_options);
     for (i = 0; i < num_options; i++)
     {
         this->q->add(this->q,
                      this->q->new_node(
-                         CREATE_TEXT(x, y, WHITE, this->f1, MENU_OPTIONS[i]),
+                         CREATE_TEXT(x, y, WHITE, this->font_main_menu_options, MENU_OPTIONS[i]),
                          render_text, text_destroy));
         y += skip;
     }
@@ -43,15 +34,15 @@ static void _set_stat_text(Menu *this, int _x, int _y, int size, int key)
     int skip, i, x, y;
     char font_path[] = "ponde.ttf";
     int prev_y;
-    this->f2 = TTF_OpenFont(font_path, 10);
-    if (!this->f2)
+    this->font_stats = TTF_OpenFont(font_path, 10);
+    if (!this->font_stats)
     {
         printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
     }
-    this->f2 = this->f2;
-    printf("%p\n", this->f2);
+    this->font_stats = this->font_stats;
+    printf("Opening font_stats: %p\n", this->font_stats);
     this->party[0]->update_party_stats(this->party);
-    skip = TTF_FontLineSkip(this->f2);
+    skip = TTF_FontLineSkip(this->font_stats);
     x = _x;
     y = _y;
     prev_y = _y;
@@ -63,33 +54,33 @@ static void _set_stat_text(Menu *this, int _x, int _y, int size, int key)
         {
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->name),
+                             CREATE_TEXT(x, y, WHITE, this->font_stats, this->party[i]->name),
                              render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->age),
+                             CREATE_TEXT(x, y, WHITE, this->font_stats, this->party[i]->age),
                              render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->job),
+                             CREATE_TEXT(x, y, WHITE, this->font_stats, this->party[i]->job),
                              render_text, text_destroy));
             y = prev_y;
             x += 70;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->HP.display),
+                             CREATE_TEXT(x, y, WHITE, this->font_stats, this->party[i]->HP.display),
                              render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->MP.display),
+                             CREATE_TEXT(x, y, WHITE, this->font_stats, this->party[i]->MP.display),
                              render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->EXP.display),
+                             CREATE_TEXT(x, y, WHITE, this->font_stats, this->party[i]->EXP.display),
                              render_text, text_destroy));
             x = _x;
             prev_y += 80;
@@ -110,22 +101,22 @@ static void _set_stat_text(Menu *this, int _x, int _y, int size, int key)
             }
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->name),
+                             CREATE_TEXT(x, y, WHITE, this->font_stats, this->party[i]->name),
                              render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->HP.display),
+                             CREATE_TEXT(x, y, WHITE, this->font_stats, this->party[i]->HP.display),
                              render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->MP.display),
+                             CREATE_TEXT(x, y, WHITE, this->font_stats, this->party[i]->MP.display),
                              render_text, text_destroy));
             y += skip;
             this->q->add(this->q,
                          this->q->new_node(
-                             CREATE_TEXT(x, y, WHITE, this->f2, this->party[i]->EXP.display),
+                             CREATE_TEXT(x, y, WHITE, this->font_stats, this->party[i]->EXP.display),
                              render_text, text_destroy));
             x += 165;
             y = _y;
@@ -154,14 +145,14 @@ static void _set_character_main_menu_image(Menu *this)
 static int _set_items_menu_options(Menu *this)
 {
     int skip, i, x, y, quat_x, quat_y;
-    char font_path[] = "ponde.ttf";
-    this->font = TTF_OpenFont(font_path, 10);
-    if (!this->font)
+    char font_items_1_path[] = "ponde.ttf";
+    this->font_items = TTF_OpenFont(font_items_1_path, 10);
+    if (!this->font_items)
     {
         printf("In function: create_Main_Menu_Options---TTF_OpenFont: %s\n", TTF_GetError());
     }
-
-    skip = TTF_FontLineSkip(this->font);
+    printf("Opening font_items: %p\n", this->font_items);
+    skip = TTF_FontLineSkip(this->font_items);
     x = 49;
     y = 15;
     quat_x = 200;
@@ -170,11 +161,11 @@ static int _set_items_menu_options(Menu *this)
     for (i = 0; i < this->bag->items_in_bag; i++)
     {
         this->q->add(this->q, this->q->new_node(CREATE_TEXT(
-                                                    x, y, WHITE, this->font, ITEMS[this->bag->items[i]]),
+                                                    x, y, WHITE, this->font_items, ITEMS[this->bag->items[i]]),
                                                 render_text, text_destroy));
 
         this->q->add(this->q, this->q->new_node(CREATE_TEXT(
-                                                    quat_x, quat_y, WHITE, this->font, this->bag->get_display(this->bag, i)),
+                                                    quat_x, quat_y, WHITE, this->font_items, this->bag->get_display(this->bag, i)),
                                                 render_text, text_destroy));
         quat_y += skip;
         y += skip;
@@ -274,10 +265,9 @@ static void _update_main_menu(Menu *this)
         state = previous_state;
         previous_state = MAIN_MENU;
         this->first_load = 1;
-        printf("f1: %p   f2: %p\n", this->f1, this->f2);
         r_Q->add(r_Q, r_Q->new_node(&this->delay, render_transition, NULL));
-        r_Q->add(r_Q, r_Q->new_node(this->f1, close_font, NULL));
-        r_Q->add(r_Q, r_Q->new_node(this->f2, close_font, NULL));
+        r_Q->add(r_Q, r_Q->new_node(this->font_main_menu_options, close_font, NULL));
+        r_Q->add(r_Q, r_Q->new_node(this->font_stats, close_font, NULL));
         return;
     }
     if (this->first_load == 1)
@@ -340,6 +330,7 @@ static void _update_items_menu(Menu *this)
         this->hand->main_menu_position(this->hand);
         this->hand->current_state = 0;
         this->first_load = 1;
+        r_Q->add(r_Q, r_Q->new_node(this->font_items, close_font, NULL));
         return;
     }
     this->hand->change_state_quantity(this->hand, this->bag->items_in_bag - 1, 0);
@@ -353,6 +344,8 @@ static void _update_items_menu(Menu *this)
         this->item_being_used = this->hand->current_state;
         this->hand->current_state = 0;
         this->previous_number_of_states = this->hand->number_of_states;
+        this->q->free(this->q);
+        this->set_items_menu_options(this);
         this->q->add(this->q, this->q->new_node(this->select_character_bg, render_window, NULL));
         this->set_stat_text(this, 49, 205, 9, USE_ITEM);
         this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
@@ -393,7 +386,10 @@ static void _update_use_items_menu(Menu *this)
         this->q->add(this->q, this->q->new_node(this->select_character_bg, render_window, NULL));
         this->set_stat_text(this, 49, 205, 9, USE_ITEM);
         this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
+        this->q->add(this->q, this->q->new_node(this->font_items, close_font, NULL));
+        this->q->add(this->q, this->q->new_node(this->font_stats, close_font, NULL));
     }
+    this->q->copy(this->q);
 }
 
 static void _set_q_config(Menu *this)
@@ -517,8 +513,10 @@ Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag)
     this->rgb_bars[1] = CREATE_WINDOW(110, 40, 150, 15);
     this->rgb_bars[2] = CREATE_WINDOW(110, 60, 150, 15);
     this->font = NULL;
-    this->f1 = NULL;
-    this->f2 = NULL;
+    this->font_main_menu_options = NULL;
+    this->font_stats = NULL;
+    this->font_items = NULL;
+    this->font_use_item = NULL;
     this->surface = NULL;
     this->texture = NULL;
     this->option_states = 6;
