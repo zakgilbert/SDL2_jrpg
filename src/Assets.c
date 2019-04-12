@@ -141,6 +141,7 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
         party[i]->job = CHARACTER_JOBS->list[character_keys[i]];
         party[i]->image_path = CHARACTER_BIO_PATHS->list[character_keys[i]];
         party[i]->texture = create_texture(renderer, party[i]->image_path, &party[i]->rect);
+        party[i]->create_battle_texture(party[i], renderer, i);
     }
 
     for (i = 0; i < num_members; i++)

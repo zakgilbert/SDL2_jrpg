@@ -9,6 +9,7 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
 #include "Header.h"
+#include "Graphics.h"
 
 /**
  * render_function
@@ -58,6 +59,7 @@ typedef struct _Render_Q
     void (*add)(struct _Render_Q *this, struct Node *data);
     struct Node *(*new_node)(void *obj, render_function target, deallo_function des);
     void (*copy)(struct _Render_Q *this);
+    struct _Render_Q *(*clone)(struct _Render_Q *this);
     struct Node *(*pop)(struct _Render_Q *this);
     struct Node *front;
     struct Node *rear;
@@ -68,7 +70,7 @@ typedef struct _Render_Q
 
 } Render_Q;
 Render_Q *CREATE_RENDER_Q();
-
+Render_Q *ENQUEUE(Render_Q *q, void *obj, render_function target, deallo_function des);
 extern Render_Q *r_Q;
 Render_Q *r_Q;
 #endif /* RENDER_H */

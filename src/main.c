@@ -21,6 +21,7 @@
 #include "Npc.h"
 #include "Collision.h"
 #include "Battle.h"
+#include "Ba.h"
 #include "Assets.h"
 #include "Enemy.h"
 #include "Battle_Q.h"
@@ -62,9 +63,9 @@ int main(int argc, char **argv)
     SDL_Thread *hand_thread;
     SDL_Thread *input_thread;
 
-    /**
-        Battle *current_battle = NULL;
-*/
+    Battle *current_battle = NULL;
+    Ba *current_ba = NULL;
+
     Character **party = load_party(0, renderer);
 
     Menu *menu = CREATE_MENU(party, hand, bag, letters);
@@ -87,6 +88,7 @@ int main(int argc, char **argv)
     input_thread = SDL_CreateThread(input_handler, "input_handler", NULL);
     SDL_DetachThread(input_thread);
     party[0]->in_animation = -1;
+    current_ba = CREATE_BA(DARK_FOREST, 1, party);
 
     while (!EXIT())
     {
@@ -94,7 +96,7 @@ int main(int argc, char **argv)
         movement();
         game_collision->update_collidables(game_collision, state);
         set_fullscreen(window, hero);
-        r_Q->render(r_Q, renderer);
+        r_Q = r_Q->render(r_Q, renderer);
 
         switch (state)
         {
@@ -169,7 +171,11 @@ int main(int argc, char **argv)
                 message_being_displayed = NULL;
             }
             break;
+*/
         case BATTLE:
+
+            current_ba->update(current_ba);
+            /**
             if (current_battle == NULL)
             {
                 current_battle = CREATE_BATTLE(previous_state, ROLL, renderer, party, 4);

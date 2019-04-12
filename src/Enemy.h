@@ -10,6 +10,7 @@
 #include <SDL2/SDL_image.h>
 #include "Header.h"
 #include "Graphics.h"
+#include "Render.h"
 
 struct Enemy_Stat
 {
@@ -36,5 +37,6 @@ typedef struct _Enemy
 
 } Enemy;
 
-Enemy *CREATE_ENEMY(int key, struct SDL_Renderer * renderer);
+Enemy *CREATE_ENEMY(int key, struct SDL_Renderer *renderer);
+void render_enemy(void *obj, struct SDL_Renderer *renderer);
 #endif /* ENEMY_H */

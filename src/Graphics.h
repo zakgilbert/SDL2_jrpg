@@ -8,6 +8,11 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include "Header.h"
+struct Texture
+{
+    struct SDL_Texture *t;
+    struct SDL_Rect r;
+};
 
 SDL_Window *make_window(char *);
 SDL_Renderer *make_renderer(struct SDL_Window **window);

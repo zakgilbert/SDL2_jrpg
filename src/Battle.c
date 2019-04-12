@@ -55,7 +55,7 @@ static void _render_line(Battle *this, struct SDL_Renderer *renderer, const char
 static int _render_action_menu_text(Battle *this, Character *character, struct SDL_Renderer *renderer, int i, int current_state)
 {
     int skip, x, y, k;
-    char font_path[] = "ponde___.ttf";
+    char font_path[] = "ponde.ttf";
 
     this->font = TTF_OpenFont(font_path, 10);
 
@@ -88,7 +88,7 @@ static int _render_action_menu_text(Battle *this, Character *character, struct S
 static int _render_battle_menu_text(Battle *this, struct SDL_Renderer *renderer, int index)
 {
     int skip, x, y, i;
-    char font_path[] = "ponde___.ttf";
+    char font_path[] = "ponde.ttf";
 
     this->font = TTF_OpenFont(font_path, 10);
 
@@ -144,7 +144,6 @@ static void _create_battle_textures(Battle *this, struct SDL_Renderer *renderer)
     }
     for (k = 0; k < this->num_party; k++)
     {
-        this->party[k]->create_battle_textures(this->party[k], renderer, k);
         this->time_bars[k] = CREATE_WINDOW(time_bar_x, time_bar_y, 50, 8);
         this->time_bars[k]->rect.w = 0;
         time_bar_y += 15;

@@ -38,7 +38,10 @@ static void _destroy(Atlas *this)
         for (i = 0; i < this->size - 1; i++)
         {
             if (NULL != this->letters[i])
+            {
                 SDL_DestroyTexture(this->letters[i]->texture);
+                free(this->letters[i]->key);
+            }
         }
 
         free(this);

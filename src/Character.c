@@ -63,7 +63,7 @@ static void _check_stats(Character *this)
     strcat(strcat(strcat(strcpy(this->EXP.display, this->EXP.name), this->EXP.str_current), "/"), this->EXP.str_max);
 }
 
-static void _create_battle_textures(Character *this, struct SDL_Renderer *renderer, int i)
+static void _create_battle_texture(Character *this, struct SDL_Renderer *renderer, int i)
 {
     int hero_positions_x[4] = {240, 255, 270, 285};
     int hero_positions_y[4] = {90, 120, 150, 180};
@@ -99,8 +99,9 @@ static int _cast(Character *this)
     return this->in_animation;
 }
 
-static void _render_battle_textures(Character *this, struct SDL_Renderer *renderer)
+static void _render_battle_textures(void *obj, struct SDL_Renderer *renderer)
 {
+    Character *this = (Character *)obj;
     this->cast(this);
     SDL_RenderCopy(renderer, this->b_texture, &this->b_rect_2, &this->b_rect_1);
 }
@@ -117,7 +118,7 @@ Character *CREATE_CHARACTER(int key)
     this->check_stats = _check_stats;
     this->destroy_party = _destroy_party;
     this->update_party_stats = _update_party_stats;
-    this->create_battle_textures = _create_battle_textures;
+    this->create_battle_texture = _create_battle_texture;
     this->render_battle_textures = _render_battle_textures;
     this->render_bio_image = _render_bio_image;
     this->cast = _cast;

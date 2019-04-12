@@ -45,6 +45,7 @@ static void _update_main(Menu *this)
         state = previous_state;
         previous_state = MAIN_MENU;
         this->time_to_load = 1;
+        this->q->free(this->q);
         r_Q->add(r_Q, r_Q->new_node(&this->delay, menu_transition, NULL));
 
         return;
@@ -107,7 +108,7 @@ static int _set_text_menu_options(Menu *this)
     {
         this->q->add(this->q, this->q->new_node(
                                   CREATE_LINE(this->atlas, MENU_OPTIONS[i], x, y),
-                                  render_line0, NULL));
+                                  render_line0, destroy_line));
         y += skip;
     }
     return skip;
@@ -128,34 +129,34 @@ static void _set_text_stats(Menu *this)
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->party[i]->name, x, y),
-                         render_line0, NULL));
+                         render_line0, destroy_line));
         y += skip;
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->party[i]->age, x, y),
-                         render_line0, NULL));
+                         render_line0, destroy_line));
         y += skip;
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->party[i]->job, x, y),
-                         render_line0, NULL));
+                         render_line0, destroy_line));
         y = y_p;
         x += 70;
 
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->party[i]->HP.display, x, y),
-                         render_line0, NULL));
+                         render_line0, destroy_line));
         y += skip;
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->party[i]->MP.display, x, y),
-                         render_line0, NULL));
+                         render_line0, destroy_line));
         y += skip;
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->party[i]->EXP.display, x, y),
-                         render_line0, NULL));
+                         render_line0, destroy_line));
 
         x = x_p;
         y_p += 80;
@@ -240,7 +241,7 @@ static int _set_text_items_menu(Menu *this)
                 CREATE_LINE(
                     this->atlas,
                     ITEMS[this->bag->items[i]], x, y),
-                render_line0, NULL));
+                render_line0, destroy_line));
 
         this->q->add(
             this->q,
@@ -249,7 +250,7 @@ static int _set_text_items_menu(Menu *this)
                     this->atlas,
                     this->bag->get_display(this->bag, i),
                     quat_x, quat_y),
-                render_line0, NULL));
+                render_line0, destroy_line));
 
         quat_y += skip;
         y += skip;
@@ -319,23 +320,23 @@ static void _set_text_use_item(Menu *this)
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->party[i]->name, x, y),
-                         render_line0, NULL));
+                         render_line0, destroy_line));
         y += skip;
 
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->party[i]->HP.display, x, y),
-                         render_line0, NULL));
+                         render_line0, destroy_line));
         y += skip;
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->party[i]->MP.display, x, y),
-                         render_line0, NULL));
+                         render_line0, destroy_line));
         y += skip;
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->party[i]->EXP.display, x, y),
-                         render_line0, NULL));
+                         render_line0, destroy_line));
 
         x += 165;
         y = y_p;
@@ -396,7 +397,7 @@ static int _set_text_config(Menu *this)
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->rgb_matrix[i], x, y),
-                         render_line0, NULL));
+                         render_line0, destroy_line));
 
         this->update_window_color(this->rgb_bars, this->hand->current_state);
         y += skip;

@@ -46,7 +46,6 @@ static void _destroy(Area *this)
 static Render_Q *_set_q(struct _area *this)
 {
     int i;
-    this->q = CREATE_RENDER_Q();
     this->q->add(this->q, this->q->new_node(this->floor, render_floor, NULL));
     this->q->add(this->q, this->q->new_node(this->hero, render_hero, NULL));
 
@@ -89,7 +88,7 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
         this->num_collidables++;
     }
     collidables->add_collision(collidables, this->lootables, num_items, this->npcs, num_npcs, this->num_collidables, this->area_key);
-    this->q = this->set_q(this);
+    
 }
 
 static Message *_render_area(Area *this)
@@ -100,19 +99,26 @@ static Message *_render_area(Area *this)
     {
         state = MAIN_MENU;
         previous_state = this->area_key;
+        this->q->free(this->q);
+        this->first_load = 1;
 
         return NULL;
     }
-    /**
-        else if (NUM_STEPS > (300 + (rand() % 500)))
-        {
-            state = BATTLE;
-            previous_state = this->area_key;
-            ROLL = rand() % 3;
-    
-            return NULL;
-        }
-*/
+    else if (NUM_STEPS > (20 + (rand() % 500)))
+    {
+        state = BATTLE;
+        previous_state = this->area_key;
+        ROLL = rand() % 3;
+        this->q->free(this->q);
+        this->first_load = 1;
+
+        return NULL;
+    }
+    else if (this->first_load)
+    {
+        this->q = this->set_q(this);
+        this->first_load = 0;
+    }
     int item_to_be_obtained = -1;
     int npc_to_interact_with = -1;
 
@@ -184,5 +190,7 @@ Area *CREATE_AREA(int area_key, Hero *hero, Item *party_bag)
     this->last_y = Y;
     this->first_load = 1;
     this->hero = hero;
+    this->q = CREATE_RENDER_Q();
+
     return this;
 }

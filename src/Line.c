@@ -50,8 +50,18 @@ static void _set_letters(Line *this)
 }
 static void _destroy(Line *this)
 {
+    int i;
     if (NULL != this)
     {
+        for (i = 0; i < this->num_let - 1; i++)
+        {
+            if (NULL != this->letters[i])
+            {
+                free(this->letters[i]);
+            }
+        }
+        free(this->letters);
+        this->letters = NULL;
         free(this);
         this = NULL;
     }
@@ -82,4 +92,9 @@ void render_line0(void *obj, struct SDL_Renderer *renderer)
     {
         this->render_letter(renderer, this->letters[i]->texture, &this->letters[i]->rect);
     }
+}
+void destroy_line(void *obj)
+{
+    Line *this = (Line *)obj;
+    this->destroy(this);
 }

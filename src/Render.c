@@ -92,18 +92,23 @@ Render_Q *_render(Render_Q *this, struct SDL_Renderer *renderer)
     {
         temp = r_Q->pop(this);
         (*temp->funct)(temp->obj, renderer);
-        /**
-            free(temp);
-            temp = NULL;
-*/
+        free(temp);
+        temp = NULL;
     }
-    return NULL;
+    this->destroy(this);
+    return CREATE_RENDER_Q();
+}
+static Render_Q *_clone(Render_Q *this)
+{
+    struct Node *current;
+    current = this->front;
+    this->add(this, this->new_node(NULL, render_clear, NULL));
+    return this;
 }
 static void _copy(Render_Q *this)
 {
     struct Node *current;
     current = this->front;
-    r_Q->in_copy = 1;
     r_Q->add(r_Q, r_Q->new_node(NULL, render_clear, NULL));
     while (current != NULL)
     {
@@ -120,10 +125,10 @@ Render_Q *CREATE_RENDER_Q()
     this->new_node = _new_node;
     this->render = _render;
     this->copy = _copy;
+    this->clone = _clone;
     this->pop = _pop;
     this->free = _free;
     this->size = 0;
-    this->in_copy = 0;
     this->rendering = 0;
     this->front = NULL;
     this->rear = NULL;
@@ -136,4 +141,9 @@ void render_clear(void *obj, struct SDL_Renderer *renderer)
 void render_present(void *obj, struct SDL_Renderer *renderer)
 {
     SDL_RenderPresent(renderer);
+}
+Render_Q *ENQUEUE(Render_Q *q, void *obj, render_function target, deallo_function des)
+{
+    q->add(q, q->new_node(obj, target, des));
+    return q;
 }
