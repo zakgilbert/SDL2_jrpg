@@ -8,6 +8,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_thread.h>
 #include "Header.h"
 #include "Graphics.h"
 
@@ -21,6 +22,8 @@ typedef void render_function(void *obj, struct SDL_Renderer *renderer);
 typedef void deallo_function(void *obj);
 void render_clear(void *obj, struct SDL_Renderer *renderer);
 void render_present(void *obj, struct SDL_Renderer *renderer);
+
+int free_handler(void *ptr);
 /**
  * Node
  * 

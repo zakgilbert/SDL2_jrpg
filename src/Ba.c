@@ -46,7 +46,7 @@ static void _create_textures(Ba *this, struct SDL_Renderer *renderer)
 }
 static void _update(Ba *this)
 {
-    int i;
+    int i, status;
     if (CANCEL())
     {
         state = previous_state;
@@ -58,13 +58,14 @@ static void _update(Ba *this)
     }
     if (this->first_render)
     {
-        this->q->free(this->q);
-        ENQUEUE(r_Q, this, create_battle_textures, NULL);
+        ENQUEUE(this->q, this, create_battle_textures, NULL);
+        this->q->copy(this->q);
+        this->free_thread = SDL_CreateThread(free_handler, "free_handler", this->q);
         this->first_render = 0;
         MOVEMENT_DISABLED = 1;
         return;
     }
-    this->q->free(this->q);
+    SDL_WaitThread(this->free_thread, &status);
     ENQUEUE(this->q, this->back_ground, render_back_ground_texture, NULL);
     ENQUEUE(this->q, this->window, render_window, NULL);
     ENQUEUE(this->q, this->window, render_window, NULL);
@@ -78,6 +79,7 @@ static void _update(Ba *this)
         ENQUEUE(this->q, this->party[i], this->party[i]->render_battle_textures, NULL);
     }
     this->q->copy(this->q);
+    this->free_thread = SDL_CreateThread(free_handler, "free_handler", this->q);
 }
 Ba *CREATE_BA(int area, int roll, Character **party)
 {

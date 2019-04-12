@@ -92,6 +92,9 @@ Render_Q *_render(Render_Q *this, struct SDL_Renderer *renderer)
     {
         temp = r_Q->pop(this);
         (*temp->funct)(temp->obj, renderer);
+/**
+            printf("%p\n", temp);
+*/
         free(temp);
         temp = NULL;
     }
@@ -100,8 +103,6 @@ Render_Q *_render(Render_Q *this, struct SDL_Renderer *renderer)
 }
 static Render_Q *_clone(Render_Q *this)
 {
-    struct Node *current;
-    current = this->front;
     this->add(this, this->new_node(NULL, render_clear, NULL));
     return this;
 }
@@ -146,4 +147,10 @@ Render_Q *ENQUEUE(Render_Q *q, void *obj, render_function target, deallo_functio
 {
     q->add(q, q->new_node(obj, target, des));
     return q;
+}
+int free_handler(void *ptr)
+{
+    Render_Q *this = (Render_Q *)ptr;
+    this->free(this);
+    return 1;
 }

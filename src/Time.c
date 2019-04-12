@@ -51,7 +51,7 @@ void reset_timer()
 
     if (ticks_per_second >= SDL_GetPerformanceFrequency())
     {
-        /**
+/**
             printf("\nFrames Rendered Per Second: %d", FRAMES_RENDERED);
             printf("\nTicks Per Second: %ld", ticks_per_second);
 */

@@ -8,6 +8,7 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_thread.h>
 #include "Header.h"
 #include "Graphics.h"
 #include "Floor.h"
@@ -42,6 +43,7 @@ typedef struct _Ba
 
     int area;
     int first_render;
+    SDL_Thread *free_thread;
 } Ba;
 
 Ba *CREATE_BA(int area, int roll, Character **party);
