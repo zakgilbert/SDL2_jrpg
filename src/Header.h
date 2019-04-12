@@ -75,6 +75,10 @@ extern struct STRING_LIST *SAVE_PATHS;
 extern struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 extern struct STRING_LIST *ENEMIES;
 extern struct SDL_Textures **alpha_textures;
+
+/* Free obj */
+typedef void (*dealloc_obj)(void *this);
+
 enum KEYS
 {
     S = SDL_SCANCODE_S,

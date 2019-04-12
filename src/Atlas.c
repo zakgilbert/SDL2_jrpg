@@ -88,18 +88,30 @@ static void _map(Atlas *this, struct SDL_Renderer *renderer)
     char **alp_str = get_alphabet_str();
     char *path = malloc(50);
     strcpy(path, "graphics/letters/");
-
-    for (i = 0; i < 52; i++)
+    for (i = 0; i < 62; i++)
     {
+        printf("map:    %s\n", alp_str[i]);
         strcpy(path, "graphics/letters/");
         this->insert(this, alp_str[i], renderer, strcat(path, alp_str[i]));
     }
+    strcpy(path, "graphics/letters/");
+    this->insert(this, ":", renderer, strcat(path, ":"));
+    strcpy(path, "graphics/letters/");
+    this->insert(this, ".", renderer, strcat(path, "per"));
+    strcpy(path, "graphics/letters/");
+    this->insert(this, "/", renderer, strcat(path, "f_slash"));
+    strcpy(path, "graphics/letters/");
+    this->insert(this, " ", renderer, strcat(path, "spc4.png"));
+
+    /**
+*/
+
     free(path);
 }
 Atlas *CREATE_ATLAS()
 {
     Atlas *this = malloc(sizeof(*this));
-    this->size = 100;
+    this->size = 127;
     this->letters = calloc(this->size, sizeof(struct Alpha_Node *));
     this->insert = _insert;
     this->destroy = _destroy;
@@ -117,7 +129,7 @@ void render_letter(void *obj, struct SDL_Renderer *renderer)
     x = 0;
     y = 0;
 
-    for (i = 0; i < 52; i++)
+    for (i = 0; i < 62; i++)
     {
         this->letters[i]->rect.x = x;
         this->letters[i]->rect.y = y;

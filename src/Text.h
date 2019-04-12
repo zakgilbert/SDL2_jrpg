@@ -9,6 +9,8 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include "Header.h"
+#include "Render.h"
+
 typedef struct _Text
 {
     void (*destroy)(struct _Text *this);

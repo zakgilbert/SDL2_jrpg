@@ -37,6 +37,8 @@ int is_freeable(deallo_function des)
 static void _free(Render_Q *this)
 {
     struct Node *temp;
+    if (NULL == this)
+        return;
     while (NULL != this->front)
     {
         temp = this->pop(this);
@@ -90,7 +92,7 @@ Render_Q *_render(Render_Q *this, struct SDL_Renderer *renderer)
     {
         temp = r_Q->pop(this);
         (*temp->funct)(temp->obj, renderer);
-/**
+        /**
             free(temp);
             temp = NULL;
 */

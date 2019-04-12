@@ -132,7 +132,7 @@ Character *CREATE_CHARACTER(int key)
 
     strcpy(this->HP.name, "HP: ");
     strcpy(this->MP.name, "MP: ");
-    strcpy(this->EXP.name, "EXP:");
+    strcpy(this->EXP.name, "EXP: ");
 
     return this;
 }

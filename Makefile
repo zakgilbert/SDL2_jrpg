@@ -1,8 +1,8 @@
 
 EXCEC = game
 
-SRCDIR  = Sources 
-OBJDIR  = Objects
+SRCDIR  = src 
+OBJDIR  = obj
 CC = gcc
 
 SRCS    := $(shell find $(SRCDIR) -name '*.c')

@@ -12,6 +12,7 @@
 #include "Movement.h"
 #include "Window.h"
 #include "Menu.h"
+#include "Me.h"
 #include "Hand.h"
 #include "Character.h"
 #include "Affect.h"
@@ -26,6 +27,7 @@
 #include "Battle_Q.h"
 #include "Text.h"
 #include "Atlas.h"
+#include "Line.h"
 
 int main(int argc, char **argv)
 {
@@ -74,6 +76,7 @@ int main(int argc, char **argv)
     Character **party = load_party(0, renderer);
 
     Menu *menu = CREATE_MENU(party, hand, bag);
+    Me *df = CREATE_ME(party, hand, bag, letters);
     int dark_forest_npcs[2] = {GIGAS, SASH};
     int dark_forest_npc_types[2] = {ONE_FRAME, SPRITE};
     int dark_forest_npcs_x[2] = {400, 350};
@@ -82,7 +85,6 @@ int main(int argc, char **argv)
     int dark_forest_items[2] = {POTION, ETHER};
     int dark_forest_items_x[2] = {300, 400};
     int dark_forest_items_y[2] = {300, 300};
-    char **str = get_alphabet_str();
     int i = 0;
     dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 2,
                                dark_forest_npcs, dark_forest_npc_types, 2,
@@ -107,55 +109,34 @@ int main(int argc, char **argv)
         game_collision->update_collidables(game_collision, state);
         set_fullscreen(window, hero);
         r_Q->render(r_Q, renderer);
-        /**
-        if (CONFIRM())
-        {
-            if (r.x > 300)
-            {
-                r.x = 5;
-                r.y += 9;
-            }
-            SDL_RenderCopy(renderer, letters->search(letters, str[i])->texture, NULL, &r);
-            r.x += 9;
-            printf("str_number: %d is %s\n", i, str[i]);
-            i++;
-        }
-*/
-        SDL_RenderPresent(renderer);
+
         switch (state)
         {
         case DARK_FOREST:
-            printf("Entering Dark Forest\n");
             dark_forest->render_area(dark_forest);
-            printf("Leaving Dark Forest\n");
             break;
 
         case MAIN_MENU:
-            printf("Entering Main Menu\n");
             TICK = 1;
+            df->update_me(df);
+            /**
             menu->update_main_menu(menu);
-            printf("Leaving Main Menu\n");
+*/
             break;
 
         case ITEMS_MENU:
-            printf("Entering Items Menu\n");
             TICK = 1;
             menu->update_items_menu(menu);
-            printf("Leaving Items Menu\n");
             break;
 
         case USE_ITEM:
-            printf("Entering Use Item\n");
             TICK = 1;
             menu->update_use_items_menu(menu);
-            printf("Leaving Use Item\n");
             break;
 
         case CONFIG:
-            printf("Entering Config\n");
             TICK = 1;
             menu->update_config(menu);
-            printf("Leaving Config\n");
             break;
 
             /**
@@ -231,7 +212,7 @@ int main(int argc, char **argv)
     hand->destroy(hand);
     save_bag(bag, 0);
     bag->destroy(bag);
-
+    letters->destroy(letters);
     free(STAT_MATRIX);
     party[0]->destroy_party(party);
     SDL_DestroyRenderer(renderer);

@@ -7,21 +7,34 @@
 
 char **get_alphabet_str()
 {
-    int i;
+    int i, k;
     char low_c = 97;
     char upr_c = 65;
-    char buffer[1];
-    char **str = malloc(sizeof(char *) * 53);
+    char buffer[2];
+    char **str = malloc(sizeof(char *) * 63);
     for (i = 0; low_c < '{' && upr_c < ']'; low_c++, upr_c++, i += 2)
     {
         str[i] = malloc(1);
         str[i + 1] = malloc(1);
         buffer[0] = low_c;
         strcpy(str[i], buffer);
+        printf("adding: %s at %d\n", str[i], i);
         buffer[0] = upr_c;
         strcpy(str[i + 1], buffer);
+        printf("adding: %s at %d\n", str[i + 1], i + 1);
+    }
+    fflush(stdout);
+    i = 52;
+    for (k = 0; k < 10; k++)
+    {
+        sprintf(buffer, "%d", k);
+        str[i] = malloc(1);
+        strcpy(str[i], buffer);
+        printf("adding: %s at %d\n", str[i], i);
+        i++;
     }
     printf("num_letters: %d\n", i);
+
     return str;
 }
 void create_load_info()
