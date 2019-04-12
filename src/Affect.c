@@ -67,7 +67,7 @@ static int __cause_affect(Affect *this)
     case ETHER:
         used = affect_mp(25, this->character);
         break;
-    case PHOENIX_DOWN:
+    case PHOENIXDOWN:
         used = revive(50, this->character);
         break;
     default:

@@ -19,7 +19,7 @@ struct Letter
 typedef struct _Line
 {
     void (*destroy)(struct _Line *this);
-    struct _Line *(*set_letters)(struct _Line *this);
+    void (*set_letters)(struct _Line *this);
 
     struct SDL_Texture *(*get_texture)(struct _Line *this, int i);
     void (*render_letter)(struct SDL_Renderer *renderer, struct SDL_Texture *texture, struct SDL_Rect *rect);

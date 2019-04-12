@@ -38,7 +38,7 @@ struct SDL_Texture *_get_texture(Line *this, int i)
         this->letters[i]->rect.y = this->y;
     return item->texture;
 }
-static Line *_set_letters(Line *this)
+static void _set_letters(Line *this)
 {
     int i = 0;
     char buff[1];

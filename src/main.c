@@ -31,15 +31,6 @@
 
 int main(int argc, char **argv)
 {
-    char *state_strs[] = {
-        "Dark Forest",
-        "Main Menu",
-        "Items Menu",
-        "Use Item",
-        "Message",
-        "Config",
-        "Save",
-        "Battle"};
 
     key_state = (Uint8 *)SDL_GetKeyboardState(NULL);
     set_up_timer(60);
@@ -72,7 +63,9 @@ int main(int argc, char **argv)
     SDL_Thread *hand_thread;
     SDL_Thread *input_thread;
 
-    Battle *current_battle = NULL;
+    /**
+        Battle *current_battle = NULL;
+*/
     Character **party = load_party(0, renderer);
 
     Menu *menu = CREATE_MENU(party, hand, bag);
@@ -85,7 +78,6 @@ int main(int argc, char **argv)
     int dark_forest_items[2] = {POTION, ETHER};
     int dark_forest_items_x[2] = {300, 400};
     int dark_forest_items_y[2] = {300, 300};
-    int i = 0;
     dark_forest->create_assets(dark_forest, renderer, game_collision, dark_forest_items, 2,
                                dark_forest_npcs, dark_forest_npc_types, 2,
                                dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
@@ -97,11 +89,7 @@ int main(int argc, char **argv)
     input_thread = SDL_CreateThread(input_handler, "input_handler", NULL);
     SDL_DetachThread(input_thread);
     party[0]->in_animation = -1;
-    struct SDL_Rect r;
-    r.x = 5;
-    r.y = 50;
-    r.w = 8;
-    r.h = 8;
+
     while (!EXIT())
     {
         start_timer();
@@ -126,7 +114,10 @@ int main(int argc, char **argv)
 
         case ITEMS_MENU:
             TICK = 1;
-            menu->update_items_menu(menu);
+            df->update_items_menu(df);
+            /**
+                menu->update_items_menu(menu);
+*/
             break;
 
         case USE_ITEM:

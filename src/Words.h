@@ -4,7 +4,7 @@
     ITEM(POTION)           \
     ITEM(ETHER)            \
     ITEM(SOFT)             \
-    ITEM(PHOENIX_DOWN)
+    ITEM(PHOENIXDOWN)
 
 #define FOREACH_STAT(STAT) \
     STAT(HP)               \

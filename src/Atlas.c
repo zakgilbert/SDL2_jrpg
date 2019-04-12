@@ -103,9 +103,6 @@ static void _map(Atlas *this, struct SDL_Renderer *renderer)
     strcpy(path, "graphics/letters/");
     this->insert(this, " ", renderer, strcat(path, "spc4.png"));
 
-    /**
-*/
-
     free(path);
 }
 Atlas *CREATE_ATLAS()
