@@ -130,7 +130,10 @@ int main(int argc, char **argv)
 
         case CONFIG:
             TICK = 1;
-            menu->update_config(menu);
+            df->update_config(df);
+            /**
+                menu->update_config(menu);
+*/
             break;
 
             /**

@@ -14,7 +14,13 @@ static const char *ITEMS[] = {
 static void _destroy(void *obj)
 {
     Me *this = (Me *)obj;
+    int i;
     this->back_ground->destroy(this->back_ground);
+    this->back_ground_use_item->destroy(this->back_ground_use_item);
+    for (i = 0; i < 3; i++)
+    {
+        this->rgb_bars[i]->destroy(this->rgb_bars[i]);
+    }
 
     if (NULL != this)
     {
@@ -67,20 +73,20 @@ static void _update_me(Me *this)
             this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
 
             break;
-            /**
         case Config:
             state = CONFIG;
             this->hand->config_menu_position(this->hand);
             this->q->free(this->q);
             r_Q->add(r_Q, r_Q->new_node(&this->delay, menu_transition, NULL));
-            this->set_q_config(this);
+            this->set_config(this);
             break;
+        case Exit:
+            key_state[O] = 1;
+            break;
+            /**
             case Save:
                 state = SAVE;
                 this->hand->save_menu_position(this->hand);
-                break;
-            case Exit:
-                INPUT = QUIT;
                 break;
 */
         default:
@@ -335,6 +341,78 @@ static void _set_text_use_item(Me *this)
         y = y_p;
     }
 }
+static void _update_config(Me *this)
+{
+    if (CANCEL())
+    {
+        state = MAIN_MENU;
+        this->hand->main_menu_position(this->hand);
+        this->time_to_load = 1;
+        this->hand->current_state = 0;
+        return;
+    }
+    MOVEMENT_DISABLED = 1;
+    this->hand->change_state_quantity(this->hand, 2, 0);
+    this->hand->move_vertical(this->hand, this->skip);
+    this->q->free(this->q);
+    this->skip = this->set_config(this);
+    this->q->copy(this->q);
+}
+static int _set_config(Me *this)
+{
+    int skip;
+    this->q->add(this->q, this->q->new_node(this->back_ground, render_window, NULL));
+    skip = this->set_text_config(this);
+    this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
+
+    return skip;
+}
+static int _set_text_config(Me *this)
+{
+    int skip, i, x, y;
+    skip = 21;
+
+    this->rgb_bars[0]->color_value = MENU_BACKGROUND.r;
+    this->rgb_bars[1]->color_value = MENU_BACKGROUND.g;
+    this->rgb_bars[2]->color_value = MENU_BACKGROUND.b;
+
+    this->rgb_bars[0]->color_bar_color = RED;
+    this->rgb_bars[1]->color_bar_color = GRN;
+    this->rgb_bars[2]->color_bar_color = BLU;
+
+    sprintf(this->rgb_matrix[0], 
+    "RED                                      %d", (int)MENU_BACKGROUND.r);
+    sprintf(this->rgb_matrix[1], 
+    "GREEN                                   %d", (int)MENU_BACKGROUND.g);
+    sprintf(this->rgb_matrix[2], 
+    "BLUE                                     %d", (int)MENU_BACKGROUND.b);
+
+    x = 50;
+    y = skip;
+    for (i = 0; i < 3; i++)
+    {
+        this->q->add(this->q, this->q->new_node(this->rgb_bars[i], render_window_color_bar, NULL));
+
+        this->q->add(this->q,
+                     this->q->new_node(
+                         CREATE_LINE(this->atlas, this->rgb_matrix[i], x, y),
+                         render_line0, NULL));
+
+        this->update_window_color(this->rgb_bars, this->hand->current_state);
+        y += skip;
+    }
+    return skip;
+}
+static void _update_window_color(Window **color_bars, int current_state)
+{
+    if (current_state == 0)
+        MENU_BACKGROUND.r = color_bars[0]->adjust_menu_colors(color_bars[0]);
+    else if (current_state == 1)
+        MENU_BACKGROUND.g = color_bars[1]->adjust_menu_colors(color_bars[1]);
+    else
+        MENU_BACKGROUND.b = color_bars[2]->adjust_menu_colors(color_bars[2]);
+}
+
 Me *CREATE_ME(Character **party, Hand *hand, Item *bag, Atlas *atlas)
 {
     Me *this = malloc(sizeof(*this));
@@ -357,6 +435,15 @@ Me *CREATE_ME(Character **party, Hand *hand, Item *bag, Atlas *atlas)
     this->item_in_use = 0;
     this->previous_number_states = 0;
     this->back_ground_use_item = CREATE_WINDOW(12, 200, 336, 120);
+
+    this->update_config = _update_config;
+    this->set_config = _set_config;
+    this->set_text_config = _set_text_config;
+    this->update_window_color = _update_window_color;
+    this->rgb_bars = (Window **)malloc(sizeof(Window *) * 3);
+    this->rgb_bars[0] = CREATE_WINDOW(110, 20, 150, 15);
+    this->rgb_bars[1] = CREATE_WINDOW(110, 40, 150, 15);
+    this->rgb_bars[2] = CREATE_WINDOW(110, 60, 150, 15);
 
     this->q = CREATE_RENDER_Q();
     this->party = party;

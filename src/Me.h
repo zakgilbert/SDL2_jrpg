@@ -53,6 +53,17 @@ typedef struct _Me
     int previous_number_states;
     Window *back_ground_use_item;
 
+    /* Update use config menu logic, called in main */
+    void (*update_config)(struct _Me *this);
+    /* Add config render functions to render queue */
+    int (*set_config)(struct _Me *this);
+    /* Add config text and color bars to render queue */
+    int (*set_text_config)(struct _Me *this);
+    /* Updates the window color */
+    void (*update_window_color)(Window **color_bars, int current_state);
+    Window **rgb_bars;
+    char rgb_matrix[3][50];
+
     Window *back_ground;
 
     Character **party;
