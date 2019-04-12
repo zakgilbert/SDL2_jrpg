@@ -12,7 +12,6 @@
 #include "Movement.h"
 #include "Window.h"
 #include "Menu.h"
-#include "Me.h"
 #include "Hand.h"
 #include "Character.h"
 #include "Affect.h"
@@ -68,8 +67,7 @@ int main(int argc, char **argv)
 */
     Character **party = load_party(0, renderer);
 
-    Menu *menu = CREATE_MENU(party, hand, bag);
-    Me *df = CREATE_ME(party, hand, bag, letters);
+    Menu *menu = CREATE_MENU(party, hand, bag, letters);
     int dark_forest_npcs[2] = {GIGAS, SASH};
     int dark_forest_npc_types[2] = {ONE_FRAME, SPRITE};
     int dark_forest_npcs_x[2] = {400, 350};
@@ -106,7 +104,7 @@ int main(int argc, char **argv)
 
         case MAIN_MENU:
             TICK = 1;
-            df->update_me(df);
+            menu->update_main(menu);
             /**
             menu->update_main_menu(menu);
 */
@@ -114,7 +112,7 @@ int main(int argc, char **argv)
 
         case ITEMS_MENU:
             TICK = 1;
-            df->update_items_menu(df);
+            menu->update_items_menu(menu);
             /**
                 menu->update_items_menu(menu);
 */
@@ -122,7 +120,7 @@ int main(int argc, char **argv)
 
         case USE_ITEM:
             TICK = 1;
-            df->update_use_item(df);
+            menu->update_use_item(menu);
             /**
                 menu->update_use_items_menu(menu);
 */
@@ -130,7 +128,7 @@ int main(int argc, char **argv)
 
         case CONFIG:
             TICK = 1;
-            df->update_config(df);
+            menu->update_config(menu);
             /**
                 menu->update_config(menu);
 */
@@ -196,11 +194,7 @@ int main(int argc, char **argv)
         delay();
         reset_timer();
     }
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-    SDL_RenderFillRect(renderer, &menu->transition);
-    SDL_RenderPresent(renderer);
-
+    menu_transition(&menu->delay, renderer);
     SDL_WaitThread(hand_thread, NULL);
 
     dark_forest->destroy(dark_forest);

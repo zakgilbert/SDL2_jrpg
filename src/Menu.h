@@ -1,12 +1,9 @@
-
-#ifndef JRPG_MENU_H
-#define JRPG_MENU_H
+#ifndef MENU_H
+#define MENU_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
-#include <math.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
@@ -21,97 +18,65 @@
 #include "Words.h"
 #include "Text.h"
 #include "Render.h"
+#include "Atlas.h"
+#include "Line.h"
 
-uint32_t transition_delay;
-void render_line(TTF_Font, char *str);
 typedef struct _Menu
 {
-    void (*destroy)(struct _Menu *);
-    void (*render_line)(struct _Menu *, struct SDL_Renderer *renderer, const char *str, SDL_Color color);
+    /* Free me */
+    dealloc_obj destroy;
 
-    /**
- * MAIN MENU
- */
-    void (*update_main_menu)(struct _Menu *this);
-    void (*set_q_main_menu)(struct _Menu *this);
-    int (*set_main_menu_text_options)(struct _Menu *this, int _x, int _y, int size, int num_options);
-    void (*set_character_main_menu_image)(struct _Menu *this);
-    void (*set_stat_text)(struct _Menu *this, int _x, int _y, int size, int key);
+    /* Update Menu Logic called in main */
+    void (*update_main)(struct _Menu *this);
+    /* Add main menu render functions to render queue. */
+    void (*set_main_menu)(struct _Menu *this);
+    /* Add main menu option text to render queue. */
+    int (*set_text_menu_options)(struct _Menu *this);
+    /* Add Character image textures to render queue */
+    void (*set_bio_image)(struct _Menu *this);
 
-    /**
- * ITEMS MENU
- */
+    /* Add Character status text to render queue */
+    void (*set_text_stats)(struct _Menu *this);
+
+    /* Update items menu logic, called in main */
     void (*update_items_menu)(struct _Menu *this);
-    void (*set_q_items_menu)(struct _Menu *this);
-    int (*set_items_menu_options)(struct _Menu *);
+    /* Add items menu render functions to render queue */
+    int (*set_items_menu)(struct _Menu *this);
+    /* Add item text to render queue */
+    int (*set_text_items_menu)(struct _Menu *this);
 
-    /**
- * USE_ITEMS
- */
-    void (*update_use_items_menu)(struct _Menu *this);
+    /* Update use items menu logic, called in main */
+    void (*update_use_item)(struct _Menu *this);
+    /* Add use item text to render queue */
+    void (*set_text_use_item)(struct _Menu *this);
+    int item_in_use;
+    int previous_number_states;
+    Window *back_ground_use_item;
 
-    /**
- * CONFIG
- */
+    /* Update use config menu logic, called in main */
     void (*update_config)(struct _Menu *this);
-    void (*set_q_config)(struct _Menu *this);
-    int (*set_config_menu_options)(struct _Menu *);
-    void (*change_window_color)(Window **color_bars, int current_state);
-
-    void (*update)(struct _Menu *this);
-    void (*set_q)(struct _Menu *this);
-
-    Window *main_menu_bg;
-
-    Window *select_character_bg;
-
-    Window **load_save_bg;
+    /* Add config render functions to render queue */
+    int (*set_config)(struct _Menu *this);
+    /* Add config text and color bars to render queue */
+    int (*set_text_config)(struct _Menu *this);
+    /* Updates the window color */
+    void (*update_window_color)(Window **color_bars, int current_state);
     Window **rgb_bars;
-
-    void (*render_main_menu)(struct _Menu *, struct SDL_Renderer *, Hand *, Character **);
-
-    /**
-    
-        void (*render_character_stats)(struct _Menu *, struct SDL_Renderer *,
-                                       Hand *, Character **party, int, int,
-                                       int, int);
-    
-    
-    
-        void (*render_items_menu)(struct _Menu *, struct SDL_Renderer *, Hand *, Item *);
-    
-    
-        void (*render_use_item_menu)(struct _Menu *, struct SDL_Renderer *, Hand *, Character **, Item *);
-    
-        void (*render_config_menu)(struct _Menu *, struct SDL_Renderer *);
-    
-    
-    
-        void (*render_save_menu)(struct _Menu *, struct SDL_Renderer *);
-    
-        int (*render_save_menu_options)(struct _Menu *, struct SDL_Renderer *);
-*/
-
-    TTF_Font *font;
-    TTF_Font *font_main_menu_options, *font_stats, *font_items, *font_use_item;
-    struct SDL_Rect rect;
-    struct SDL_Rect transition;
-    struct SDL_Surface *surface;
-    struct SDL_Texture *texture;
-    int option_states;
-    int item_being_used;
-    int previous_number_of_states;
-    int first_load;
-    int skip;
-    Render_Q *q;
-    Uint32 delay;
-    Character **party;
-    Item *bag;
-    Hand *hand;
-    int num_fonts;
     char rgb_matrix[3][50];
-} Menu;
 
-Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag);
-void render_transition(void *obj, struct SDL_Renderer *renderer);
-#endif
+    Window *back_ground;
+
+    Character **party;
+    Hand *hand;
+    Item *bag;
+    Render_Q *q;
+    Atlas *atlas;
+    int time_to_load;
+    int skip;
+    Uint32 delay;
+
+} Menu;
+Menu *CREATE_MENU(Character **party, Hand *hand, Item *bag, Atlas *atlas);
+void menu_transition(void *obj, struct SDL_Renderer *renderer);
+
+#endif /* MENU_H */
