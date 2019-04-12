@@ -41,11 +41,20 @@ typedef struct _Me
     /* Update items menu logic, called in main */
     void (*update_items_menu)(struct _Me *this);
     /* Add items menu render functions to render queue */
-    void (*set_items_menu)(struct _Me *this);
+    int (*set_items_menu)(struct _Me *this);
     /* Add item text to render queue */
     int (*set_text_items_menu)(struct _Me *this);
 
+    /* Update use items menu logic, called in main */
+    void (*update_use_item)(struct _Me *this);
+    /* Add use item text to render queue */
+    void (*set_text_use_item)(struct _Me *this);
+    int item_in_use;
+    int previous_number_states;
+    Window *back_ground_use_item;
+
     Window *back_ground;
+
     Character **party;
     Hand *hand;
     Item *bag;

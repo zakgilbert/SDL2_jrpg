@@ -46,6 +46,8 @@ static void _update_me(Me *this)
     else if (this->time_to_load)
     {
         this->set_main_menu(this);
+        this->hand->main_menu_position(this->hand);
+        this->hand->current_state = 0;
         this->time_to_load = 0;
     }
     this->hand->change_state_quantity(this->hand, 6, 0);
@@ -92,7 +94,7 @@ static int _set_text_menu_options(Me *this)
     int skip, i, x, y;
 
     skip = 19;
-    x = 270;
+    x = 290;
     y = 15;
 
     for (i = 0; i < 7; i++)
@@ -172,12 +174,16 @@ static void _set_bio_image(Me *this)
         j += 80;
     }
 }
-static void _set_items_menu(Me *this)
+static int _set_items_menu(Me *this)
 {
+    int skip;
+
     this->q->free(this->q);
     this->q->add(this->q, this->q->new_node(this->back_ground, render_window, NULL));
-    this->skip = this->set_text_items_menu(this);
+    skip = this->set_text_items_menu(this);
     this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
+
+    return skip;
 }
 static void _update_items_menu(Me *this)
 {
@@ -192,7 +198,22 @@ static void _update_items_menu(Me *this)
     }
     this->hand->change_state_quantity(this->hand, this->bag->items_in_bag - 1, 0);
     this->hand->move_vertical(this->hand, this->skip);
+    MOVEMENT_DISABLED = 1;
 
+    if (CONFIRM())
+    {
+        state = USE_ITEM;
+        this->hand->use_item_position(this->hand);
+        this->item_in_use = this->hand->current_state;
+        this->hand->current_state = 0;
+        this->previous_number_states = this->hand->number_of_states;
+        this->q->free(this->q);
+        this->set_items_menu(this);
+        this->q->add(this->q, this->q->new_node(this->back_ground_use_item, render_window, NULL));
+        this->set_text_use_item(this);
+
+        this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
+    }
     this->q->copy(this->q);
 }
 static int _set_text_items_menu(Me *this)
@@ -229,6 +250,91 @@ static int _set_text_items_menu(Me *this)
     }
     return skip;
 }
+static void _update_use_item(Me *this)
+{
+    if (CANCEL())
+    {
+        state = ITEMS_MENU;
+        this->hand->current_state = this->item_in_use;
+        this->hand->items_menu_position(this->hand);
+        this->hand->number_of_states = this->previous_number_states;
+        this->q->free(this->q);
+        this->skip = this->set_items_menu(this);
+        this->q->copy(this->q);
+        return;
+    }
+    this->hand->change_state_quantity(this->hand, NUM_CHARACTERS - 1, 0);
+    this->hand->vertical_horizontal(this->hand);
+
+    if (CONFIRM())
+    {
+        int was_item_removed = this->bag->quaff_item(
+            this->bag, CREATE_AFFECT(
+                           this->bag->items[this->item_in_use],
+                           this->party[this->hand->current_state]));
+
+        this->previous_number_states += was_item_removed;
+        if (was_item_removed == -1)
+        {
+            this->hand->items_menu_position(this->hand);
+            this->hand->number_of_states = this->previous_number_states;
+            state = ITEMS_MENU;
+            SDL_Delay(300);
+        }
+        this->q->free(this->q);
+        this->set_items_menu(this);
+        this->q->add(this->q, this->q->new_node(this->back_ground_use_item, render_window, NULL));
+        this->set_text_use_item(this);
+        this->q->add(this->q, this->q->new_node(this->hand, render_hand, NULL));
+    }
+    this->q->copy(this->q);
+}
+static void _set_text_use_item(Me *this)
+{
+    int i, x, y, y_p, x_p, skip;
+
+    skip = 12;
+    x = 49;
+    y = 205;
+    y_p = y;
+    x_p = x;
+
+    this->party[0]->update_party_stats(this->party);
+    for (i = 0; i < NUM_CHARACTERS; i++)
+    {
+        if (i == 2)
+        {
+            x = x_p;
+            y = y_p + 58;
+        }
+        else if (i == 3)
+            y = y_p + 58;
+
+        this->q->add(this->q,
+                     this->q->new_node(
+                         CREATE_LINE(this->atlas, this->party[i]->name, x, y),
+                         render_line0, NULL));
+        y += skip;
+
+        this->q->add(this->q,
+                     this->q->new_node(
+                         CREATE_LINE(this->atlas, this->party[i]->HP.display, x, y),
+                         render_line0, NULL));
+        y += skip;
+        this->q->add(this->q,
+                     this->q->new_node(
+                         CREATE_LINE(this->atlas, this->party[i]->MP.display, x, y),
+                         render_line0, NULL));
+        y += skip;
+        this->q->add(this->q,
+                     this->q->new_node(
+                         CREATE_LINE(this->atlas, this->party[i]->EXP.display, x, y),
+                         render_line0, NULL));
+
+        x += 165;
+        y = y_p;
+    }
+}
 Me *CREATE_ME(Character **party, Hand *hand, Item *bag, Atlas *atlas)
 {
     Me *this = malloc(sizeof(*this));
@@ -245,6 +351,12 @@ Me *CREATE_ME(Character **party, Hand *hand, Item *bag, Atlas *atlas)
     this->update_items_menu = _update_items_menu;
     this->set_items_menu = _set_items_menu;
     this->set_text_items_menu = _set_text_items_menu;
+
+    this->update_use_item = _update_use_item;
+    this->set_text_use_item = _set_text_use_item;
+    this->item_in_use = 0;
+    this->previous_number_states = 0;
+    this->back_ground_use_item = CREATE_WINDOW(12, 200, 336, 120);
 
     this->q = CREATE_RENDER_Q();
     this->party = party;

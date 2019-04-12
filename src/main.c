@@ -122,7 +122,10 @@ int main(int argc, char **argv)
 
         case USE_ITEM:
             TICK = 1;
-            menu->update_use_items_menu(menu);
+            df->update_use_item(df);
+            /**
+                menu->update_use_items_menu(menu);
+*/
             break;
 
         case CONFIG:

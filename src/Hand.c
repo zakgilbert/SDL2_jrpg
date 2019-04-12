@@ -60,8 +60,8 @@ static void _save_menu_position(Hand *this)
 
 static void _main_menu_position(Hand *this)
 {
-    this->position.x = 233;
-    this->position.y = 11;
+    this->position.x = 253;
+    this->position.y = 10;
 }
 
 static void _render(Hand *this, struct SDL_Renderer *renderer)

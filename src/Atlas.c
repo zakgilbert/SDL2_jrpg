@@ -58,7 +58,6 @@ static struct Alpha_Node *_search(Atlas *this, const char *key)
     {
         if (strcmp(item->key, key) == 0)
         {
-            printf("found %s at :%d\n", item->key, index);
             return item;
         }
         index = hash_code(key, this->size, i);
@@ -78,7 +77,6 @@ static void _insert(Atlas *this, const char *key, struct SDL_Renderer *renderer,
         cur_item = this->letters[index];
         i++;
     }
-    printf("%s at index: %d\n", item->key, index);
     this->letters[index] = item;
     this->count++;
 }
@@ -90,7 +88,6 @@ static void _map(Atlas *this, struct SDL_Renderer *renderer)
     strcpy(path, "graphics/letters/");
     for (i = 0; i < 62; i++)
     {
-        printf("map:    %s\n", alp_str[i]);
         strcpy(path, "graphics/letters/");
         this->insert(this, alp_str[i], renderer, strcat(path, alp_str[i]));
     }

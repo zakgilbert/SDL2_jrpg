@@ -26,7 +26,6 @@ struct SDL_Texture *_get_texture(Line *this, int i)
     this->letters[i]->rect.w = item->rect.w;
     this->letters[i]->rect.h = item->rect.h;
     this->x += item->rect.w + 1;
-    printf("get_text: %p\n", this->letters[i]);
 
     if ((strcmp(item->key, "g") == 0) || (strcmp(item->key, "q") == 0) || (strcmp(item->key, "j") == 0) || (strcmp(item->key, "y")) == 0)
         this->letters[i]->rect.y = this->y + 3;

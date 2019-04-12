@@ -18,10 +18,8 @@ char **get_alphabet_str()
         str[i + 1] = malloc(1);
         buffer[0] = low_c;
         strcpy(str[i], buffer);
-        printf("adding: %s at %d\n", str[i], i);
         buffer[0] = upr_c;
         strcpy(str[i + 1], buffer);
-        printf("adding: %s at %d\n", str[i + 1], i + 1);
     }
     fflush(stdout);
     i = 52;
@@ -30,10 +28,8 @@ char **get_alphabet_str()
         sprintf(buffer, "%d", k);
         str[i] = malloc(1);
         strcpy(str[i], buffer);
-        printf("adding: %s at %d\n", str[i], i);
         i++;
     }
-    printf("num_letters: %d\n", i);
 
     return str;
 }
