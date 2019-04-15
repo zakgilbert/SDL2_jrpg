@@ -22,6 +22,9 @@
 #include "Battle_Q.h"
 #include "Render.h"
 #include "Atlas.h"
+#include "Line.h"
+#include "Time.h"
+#include "Hand.h"
 
 typedef struct _Ba
 {
@@ -30,23 +33,37 @@ typedef struct _Ba
     void (*create_textures)(struct _Ba *, struct SDL_Renderer *renderer);
     /* Update battle logic */
     void (*update)(struct _Ba *this);
+    int (*set_text_stats)(struct _Ba *this);
+    int (*set_text_enemies)(struct _Ba *this);
+    Uint32 (*hero_callback)(Uint32 interval, void *param);
 
     Render_Q *q;
+    Battle_Q *b;
     Window *window;
     Window *action_window;
     Window **time_bars;
     Character **party;
+    Atlas *atlas;
+    Hand *hand;
     struct Texture *back_ground;
     Enemy **enemies;
     int num_enemies;
+    int index;
     int roll;
-
     int area;
     int first_render;
     SDL_Thread *free_thread;
+    SDL_TimerID *hero_timers;
+    struct timer_packet **timer_packets;
 } Ba;
+struct timer_packet
+{
+    Character *c;
+    Ba *ba;
+};
 
-Ba *CREATE_BA(int area, int roll, Character **party);
+Ba *CREATE_BA(int area, int roll, Character **party, Atlas *atlas, Hand *hand);
 void create_battle_textures(void *obj, struct SDL_Renderer *renderer);
 void render_back_ground_texture(void *obj, struct SDL_Renderer *renderer);
+
 #endif /* BA_H */

@@ -24,6 +24,8 @@ typedef struct _hand
 
     void (*animate)(struct _hand *);
 
+    int (*battle_postion)(struct _hand *, int skip, int state);
+
     void (*main_menu_position)(struct _hand *);
 
     void (*items_menu_position)(struct _hand *);
@@ -64,6 +66,6 @@ typedef struct _hand
 
 Hand *CREATE_HAND();
 
-void render_hand(void * obj, struct SDL_Renderer * renderer);
+void render_hand(void *obj, struct SDL_Renderer *renderer);
 
-#endif 
+#endif

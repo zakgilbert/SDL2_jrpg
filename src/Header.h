@@ -18,6 +18,8 @@
 #define WINDOW_HEIGHT (324)
 #define SPRITE_FRAME_WIDTH (32)
 #define SPRITE_FRAME_HEIGHT (32)
+#define PRIME_1 (163)
+#define PRIME_2 (151)
 
 extern int FPS;
 extern int FRAMES_RENDERED;
@@ -104,8 +106,36 @@ enum KEYS KEY;
 extern Uint8 *key_state;
 Uint8 *key_state;
 union SDL_Event ev;
-typedef struct SDL_Renderer Renderer;
+typedef struct SDL_Renderer *Renderer;
+typedef struct SDL_Rect Rect;
+typedef char *GET_DATA(void *obj);
 
+typedef void change_animation_pos(Rect *rect_1, Rect * rect_2);
+enum ANIMATION_FUNCTIONS
+{
+    stand,
+    pray_1,
+    cast,
+    step,
+    hit,
+    defend,
+    pray_2,
+    cast_step,
+    injured,
+    dead
+};
+extern change_animation_pos *animation_functions[10];
+change_animation_pos *animation_functions[10];
+enum battle_states
+{
+    waiting,
+    in_timer,
+    primary,
+    attack,
+    magic,
+    item,
+    casting
+};
 enum states
 {
     DARK_FOREST,

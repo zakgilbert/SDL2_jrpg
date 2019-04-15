@@ -88,7 +88,6 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
         this->num_collidables++;
     }
     collidables->add_collision(collidables, this->lootables, num_items, this->npcs, num_npcs, this->num_collidables, this->area_key);
-    
 }
 
 static Message *_render_area(Area *this)
@@ -118,6 +117,7 @@ static Message *_render_area(Area *this)
     {
         this->q = this->set_q(this);
         this->first_load = 0;
+        ROLL = -1;
     }
     int item_to_be_obtained = -1;
     int npc_to_interact_with = -1;

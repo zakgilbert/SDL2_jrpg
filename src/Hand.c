@@ -32,6 +32,23 @@ int animate_hand_thread(void *ptr)
     }
     return 0;
 }
+static int _battle_postion(Hand *this, int skip, int state)
+{
+    switch (state)
+    {
+    case primary:
+        this->position.x = 169;
+        this->position.y = 230 + (this->current_state * skip);
+        break;
+    case magic:
+        this->position.x = 172;
+        this->position.y = 220 + (this->current_state * skip);
+        break;
+    default:
+        break;
+    }
+    return skip;
+}
 static void _use_item_position(Hand *this)
 {
     this->position.x = 15;
@@ -290,6 +307,7 @@ Hand *CREATE_HAND()
     this->use_item_position = _use_item_position;
     this->config_menu_position = _config_menu_position;
     this->save_menu_position = _save_menu_position;
+    this->battle_postion = _battle_postion;
 
     this->vertical_horizontal = _vertical_horizontal;
     this->set_states = _set_states;

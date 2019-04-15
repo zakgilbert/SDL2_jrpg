@@ -25,6 +25,11 @@
     ACTION_OPTION(Spell)                     \
     ACTION_OPTION(Quaff)
 
+#define FOREACH_SPELL(SPELL) \
+    SPELL(Fire)              \
+    SPELL(Ice)               \
+    SPELL(Bolt)
+
 #define GERERATE_ENUM(ENUM) ENUM,
 #define GENERATE_STRING(STRING) #STRING,
 
@@ -47,6 +52,11 @@ typedef enum
 {
     FOREACH_ACTION_OPTION(GERERATE_ENUM)
 } ACTION_OPTION_ENUM;
+
+enum SPELL_ENUM
+{
+    FOREACH_SPELL(GERERATE_ENUM)
+};
 
 extern int ITEM_QUANTITY;
 #endif

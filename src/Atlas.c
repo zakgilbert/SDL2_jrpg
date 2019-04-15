@@ -5,6 +5,34 @@
 
 #include "Atlas.h"
 
+char **get_alphabet_str()
+{
+    int i, k;
+    char low_c = 97;
+    char upr_c = 65;
+    char buffer[2];
+    char **str = malloc(sizeof(char *) * 63);
+    for (i = 0; low_c < '{' && upr_c < ']'; low_c++, upr_c++, i += 2)
+    {
+        str[i] = malloc(1);
+        str[i + 1] = malloc(1);
+        buffer[0] = low_c;
+        strcpy(str[i], buffer);
+        buffer[0] = upr_c;
+        strcpy(str[i + 1], buffer);
+    }
+    fflush(stdout);
+    i = 52;
+    for (k = 0; k < 10; k++)
+    {
+        sprintf(buffer, "%d", k);
+        str[i] = malloc(1);
+        strcpy(str[i], buffer);
+        i++;
+    }
+
+    return str;
+}
 struct Alpha_Node *new_alpha_node(const char *key, const char *path, struct SDL_Renderer *renderer)
 {
     struct Alpha_Node *item = malloc(sizeof(struct Alpha_Node));

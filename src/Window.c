@@ -103,6 +103,14 @@ Window *CREATE_WINDOW(int x, int y, int w, int h)
     this->create_borders(this, 3, &this->border_4);
     return this;
 }
+Window *BATTLE_PRIMARY()
+{
+    return CREATE_WINDOW(192, 230, 85, WINDOW_HEIGHT - 245);
+}
+Window *BATTLE_MAGIC()
+{
+    return CREATE_WINDOW(200, 220, 85, WINDOW_HEIGHT - 245);
+}
 void render_window(void *obj, struct SDL_Renderer *renderer)
 {
     Window *this = (Window *)obj;

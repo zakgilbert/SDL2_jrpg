@@ -5,26 +5,18 @@
 
 #include "Battle_Q.h"
 
-/*
-typedef struct _Battle_Q
-{
-    void (*destroy)(struct _Battle_Q *this);
-    struct node
-    {
-        int key;
-        int type;
-        int index;
-        struct node *prev;
-    };
-    struct node *front;
-    struct node *rear;
-} Battle_Q;
-Battle_Q *CREATE_BATTLE_Q(int size);
-*/
 static void _destroy(Battle_Q *this)
 {
+    struct node *temp;
     if (NULL != this)
     {
+        while (NULL != this->front)
+        {
+            temp = this->pop(this);
+            temp->hero->current_state = 0;
+            free(temp);
+            temp = NULL;
+        }
         free(this);
         this = NULL;
     }
@@ -41,27 +33,31 @@ static void _print_q(Battle_Q *this)
         current = this->front;
         while (NULL != current->next)
         {
-
-            printf("key: %d  index: %d  type:  %d\n", current->key, current->index, current->type);
             current = current->next;
         }
     }
 }
 
-static struct node *_new_node(Battle_Q *this, int key, int type, int index)
+static struct node *_new_node(Battle_Q *this, Character *hero)
 {
     struct node *data = malloc(sizeof(struct node));
-    data->key = key;
-    data->type = type;
-    data->index = index;
+    data->hero = hero;
     data->next = NULL;
     return data;
 }
 
-static void _add(Battle_Q *this, int key, int type, int index)
+static Character *_peek(struct _Battle_Q *this, Atlas *at, Render_Q *q)
 {
-    struct node *data = this->new_node(this, key, type, index);
-
+    if (NULL != this->front)
+        return this->front->hero;
+    return NULL;
+}
+static void _add(Battle_Q *this, Character *hero)
+{
+    struct node *data = this->new_node(this, hero);
+    data->hero->current_state = primary;
+    this->size++;
+    printf("addiing character: %s to the battle_q\n", hero->name);
     if (NULL == this->rear)
     {
         this->front = data;
@@ -84,6 +80,7 @@ static struct node *_pop(Battle_Q *this)
     {
         this->rear = NULL;
     }
+    temp->hero->current_state = waiting;
     return temp;
 }
 static void _re_q(Battle_Q *this, struct node *ode)
@@ -98,6 +95,7 @@ static void _re_q(Battle_Q *this, struct node *ode)
     }
     this->rear->next = data;
     this->rear = data;
+    data->hero->current_state = primary;
 }
 
 Battle_Q *CREATE_BATTLE_Q()
@@ -108,9 +106,11 @@ Battle_Q *CREATE_BATTLE_Q()
     this->print_q = _print_q;
     this->destroy = _destroy;
     this->new_node = _new_node;
+    this->peek = _peek;
     this->re_q = _re_q;
     this->front = NULL;
     this->rear = NULL;
+    this->size = 0;
 
     return this;
 }

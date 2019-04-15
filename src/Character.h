@@ -12,6 +12,10 @@
 #include "Graphics.h"
 #include "Hero.h"
 #include "Render.h"
+#include "Window.h"
+#include "Atlas.h"
+#include "Line.h"
+#include "Words.h"
 
 struct Main_Attribute
 {
@@ -22,7 +26,6 @@ struct Main_Attribute
     char display[50];
     char name[10];
 };
-
 void stand_battle_ani(struct SDL_Rect *rect);
 int cast_1_battle_ani(struct SDL_Rect *rect);
 int cast_2_battle_ani(struct SDL_Rect *rect);
@@ -41,7 +44,14 @@ typedef struct _Character
     int (*update_party_stats)(struct _Character **);
     int (*cast)(struct _Character *);
     int (*cast_ptr[2])(struct SDL_Rect *rect);
-
+    Uint32 (*speed_round)(struct _Character *this);
+    int (*set_battle_actions)(struct _Character *this, Atlas *at, Render_Q *q);
+    GET_DATA(*get_data);
+    change_animation_pos(*curent_spell);
+    change_animation_pos(*step);
+    change_animation_pos(*execute_spell_1);
+    change_animation_pos(*execute_spell_2);
+    int (*get_current_state_options)(struct _Character *this);
     struct SDL_Texture *texture;
     struct SDL_Rect rect;
     struct SDL_Texture *b_texture;
@@ -52,11 +62,13 @@ typedef struct _Character
     struct Main_Attribute MP;
     struct Main_Attribute EXP;
 
+    int *spells;
+    int num_spells;
     const char *image_path;
     const char *name;
     const char *age;
     char *job;
-    int SPD;
+    Uint32 SPD;
     int key;
     int type;
     int *actions;
@@ -68,6 +80,8 @@ typedef struct _Character
     int current_animation_frame;
     int ani_i;
     int in_animation;
+    int ready;
+    enum battle_states current_state;
 
 } Character;
 

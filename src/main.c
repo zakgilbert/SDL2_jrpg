@@ -13,6 +13,7 @@
 #include "Window.h"
 #include "Menu.h"
 #include "Hand.h"
+#include "Atlas.h"
 #include "Character.h"
 #include "Affect.h"
 #include "Message.h"
@@ -20,18 +21,16 @@
 #include "Lootable.h"
 #include "Npc.h"
 #include "Collision.h"
-#include "Battle.h"
 #include "Ba.h"
 #include "Assets.h"
 #include "Enemy.h"
 #include "Battle_Q.h"
 #include "Text.h"
-#include "Atlas.h"
 #include "Line.h"
 
 int main(int argc, char **argv)
 {
-
+    int i;
     key_state = (Uint8 *)SDL_GetKeyboardState(NULL);
     set_up_timer(60);
     SET_GLOBALS();
@@ -63,7 +62,9 @@ int main(int argc, char **argv)
     SDL_Thread *hand_thread;
     SDL_Thread *input_thread;
 
-    Battle *current_battle = NULL;
+    /**
+        Battle *current_battle = NULL;
+*/
     Ba *current_ba = NULL;
 
     Character **party = load_party(0, renderer);
@@ -88,10 +89,14 @@ int main(int argc, char **argv)
     input_thread = SDL_CreateThread(input_handler, "input_handler", NULL);
     SDL_DetachThread(input_thread);
     party[0]->in_animation = -1;
-    current_ba = CREATE_BA(DARK_FOREST, 1, party);
-
+    FILE *data = fopen("data.txt", "w");
     while (!EXIT())
     {
+        for (i = 0; i < 1; i++)
+        {
+            fprintf(data, "%s", party[i]->get_data(party[i]));
+        }
+
         start_timer();
         movement();
         game_collision->update_collidables(game_collision, state);
@@ -173,24 +178,20 @@ int main(int argc, char **argv)
             break;
 */
         case BATTLE:
-
-            current_ba->update(current_ba);
-            /**
-            if (current_battle == NULL)
+            if (NULL == current_ba)
+                current_ba = CREATE_BA(previous_state, ROLL, party, letters, hand);
+            if (NULL != current_ba && state == BATTLE)
+                current_ba->update(current_ba);
+            if (NULL != current_ba && previous_state == BATTLE)
             {
-                current_battle = CREATE_BATTLE(previous_state, ROLL, renderer, party, 4);
-            }
+                current_ba->destroy(current_ba);
+                for (i = 0; i < NUM_CHARACTERS; i++)
+                {
+                    party[i]->current_state = waiting;
+                }
 
-            SDL_RenderClear(renderer);
-            current_battle->render(current_battle, renderer, hand);
-            SDL_RenderPresent(renderer);
-            if (previous_state == BATTLE)
-            {
-                current_battle->destroy(current_battle);
-                current_battle = NULL;
-                ROLL = -1;
+                current_ba = NULL;
             }
-*/
             break;
         default:
             break;
@@ -200,6 +201,11 @@ int main(int argc, char **argv)
         delay();
         reset_timer();
     }
+    for (i = 0; i < 1; i++)
+    {
+        fprintf(data, "%s", party[i]->get_data(party[i]));
+    }
+    fclose(data);
     menu_transition(&menu->delay, renderer);
     SDL_WaitThread(hand_thread, NULL);
 

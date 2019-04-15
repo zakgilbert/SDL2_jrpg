@@ -4,34 +4,71 @@
 */
 
 #include "Assets.h"
-
-char **get_alphabet_str()
+static void _stand(Rect *rect_1, Rect *rect_2)
 {
-    int i, k;
-    char low_c = 97;
-    char upr_c = 65;
-    char buffer[2];
-    char **str = malloc(sizeof(char *) * 63);
-    for (i = 0; low_c < '{' && upr_c < ']'; low_c++, upr_c++, i += 2)
-    {
-        str[i] = malloc(1);
-        str[i + 1] = malloc(1);
-        buffer[0] = low_c;
-        strcpy(str[i], buffer);
-        buffer[0] = upr_c;
-        strcpy(str[i + 1], buffer);
-    }
-    fflush(stdout);
-    i = 52;
-    for (k = 0; k < 10; k++)
-    {
-        sprintf(buffer, "%d", k);
-        str[i] = malloc(1);
-        strcpy(str[i], buffer);
-        i++;
-    }
-
-    return str;
+    rect_2->x = 0;
+    rect_2->y = 0;
+}
+static void _pray_1(Rect *rect_1, Rect *rect_2)
+{
+    rect_2->x = 32;
+    rect_2->y = 0;
+}
+static void _cast(Rect *rect_1, Rect *rect_2)
+{
+    rect_2->x = 32 * 2;
+    rect_2->y = 0;
+}
+static void _step(Rect *rect_1, Rect *rect_2)
+{
+/**
+        rect_1->x++;
+*/
+    rect_2->x = 32 * 3;
+    rect_2->y = 0;
+}
+static void _hit(Rect *rect_1, Rect *rect_2)
+{
+    rect_2->x = 32 * 4;
+    rect_2->y = 0;
+}
+static void _defend(Rect *rect_1, Rect *rect_2)
+{
+    rect_2->x = 0;
+    rect_2->y = 32;
+}
+static void _pray_2(Rect *rect_1, Rect *rect_2)
+{
+    rect_2->x = 32;
+    rect_2->y = 32;
+}
+static void _cast_step(Rect *rect_1, Rect *rect_2)
+{
+    rect_2->x = 32 * 2;
+    rect_2->y = 32;
+}
+static void _injured(Rect *rect_1, Rect *rect_2)
+{
+    rect_2->x = 32 * 3;
+    rect_2->y = 32;
+}
+static void _dead(Rect *rect_1, Rect *rect_2)
+{
+    rect_2->x = 32 * 4;
+    rect_2->y = 32;
+}
+void set_animation_functions()
+{
+    animation_functions[0] = _stand;
+    animation_functions[1] = _pray_1;
+    animation_functions[2] = _cast;
+    animation_functions[3] = _step;
+    animation_functions[4] = _hit;
+    animation_functions[5] = _defend;
+    animation_functions[6] = _pray_2;
+    animation_functions[7] = _cast_step;
+    animation_functions[8] = _injured;
+    animation_functions[9] = _dead;
 }
 void create_load_info()
 {
@@ -112,6 +149,19 @@ Item *load_bag(Item *bag, int save_state)
     return bag;
 }
 
+/**
+ * Loads saved data of a party from file, the fields are as follows
+ * 1: number of members
+ * 2: member enum keys
+ * 3: HP
+ * 4: MP
+ * 5: EXP
+ * 6: speed in milliseconds
+ * 7 - 14: 
+ *      first line starts with the number of actions and the second follows by those 
+ *      actions' enum keys.
+ * 
+*/
 Character **load_party(int save_state, struct SDL_Renderer *renderer)
 {
     FILE *in;
@@ -164,7 +214,9 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
 
     for (i = 0; i < num_members; i++)
     {
-        fscanf(in, "%d", &party[i]->SPD);
+        int temp = 0;
+        fscanf(in, "%d", &temp);
+        party[i]->SPD = (Uint32)temp;
     }
     for (i = 0; i < num_members; i++)
     {
@@ -207,7 +259,7 @@ void save_bag(Item *bag, int save_state)
 void SET_GLOBALS()
 {
     int i;
-
+    set_animation_functions();
     TICK = 0;
     ITEM_QUANTITY = 4;
     NUM_CHARACTERS = 4;

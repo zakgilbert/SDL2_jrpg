@@ -37,6 +37,8 @@ typedef struct _Window
 } Window;
 
 Window *CREATE_WINDOW(int x, int y, int w, int h);
+Window *BATTLE_PRIMARY();
+Window *BATTLE_MAGIC();
 
 void render_window(void *obj, struct SDL_Renderer *renderer);
 void render_window_color_bar(void *obj, struct SDL_Renderer *renderer);

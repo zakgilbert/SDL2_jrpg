@@ -14,13 +14,11 @@
 #include <SDL2/SDL_platform.h>
 #include "Header.h"
 #include "Graphics.h"
-#include "Assets.h"
-#define PRIME_1 (163)
-#define PRIME_2 (151)
 
 int hash_code(const char *letter, const int num, const int attempt);
 int hash(const char *letter, const int prime, const int size);
 
+char **get_alphabet_str();
 struct Alpha_Node
 {
     struct SDL_Texture *texture;
@@ -32,7 +30,7 @@ typedef struct _Atlas
 {
     void (*destroy)(struct _Atlas *this);
     void (*insert)(struct _Atlas *this, const char *key, struct SDL_Renderer *renderer, const char *path);
-    struct Alpha_Node* (*search)(struct _Atlas *this, const char *key);
+    struct Alpha_Node *(*search)(struct _Atlas *this, const char *key);
     void (*map)(struct _Atlas *this, struct SDL_Renderer *renderer);
     void (*render)(struct Alpha_Node *node, struct SDL_Renderer *renderer);
     struct Alpha_Node **letters;
