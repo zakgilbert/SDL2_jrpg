@@ -1,5 +1,4 @@
 *.o
-graphics
 .idea
 game
 .vscode

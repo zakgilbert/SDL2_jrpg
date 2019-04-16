@@ -16,6 +16,7 @@
 #include "Atlas.h"
 #include "Line.h"
 #include "Words.h"
+#include "Animation.h"
 
 struct Main_Attribute
 {
@@ -48,9 +49,6 @@ typedef struct _Character
     int (*set_battle_actions)(struct _Character *this, Atlas *at, Render_Q *q);
     GET_DATA(*get_data);
     change_animation_pos(*curent_spell);
-    change_animation_pos(*step);
-    change_animation_pos(*execute_spell_1);
-    change_animation_pos(*execute_spell_2);
     int (*get_current_state_options)(struct _Character *this);
     struct SDL_Texture *texture;
     struct SDL_Rect rect;
@@ -61,6 +59,7 @@ typedef struct _Character
     struct Main_Attribute HP;
     struct Main_Attribute MP;
     struct Main_Attribute EXP;
+    Animation *animation;
 
     int *spells;
     int num_spells;
@@ -85,7 +84,7 @@ typedef struct _Character
 
 } Character;
 
-Character *CREATE_CHARACTER(int key);
+Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer);
 
 struct Party
 {

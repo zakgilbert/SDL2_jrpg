@@ -27,6 +27,7 @@
 #include "Battle_Q.h"
 #include "Text.h"
 #include "Line.h"
+#include "Animation.h"
 
 int main(int argc, char **argv)
 {
@@ -182,7 +183,7 @@ int main(int argc, char **argv)
                 current_ba = CREATE_BA(previous_state, ROLL, party, letters, hand);
             if (NULL != current_ba && state == BATTLE)
                 current_ba->update(current_ba);
-            if (NULL != current_ba && previous_state == BATTLE)
+            if (NULL != current_ba && previous_state == BATTLE && !EXIT())
             {
                 current_ba->destroy(current_ba);
                 for (i = 0; i < NUM_CHARACTERS; i++)
@@ -211,6 +212,10 @@ int main(int argc, char **argv)
 
     dark_forest->destroy(dark_forest);
     hero->destroy(hero);
+    if (NULL != current_ba)
+    {
+        current_ba->destroy(current_ba);
+    }
     menu->destroy(menu);
     hand->destroy(hand);
     save_bag(bag, 0);
@@ -221,8 +226,10 @@ int main(int argc, char **argv)
     SDL_DestroyRenderer(renderer);
     SDL_Delay(400);
     SDL_DestroyWindow(window);
-    TTF_Quit();
+    /**
     SDL_Quit();
+    TTF_Quit();
+*/
     return 0;
 }
 

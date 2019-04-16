@@ -185,7 +185,7 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
     for (i = 0; i < num_members; i++)
     {
         fscanf(in, "%d", &character_keys[i]);
-        party[i] = CREATE_CHARACTER(character_keys[i]);
+        party[i] = CREATE_CHARACTER(character_keys[i], renderer);
         party[i]->name = CHARACTER_NAMES->list[character_keys[i]];
         party[i]->age = CHARACTER_AGES->list[character_keys[i]];
         party[i]->job = CHARACTER_JOBS->list[character_keys[i]];

@@ -11,38 +11,6 @@ static const char *SPELL_STRS[] = {
 
 static const int sched_spell[] = {pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step};
 
-void stand_battle_ani(struct SDL_Rect *rect)
-{
-    rect->x = 0;
-    rect->y = 0;
-}
-int cast_1_battle_ani(struct SDL_Rect *rect)
-{
-    rect->x = 32;
-    rect->y = 0;
-    return 0;
-}
-int cast_2_battle_ani(struct SDL_Rect *rect)
-{
-    rect->x = 32;
-    rect->y = 32;
-    return 0;
-}
-static void _step(struct SDL_Rect *rect)
-{
-    rect->x = 32 * 3;
-    rect->y = 0;
-}
-static void _execute_spell_1(struct SDL_Rect *rect)
-{
-    rect->x = 32 * 2;
-    rect->y = 32;
-}
-static void _execute_spell_2(struct SDL_Rect *rect)
-{
-    rect->x = 32 * 2;
-    rect->y = 0;
-}
 static void _destroy(Character *this)
 {
     SDL_DestroyTexture(this->texture);
@@ -145,7 +113,8 @@ static int _cast(Character *this)
     else if (this->current_animation_frame >= this->animation_total_frames)
     {
         this->in_animation = -1;
-        stand_battle_ani(&this->b_rect_2);
+        this->curent_spell = animation_functions[stand];
+        this->curent_spell(&this->b_rect_1, &this->b_rect_2);
         this->current_state = waiting;
         this->b_rect_1.x = 240;
     }
@@ -154,6 +123,8 @@ static int _cast(Character *this)
         this->curent_spell = animation_functions[sched_spell[this->current_animation_frame++]];
         this->curent_spell(&this->b_rect_1, &this->b_rect_2);
         printf("%p\n", this->curent_spell);
+        this->animation->magic_atk[0]->rect_2.x += this->animation->magic_atk[0]->w;
+        this->animation->magic_charge[0]->rect_2.x += this->animation->magic_charge[0]->w;
     }
     /**
         else if (time_to_animate() && this->in_animation && this->current_animation_frame >= 20 && this->current_animation_frame <= 24)
@@ -185,12 +156,19 @@ static Uint32 _speed_round(Character *this)
 static void _render_battle_textures(void *obj, struct SDL_Renderer *renderer)
 {
     Character *this = (Character *)obj;
-    if (this->current_state == casting)
-        this->cast(this);
-    else
-        stand_battle_ani(&this->b_rect_2);
-
     SDL_RenderCopy(renderer, this->b_texture, &this->b_rect_2, &this->b_rect_1);
+    if (this->current_state == casting)
+    {
+        this->animation->render_animation(this->animation->magic_atk[0], renderer);
+        this->animation->render_animation(this->animation->magic_charge[0], renderer);
+
+        this->cast(this);
+    }
+    else
+    {
+        this->curent_spell = animation_functions[stand];
+        this->curent_spell(&this->b_rect_1, &this->b_rect_2);
+    }
 }
 static void _render_bio_image(Character *this, struct SDL_Renderer *renderer)
 {
@@ -250,7 +228,7 @@ static int _set_battle_actions(Character *this, Atlas *at, Render_Q *q)
     }
     return 0;
 }
-Character *CREATE_CHARACTER(int key)
+Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer)
 {
     Character *this = (Character *)malloc(sizeof(*this));
 
@@ -267,16 +245,9 @@ Character *CREATE_CHARACTER(int key)
 
     this->curent_spell = NULL;
 
-    this->step = _step;
-    /**
-        this->execute_spell_1 = _execute_spell_1;
-        this->execute_spell_2 = _execute_spell_2;
-*/
-
+    this->animation = CREATE_ANIMATION(renderer);
     this->cast = _cast;
     this->get_data = _get_data;
-    this->cast_ptr[0] = cast_1_battle_ani;
-    this->cast_ptr[1] = cast_2_battle_ani;
     this->key = key;
     this->num_stats = 1;
     this->in_action_queue = 0;
