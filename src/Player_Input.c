@@ -4,7 +4,7 @@
 int wait_for_okay()
 {
     MOVEMENT_DISABLED = 1;
-    while (!USER_INPUTS[4])
+    while (!CONFIRM())
     {
         SDL_Delay(1);
     }
@@ -19,7 +19,6 @@ int input_handler(void *data)
         switch (ev.type)
         {
         case SDL_QUIT:
-            key_state[O] = 1;
             break;
 
         case SDL_KEYDOWN:

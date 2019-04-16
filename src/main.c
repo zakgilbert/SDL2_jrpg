@@ -36,7 +36,6 @@ int main(int argc, char **argv)
     set_up_timer(60);
     SET_GLOBALS();
     create_load_info();
-    refresh_inputs(USER_INPUTS, 6, 1);
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
     {
@@ -113,33 +112,21 @@ int main(int argc, char **argv)
         case MAIN_MENU:
             TICK = 1;
             menu->update_main(menu);
-            /**
-            menu->update_main_menu(menu);
-*/
             break;
 
         case ITEMS_MENU:
             TICK = 1;
             menu->update_items_menu(menu);
-            /**
-                menu->update_items_menu(menu);
-*/
             break;
 
         case USE_ITEM:
             TICK = 1;
             menu->update_use_item(menu);
-            /**
-                menu->update_use_items_menu(menu);
-*/
             break;
 
         case CONFIG:
             TICK = 1;
             menu->update_config(menu);
-            /**
-                menu->update_config(menu);
-*/
             break;
 
             /**
@@ -202,11 +189,6 @@ int main(int argc, char **argv)
         delay();
         reset_timer();
     }
-    for (i = 0; i < 1; i++)
-    {
-        fprintf(data, "%s", party[i]->get_data(party[i]));
-    }
-    fclose(data);
     menu_transition(&menu->delay, renderer);
     SDL_WaitThread(hand_thread, NULL);
 
@@ -224,10 +206,9 @@ int main(int argc, char **argv)
     free(STAT_MATRIX);
     party[0]->destroy_party(party);
     SDL_DestroyRenderer(renderer);
-    SDL_Delay(400);
     SDL_DestroyWindow(window);
-    /**
     SDL_Quit();
+    /**
     TTF_Quit();
 */
     return 0;
@@ -243,20 +224,6 @@ void set_fullscreen(struct SDL_Window *window, Hero *hero)
     {
         SDL_SetWindowFullscreen(window, 0);
     }
-}
-int refresh_inputs(int *array, int size, int bol)
-{
-    if (!bol)
-    {
-        return 0;
-    }
-    int i;
-
-    for (i = 0; i < size; i++)
-    {
-        array[i] = 0;
-    }
-    return 1;
 }
 int confirm(int val)
 {

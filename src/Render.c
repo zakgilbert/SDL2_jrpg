@@ -93,7 +93,7 @@ Render_Q *_render(Render_Q *this, struct SDL_Renderer *renderer)
         temp = r_Q->pop(this);
         (*temp->funct)(temp->obj, renderer);
         /**
-        printf("%p\n", temp);
+            printf("%p\n", temp);
 */
         free(temp);
         temp = NULL;

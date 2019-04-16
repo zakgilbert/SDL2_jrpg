@@ -33,7 +33,6 @@ extern int READY_TO_INTERACT;
 extern int *ITEM_QUANTITIES;
 extern char **BAG;
 extern int *BAG_QUANTITIES;
-extern int USER_INPUTS[6];
 extern int EDGE_DETECTION[4];
 extern int AT_COLLIDABLE_EDGE[4];
 extern int MOVEMENT_DISABLED;
@@ -110,7 +109,7 @@ typedef struct SDL_Renderer *Renderer;
 typedef struct SDL_Rect Rect;
 typedef char *GET_DATA(void *obj);
 
-typedef void change_animation_pos(Rect *rect_1, Rect * rect_2);
+typedef void change_animation_pos(Rect *rect_1, Rect *rect_2);
 enum ANIMATION_FUNCTIONS
 {
     stand,
@@ -225,7 +224,6 @@ enum NPC_TYPES
 int FPS;
 int FRAMES_RENDERED;
 
-int USER_INPUTS[6];
 int NUM_CHARACTERS;
 int EDGE_DETECTION[4];
 int READY_TO_INTERACT;
@@ -278,7 +276,6 @@ struct STRING_LIST **LOAD_SAVE_INFO_STRINGS;
 struct STRING_LIST *ENEMIES;
 struct SDL_Textures **alpha_textures;
 
-int refresh_inputs(int *, int, int);
 void set_items(int *);
 int quit();
 int render_thread(void *);

@@ -9,7 +9,6 @@ void create_battle_textures(void *obj, struct SDL_Renderer *renderer)
 {
     Ba *this = (Ba *)obj;
     this->create_textures(this, renderer);
-    SDL_Delay(100);
 }
 void render_back_ground_texture(void *obj, struct SDL_Renderer *renderer)
 {
@@ -18,7 +17,6 @@ void render_back_ground_texture(void *obj, struct SDL_Renderer *renderer)
 }
 static void _destroy(Ba *this)
 {
-    int i;
     if (NULL != this)
     {
         free(this);
@@ -28,9 +26,12 @@ static void _destroy(Ba *this)
 }
 static void _create_textures(Ba *this, struct SDL_Renderer *renderer)
 {
-    int time_bar_x, time_bar_y, i, k;
-    time_bar_x = 290;
-    time_bar_y = 250;
+    /**
+        int time_bar_x, time_bar_y;
+        time_bar_x = 290;
+        time_bar_y = 250;
+*/
+    int i, k;
     this->back_ground->t = create_texture(renderer, BATTLE_BACKGROUNDS->list[this->area], &this->back_ground->r);
 
     for (i = 0; i < this->num_enemies; i++)
@@ -104,7 +105,7 @@ static void _update(Ba *this)
 {
     int i, status;
     Character *head;
-    if (CANCEL())
+    if (CANCEL() || EXIT())
     {
         state = previous_state;
         previous_state = BATTLE;
@@ -196,7 +197,7 @@ Ba *CREATE_BA(int area, int roll, Character **party, Atlas *atlas, Hand *hand)
     this->area = area;
     this->hand = hand;
 
-    this->timer_packets = malloc(sizeof(struct timer_packet *) * 1);
+    this->timer_packets = malloc(sizeof(struct timer_packet *) * NUM_CHARACTERS);
     this->action_window = NULL;
     this->back_ground = malloc(sizeof(struct Texture));
     this->back_ground->r.x = 0;

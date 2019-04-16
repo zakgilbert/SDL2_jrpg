@@ -190,12 +190,12 @@ static void _animate(Hand *this)
 
 static int _move_horizontal(Hand *this, int distance)
 {
-    if (USER_INPUTS[2] && this->current_state > 0)
+    if (LEFT() && this->current_state > 0)
     {
         this->position.x -= distance;
         this->current_state--;
     }
-    else if (USER_INPUTS[3] && this->current_state < this->number_of_states)
+    else if (RIGHT() && this->current_state < this->number_of_states)
     {
         this->position.x += distance;
         this->current_state++;

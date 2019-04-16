@@ -21,7 +21,7 @@ static Lootable *_render(Lootable *this, struct SDL_Renderer *renderer)
 
 static int _loot(Lootable *this)
 {
-    if (!this->looted && USER_INPUTS[4])
+    if (!this->looted && CONFIRM())
     {
         this->texture = this->alt_tex;
         this->looted = 1;
