@@ -53,3 +53,11 @@ struct SDL_Texture *create_texture(struct SDL_Renderer *renderer, const char *pa
     SDL_QueryTexture(texture, NULL, NULL, &rect->w, &rect->h);
     return texture;
 }
+Rect *set_rect(Rect *rect, int x, int y, int w, int h)
+{
+    rect->x = x;
+    rect->y = y;
+    rect->w = w;
+    rect->h = h;
+    return rect;
+}

@@ -4,58 +4,71 @@
 */
 
 #include "Assets.h"
-static void _stand(Rect *rect_1, Rect *rect_2)
+static const int hero_positions_x[4] = {240, 255, 270, 285};
+static const int hero_positions_y[4] = {90, 120, 150, 180};
+static void _stand(Rect *rect_1, Rect *rect_2, int *index)
 {
     rect_2->x = 0;
     rect_2->y = 0;
 }
-static void _pray_1(Rect *rect_1, Rect *rect_2)
+static void _pray_1(Rect *rect_1, Rect *rect_2, int *index)
 {
     rect_2->x = 32;
     rect_2->y = 0;
 }
-static void _cast(Rect *rect_1, Rect *rect_2)
+static void _cast(Rect *rect_1, Rect *rect_2, int *index)
 {
     rect_2->x = 32 * 2;
     rect_2->y = 0;
 }
-static void _step(Rect *rect_1, Rect *rect_2)
+static void _step(Rect *rect_1, Rect *rect_2, int *index)
 {
-/**
+    /**
         rect_1->x++;
 */
     rect_2->x = 32 * 3;
     rect_2->y = 0;
 }
-static void _hit(Rect *rect_1, Rect *rect_2)
+static void _hit(Rect *rect_1, Rect *rect_2, int *index)
 {
     rect_2->x = 32 * 4;
     rect_2->y = 0;
 }
-static void _defend(Rect *rect_1, Rect *rect_2)
+static void _defend(Rect *rect_1, Rect *rect_2, int *index)
 {
     rect_2->x = 0;
     rect_2->y = 32;
 }
-static void _pray_2(Rect *rect_1, Rect *rect_2)
+static void _pray_2(Rect *rect_1, Rect *rect_2, int *index)
 {
     rect_2->x = 32;
     rect_2->y = 32;
 }
-static void _cast_step(Rect *rect_1, Rect *rect_2)
+static void _cast_step(Rect *rect_1, Rect *rect_2, int *index)
 {
     rect_2->x = 32 * 2;
     rect_2->y = 32;
 }
-static void _injured(Rect *rect_1, Rect *rect_2)
+static void _injured(Rect *rect_1, Rect *rect_2, int *index)
 {
     rect_2->x = 32 * 3;
     rect_2->y = 32;
 }
-static void _dead(Rect *rect_1, Rect *rect_2)
+static void _dead(Rect *rect_1, Rect *rect_2, int *index)
 {
     rect_2->x = 32 * 4;
     rect_2->y = 32;
+}
+static void _no_ani(Rect *rect_1, Rect *rect_2, int *index)
+{
+    rect_1->x = hero_positions_x[*index];
+    rect_1->y = hero_positions_y[*index];
+    _stand(rect_1, rect_2, index);
+}
+static void _execute(Rect *rect_1, Rect *rect_2, int *index)
+{
+    rect_1->x = 35;
+    rect_1->y = (WINDOW_HEIGHT / 2) - 50;
 }
 void set_animation_functions()
 {
@@ -69,6 +82,8 @@ void set_animation_functions()
     animation_functions[7] = _cast_step;
     animation_functions[8] = _injured;
     animation_functions[9] = _dead;
+    animation_functions[10] = _no_ani;
+    animation_functions[11] = _execute;
 }
 void create_load_info()
 {
@@ -162,7 +177,7 @@ Item *load_bag(Item *bag, int save_state)
  *      actions' enum keys.
  * 
 */
-Character **load_party(int save_state, struct SDL_Renderer *renderer)
+Character **load_party(int save_state, struct SDL_Renderer *renderer, Animation *animation)
 {
     FILE *in;
     Character **party;
@@ -185,13 +200,14 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
     for (i = 0; i < num_members; i++)
     {
         fscanf(in, "%d", &character_keys[i]);
-        party[i] = CREATE_CHARACTER(character_keys[i], renderer);
+        party[i] = CREATE_CHARACTER(character_keys[i], renderer, animation);
         party[i]->name = CHARACTER_NAMES->list[character_keys[i]];
         party[i]->age = CHARACTER_AGES->list[character_keys[i]];
         party[i]->job = CHARACTER_JOBS->list[character_keys[i]];
         party[i]->image_path = CHARACTER_BIO_PATHS->list[character_keys[i]];
         party[i]->texture = create_texture(renderer, party[i]->image_path, &party[i]->rect);
         party[i]->create_battle_texture(party[i], renderer, i);
+        party[i]->index = i;
     }
 
     for (i = 0; i < num_members; i++)

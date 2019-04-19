@@ -157,7 +157,7 @@ Collision *CREATE_COLLISION(Hero *hero)
     this->check_right_edge = _check_right_edge;
     this->check_up_edge = _check_up_edge;
 
-    this->hero_rect = &hero->rect_pos;
+    this->hero_rect = &hero->sprite->pos;
     this->hero = hero;
     this->collidables = malloc(sizeof(struct Collidable **) * NUM_AREAS);
     this->num_collibables = malloc(sizeof(int) * NUM_AREAS);

@@ -40,6 +40,15 @@ static void _create_textures(Ba *this, struct SDL_Renderer *renderer)
         this->enemies[i]->rect.x = 35;
         this->enemies[i]->rect.y = (WINDOW_HEIGHT / 2) - 50;
     }
+    if (this->num_enemies > 1)
+    {
+        Rect new_rect;
+        while (SDL_IntersectRect(&this->enemies[0]->rect, &this->enemies[1]->rect, &new_rect))
+        {
+            this->enemies[1]->rect.y--;
+            this->enemies[1]->rect.x++;
+        }
+    }
 
     for (k = 0; k < NUM_CHARACTERS; k++)
     {
@@ -103,7 +112,7 @@ static int _set_text_stats(Ba *this)
 }
 static void _update(Ba *this)
 {
-    int i, status;
+    int i, status, ret_ani;
     Character *head;
     if (CANCEL() || EXIT())
     {
@@ -116,8 +125,8 @@ static void _update(Ba *this)
             free(this->timer_packets[i]);
         }
         free(this->hero_timers);
-        this->q->free(this->q);
         this->b->destroy(this->b);
+        this->q->free(this->q);
         SDL_Delay(500);
         this->first_render = 1;
         NUM_STEPS = 0;
@@ -153,7 +162,22 @@ static void _update(Ba *this)
             this->party[i]->current_state = in_timer;
             this->hero_timers[i] = SDL_AddTimer(this->party[i]->speed_round(this->party[i]), this->hero_callback, this->timer_packets[i]);
         }
-
+        else if (this->party[i]->current_state == casting)
+        {
+            ret_ani = this->party[i]->cast(this->party[i], this->q);
+            /**
+                        if (ret_ani == execute)
+                        {
+                            this->party[i]->animation->fire_textures[0]->rect_1.x = this->enemies[0]->rect.x;
+                            this->party[i]->animation->fire_textures[0]->rect_1.y = this->enemies[0]->rect.y;
+                            ENQUEUE(this->q, this->party[i]->animation, this->party[i]->animation->render_fire_attack, NULL);
+                        }
+                        else if (ret_ani == fin)
+                        {
+                            this->party[i]->current_state = waiting;
+                        }
+*/
+        }
         ENQUEUE(this->q, this->party[i], this->party[i]->render_battle_textures, NULL);
     }
     if (NULL != (head = this->b->peek(this->b, this->atlas, this->q)))
@@ -169,6 +193,7 @@ static void _update(Ba *this)
             {
                 this->b->pop(this->b);
                 head->current_state = casting;
+                head->scheduled_animation = this->hand->current_state;
             }
         }
         this->hand->change_state_quantity(this->hand, head->get_current_state_options(head) - 1, 0);
@@ -179,6 +204,7 @@ static void _update(Ba *this)
     this->q->copy(this->q);
     this->free_thread = SDL_CreateThread(free_handler, "free_handler", this->q);
 }
+
 Ba *CREATE_BA(int area, int roll, Character **party, Atlas *atlas, Hand *hand)
 {
     Ba *this = malloc(sizeof(*this));

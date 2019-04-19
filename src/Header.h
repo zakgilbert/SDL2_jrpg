@@ -20,6 +20,7 @@
 #define SPRITE_FRAME_HEIGHT (32)
 #define PRIME_1 (163)
 #define PRIME_2 (151)
+#define NUM_ANI (13)
 
 extern int FPS;
 extern int FRAMES_RENDERED;
@@ -92,13 +93,69 @@ enum KEYS
     F = SDL_SCANCODE_F,
     NON
 };
+
+/** 
+ * UP:
+ * If user is pressing up, 
+ * set the value of key_states[SDL_SCANCODE_W] to 0 and return true, 
+ * otherwise return false 
+ */
 int UP();
+
+/** 
+ * LEFT:
+ * If user is pressing left, 
+ * set the value of key_states[SDL_SCANCODE_A] to 0 and return true, 
+ * otherwise return false 
+ */
 int LEFT();
+
+/** 
+ * RIGHT:
+ * If user is pressing right, 
+ * set the value of key_states[SDL_SCANCODE_D] to 0 and return true, 
+ * otherwise return false 
+ */
 int RIGHT();
+
+/** 
+ * DOWN:
+ * If user is pressing down, 
+ * set the value of key_states[SDL_SCANCODE_S] to 0 and return true, 
+ * otherwise return false 
+ */
 int DOWN();
+
+/** 
+ * CONFIRM:
+ * If user is pressing the confirm button, 
+ * set the value of key_states[SDL_SCANCODE_J] to 0 and return true, 
+ * otherwise return false 
+ */
 int CONFIRM();
+
+/** 
+ * CANCEL:
+ * If user is pressing the cancel button, 
+ * set the value of key_states[SDL_SCANCODE_L] to 0 and return true, 
+ * otherwise return false 
+ */
 int CANCEL();
+
+/** 
+ * EXIT:
+ * If user is pressing the exit button, 
+ * set the value of key_states[SDL_SCANCODE_O] to 0 and return true, 
+ * otherwise return false 
+ */
 int EXIT();
+
+/** 
+ * FULL:
+ * If user is pressing the activate fullscreen button, 
+ * set the value of key_states[SDL_SCANCODE_F] to 0 and return true, 
+ * otherwise return false 
+ */
 int FULL();
 
 enum KEYS KEY;
@@ -107,24 +164,30 @@ Uint8 *key_state;
 union SDL_Event ev;
 typedef struct SDL_Renderer *Renderer;
 typedef struct SDL_Rect Rect;
+typedef struct SDL_Texture *Tex;
 typedef char *GET_DATA(void *obj);
+typedef void change_animation_pos(Rect *rect_1, Rect *rect_2, int *index);
 
-typedef void change_animation_pos(Rect *rect_1, Rect *rect_2);
-enum ANIMATION_FUNCTIONS
-{
-    stand,
-    pray_1,
-    cast,
-    step,
-    hit,
-    defend,
-    pray_2,
-    cast_step,
-    injured,
-    dead
-};
-extern change_animation_pos *animation_functions[10];
-change_animation_pos *animation_functions[10];
+/**
+    enum ANIMATION_FUNCTIONS
+    {
+        stand,
+        pray_1,
+        cast,
+        step,
+        hit,
+        defend,
+        pray_2,
+        cast_step,
+        injured,
+        dead,
+        no_ani,
+        execute,
+        fin
+    };
+*/
+extern change_animation_pos *animation_functions[NUM_ANI];
+change_animation_pos *animation_functions[NUM_ANI];
 enum battle_states
 {
     waiting,
@@ -133,7 +196,9 @@ enum battle_states
     attack,
     magic,
     item,
-    casting
+    casting,
+    execute
+
 };
 enum states
 {
@@ -146,7 +211,15 @@ enum states
     SAVE,
     BATTLE
 };
-enum states state, previous_state;
+enum CHARACTER_BATTLE_ANIMATION_SCHEDULES
+{
+    primary_attack,
+    cast_magic,
+    use_item
+};
+
+enum states state,
+    previous_state;
 enum CHARACTER_BATTLE_ANIMATION
 {
     ATK,

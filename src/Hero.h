@@ -10,6 +10,7 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
 #include "Header.h"
+#include "Sprite.h"
 
 int get_middle_x(int, int);
 int get_middle_y(int, int);
@@ -20,13 +21,7 @@ typedef struct _Hero
 {
     void (*destroy)(struct _Hero *);
 
-    void (*set_texture)(struct _Hero *, struct SDL_Renderer *, char *);
-
     void (*render)(struct _Hero *, struct SDL_Renderer *);
-
-    struct SDL_Rect *(*get_rect_pointer)(struct _Hero *);
-
-    struct SDL_Rect *(*get_rect_pos_pointer)(struct _Hero *);
 
     void (*animate)(struct _Hero *);
 
@@ -40,9 +35,13 @@ typedef struct _Hero
 
     void (*animate_right)(struct _Hero *);
 
-    struct SDL_Texture *texture;
-    struct SDL_Rect rect;
-    struct SDL_Rect rect_pos;
+    Sprite *sprite;
+    int index;
+    char *ani_buffer;
+    int d_i;
+    int u_i;
+    int l_i;
+    int r_i;
     enum direction
     {
         up,
@@ -53,7 +52,7 @@ typedef struct _Hero
 
 } Hero;
 
-Hero *CREATE_HERO();
+Hero *CREATE_HERO(Renderer renderer);
 
 void render_hero(void *obj, struct SDL_Renderer *renderer);
 #endif

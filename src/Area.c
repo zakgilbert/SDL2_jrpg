@@ -103,7 +103,7 @@ static Message *_render_area(Area *this)
 
         return NULL;
     }
-    else if (NUM_STEPS > (20 + (rand() % 500)))
+    else if (NUM_STEPS > (200 + (rand() % 500)))
     {
         state = BATTLE;
         previous_state = this->area_key;

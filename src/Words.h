@@ -1,5 +1,9 @@
 #ifndef JRPG_WORDS_H
 #define JRPG_WORDS_H
+
+#define GENERATE_ENUM(ENUM) ENUM,
+#define GENERATE_STRING(STRING) #STRING,
+
 #define FOREACH_ITEM(ITEM) \
     ITEM(POTION)           \
     ITEM(ETHER)            \
@@ -30,33 +34,65 @@
     SPELL(Ice)               \
     SPELL(Bolt)
 
-#define GERERATE_ENUM(ENUM) ENUM,
-#define GENERATE_STRING(STRING) #STRING,
+#define FOREACH_CHARACTER_BATTLE_FRAME(FRAME) \
+    FRAME(stand)                              \
+    FRAME(pray_1)                             \
+    FRAME(cast)                               \
+    FRAME(step)                               \
+    FRAME(hit)                                \
+    FRAME(defend)                             \
+    FRAME(pray_2)                             \
+    FRAME(cast_step)                          \
+    FRAME(wound)                              \
+    FRAME(dead)
+
+#define FOREACH_GENERIC_HASHTARGET(TARG) \
+    TARG(zero)                           \
+    TARG(one)                            \
+    TARG(two)                            \
+    TARG(thre)                          \
+    TARG(four)                           \
+    TARG(five)                           \
+    TARG(six)                            \
+    TARG(seven)                          \
+    TARG(eight)                          \
+    TARG(nine)                           \
+    TARG(ten)
 
 typedef enum
 {
-    FOREACH_ITEM(GERERATE_ENUM)
+    FOREACH_ITEM(GENERATE_ENUM)
 } ITEM_ENUM;
 
 enum STAT_ENUM
 {
-    FOREACH_STAT(GERERATE_ENUM)
+    FOREACH_STAT(GENERATE_ENUM)
 };
 
 typedef enum
 {
-    FOREACH_MENU_OPTION(GERERATE_ENUM)
+    FOREACH_MENU_OPTION(GENERATE_ENUM)
 } MENU_OPTION_ENUM;
 
 typedef enum
 {
-    FOREACH_ACTION_OPTION(GERERATE_ENUM)
+    FOREACH_ACTION_OPTION(GENERATE_ENUM)
 } ACTION_OPTION_ENUM;
 
 enum SPELL_ENUM
 {
-    FOREACH_SPELL(GERERATE_ENUM)
+    FOREACH_SPELL(GENERATE_ENUM)
 };
+
+typedef enum
+{
+    FOREACH_CHARACTER_BATTLE_FRAME(GENERATE_ENUM)
+} CHARACTER_BATTLE_FRAME_ENUM;
+
+typedef enum
+{
+    FOREACH_GENERIC_HASHTARGET(GENERATE_ENUM)
+} GENERIC_HASH_TARGET_ENUM;
 
 extern int ITEM_QUANTITY;
 #endif
