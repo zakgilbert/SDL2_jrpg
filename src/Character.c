@@ -14,9 +14,13 @@ static const char *SPELL_STRS[] = {
 
 static const char *FRMS[] = {
     FOREACH_CHARACTER_BATTLE_FRAME(GENERATE_STRING)};
-/**
-    static const int sched_spell[] = {pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, execute, execute, execute, execute, execute, execute, execute, fin};
-*/
+static const int sched_spell[] = {
+    pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1,
+    pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2,
+    pray_1, pray_2, pray_1, pray_2, pray_1, pray_2,
+    step,
+    cast_step, cast_step, cast_step, cast_step, cast_step,
+    cast_step, cast_step, cast_step, cast_step, cast_step, cast_step};
 
 static void _destroy(Character *this)
 {
@@ -105,24 +109,22 @@ static void _create_battle_texture(Character *this, struct SDL_Renderer *rendere
 }
 static int _cast(Character *this, Render_Q *q)
 {
-    /**
-    
-        if (this->in_animation == -1)
-        {
-            this->in_animation = 1;
-            this->current_animation_frame = 0;
-            this->animation_total_frames = 39;
-        }
-        else if (this->current_animation_frame >= this->animation_total_frames)
-        {
-            this->in_animation = -1;
-            this->curent_spell = animation_functions[no_ani];
-            this->curent_spell(&this->b_rect_1, &this->b_rect_2, &this->index);
-            this->current_state = waiting;
-            return fin;
-        }
-        if (time_to_animate() && this->in_animation)
-        {
+
+    if (this->in_animation == -1)
+    {
+        this->in_animation = 1;
+        this->current_animation_frame = 0;
+        this->animation_total_frames = 32;
+    }
+    else if (this->current_animation_frame >= this->animation_total_frames)
+    {
+        this->in_animation = -1;
+        this->current_state = waiting;
+    }
+    if (time_to_animate() && this->in_animation)
+    {
+        this->current_sprite_frame = sched_spell[this->current_animation_frame++];
+        /**
             if (sched_spell[this->current_animation_frame] != execute)
             {
                 this->curent_spell = animation_functions[sched_spell[this->current_animation_frame]];
@@ -136,9 +138,10 @@ static int _cast(Character *this, Render_Q *q)
         {
             ENQUEUE(q, this->animation, this->animation->render_fire, NULL);
         }
-    
-        return sched_spell[this->current_animation_frame];
 */
+
+        return sched_spell[this->current_animation_frame];
+    }
 }
 
 static Uint32 _speed_round(Character *this)
@@ -250,10 +253,6 @@ Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer)
     strcpy(this->HP.name, "HP: ");
     strcpy(this->MP.name, "MP: ");
     strcpy(this->EXP.name, "EXP: ");
-
-    /**
-        this->create_battle_texture(this, renderer, this->key);
-*/
 
     return this;
 }
