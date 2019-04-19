@@ -30,6 +30,8 @@
 #include "Animation.h"
 #include "Sprite.h"
 
+static const char *FRMS[] = {
+    FOREACH_CHARACTER_BATTLE_FRAME(GENERATE_STRING)};
 int main(int argc, char **argv)
 {
     int i;
@@ -177,6 +179,7 @@ int main(int argc, char **argv)
                 message_being_displayed = NULL;
             }
             break;
+*/
         case BATTLE:
             if (NULL == current_ba)
                 current_ba = CREATE_BA(previous_state, ROLL, party, letters, hand);
@@ -193,7 +196,6 @@ int main(int argc, char **argv)
                 current_ba = NULL;
             }
             break;
-*/
         default:
             break;
         }
@@ -207,12 +209,12 @@ int main(int argc, char **argv)
 
     dark_forest->destroy(dark_forest);
     hero->destroy(hero);
-/**
-        if (NULL != current_ba)
-        {
-            current_ba->destroy(current_ba);
-        }
+    /**
 */
+    if (NULL != current_ba)
+    {
+        current_ba->destroy(current_ba);
+    }
     menu->destroy(menu);
     hand->destroy(hand);
     save_bag(bag, 0);

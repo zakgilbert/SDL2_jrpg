@@ -9,7 +9,6 @@
 #include <SDL2/SDL_thread.h>
 
 #include "Header.h"
-#include "Graphics.h"
 #include "Hero.h"
 #include "Render.h"
 #include "Window.h"
@@ -84,6 +83,7 @@ typedef struct _Character
     int in_animation;
     int ready;
     enum battle_states current_state;
+    CHARACTER_BATTLE_FRAME_ENUM current_sprite_frame;
     int index;
 
 } Character;

@@ -148,8 +148,12 @@ static Uint32 _speed_round(Character *this)
 static void _render_battle_textures(void *obj, struct SDL_Renderer *renderer)
 {
     Character *this = (Character *)obj;
-    SDL_RenderCopy(renderer, this->b_texture, &this->b_rect_2, &this->b_rect_1);
+    SDL_RenderCopy(renderer, this->battle_spr->texture,
+                   this->battle_spr->search(
+                       this->battle_spr, FRMS[this->current_sprite_frame]),
+                   &this->battle_spr->pos);
 }
+
 static void _render_bio_image(Character *this, struct SDL_Renderer *renderer)
 {
     SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
@@ -241,10 +245,15 @@ Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer)
     this->spells[1] = Ice;
     this->spells[2] = Bolt;
     this->num_spells = 3;
+    this->current_sprite_frame = stand;
 
     strcpy(this->HP.name, "HP: ");
     strcpy(this->MP.name, "MP: ");
     strcpy(this->EXP.name, "EXP: ");
+
+    /**
+        this->create_battle_texture(this, renderer, this->key);
+*/
 
     return this;
 }

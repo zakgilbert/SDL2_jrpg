@@ -71,7 +71,7 @@ static void _insert(Sprite *this, const char *key, int x, int y, int w, int h)
         current_node = this->table[index];
         i++;
     }
-/**
+    /**
         printf("%s was added at index %d\n", node->key, index);
 */
     this->table[index] = node;
@@ -151,6 +151,7 @@ Sprite *CREATE_SPRITE(const char *name, const char *path,
     this->frame.w = w;
     this->frame.h = h;
     this->map(this, argv, argc);
+    printf("creating Sprite %s\n", this->name);
 
     return this;
 }
