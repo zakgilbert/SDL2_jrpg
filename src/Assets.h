@@ -24,7 +24,7 @@
 void SET_GLOBALS();
 Item *load_bag(Item *bag, int save_state);
 Enemy *load_enemy(int key, struct SDL_Renderer *renderer);
-Character **load_party(int save_state, struct SDL_Renderer *renderer, Animation const *animation);
+Character **load_party(int save_state, struct SDL_Renderer *renderer, Animation *animation);
 void save_bag(Item *bag, int save_state);
 void save(Character **party, Item *bag, int save_state);
 void create_load_info();

@@ -128,6 +128,7 @@ static int _cast(Character *this, Render_Q *q)
     if (time_to_animate() && this->in_animation)
     {
         int charger_count = NUM_CASTING_FRAMES - 10;
+        printf("charger_counter: %d\n", charger_count);
         this->current_sprite_frame =
             this->current_battle_animation_schedule[this->current_animation_frame++];
         /**
@@ -144,19 +145,16 @@ static int _cast(Character *this, Render_Q *q)
         {
             ENQUEUE(q, this->animation, this->animation->render_fire, NULL);
 */
-        if (this->current_animation_frame == charger_count)
+        if (this->current_external_animation_frame < 10)
         {
-            this->current_external_animation_frame = 0;
-        }
-        if (this->current_external_animation_frame != -1 && this->current_external_animation_frame < 10)
-        {
-            ENQUEUE(q, this, this->render_external_animation, NULL);
-        }
-        if (this->current_external_animation_frame == 10)
-        {
-            this->current_external_animation_frame = -1;
+            this->current_external_animation_frame++;
         }
     }
+    if (this->current_external_animation_frame >= 10)
+    {
+        this->current_external_animation_frame = 0;
+    }
+    ENQUEUE(q, this, this->render_external_animation, NULL);
 
     return casting_schedule[this->current_animation_frame];
 }
@@ -181,13 +179,12 @@ static void _render_bio_image(Character *this, struct SDL_Renderer *renderer)
 static void _render_external_animation(void *obj, Renderer renderer)
 {
     Character *this = (Character *)obj;
-    this->ani_ptr->charge_spell->pos.x = hero_positions_x[this->key];
-    this->ani_ptr->charge_spell->pos.y = hero_positions_y[this->key];
+    this->charger->pos.x = hero_positions_x[this->key];
+    this->charger->pos.y = hero_positions_y[this->key];
     printf("external animation frame: %d\n", this->current_external_animation_frame);
-    SDL_RenderCopy(renderer, this->ani_ptr->charge_spell->texture,
-                   this->ani_ptr->charge_spell->search(
-                       this->ani_ptr->charge_spell, generic_hash_strings[this->current_external_animation_frame]),
-                   &this->ani_ptr->charge_spell->pos);
+    SDL_RenderCopy(renderer, this->charger->texture,
+                   this->charger->search(this->charger, generic_hash_strings[this->current_external_animation_frame]),
+                   &this->charger->pos);
 }
 static char *_get_data(void *obj)
 {
@@ -243,7 +240,7 @@ static int _set_battle_actions(Character *this, Atlas *at, Render_Q *q)
     }
     return 0;
 }
-Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer, Animation const *animation)
+Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer, Animation *animation)
 {
     Character *this = (Character *)malloc(sizeof(*this));
 
@@ -278,7 +275,8 @@ Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer, Animation co
     this->spells[2] = Bolt;
     this->num_spells = 3;
     this->current_sprite_frame = stand;
-    this->current_external_animation_frame = -1;
+    this->current_external_animation_frame = 0;
+    this->charger = CREATE_SPRITE("Magic_Charger", "graphics/animation/charge_spell.png", 1, 10, renderer, 10, generic_hash_strings, 44, 44);
 
     strcpy(this->HP.name, "HP: ");
     strcpy(this->MP.name, "MP: ");

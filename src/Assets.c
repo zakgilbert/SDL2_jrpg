@@ -177,7 +177,7 @@ Item *load_bag(Item *bag, int save_state)
  *      actions' enum keys.
  * 
 */
-Character **load_party(int save_state, struct SDL_Renderer *renderer, Animation const *animation)
+Character **load_party(int save_state, struct SDL_Renderer *renderer, Animation *animation)
 {
     FILE *in;
     Character **party;

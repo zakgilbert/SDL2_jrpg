@@ -57,6 +57,7 @@ typedef struct _Character
     struct SDL_Rect rect;
 
     Sprite *battle_spr;
+    Sprite *charger;
     struct SDL_Texture *b_texture;
     struct SDL_Rect b_rect_1;
     struct SDL_Rect b_rect_2;
@@ -64,7 +65,7 @@ typedef struct _Character
     struct Main_Attribute HP;
     struct Main_Attribute MP;
     struct Main_Attribute EXP;
-    Animation const *ani_ptr;
+    Animation *ani_ptr;
 
     const int *current_battle_animation_schedule;
     int scheduled_animation;
@@ -94,7 +95,7 @@ typedef struct _Character
 
 } Character;
 
-Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer, Animation const *animation);
+Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer, Animation *animation);
 
 struct Party
 {

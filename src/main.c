@@ -68,7 +68,7 @@ int main(int argc, char **argv)
     Hero *hero = CREATE_HERO(renderer);
     Area *dark_forest = CREATE_AREA(DARK_FOREST, hero, bag);
     Collision *game_collision = CREATE_COLLISION(hero);
-    Animation const *animations = CREATE_ANIMATION(renderer);
+    Animation *animations = CREATE_ANIMATION(renderer);
 
     r_Q = CREATE_RENDER_Q();
     letters->map(letters, renderer);
