@@ -5,6 +5,7 @@
 
 #include "Animation.h"
 
+#include "Character.h"
 static void _destroy(Animation *this)
 {
     if (NULL != this)
@@ -37,10 +38,34 @@ static void _render_animation(void *obj, struct SDL_Renderer *renderer)
     struct Sprite_Packet *this = (struct Sprite_Packet *)obj;
     SDL_RenderCopy(renderer, this->texture, &this->rect_2, &this->rect_1);
 }
+static void _render_fire(void *obj, Renderer renderer)
+{
+    Animation *this = (Animation *)obj;
+    this->render_animation(this->fire_textures[1], renderer);
+    if (time_to_animate())
+    {
+        if (this->fire_textures[1]->rect_2.x > this->fire_textures[1]->rect_2.w * 10)
+            this->fire_textures[1]->rect_2.x = 0;
+
+        this->fire_textures[1]->rect_2.x += this->fire_textures[1]->rect_2.w;
+    }
+}
+static void _render_fire_attack(void *obj, Renderer renderer)
+{
+    Animation *this = (Animation *)obj;
+    this->render_animation(this->fire_textures[0], renderer);
+    if (time_to_animate())
+    {
+        if (this->fire_textures[0]->rect_2.x > this->fire_textures[0]->rect_2.w * 3)
+            this->fire_textures[0]->rect_2.x = 0;
+
+        this->fire_textures[0]->rect_2.x += this->fire_textures[0]->rect_2.w;
+    }
+}
 static void _create_textures(Animation *this, struct SDL_Renderer *renderer)
 {
-    this->magic_atk[0] = this->new_sprite_packet(renderer, "graphics/animation/fire_1_sheet.png", 1, 5);
-    this->magic_charge[0] = this->new_sprite_packet(renderer, "graphics/animation/fire_1_char.png", 1, 10);
+    this->fire_textures[0] = this->new_sprite_packet(renderer, "graphics/animation/fire_1_sheet.png", 1, 5);
+    this->fire_textures[1] = this->new_sprite_packet(renderer, "graphics/animation/fire_1_char.png", 1, 10);
     this->slash[0] = this->new_sprite_packet(renderer, "graphics/animation/weapon_fx_sheet.png", 1, 9);
 }
 Animation *CREATE_ANIMATION(struct SDL_Renderer *renderer)
@@ -50,10 +75,13 @@ Animation *CREATE_ANIMATION(struct SDL_Renderer *renderer)
     this->create_textures = _create_textures;
     this->new_sprite_packet = _new_sprite_packet;
     this->render_animation = _render_animation;
+    this->render_fire = _render_fire;
+    this->render_fire_attack = _render_fire_attack;
 
     this->magic_atk = malloc(sizeof(struct Animation_Packet *));
     this->magic_charge = malloc(sizeof(struct Animation_Packet *));
     this->slash = malloc(sizeof(struct Animation_Packet *));
+    this->fire_textures = malloc(sizeof(struct Animation_Packet *) * 2);
     this->create_textures(this, renderer);
     return this;
 }

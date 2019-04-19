@@ -40,6 +40,15 @@ static void _create_textures(Ba *this, struct SDL_Renderer *renderer)
         this->enemies[i]->rect.x = 35;
         this->enemies[i]->rect.y = (WINDOW_HEIGHT / 2) - 50;
     }
+    if (this->num_enemies > 1)
+    {
+        Rect new_rect;
+        while (SDL_IntersectRect(&this->enemies[0]->rect, &this->enemies[1]->rect, &new_rect))
+        {
+            this->enemies[1]->rect.y--;
+            this->enemies[1]->rect.x++;
+        }
+    }
 
     for (k = 0; k < NUM_CHARACTERS; k++)
     {
@@ -103,82 +112,98 @@ static int _set_text_stats(Ba *this)
 }
 static void _update(Ba *this)
 {
-    int i, status;
-    Character *head;
-    if (CANCEL() || EXIT())
-    {
-        state = previous_state;
-        previous_state = BATTLE;
+/**
+        int i, status, ret_ani;
+        Character *head;
+        if (CANCEL() || EXIT())
+        {
+            state = previous_state;
+            previous_state = BATTLE;
+            for (i = 0; i < NUM_CHARACTERS; i++)
+            {
+                while (SDL_RemoveTimer(this->hero_timers[i]))
+                    ;
+                free(this->timer_packets[i]);
+            }
+            free(this->hero_timers);
+            this->q->free(this->q);
+            this->b->destroy(this->b);
+            SDL_Delay(500);
+            this->first_render = 1;
+            NUM_STEPS = 0;
+            return;
+        }
+        if (this->first_render)
+        {
+            ENQUEUE(this->q, this, create_battle_textures, NULL);
+            this->q->copy(this->q);
+            this->free_thread = SDL_CreateThread(free_handler, "free_handler", this->q);
+            this->first_render = 0;
+            MOVEMENT_DISABLED = 1;
+            return;
+        }
+        SDL_WaitThread(this->free_thread, &status);
+        ENQUEUE(this->q, this->back_ground, render_back_ground_texture, NULL);
+        ENQUEUE(this->q, this->window, render_window, NULL);
+        ENQUEUE(this->q, this->window, render_window, NULL);
+        this->set_text_stats(this);
+        this->set_text_enemies(this);
+    
+        for (i = 0; i < this->num_enemies; i++)
+        {
+            ENQUEUE(this->q, this->enemies[i], render_enemy, NULL);
+        }
         for (i = 0; i < NUM_CHARACTERS; i++)
         {
-            while (SDL_RemoveTimer(this->hero_timers[i]))
-                ;
-            free(this->timer_packets[i]);
+            if (this->party[i]->current_state == waiting)
+            {
+                this->timer_packets[i] = malloc(sizeof(struct timer_packet));
+                this->timer_packets[i]->c = this->party[i];
+                this->timer_packets[i]->ba = this;
+                this->party[i]->current_state = in_timer;
+                this->hero_timers[i] = SDL_AddTimer(this->party[i]->speed_round(this->party[i]), this->hero_callback, this->timer_packets[i]);
+            }
+            else if (this->party[i]->current_state == casting)
+            {
+                ret_ani = this->party[i]->cast(this->party[i], this->q);
+                if (ret_ani == execute)
+                {
+                    this->party[i]->animation->fire_textures[0]->rect_1.x = this->enemies[0]->rect.x;
+                    this->party[i]->animation->fire_textures[0]->rect_1.y = this->enemies[0]->rect.y;
+                    ENQUEUE(this->q, this->party[i]->animation, this->party[i]->animation->render_fire_attack, NULL);
+                }
+                else if (ret_ani == fin)
+                {
+                    this->party[i]->current_state = waiting;
+                }
+            }
+    
+            ENQUEUE(this->q, this->party[i], this->party[i]->render_battle_textures, NULL);
         }
-        free(this->hero_timers);
-        this->q->free(this->q);
-        this->b->destroy(this->b);
-        SDL_Delay(500);
-        this->first_render = 1;
-        NUM_STEPS = 0;
-        return;
-    }
-    if (this->first_render)
-    {
-        ENQUEUE(this->q, this, create_battle_textures, NULL);
+        if (NULL != (head = this->b->peek(this->b, this->atlas, this->q)))
+        {
+            if (CONFIRM())
+            {
+                if (head->current_state == primary)
+                {
+                    head->current_state = this->hand->current_state + 3;
+                    this->hand->current_state = 0;
+                }
+                else
+                {
+                    this->b->pop(this->b);
+                    head->current_state = casting;
+                }
+            }
+            this->hand->change_state_quantity(this->hand, head->get_current_state_options(head) - 1, 0);
+            this->hand->move_vertical(this->hand, this->hand->battle_postion(this->hand, head->set_battle_actions(head, this->atlas, this->q), head->current_state));
+            ENQUEUE(this->q, this->hand, render_hand, NULL);
+        }
+    
         this->q->copy(this->q);
         this->free_thread = SDL_CreateThread(free_handler, "free_handler", this->q);
-        this->first_render = 0;
-        MOVEMENT_DISABLED = 1;
-        return;
-    }
-    SDL_WaitThread(this->free_thread, &status);
-    ENQUEUE(this->q, this->back_ground, render_back_ground_texture, NULL);
-    ENQUEUE(this->q, this->window, render_window, NULL);
-    ENQUEUE(this->q, this->window, render_window, NULL);
-    this->set_text_stats(this);
-    this->set_text_enemies(this);
-
-    for (i = 0; i < this->num_enemies; i++)
-    {
-        ENQUEUE(this->q, this->enemies[i], render_enemy, NULL);
-    }
-    for (i = 0; i < NUM_CHARACTERS; i++)
-    {
-        if (this->party[i]->current_state == waiting)
-        {
-            this->timer_packets[i] = malloc(sizeof(struct timer_packet));
-            this->timer_packets[i]->c = this->party[i];
-            this->timer_packets[i]->ba = this;
-            this->party[i]->current_state = in_timer;
-            this->hero_timers[i] = SDL_AddTimer(this->party[i]->speed_round(this->party[i]), this->hero_callback, this->timer_packets[i]);
-        }
-
-        ENQUEUE(this->q, this->party[i], this->party[i]->render_battle_textures, NULL);
-    }
-    if (NULL != (head = this->b->peek(this->b, this->atlas, this->q)))
-    {
-        if (CONFIRM())
-        {
-            if (head->current_state == primary)
-            {
-                head->current_state = this->hand->current_state + 3;
-                this->hand->current_state = 0;
-            }
-            else
-            {
-                this->b->pop(this->b);
-                head->current_state = casting;
-            }
-        }
-        this->hand->change_state_quantity(this->hand, head->get_current_state_options(head) - 1, 0);
-        this->hand->move_vertical(this->hand, this->hand->battle_postion(this->hand, head->set_battle_actions(head, this->atlas, this->q), head->current_state));
-        ENQUEUE(this->q, this->hand, render_hand, NULL);
-    }
-
-    this->q->copy(this->q);
-    this->free_thread = SDL_CreateThread(free_handler, "free_handler", this->q);
-}
+    
+*/}
 Ba *CREATE_BA(int area, int roll, Character **party, Atlas *atlas, Hand *hand)
 {
     Ba *this = malloc(sizeof(*this));

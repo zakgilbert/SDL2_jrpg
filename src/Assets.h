@@ -32,4 +32,5 @@ char **get_state_info(int save_state);
 void set_fullscreen(struct SDL_Window *window, Hero *hero);
 void set_animation_functions();
 void set_animation_textures();
+int handler_tt(void * ptr);
 #endif /* ASSETS_H */

@@ -29,7 +29,10 @@ typedef struct _Animation
     struct Sprite_Packet **magic_atk;
     struct Sprite_Packet **magic_charge;
     struct Sprite_Packet **slash;
+    struct Sprite_Packet **fire_textures;
     render_function(*render_animation);
+    render_function(*render_fire);
+    render_function(*render_fire_attack);
 } Animation;
 Animation *CREATE_ANIMATION(struct SDL_Renderer *renderer);
 

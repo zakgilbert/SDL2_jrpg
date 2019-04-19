@@ -28,6 +28,7 @@
 #include "Text.h"
 #include "Line.h"
 #include "Animation.h"
+#include "Sprite.h"
 
 int main(int argc, char **argv)
 {
@@ -36,22 +37,33 @@ int main(int argc, char **argv)
     set_up_timer(60);
     SET_GLOBALS();
     create_load_info();
+    const char *bt[] = {
+        "stand",
+        "pray_1",
+        "cast",
+        "step",
+        "damage",
+        "defend",
+        "pray_2",
+        "cast_stp",
+        "wound",
+        "dead"};
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
     {
         printf("error creating renderer: %s\n", SDL_GetError());
         return 1;
     }
-    TTF_Init();
+
     struct SDL_Window *window = NULL;
     struct SDL_Renderer *renderer = NULL;
     SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
     SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
     Atlas *letters = CREATE_ATLAS();
-    Hero *hero = CREATE_HERO();
     Hand *hand = CREATE_HAND();
     Item *bag = CREATE_BAG();
+    Hero *hero = CREATE_HERO(renderer);
     Area *dark_forest = CREATE_AREA(DARK_FOREST, hero, bag);
     Collision *game_collision = CREATE_COLLISION(hero);
     r_Q = CREATE_RENDER_Q();
@@ -68,6 +80,7 @@ int main(int argc, char **argv)
     Ba *current_ba = NULL;
 
     Character **party = load_party(0, renderer);
+    Sprite *he = CREATE_SPRITE("Locke", "graphics/Locke_battle.png", 2, 5, renderer, 10, bt, 32, 32);
 
     Menu *menu = CREATE_MENU(party, hand, bag, letters);
     int dark_forest_npcs[2] = {GIGAS, SASH};
@@ -82,7 +95,6 @@ int main(int argc, char **argv)
                                dark_forest_npcs, dark_forest_npc_types, 2,
                                dark_forest_items_x, dark_forest_items_y, dark_forest_npcs_x, dark_forest_npcs_y);
 
-    hero->set_texture(hero, renderer, "graphics/locke_map.png");
     hand->create_texture(hand, "graphics/hand.png", renderer, 233, 11);
 
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
@@ -90,6 +102,7 @@ int main(int argc, char **argv)
     SDL_DetachThread(input_thread);
     party[0]->in_animation = -1;
     FILE *data = fopen("data.txt", "w");
+
     while (!EXIT())
     {
         for (i = 0; i < 1; i++)
@@ -164,7 +177,6 @@ int main(int argc, char **argv)
                 message_being_displayed = NULL;
             }
             break;
-*/
         case BATTLE:
             if (NULL == current_ba)
                 current_ba = CREATE_BA(previous_state, ROLL, party, letters, hand);
@@ -181,6 +193,7 @@ int main(int argc, char **argv)
                 current_ba = NULL;
             }
             break;
+*/
         default:
             break;
         }
@@ -194,10 +207,12 @@ int main(int argc, char **argv)
 
     dark_forest->destroy(dark_forest);
     hero->destroy(hero);
-    if (NULL != current_ba)
-    {
-        current_ba->destroy(current_ba);
-    }
+/**
+        if (NULL != current_ba)
+        {
+            current_ba->destroy(current_ba);
+        }
+*/
     menu->destroy(menu);
     hand->destroy(hand);
     save_bag(bag, 0);

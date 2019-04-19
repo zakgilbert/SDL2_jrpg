@@ -17,6 +17,7 @@
 #include "Line.h"
 #include "Words.h"
 #include "Animation.h"
+#include "Sprite.h"
 
 struct Main_Attribute
 {
@@ -43,7 +44,7 @@ typedef struct _Character
     render_function(*render_battle_textures);
     void (*render_bio_image)(struct _Character *this, struct SDL_Renderer *renderer);
     int (*update_party_stats)(struct _Character **);
-    int (*cast)(struct _Character *);
+    int (*cast)(struct _Character *, Render_Q *q);
     int (*cast_ptr[2])(struct SDL_Rect *rect);
     Uint32 (*speed_round)(struct _Character *this);
     int (*set_battle_actions)(struct _Character *this, Atlas *at, Render_Q *q);
@@ -52,6 +53,8 @@ typedef struct _Character
     int (*get_current_state_options)(struct _Character *this);
     struct SDL_Texture *texture;
     struct SDL_Rect rect;
+
+    Sprite *battle_spr;
     struct SDL_Texture *b_texture;
     struct SDL_Rect b_rect_1;
     struct SDL_Rect b_rect_2;
@@ -81,6 +84,7 @@ typedef struct _Character
     int in_animation;
     int ready;
     enum battle_states current_state;
+    int index;
 
 } Character;
 

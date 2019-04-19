@@ -3,13 +3,20 @@
 #include "Character.h"
 #include "Battle_Q.h"
 
+static const int hero_positions_x[4] = {240, 255, 270, 285};
+static const int hero_positions_y[4] = {90, 120, 150, 180};
+
 static const char *ACTION_STRS[] = {
     FOREACH_ACTION_OPTION(GENERATE_STRING)};
 
 static const char *SPELL_STRS[] = {
     FOREACH_SPELL(GENERATE_STRING)};
 
-static const int sched_spell[] = {pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step};
+static const char *FRMS[] = {
+    FOREACH_CHARACTER_BATTLE_FRAME(GENERATE_STRING)};
+/**
+    static const int sched_spell[] = {pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, cast_step, execute, execute, execute, execute, execute, execute, execute, fin};
+*/
 
 static void _destroy(Character *this)
 {
@@ -89,64 +96,49 @@ static void _check_stats(Character *this)
 
 static void _create_battle_texture(Character *this, struct SDL_Renderer *renderer, int i)
 {
-    int hero_positions_x[4] = {240, 255, 270, 285};
-    int hero_positions_y[4] = {90, 120, 150, 180};
-    this->b_texture = create_texture(renderer, BATTLE_CHARACTER_GRAPHICS->list[this->key], &this->b_rect_2);
+    char *str = malloc(40);
+    strcpy(str, "Battle_Spr_");
+    this->battle_spr = CREATE_SPRITE(str, BATTLE_CHARACTER_GRAPHICS->list[this->key], 2, 5, renderer, 10, FRMS, 32, 32);
 
-    this->b_rect_1.x = hero_positions_x[i];
-    this->b_rect_1.y = hero_positions_y[i];
-    this->b_rect_2.x = 0;
-    this->b_rect_2.y = 0;
-    this->b_rect_1.w = SPRITE_FRAME_WIDTH;
-    this->b_rect_1.h = SPRITE_FRAME_HEIGHT;
-    this->b_rect_2.w = SPRITE_FRAME_WIDTH;
-    this->b_rect_2.h = SPRITE_FRAME_HEIGHT;
+    this->battle_spr->pos.x = hero_positions_x[i];
+    this->battle_spr->pos.y = hero_positions_y[i];
 }
-static int _cast(Character *this)
+static int _cast(Character *this, Render_Q *q)
 {
-    if (this->in_animation == -1)
-    {
-        this->in_animation = 1;
-        this->current_animation_frame = 0;
-        this->animation_total_frames = 32;
-    }
-    else if (this->current_animation_frame >= this->animation_total_frames)
-    {
-        this->in_animation = -1;
-        this->curent_spell = animation_functions[stand];
-        this->curent_spell(&this->b_rect_1, &this->b_rect_2);
-        this->current_state = waiting;
-        this->b_rect_1.x = 240;
-    }
-    if (time_to_animate() && this->in_animation)
-    {
-        this->curent_spell = animation_functions[sched_spell[this->current_animation_frame++]];
-        this->curent_spell(&this->b_rect_1, &this->b_rect_2);
-        printf("%p\n", this->curent_spell);
-        this->animation->magic_atk[0]->rect_2.x += this->animation->magic_atk[0]->w;
-        this->animation->magic_charge[0]->rect_2.x += this->animation->magic_charge[0]->w;
-    }
     /**
-        else if (time_to_animate() && this->in_animation && this->current_animation_frame >= 20 && this->current_animation_frame <= 24)
+    
+        if (this->in_animation == -1)
         {
-            this->current_animation_frame++;
-            this->b_rect_1.x--;
-            this->step(&this->b_rect_2);
+            this->in_animation = 1;
+            this->current_animation_frame = 0;
+            this->animation_total_frames = 39;
         }
-        else if (time_to_animate() && this->in_animation && this->current_animation_frame >= 25 && this->current_animation_frame <= 27)
+        else if (this->current_animation_frame >= this->animation_total_frames)
         {
-            this->current_animation_frame++;
-            this->b_rect_1.x--;
-            this->execute_spell_1(&this->b_rect_2);
+            this->in_animation = -1;
+            this->curent_spell = animation_functions[no_ani];
+            this->curent_spell(&this->b_rect_1, &this->b_rect_2, &this->index);
+            this->current_state = waiting;
+            return fin;
         }
-        else if (time_to_animate() && this->in_animation && this->current_animation_frame >= 27)
+        if (time_to_animate() && this->in_animation)
         {
+            if (sched_spell[this->current_animation_frame] != execute)
+            {
+                this->curent_spell = animation_functions[sched_spell[this->current_animation_frame]];
+                this->curent_spell(&this->b_rect_1, &this->b_rect_2, &this->index);
+            }
+            else
+                animation_functions[no_ani](&this->b_rect_1, &this->b_rect_2, &this->index);
             this->current_animation_frame++;
-            this->execute_spell_2(&this->b_rect_2);
         }
+        if (sched_spell[this->current_animation_frame] == cast_step)
+        {
+            ENQUEUE(q, this->animation, this->animation->render_fire, NULL);
+        }
+    
+        return sched_spell[this->current_animation_frame];
 */
-
-    return this->in_animation;
 }
 
 static Uint32 _speed_round(Character *this)
@@ -157,18 +149,6 @@ static void _render_battle_textures(void *obj, struct SDL_Renderer *renderer)
 {
     Character *this = (Character *)obj;
     SDL_RenderCopy(renderer, this->b_texture, &this->b_rect_2, &this->b_rect_1);
-    if (this->current_state == casting)
-    {
-        this->animation->render_animation(this->animation->magic_atk[0], renderer);
-        this->animation->render_animation(this->animation->magic_charge[0], renderer);
-
-        this->cast(this);
-    }
-    else
-    {
-        this->curent_spell = animation_functions[stand];
-        this->curent_spell(&this->b_rect_1, &this->b_rect_2);
-    }
 }
 static void _render_bio_image(Character *this, struct SDL_Renderer *renderer)
 {
