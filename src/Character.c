@@ -179,12 +179,12 @@ static void _render_bio_image(Character *this, struct SDL_Renderer *renderer)
 static void _render_external_animation(void *obj, Renderer renderer)
 {
     Character *this = (Character *)obj;
-    this->charger->pos.x = hero_positions_x[this->key];
-    this->charger->pos.y = hero_positions_y[this->key];
+    this->ani_ptr->charge_spell->pos.x = hero_positions_x[this->key];
+    this->ani_ptr->charge_spell->pos.y = hero_positions_y[this->key];
     printf("external animation frame: %d\n", this->current_external_animation_frame);
-    SDL_RenderCopy(renderer, this->charger->texture,
-                   this->charger->search(this->charger, generic_hash_strings[this->current_external_animation_frame]),
-                   &this->charger->pos);
+    SDL_RenderCopy(renderer, this->ani_ptr->charge_spell->texture,
+                   this->ani_ptr->charge_spell->search(this->ani_ptr->charge_spell, generic_hash_strings[this->current_external_animation_frame]),
+                   &this->ani_ptr->charge_spell->pos);
 }
 static char *_get_data(void *obj)
 {
@@ -276,7 +276,6 @@ Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer, Animation *a
     this->num_spells = 3;
     this->current_sprite_frame = stand;
     this->current_external_animation_frame = 0;
-    this->charger = CREATE_SPRITE("Magic_Charger", "graphics/animation/charge_spell.png", 1, 10, renderer, 10, generic_hash_strings, 44, 44);
 
     strcpy(this->HP.name, "HP: ");
     strcpy(this->MP.name, "MP: ");

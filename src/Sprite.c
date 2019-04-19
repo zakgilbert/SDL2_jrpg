@@ -53,6 +53,7 @@ static struct Sprite_Node *new_node(const char *key, int x, int y, int w, int h)
     struct Sprite_Node *node = malloc(sizeof(struct Sprite_Node));
     node->key = strdup(key);
     set_rect(&node->rect, x, y, w, h);
+    printf("Sprite node: X: %d,   Y: %d,   W: %d,    H: %d\n", x, y, w, h);
     return node;
 }
 

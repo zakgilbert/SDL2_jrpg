@@ -6,7 +6,7 @@
 #include "Animation.h"
 
 #include "Character.h"
-const static char *generic_hash_strings[] = {
+static const char *generic_hash_strings[] = {
     FOREACH_GENERIC_HASHTARGET(GENERATE_STRING)};
 
 static void _destroy(Animation *this)

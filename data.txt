@@ -521,7 +521,115 @@ Locke:   Current Battle State: 0
 Locke
 Locke:   Current Battle State: 0
 Locke
-Locke:   Current Battle State: 1
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 0
 Locke
 Locke:   Current Battle State: 1
 Locke
@@ -628,4 +736,2857 @@ Locke
 Locke:   Current Battle State: 1
 Locke
 Locke:   Current Battle State: 1
-Loc
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 4
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 6
+Locke
+Locke:   Current Battle State: 0
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 1
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2
+Locke
+Locke:   Current Battle State: 2

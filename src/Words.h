@@ -50,7 +50,7 @@
     TARG(zero)                           \
     TARG(one)                            \
     TARG(two)                            \
-    TARG(three)                          \
+    TARG(thre)                          \
     TARG(four)                           \
     TARG(five)                           \
     TARG(six)                            \
