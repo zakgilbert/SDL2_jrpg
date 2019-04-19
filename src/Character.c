@@ -125,9 +125,14 @@ static int _cast(Character *this, Render_Q *q)
         this->current_state = waiting;
         this->current_sprite_frame = stand;
     }
+    int charger_count = NUM_CASTING_FRAMES - 10;
+    if (charger_count == this->current_animation_frame)
+    {
+        printf("a_frame: %d\n ani_frame : %d\n", this->current_external_animation_frame, this->current_animation_frame);
+        this->current_external_animation_frame = 0;
+    }
     if (time_to_animate() && this->in_animation)
     {
-        int charger_count = NUM_CASTING_FRAMES - 10;
         printf("charger_counter: %d\n", charger_count);
         this->current_sprite_frame =
             this->current_battle_animation_schedule[this->current_animation_frame++];
@@ -145,16 +150,15 @@ static int _cast(Character *this, Render_Q *q)
         {
             ENQUEUE(q, this->animation, this->animation->render_fire, NULL);
 */
-        if (this->current_external_animation_frame < 10)
+        if (this->current_external_animation_frame != -1 && this->current_external_animation_frame < 10)
         {
             this->current_external_animation_frame++;
         }
     }
-    if (this->current_external_animation_frame >= 10)
+    if (this->current_external_animation_frame != -1)
     {
-        this->current_external_animation_frame = 0;
+        ENQUEUE(q, this, this->render_external_animation, NULL);
     }
-    ENQUEUE(q, this, this->render_external_animation, NULL);
 
     return casting_schedule[this->current_animation_frame];
 }
@@ -179,8 +183,8 @@ static void _render_bio_image(Character *this, struct SDL_Renderer *renderer)
 static void _render_external_animation(void *obj, Renderer renderer)
 {
     Character *this = (Character *)obj;
-    this->ani_ptr->charge_spell->pos.x = hero_positions_x[this->key];
-    this->ani_ptr->charge_spell->pos.y = hero_positions_y[this->key];
+    this->ani_ptr->charge_spell->pos.x = hero_positions_x[this->key] - 8;
+    this->ani_ptr->charge_spell->pos.y = hero_positions_y[this->key] - 8;
     printf("external animation frame: %d\n", this->current_external_animation_frame);
     SDL_RenderCopy(renderer, this->ani_ptr->charge_spell->texture,
                    this->ani_ptr->charge_spell->search(this->ani_ptr->charge_spell, generic_hash_strings[this->current_external_animation_frame]),
@@ -275,7 +279,7 @@ Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer, Animation *a
     this->spells[2] = Bolt;
     this->num_spells = 3;
     this->current_sprite_frame = stand;
-    this->current_external_animation_frame = 0;
+    this->current_external_animation_frame = -1;
 
     strcpy(this->HP.name, "HP: ");
     strcpy(this->MP.name, "MP: ");
