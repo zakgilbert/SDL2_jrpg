@@ -72,8 +72,8 @@ static void _insert(Sprite *this, const char *key, int x, int y, int w, int h)
         i++;
     }
     /**
-        printf("%s was added at index %d\n", node->key, index);
 */
+    printf("%s was added at index %d\n", node->key, index);
     this->table[index] = node;
 }
 
@@ -92,8 +92,8 @@ static Rect *_search(Sprite *this, const char *key)
             this->frame.x = disco->rect.x;
             this->frame.y = disco->rect.y;
             /**
-                printf("key %s was found at index %d\n", key, index);
 */
+            printf("key %s was found at index %d\n", key, index);
             return &this->frame;
         }
         index = hash_code(disco->key, this->size, i);

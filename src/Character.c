@@ -6,6 +6,9 @@
 static const int hero_positions_x[4] = {240, 255, 270, 285};
 static const int hero_positions_y[4] = {90, 120, 150, 180};
 
+const static char *generic_hash_strings[] = {
+    FOREACH_GENERIC_HASHTARGET(GENERATE_STRING)};
+
 static const char *ACTION_STRS[] = {
     FOREACH_ACTION_OPTION(GENERATE_STRING)};
 
@@ -14,7 +17,7 @@ static const char *SPELL_STRS[] = {
 
 static const char *FRMS[] = {
     FOREACH_CHARACTER_BATTLE_FRAME(GENERATE_STRING)};
-static const int sched_spell[] = {
+static const int casting_schedule[NUM_CASTING_FRAMES] = {
     pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1,
     pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2,
     pray_1, pray_2, pray_1, pray_2, pray_1, pray_2,
@@ -114,16 +117,19 @@ static int _cast(Character *this, Render_Q *q)
     {
         this->in_animation = 1;
         this->current_animation_frame = 0;
-        this->animation_total_frames = 32;
+        this->current_battle_animation_schedule = casting_schedule;
     }
-    else if (this->current_animation_frame >= this->animation_total_frames)
+    else if (this->current_animation_frame >= NUM_CASTING_FRAMES)
     {
         this->in_animation = -1;
         this->current_state = waiting;
+        this->current_sprite_frame = stand;
     }
     if (time_to_animate() && this->in_animation)
     {
-        this->current_sprite_frame = sched_spell[this->current_animation_frame++];
+        int charger_count = NUM_CASTING_FRAMES - 10;
+        this->current_sprite_frame =
+            this->current_battle_animation_schedule[this->current_animation_frame++];
         /**
             if (sched_spell[this->current_animation_frame] != execute)
             {
@@ -137,11 +143,22 @@ static int _cast(Character *this, Render_Q *q)
         if (sched_spell[this->current_animation_frame] == cast_step)
         {
             ENQUEUE(q, this->animation, this->animation->render_fire, NULL);
-        }
 */
-
-        return sched_spell[this->current_animation_frame];
+        if (this->current_animation_frame == charger_count)
+        {
+            this->current_external_animation_frame = 0;
+        }
+        if (this->current_external_animation_frame != -1 && this->current_external_animation_frame < 10)
+        {
+            ENQUEUE(q, this, this->render_external_animation, NULL);
+        }
+        if (this->current_external_animation_frame == 10)
+        {
+            this->current_external_animation_frame = -1;
+        }
     }
+
+    return casting_schedule[this->current_animation_frame];
 }
 
 static Uint32 _speed_round(Character *this)
@@ -160,6 +177,17 @@ static void _render_battle_textures(void *obj, struct SDL_Renderer *renderer)
 static void _render_bio_image(Character *this, struct SDL_Renderer *renderer)
 {
     SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
+}
+static void _render_external_animation(void *obj, Renderer renderer)
+{
+    Character *this = (Character *)obj;
+    this->ani_ptr->charge_spell->pos.x = hero_positions_x[this->key];
+    this->ani_ptr->charge_spell->pos.y = hero_positions_y[this->key];
+    printf("external animation frame: %d\n", this->current_external_animation_frame);
+    SDL_RenderCopy(renderer, this->ani_ptr->charge_spell->texture,
+                   this->ani_ptr->charge_spell->search(
+                       this->ani_ptr->charge_spell, generic_hash_strings[this->current_external_animation_frame]),
+                   &this->ani_ptr->charge_spell->pos);
 }
 static char *_get_data(void *obj)
 {
@@ -215,7 +243,7 @@ static int _set_battle_actions(Character *this, Atlas *at, Render_Q *q)
     }
     return 0;
 }
-Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer)
+Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer, Animation const *animation)
 {
     Character *this = (Character *)malloc(sizeof(*this));
 
@@ -229,10 +257,11 @@ Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer)
     this->speed_round = _speed_round;
     this->set_battle_actions = _set_battle_actions;
     this->get_current_state_options = _get_current_state_options;
+    this->render_external_animation = _render_external_animation;
 
     this->curent_spell = NULL;
 
-    this->animation = CREATE_ANIMATION(renderer);
+    this->ani_ptr = animation;
     this->cast = _cast;
     this->get_data = _get_data;
     this->key = key;
@@ -249,6 +278,7 @@ Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer)
     this->spells[2] = Bolt;
     this->num_spells = 3;
     this->current_sprite_frame = stand;
+    this->current_external_animation_frame = -1;
 
     strcpy(this->HP.name, "HP: ");
     strcpy(this->MP.name, "MP: ");

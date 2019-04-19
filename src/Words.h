@@ -46,6 +46,19 @@
     FRAME(wound)                              \
     FRAME(dead)
 
+#define FOREACH_GENERIC_HASHTARGET(TARG) \
+    TARG(zero)                           \
+    TARG(one)                            \
+    TARG(two)                            \
+    TARG(three)                          \
+    TARG(four)                           \
+    TARG(five)                           \
+    TARG(six)                            \
+    TARG(seven)                          \
+    TARG(eight)                          \
+    TARG(nine)                           \
+    TARG(ten)
+
 typedef enum
 {
     FOREACH_ITEM(GENERATE_ENUM)
@@ -75,6 +88,11 @@ typedef enum
 {
     FOREACH_CHARACTER_BATTLE_FRAME(GENERATE_ENUM)
 } CHARACTER_BATTLE_FRAME_ENUM;
+
+typedef enum
+{
+    FOREACH_GENERIC_HASHTARGET(GENERATE_ENUM)
+} GENERIC_HASH_TARGET_ENUM;
 
 extern int ITEM_QUANTITY;
 #endif

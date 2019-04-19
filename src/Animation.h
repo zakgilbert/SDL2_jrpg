@@ -13,6 +13,7 @@
 #include "Header.h"
 #include "Graphics.h"
 #include "Render.h"
+#include "Sprite.h"
 
 struct Sprite_Packet
 {
@@ -24,15 +25,8 @@ struct Sprite_Packet
 typedef struct _Animation
 {
     void (*destroy)(struct _Animation *this);
-    void (*create_textures)(struct _Animation *this, struct SDL_Renderer *renderer);
-    struct Sprite_Packet *(*new_sprite_packet)(struct SDL_Renderer *renderer, const char *path, int rows, int cols);
-    struct Sprite_Packet **magic_atk;
-    struct Sprite_Packet **magic_charge;
-    struct Sprite_Packet **slash;
-    struct Sprite_Packet **fire_textures;
-    render_function(*render_animation);
-    render_function(*render_fire);
-    render_function(*render_fire_attack);
+    render_function(*render);
+    Sprite *charge_spell;
 } Animation;
 Animation *CREATE_ANIMATION(struct SDL_Renderer *renderer);
 

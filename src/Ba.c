@@ -118,16 +118,14 @@ static void _update(Ba *this)
     {
         state = previous_state;
         previous_state = BATTLE;
-        /**
-            for (i = 0; i < NUM_CHARACTERS; i++)
-            {
-                while (SDL_RemoveTimer(this->hero_timers[i]))
-                    ;
-                free(this->timer_packets[i]);
-            }
-            free(this->hero_timers);
+        for (i = 0; i < NUM_CHARACTERS; i++)
+        {
+            while (SDL_RemoveTimer(this->hero_timers[i]))
+                ;
+            free(this->timer_packets[i]);
+        }
+        free(this->hero_timers);
         this->b->destroy(this->b);
-*/
         this->q->free(this->q);
         SDL_Delay(500);
         this->first_render = 1;
@@ -195,6 +193,7 @@ static void _update(Ba *this)
             {
                 this->b->pop(this->b);
                 head->current_state = casting;
+                head->scheduled_animation = this->hand->current_state;
             }
         }
         this->hand->change_state_quantity(this->hand, head->get_current_state_options(head) - 1, 0);

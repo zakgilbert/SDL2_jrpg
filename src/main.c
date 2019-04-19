@@ -68,6 +68,8 @@ int main(int argc, char **argv)
     Hero *hero = CREATE_HERO(renderer);
     Area *dark_forest = CREATE_AREA(DARK_FOREST, hero, bag);
     Collision *game_collision = CREATE_COLLISION(hero);
+    Animation const *animations = CREATE_ANIMATION(renderer);
+
     r_Q = CREATE_RENDER_Q();
     letters->map(letters, renderer);
 
@@ -81,7 +83,7 @@ int main(int argc, char **argv)
 */
     Ba *current_ba = NULL;
 
-    Character **party = load_party(0, renderer);
+    Character **party = load_party(0, renderer, animations);
     Sprite *he = CREATE_SPRITE("Locke", "graphics/Locke_battle.png", 2, 5, renderer, 10, bt, 32, 32);
 
     Menu *menu = CREATE_MENU(party, hand, bag, letters);

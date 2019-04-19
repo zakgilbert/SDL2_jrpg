@@ -197,6 +197,8 @@ enum battle_states
     magic,
     item,
     casting,
+    execute
+
 };
 enum states
 {
@@ -209,7 +211,15 @@ enum states
     SAVE,
     BATTLE
 };
-enum states state, previous_state;
+enum CHARACTER_BATTLE_ANIMATION_SCHEDULES
+{
+    primary_attack,
+    cast_magic,
+    use_item
+};
+
+enum states state,
+    previous_state;
 enum CHARACTER_BATTLE_ANIMATION
 {
     ATK,

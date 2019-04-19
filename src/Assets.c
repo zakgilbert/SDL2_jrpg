@@ -177,7 +177,7 @@ Item *load_bag(Item *bag, int save_state)
  *      actions' enum keys.
  * 
 */
-Character **load_party(int save_state, struct SDL_Renderer *renderer)
+Character **load_party(int save_state, struct SDL_Renderer *renderer, Animation const *animation)
 {
     FILE *in;
     Character **party;
@@ -200,7 +200,7 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
     for (i = 0; i < num_members; i++)
     {
         fscanf(in, "%d", &character_keys[i]);
-        party[i] = CREATE_CHARACTER(character_keys[i], renderer);
+        party[i] = CREATE_CHARACTER(character_keys[i], renderer, animation);
         party[i]->name = CHARACTER_NAMES->list[character_keys[i]];
         party[i]->age = CHARACTER_AGES->list[character_keys[i]];
         party[i]->job = CHARACTER_JOBS->list[character_keys[i]];
@@ -208,8 +208,6 @@ Character **load_party(int save_state, struct SDL_Renderer *renderer)
         party[i]->texture = create_texture(renderer, party[i]->image_path, &party[i]->rect);
         party[i]->create_battle_texture(party[i], renderer, i);
         party[i]->index = i;
-        party[i]->animation->fire_textures[1]->rect_1.x = hero_positions_x[party[i]->index] - 10;
-        party[i]->animation->fire_textures[1]->rect_1.y = hero_positions_y[party[i]->index] - 10;
     }
 
     for (i = 0; i < num_members; i++)

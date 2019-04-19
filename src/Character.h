@@ -18,6 +18,8 @@
 #include "Animation.h"
 #include "Sprite.h"
 
+#define NUM_CASTING_FRAMES (32)
+
 struct Main_Attribute
 {
     int current;
@@ -50,6 +52,7 @@ typedef struct _Character
     GET_DATA(*get_data);
     change_animation_pos(*curent_spell);
     int (*get_current_state_options)(struct _Character *this);
+    render_function(*render_external_animation);
     struct SDL_Texture *texture;
     struct SDL_Rect rect;
 
@@ -61,8 +64,10 @@ typedef struct _Character
     struct Main_Attribute HP;
     struct Main_Attribute MP;
     struct Main_Attribute EXP;
-    Animation *animation;
+    Animation const *ani_ptr;
 
+    const int *current_battle_animation_schedule;
+    int scheduled_animation;
     int *spells;
     int num_spells;
     const char *image_path;
@@ -83,12 +88,13 @@ typedef struct _Character
     int in_animation;
     int ready;
     enum battle_states current_state;
+    GENERIC_HASH_TARGET_ENUM current_external_animation_frame;
     CHARACTER_BATTLE_FRAME_ENUM current_sprite_frame;
     int index;
 
 } Character;
 
-Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer);
+Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer, Animation const *animation);
 
 struct Party
 {
