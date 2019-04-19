@@ -27,6 +27,8 @@ typedef struct _Animation
     void (*destroy)(struct _Animation *this);
     render_function(*render);
     Sprite *charge_spell;
+    Sprite *fire_1;
+
 } Animation;
 Animation *CREATE_ANIMATION(struct SDL_Renderer *renderer);
 

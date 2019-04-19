@@ -125,42 +125,35 @@ static int _cast(Character *this, Render_Q *q)
         this->current_state = waiting;
         this->current_sprite_frame = stand;
     }
+
     int charger_count = NUM_CASTING_FRAMES - 10;
+    int spell_count = NUM_CASTING_FRAMES - 5;
+
     if (charger_count == this->current_animation_frame)
-    {
-        printf("a_frame: %d\n ani_frame : %d\n", this->current_external_animation_frame, this->current_animation_frame);
         this->current_external_animation_frame = 0;
-    }
+
+    if (spell_count == this->current_animation_frame)
+        this->spell_fx_frame = 0;
+
     if (time_to_animate() && this->in_animation)
     {
-        printf("charger_counter: %d\n", charger_count);
         this->current_sprite_frame =
             this->current_battle_animation_schedule[this->current_animation_frame++];
-        /**
-            if (sched_spell[this->current_animation_frame] != execute)
-            {
-                this->curent_spell = animation_functions[sched_spell[this->current_animation_frame]];
-                this->curent_spell(&this->b_rect_1, &this->b_rect_2, &this->index);
-            }
-            else
-                animation_functions[no_ani](&this->b_rect_1, &this->b_rect_2, &this->index);
-            this->current_animation_frame++;
-        }
-        if (sched_spell[this->current_animation_frame] == cast_step)
-        {
-            ENQUEUE(q, this->animation, this->animation->render_fire, NULL);
-*/
+
         if (this->current_external_animation_frame != -1 && this->current_external_animation_frame < 10)
-        {
             this->current_external_animation_frame++;
-        }
-    }
-    if (this->current_external_animation_frame != -1)
-    {
-        ENQUEUE(q, this, this->render_external_animation, NULL);
+
+        if (this->spell_fx_frame != -1 && this->spell_fx_frame < 5)
+            this->spell_fx_frame++;
     }
 
-    return casting_schedule[this->current_animation_frame];
+    if (this->current_external_animation_frame != -1)
+        ENQUEUE(q, this, this->render_external_animation, NULL);
+
+    if (this->spell_fx_frame != -1)
+        ENQUEUE(q, this, this->render_spell_fx, NULL);
+
+    return NULL;
 }
 
 static Uint32 _speed_round(Character *this)
@@ -180,15 +173,27 @@ static void _render_bio_image(Character *this, struct SDL_Renderer *renderer)
 {
     SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
 }
+
 static void _render_external_animation(void *obj, Renderer renderer)
 {
     Character *this = (Character *)obj;
     this->ani_ptr->charge_spell->pos.x = hero_positions_x[this->key] - 8;
     this->ani_ptr->charge_spell->pos.y = hero_positions_y[this->key] - 8;
-    printf("external animation frame: %d\n", this->current_external_animation_frame);
+
     SDL_RenderCopy(renderer, this->ani_ptr->charge_spell->texture,
                    this->ani_ptr->charge_spell->search(this->ani_ptr->charge_spell, generic_hash_strings[this->current_external_animation_frame]),
                    &this->ani_ptr->charge_spell->pos);
+}
+
+static void _render_spell_fx(void *obj, Renderer renderer)
+{
+    Character *this = (Character *)obj;
+    this->ani_ptr->fire_1->pos.x = 150;
+    this->ani_ptr->fire_1->pos.y = 150;
+
+    SDL_RenderCopy(renderer, this->ani_ptr->fire_1->texture,
+                   this->ani_ptr->fire_1->search(this->ani_ptr->fire_1, generic_hash_strings[this->spell_fx_frame]),
+                   &this->ani_ptr->fire_1->pos);
 }
 static char *_get_data(void *obj)
 {
@@ -259,6 +264,7 @@ Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer, Animation *a
     this->set_battle_actions = _set_battle_actions;
     this->get_current_state_options = _get_current_state_options;
     this->render_external_animation = _render_external_animation;
+    this->render_spell_fx = _render_spell_fx;
 
     this->curent_spell = NULL;
 
@@ -280,6 +286,8 @@ Character *CREATE_CHARACTER(int key, struct SDL_Renderer *renderer, Animation *a
     this->num_spells = 3;
     this->current_sprite_frame = stand;
     this->current_external_animation_frame = -1;
+    this->current_spell = -1;
+    this->spell_fx_frame = -1;
 
     strcpy(this->HP.name, "HP: ");
     strcpy(this->MP.name, "MP: ");

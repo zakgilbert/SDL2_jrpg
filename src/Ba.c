@@ -194,6 +194,9 @@ static void _update(Ba *this)
                 this->b->pop(this->b);
                 head->current_state = casting;
                 head->scheduled_animation = this->hand->current_state;
+/**
+                    head->current_spell = this->hand->current_state;
+*/
             }
         }
         this->hand->change_state_quantity(this->hand, head->get_current_state_options(head) - 1, 0);

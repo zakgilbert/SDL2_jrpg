@@ -53,7 +53,6 @@ static struct Sprite_Node *new_node(const char *key, int x, int y, int w, int h)
     struct Sprite_Node *node = malloc(sizeof(struct Sprite_Node));
     node->key = strdup(key);
     set_rect(&node->rect, x, y, w, h);
-    printf("Sprite node: X: %d,   Y: %d,   W: %d,    H: %d\n", x, y, w, h);
     return node;
 }
 
@@ -72,8 +71,8 @@ static void _insert(Sprite *this, const char *key, int x, int y, int w, int h)
         current_node = this->table[index];
         i++;
     }
-    /**
-    printf("%s was added at index %d\n", node->key, index);
+/**
+        printf("%s was added at index %d\n", node->key, index);
 */
     this->table[index] = node;
 }

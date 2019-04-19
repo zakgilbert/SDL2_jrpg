@@ -53,6 +53,7 @@ typedef struct _Character
     change_animation_pos(*curent_spell);
     int (*get_current_state_options)(struct _Character *this);
     render_function(*render_external_animation);
+    render_function(*render_spell_fx);
     struct SDL_Texture *texture;
     struct SDL_Rect rect;
 
@@ -85,11 +86,12 @@ typedef struct _Character
     int update_stats;
     int animation_total_frames;
     int current_animation_frame;
+    SPELL_ENUM current_spell;
     int ani_i;
     int in_animation;
     int ready;
     enum battle_states current_state;
-    GENERIC_HASH_TARGET_ENUM current_external_animation_frame;
+    GENERIC_HASH_TARGET_ENUM current_external_animation_frame, spell_fx_frame;
     CHARACTER_BATTLE_FRAME_ENUM current_sprite_frame;
     int index;
 

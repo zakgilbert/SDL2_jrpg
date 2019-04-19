@@ -30,8 +30,6 @@
 #include "Animation.h"
 #include "Sprite.h"
 
-static const char *FRMS[] = {
-    FOREACH_CHARACTER_BATTLE_FRAME(GENERATE_STRING)};
 int main(int argc, char **argv)
 {
     int i;
@@ -39,17 +37,6 @@ int main(int argc, char **argv)
     set_up_timer(60);
     SET_GLOBALS();
     create_load_info();
-    const char *bt[] = {
-        "stand",
-        "pray_1",
-        "cast",
-        "step",
-        "damage",
-        "defend",
-        "pray_2",
-        "cast_stp",
-        "wound",
-        "dead"};
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
     {
@@ -78,13 +65,9 @@ int main(int argc, char **argv)
     SDL_Thread *hand_thread;
     SDL_Thread *input_thread;
 
-    /**
-        Battle *current_battle = NULL;
-*/
     Ba *current_ba = NULL;
 
     Character **party = load_party(0, renderer, animations);
-    Sprite *he = CREATE_SPRITE("Locke", "graphics/Locke_battle.png", 2, 5, renderer, 10, bt, 32, 32);
 
     Menu *menu = CREATE_MENU(party, hand, bag, letters);
     int dark_forest_npcs[2] = {GIGAS, SASH};
@@ -104,7 +87,6 @@ int main(int argc, char **argv)
     hand_thread = SDL_CreateThread(animate_hand_thread, "animate_hand_thread", hand);
     input_thread = SDL_CreateThread(input_handler, "input_handler", NULL);
     SDL_DetachThread(input_thread);
-    party[0]->in_animation = -1;
     FILE *data = fopen("data.txt", "w");
 
     while (!EXIT())
@@ -221,6 +203,7 @@ int main(int argc, char **argv)
     hand->destroy(hand);
     save_bag(bag, 0);
     bag->destroy(bag);
+    animations->destroy(animations);
     letters->destroy(letters);
     free(STAT_MATRIX);
     party[0]->destroy_party(party);

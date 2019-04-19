@@ -47,17 +47,17 @@
     FRAME(dead)
 
 #define FOREACH_GENERIC_HASHTARGET(TARG) \
-    TARG(zero)                           \
-    TARG(one)                            \
-    TARG(two)                            \
-    TARG(thre)                          \
-    TARG(four)                           \
-    TARG(five)                           \
-    TARG(six)                            \
-    TARG(seven)                          \
-    TARG(eight)                          \
-    TARG(nine)                           \
-    TARG(ten)
+    TARG(a)                              \
+    TARG(b)                              \
+    TARG(c)                              \
+    TARG(d)                              \
+    TARG(e)                              \
+    TARG(f)                              \
+    TARG(g)                              \
+    TARG(h)                              \
+    TARG(i)                              \
+    TARG(j)                              \
+    TARG(k)
 
 typedef enum
 {
@@ -79,10 +79,10 @@ typedef enum
     FOREACH_ACTION_OPTION(GENERATE_ENUM)
 } ACTION_OPTION_ENUM;
 
-enum SPELL_ENUM
+typedef enum
 {
     FOREACH_SPELL(GENERATE_ENUM)
-};
+} SPELL_ENUM;
 
 typedef enum
 {
