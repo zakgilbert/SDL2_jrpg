@@ -123,6 +123,7 @@ static void _check_direction(Hero *this)
     if (key_state[SDL_SCANCODE_S])
     {
         this->animate_down(this);
+        this->facing = down;
     }
     else if (key_state[SDL_SCANCODE_W])
     {
@@ -186,7 +187,7 @@ Hero *CREATE_HERO(Renderer renderer)
     this->animate_up = _animate_up;
     this->animate_left = _animate_left;
     this->animate_right = _animate_right;
-    this->sprite = CREATE_SPRITE("Hero", "graphics/lockft.png", 4, 3, renderer, 12, keys, 18, 26);
+    this->sprite = CREATE_SPRITE("Hero", "graphics/dog.png", 6, 3, renderer, 18, keys, 20, 20);
     this->sprite->pos.x = get_middle_x(WINDOW_WIDTH, HERO_WIDTH);
     this->sprite->pos.y = get_middle_y(WINDOW_HEIGHT, HERO_HEIGHT);
     this->index = 0;

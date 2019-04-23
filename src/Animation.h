@@ -28,6 +28,8 @@ typedef struct _Animation
     render_function(*render);
     Sprite *charge_spell;
     Sprite *fire_1;
+    Sprite *ice_1_charge;
+    Sprite *ice_1;
 
 } Animation;
 Animation *CREATE_ANIMATION(struct SDL_Renderer *renderer);

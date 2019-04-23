@@ -18,12 +18,14 @@ static const char *SPELL_STRS[] = {
 static const char *FRMS[] = {
     FOREACH_CHARACTER_BATTLE_FRAME(GENERATE_STRING)};
 static const int casting_schedule[NUM_CASTING_FRAMES] = {
-    pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1,
-    pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2,
-    pray_1, pray_2, pray_1, pray_2, pray_1, pray_2,
+    pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2,
+    pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2,
+    pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2,
+    pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2, pray_1, pray_2,
     step,
     cast_step, cast_step, cast_step, cast_step, cast_step,
-    cast_step, cast_step, cast_step, cast_step, cast_step, cast_step};
+    cast_step, cast_step, cast_step, cast_step, cast_step, cast_step,
+    stand, stand, stand, stand, stand};
 
 static void _destroy(Character *this)
 {
@@ -126,8 +128,8 @@ static int _cast(Character *this, Render_Q *q)
         this->current_sprite_frame = stand;
     }
 
-    int charger_count = NUM_CASTING_FRAMES - 10;
-    int spell_count = NUM_CASTING_FRAMES - 5;
+    int charger_count = NUM_CASTING_FRAMES - 12;
+    int spell_count = NUM_CASTING_FRAMES - 10;
 
     if (charger_count == this->current_animation_frame)
         this->current_external_animation_frame = 0;
@@ -143,11 +145,15 @@ static int _cast(Character *this, Render_Q *q)
         if (this->current_external_animation_frame != -1 && this->current_external_animation_frame < 10)
             this->current_external_animation_frame++;
 
-        if (this->spell_fx_frame != -1 && this->spell_fx_frame < 5)
+        if (this->spell_fx_frame != -1 && this->spell_fx_frame < 4)
             this->spell_fx_frame++;
+        else if (this->spell_fx_frame == 4)
+        {
+            this->spell_fx_frame = 0;
+        }
     }
 
-    if (this->current_external_animation_frame != -1)
+    if (this->current_external_animation_frame != -1 && this->current_external_animation_frame < 10)
         ENQUEUE(q, this, this->render_external_animation, NULL);
 
     if (this->spell_fx_frame != -1)
@@ -188,7 +194,7 @@ static void _render_external_animation(void *obj, Renderer renderer)
 static void _render_spell_fx(void *obj, Renderer renderer)
 {
     Character *this = (Character *)obj;
-    this->ani_ptr->fire_1->pos.x = 150;
+    this->ani_ptr->fire_1->pos.x = 150 - (this->current_animation_frame * 2);
     this->ani_ptr->fire_1->pos.y = 150;
 
     SDL_RenderCopy(renderer, this->ani_ptr->fire_1->texture,

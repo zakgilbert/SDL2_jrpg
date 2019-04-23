@@ -18,7 +18,7 @@
 #include "Animation.h"
 #include "Sprite.h"
 
-#define NUM_CASTING_FRAMES (32)
+#define NUM_CASTING_FRAMES (57)
 
 struct Main_Attribute
 {
