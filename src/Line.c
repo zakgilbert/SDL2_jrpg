@@ -31,6 +31,8 @@ struct SDL_Texture *_get_texture(Line *this, int i)
         this->letters[i]->rect.y = this->y + 3;
     else if ((strcmp(item->key, ".") == 0))
         this->letters[i]->rect.y += 6;
+    else if ((strcmp(item->key, ",") == 0))
+        this->letters[i]->rect.y += 6;
     else if ((strcmp(item->key, "i") == 0))
         this->letters[i]->rect.y = this->y + 1;
     else if (item->rect.h < 8 && (strcmp(item->key, "h") != 0))
@@ -105,17 +107,6 @@ Line *CREATE_LINE_WINDOW(Atlas *atlas, const char *line, int x, int y)
     Line *this = CREATE_LINE(atlas, line, x, y);
     this->window = CREATE_WINDOW(x - 3, y - 3, (int)(strlen(line) * 12), 16);
     return this;
-}
-Line **CREATE_MESS(Atlas *atlas, const char **line, int x, int y, int num_lines)
-{
-    Line **this = malloc(sizeof(Line *) * num_lines);
-    int i;
-
-    for (i = 0; i < num_lines; i++)
-    {
-        this[i] = CREATE_LINE(atlas, line[i], x, y);
-        y += 12;
-    }
 }
 void render_line0(void *obj, struct SDL_Renderer *renderer)
 {

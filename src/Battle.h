@@ -1,5 +1,5 @@
-#ifndef BA_H
-#define BA_H
+#ifndef BATTLE_H
+#define BATTLE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,15 +26,15 @@
 #include "Time.h"
 #include "Hand.h"
 
-typedef struct _Ba
+typedef struct _Battle
 {
     /* Deallocates battle */
-    void (*destroy)(struct _Ba *this);
-    void (*create_textures)(struct _Ba *, struct SDL_Renderer *renderer);
+    void (*destroy)(struct _Battle *this);
+    void (*create_textures)(struct _Battle *, struct SDL_Renderer *renderer);
     /* Update battle logic */
-    void (*update)(struct _Ba *this);
-    int (*set_text_stats)(struct _Ba *this);
-    int (*set_text_enemies)(struct _Ba *this);
+    void (*update)(struct _Battle *this);
+    int (*set_text_stats)(struct _Battle *this);
+    int (*set_text_enemies)(struct _Battle *this);
     Uint32 (*hero_callback)(Uint32 interval, void *param);
 
     Render_Q *q;
@@ -55,15 +55,15 @@ typedef struct _Ba
     SDL_Thread *free_thread;
     SDL_TimerID *hero_timers;
     struct timer_packet **timer_packets;
-} Ba;
+} Battle;
 struct timer_packet
 {
     Character *c;
-    Ba *ba;
+    Battle *ba;
 };
 
-Ba *CREATE_BA(int area, int roll, Character **party, Atlas *atlas, Hand *hand);
+Battle *CREATE_BATTLE(int area, int roll, Character **party, Atlas *atlas, Hand *hand);
 void create_battle_textures(void *obj, struct SDL_Renderer *renderer);
 void render_back_ground_texture(void *obj, struct SDL_Renderer *renderer);
 
-#endif /* BA_H */
+#endif /* BATTLE_H */

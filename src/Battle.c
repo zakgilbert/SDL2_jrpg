@@ -1,13 +1,13 @@
 
 /************************
-	 *  Ba.c
+	 *  Battle.c
 	*/
 
-#include "Ba.h"
+#include "Battle.h"
 
 void create_battle_textures(void *obj, struct SDL_Renderer *renderer)
 {
-    Ba *this = (Ba *)obj;
+    Battle *this = (Battle *)obj;
     this->create_textures(this, renderer);
 }
 void render_back_ground_texture(void *obj, struct SDL_Renderer *renderer)
@@ -15,7 +15,7 @@ void render_back_ground_texture(void *obj, struct SDL_Renderer *renderer)
     struct Texture *this = (struct Texture *)obj;
     SDL_RenderCopy(renderer, this->t, NULL, &this->r);
 }
-static void _destroy(Ba *this)
+static void _destroy(Battle *this)
 {
     if (NULL != this)
     {
@@ -24,7 +24,7 @@ static void _destroy(Ba *this)
         this = NULL;
     }
 }
-static void _create_textures(Ba *this, struct SDL_Renderer *renderer)
+static void _create_textures(Battle *this, struct SDL_Renderer *renderer)
 {
     /**
         int time_bar_x, time_bar_y;
@@ -62,7 +62,7 @@ static void _create_textures(Ba *this, struct SDL_Renderer *renderer)
 */
     }
 }
-static int _set_text_enemies(Ba *this)
+static int _set_text_enemies(Battle *this)
 {
     int skip, x, y, i;
     skip = 12;
@@ -85,7 +85,7 @@ static Uint32 _hero_callback(Uint32 interval, void *param)
     printf("Hero Callback is being called\n");
     return 0;
 }
-static int _set_text_stats(Ba *this)
+static int _set_text_stats(Battle *this)
 {
     int skip, x, y, l_x, i;
     skip = 12;
@@ -110,9 +110,9 @@ static int _set_text_stats(Ba *this)
     }
     return 0;
 }
-static void _update(Ba *this)
+static void _update(Battle *this)
 {
-    int i, status, ret_ani;
+    int i, status;
     Character *head;
     if (CANCEL() || EXIT())
     {
@@ -164,7 +164,7 @@ static void _update(Ba *this)
         }
         else if (this->party[i]->current_state == casting)
         {
-            ret_ani = this->party[i]->cast(this->party[i], this->q);
+            this->party[i]->cast(this->party[i], this->q);
             /**
                         if (ret_ani == execute)
                         {
@@ -194,7 +194,7 @@ static void _update(Ba *this)
                 this->b->pop(this->b);
                 head->current_state = casting;
                 head->scheduled_animation = this->hand->current_state;
-/**
+                /**
                     head->current_spell = this->hand->current_state;
 */
             }
@@ -208,9 +208,9 @@ static void _update(Ba *this)
     this->free_thread = SDL_CreateThread(free_handler, "free_handler", this->q);
 }
 
-Ba *CREATE_BA(int area, int roll, Character **party, Atlas *atlas, Hand *hand)
+Battle *CREATE_BATTLE(int area, int roll, Character **party, Atlas *atlas, Hand *hand)
 {
-    Ba *this = malloc(sizeof(*this));
+    Battle *this = malloc(sizeof(*this));
     this->destroy = _destroy;
     this->create_textures = _create_textures;
     this->update = _update;

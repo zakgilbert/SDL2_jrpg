@@ -97,8 +97,7 @@ static void _add_npcs(Collision *this, Npc **npcs, int num_npcs, int area_key)
 
 static void _update_collidables(Collision *this, int area_key)
 {
-    int k, intersection;
-    intersection = 0;
+    int k;
     if (area_key >= NUM_AREAS)
     {
         return;
@@ -108,7 +107,6 @@ static void _update_collidables(Collision *this, int area_key)
 
         if (SDL_HasIntersection(this->hero_rect, this->collidables[area_key][k]->rect))
         {
-            intersection = 1;
             if (this->hero->facing == up)
             {
                 Y--;

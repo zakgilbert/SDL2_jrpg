@@ -41,8 +41,6 @@ Line *CREATE_LINE(Atlas *atlas, const char *line, int x, int y);
 
 Line *CREATE_LINE_WINDOW(Atlas *atlas, const char *line, int x, int y);
 
-Line **CREATE_MESS(Atlas *atlas, const char **line, int x, int y, int num_lines);
-
 struct Letter *NEW_LETTER(const char *letter, int x, int y);
 void render_line0(void *obj, struct SDL_Renderer *renderer);
 void destroy_line(void *obj);

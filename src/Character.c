@@ -159,7 +159,7 @@ static int _cast(Character *this, Render_Q *q)
     if (this->spell_fx_frame != -1)
         ENQUEUE(q, this, this->render_spell_fx, NULL);
 
-    return NULL;
+    return 0;
 }
 
 static Uint32 _speed_round(Character *this)

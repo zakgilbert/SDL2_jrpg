@@ -21,7 +21,7 @@
 #include "Lootable.h"
 #include "Npc.h"
 #include "Collision.h"
-#include "Ba.h"
+#include "Battle.h"
 #include "Assets.h"
 #include "Enemy.h"
 #include "Battle_Q.h"
@@ -66,7 +66,7 @@ int main(int argc, char **argv)
     SDL_Thread *hand_thread;
     SDL_Thread *input_thread;
 
-    Ba *current_ba = NULL;
+    Battle *current_battle = NULL;
 
     Character **party = load_party(0, renderer, animations);
 
@@ -166,19 +166,19 @@ int main(int argc, char **argv)
             break;
 */
         case BATTLE:
-            if (NULL == current_ba)
-                current_ba = CREATE_BA(previous_state, ROLL, party, letters, hand);
-            if (NULL != current_ba && state == BATTLE)
-                current_ba->update(current_ba);
-            if (NULL != current_ba && previous_state == BATTLE && !EXIT())
+            if (NULL == current_battle)
+                current_battle = CREATE_BATTLE(previous_state, ROLL, party, letters, hand);
+            if (NULL != current_battle && state == BATTLE)
+                current_battle->update(current_battle);
+            if (NULL != current_battle && previous_state == BATTLE && !EXIT())
             {
-                current_ba->destroy(current_ba);
+                current_battle->destroy(current_battle);
                 for (i = 0; i < NUM_CHARACTERS; i++)
                 {
                     party[i]->current_state = waiting;
                 }
 
-                current_ba = NULL;
+                current_battle = NULL;
             }
             break;
         default:
@@ -196,9 +196,9 @@ int main(int argc, char **argv)
     dark_forest->destroy(dark_forest);
     hero->destroy(hero);
 
-    if (NULL != current_ba)
+    if (NULL != current_battle)
     {
-        current_ba->destroy(current_ba);
+        current_battle->destroy(current_battle);
     }
     menu->destroy(menu);
     hand->destroy(hand);
