@@ -70,6 +70,26 @@ static void _add(Render_Q *this, struct Node *data)
     this->rear->next = data;
     this->rear = data;
 }
+static struct Node *_poop(Render_Q *this)
+{
+    struct Node *temp;
+
+    if (NULL == this->front)
+        return NULL;
+
+    struct Node *current = this->front;
+    temp = this->rear;
+    while (NULL != current)
+    {
+        if (current->next == temp)
+        {
+            current->next = NULL;
+            this->rear = current;
+            break;
+        }
+    }
+    return temp;
+}
 static struct Node *_pop(Render_Q *this)
 {
     struct Node *temp;
@@ -128,6 +148,7 @@ Render_Q *CREATE_RENDER_Q()
     this->copy = _copy;
     this->clone = _clone;
     this->pop = _pop;
+    this->poop = _poop;
     this->free = _free;
     this->size = 0;
     this->rendering = 0;

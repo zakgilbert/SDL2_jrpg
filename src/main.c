@@ -29,6 +29,7 @@
 #include "Line.h"
 #include "Animation.h"
 #include "Sprite.h"
+#include "Dialogue.h"
 
 int main(int argc, char **argv)
 {
@@ -53,7 +54,7 @@ int main(int argc, char **argv)
     Hand *hand = CREATE_HAND();
     Item *bag = CREATE_BAG();
     Hero *hero = CREATE_HERO(renderer);
-    Area *dark_forest = CREATE_AREA(DARK_FOREST, hero, bag);
+    Area *dark_forest = CREATE_AREA(DARK_FOREST, hero, bag, letters);
     Collision *game_collision = CREATE_COLLISION(hero);
     Animation *animations = CREATE_ANIMATION(renderer);
 
@@ -99,7 +100,6 @@ int main(int argc, char **argv)
         start_timer();
         game_collision->update_collidables(game_collision, state);
         movement();
-
         set_fullscreen(window, hero);
         r_Q = r_Q->render(r_Q, renderer);
 
@@ -189,20 +189,22 @@ int main(int argc, char **argv)
         delay();
         reset_timer();
     }
-    menu_transition(&menu->delay, renderer);
+    SDL_SetWindowFullscreen(window, 0);
+    SDL_Delay(3000);
     SDL_WaitThread(hand_thread, NULL);
 
     dark_forest->destroy(dark_forest);
     hero->destroy(hero);
-    /**
-*/
+
     if (NULL != current_ba)
     {
         current_ba->destroy(current_ba);
     }
     menu->destroy(menu);
     hand->destroy(hand);
-    save_bag(bag, 0);
+    /**
+        save_bag(bag, 0);
+*/
     bag->destroy(bag);
     animations->destroy(animations);
     letters->destroy(letters);

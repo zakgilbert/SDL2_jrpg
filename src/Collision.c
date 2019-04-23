@@ -111,29 +111,24 @@ static void _update_collidables(Collision *this, int area_key)
             intersection = 1;
             if (this->hero->facing == up)
             {
-                Y = LAST_Y;
+                Y--;
                 *this->collidables[area_key][k]->ready_to_interact = 1;
-                printf("Hero: x: %d Hero; y: %d\nOBJ: X: %d OBJ: Y: %d\n", this->hero_rect->x, this->hero_rect->y, this->collidables[area_key][k]->rect->x, this->collidables[area_key][k]->rect->y);
             }
             if (this->hero->facing == down)
             {
 
-                Y = LAST_Y;
+                Y++;
                 *this->collidables[area_key][k]->ready_to_interact = 0;
-                printf("Hero: x: %d Hero; y: %d\nOBJ: X: %d OBJ: Y: %d\n", this->hero_rect->x, this->hero_rect->y, this->collidables[area_key][k]->rect->x, this->collidables[area_key][k]->rect->y);
             }
             if (this->hero->facing == left)
             {
-                X = LAST_X;
+                X--;
                 *this->collidables[area_key][k]->ready_to_interact = 0;
-                printf("Hero: x: %d Hero; y: %d\nOBJ: X: %d OBJ: Y: %d\n", this->hero_rect->x, this->hero_rect->y, this->collidables[area_key][k]->rect->x, this->collidables[area_key][k]->rect->y);
             }
             if (this->hero->facing == right)
             {
-                directions_restricted(1, 1, 1, 0);
-                X = LAST_X;
+                X++;
                 *this->collidables[area_key][k]->ready_to_interact = 0;
-                printf("Hero: x: %d Hero; y: %d\nOBJ: X: %d OBJ: Y: %d\n", this->hero_rect->x, this->hero_rect->y, this->collidables[area_key][k]->rect->x, this->collidables[area_key][k]->rect->y);
             }
         }
         else
@@ -171,4 +166,4 @@ Collision *CREATE_COLLISION(Hero *hero)
 
     return this;
 }
-int obj_mov_handler(void * ptr);
+int obj_mov_handler(void *ptr);

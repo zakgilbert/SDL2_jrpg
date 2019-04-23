@@ -130,6 +130,10 @@ static void _map(Atlas *this, struct SDL_Renderer *renderer)
     this->insert(this, "/", renderer, strcat(path, "f_slash"));
     strcpy(path, "graphics/letters/");
     this->insert(this, " ", renderer, strcat(path, "spc4.png"));
+    strcpy(path, "graphics/letters/");
+    this->insert(this, ",", renderer, strcat(path, ","));
+    strcpy(path, "graphics/letters/");
+    this->insert(this, "?", renderer, strcat(path, "?"));
 
     free(path);
 }

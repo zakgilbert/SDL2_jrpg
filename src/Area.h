@@ -21,6 +21,10 @@
 #include "Lootable.h"
 #include "Npc.h"
 #include "Message.h"
+#include "Line.h"
+#include "Atlas.h"
+#include "Dialogue.h"
+
 int handler_area(void *ptr);
 typedef struct _area
 {
@@ -35,6 +39,7 @@ typedef struct _area
                           int *npc_keys, int *npc_types, int num_npcs,
                           int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y);
 
+    Dialogue *current_dialogue;
     Message *(*render_area)(struct _area *);
     Render_Q *(*set_q)(struct _area *this);
     int (*check_wait_thread)(struct _area *);
@@ -56,7 +61,10 @@ typedef struct _area
     int first_load;
     Render_Q *q;
     Hero *hero;
+    Atlas *atlas;
+    int in_message;
+    int in_dialogue;
 } Area;
 
-Area *CREATE_AREA(int area_key, Hero *hero, Item *party_bag);
+Area *CREATE_AREA(int area_key, Hero *hero, Item *party_bag, Atlas *atlas);
 #endif
