@@ -16,7 +16,6 @@
 #include "Atlas.h"
 #include "Character.h"
 #include "Affect.h"
-#include "Message.h"
 #include "Time.h"
 #include "Lootable.h"
 #include "Npc.h"
@@ -137,34 +136,8 @@ int main(int argc, char **argv)
                 hand->render(hand, renderer);
                 SDL_RenderPresent(renderer);
                 break;
-
-        case MESSAGE:
-            if (message_being_displayed->type == ONE_LINER)
-            {
-                message_being_displayed->render_one_liner(message_being_displayed, renderer);
-                SDL_RenderPresent(renderer);
-                wait_for_okay();
-                state = previous_state;
-                previous_state = MESSAGE;
-                message_being_displayed->destroy(message_being_displayed);
-                message_being_displayed = NULL;
-            }
-            else if (message_being_displayed->type == DIALOGUE)
-            {
-                while (!message_being_displayed->render_dialogue(message_being_displayed, renderer))
-                {
-                    SDL_RenderPresent(renderer);
-                    wait_for_okay();
-                    USER_INPUTS[4] = 0;
-                }
-                USER_INPUTS[4] = 0;
-                state = previous_state;
-                previous_state = MESSAGE;
-                message_being_displayed->destroy(message_being_displayed);
-                message_being_displayed = NULL;
-            }
-            break;
 */
+
         case BATTLE:
             if (NULL == current_battle)
                 current_battle = CREATE_BATTLE(previous_state, ROLL, party, letters, hand);

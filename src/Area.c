@@ -100,7 +100,7 @@ static void _create_assets(Area *this, struct SDL_Renderer *renderer, Collision 
     collidables->add_collision(collidables, this->lootables, num_items, this->npcs, num_npcs, this->num_collidables, this->area_key);
 }
 
-static Message *_render_area(Area *this)
+static void _render_area(Area *this)
 {
     int i, k;
     srand(time(NULL));
@@ -111,7 +111,7 @@ static Message *_render_area(Area *this)
         this->q->free(this->q);
         this->first_load = 1;
 
-        return NULL;
+        return;
     }
     /**
         else if (NUM_STEPS > (200 + (rand() % 500)))
@@ -122,7 +122,7 @@ static Message *_render_area(Area *this)
             this->q->free(this->q);
             this->first_load = 1;
     
-            return NULL;
+            return;
         }
 */
     else if (this->first_load)
@@ -135,7 +135,6 @@ static Message *_render_area(Area *this)
     int item_to_be_obtained = -1;
     int npc_to_interact_with = -1;
 
-    Message *dungeon_message = NULL;
     this->hero->animate(this->hero);
     if (!this->in_message || !this->in_dialogue)
     {
@@ -174,31 +173,6 @@ static Message *_render_area(Area *this)
             }
         }
     }
-    /**
-    
-        for (i = 0; i < this->num_npcs; i++)
-        {
-            if (this->current_index == -1 &&
-                this->npcs[i]->ready_to_interact != 0 &&
-                (0 <= ((npc_to_interact_with) = (this->npcs[i]->interact(this->npcs[i])))))
-            {
-                this->last_x = X;
-                this->last_y = Y;
-                this->current_index = i;
-                dungeon_message = CREATE_MESSAGE(" ", 0, 0, 10, DIALOGUE, npc_to_interact_with);
-                state = MESSAGE;
-                previous_state = this->area_key;
-                WAITING_FOR_MESSAGE = 0;
-            }
-        }
-        if (this->current_index != -1 && (this->last_x != X || this->last_y != Y))
-        {
-            this->npcs[this->current_index]->ready_to_interact = 0;
-            this->current_index = -1;
-            this->last_x = X;
-            this->last_y = Y;
-        }
-*/
     if (((this->in_message && ((CONFIRM())))) ||
         (this->last_x > X + 20 || this->last_x < X - 20 ||
          this->last_y > Y + 20 || this->last_y < Y - 20))
@@ -222,7 +196,6 @@ static Message *_render_area(Area *this)
         }
     }
     this->q->copy(this->q);
-    return dungeon_message;
 }
 
 Area *CREATE_AREA(int area_key, Hero *hero, Item *party_bag, Atlas *atlas)

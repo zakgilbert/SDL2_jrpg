@@ -20,7 +20,6 @@
 #include "Collision.h"
 #include "Lootable.h"
 #include "Npc.h"
-#include "Message.h"
 #include "Line.h"
 #include "Atlas.h"
 #include "Dialogue.h"
@@ -40,7 +39,7 @@ typedef struct _area
                           int *loot_cords_x, int *loot_cords_y, int *npc_cords_x, int *npc_cords_y);
 
     Dialogue *current_dialogue;
-    Message *(*render_area)(struct _area *);
+    void (*render_area)(struct _area *);
     Render_Q *(*set_q)(struct _area *this);
     int (*check_wait_thread)(struct _area *);
     int area_map_width;
