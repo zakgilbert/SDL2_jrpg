@@ -21,6 +21,7 @@ struct Collidable
     int *ready_to_interact;
 };
 
+void directions_restricted(int down, int up, int left, int right);
 typedef struct _collision
 {
     void (*destroy)(struct _collision *);

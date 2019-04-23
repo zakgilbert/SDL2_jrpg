@@ -13,13 +13,27 @@ static void _destroy(Npc *this)
 
 static void _render_one_frame(Npc *this, struct SDL_Renderer *renderer)
 {
+    if (!MOVEMENT_DISABLED)
+    {
+        this->rect.x = this->x + X;
+        this->rect.y = this->y + Y;
+    }
     SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-    SDL_RenderDrawRect(renderer, &this->rect);
+    /**
+        SDL_RenderDrawRect(renderer, &this->rect);
+*/
 }
 static void _render_sprite(Npc *this, struct SDL_Renderer *renderer)
 {
+    if (!MOVEMENT_DISABLED)
+    {
+        this->rect.x = this->x + X;
+        this->rect.y = this->y + Y;
+    }
     SDL_RenderCopy(renderer, this->texture, &this->rect2, &this->rect);
+    /**
     SDL_RenderDrawRect(renderer, &this->rect);
+*/
 }
 
 static int _interact(Npc *this)

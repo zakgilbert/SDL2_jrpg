@@ -39,24 +39,28 @@ int change_position()
     {
         if (key_state[SDL_SCANCODE_S])
         {
+            LAST_Y = Y;
             Y--;
             is_moving = 1;
             NUM_STEPS++;
         }
         else if (key_state[SDL_SCANCODE_W])
         {
+            LAST_Y = Y;
             Y++;
             is_moving = 1;
             NUM_STEPS++;
         }
         else if (key_state[SDL_SCANCODE_A])
         {
+            LAST_X = X;
             X++;
             is_moving = 1;
             NUM_STEPS++;
         }
         else if (key_state[SDL_SCANCODE_D])
         {
+            LAST_X = X;
             X--;
             is_moving = 1;
             NUM_STEPS++;

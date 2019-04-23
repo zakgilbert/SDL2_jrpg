@@ -46,18 +46,18 @@ static void _destroy(Area *this)
 static Render_Q *_set_q(struct _area *this)
 {
     int i;
-    this->q->add(this->q, this->q->new_node(this->floor, render_floor, NULL));
-    this->q->add(this->q, this->q->new_node(this->hero, render_hero, NULL));
+    ENQUEUE(this->q, this->floor, render_floor, NULL);
+    ENQUEUE(this->q, this->hero, render_hero, NULL);
 
     for (i = 0; i < this->bag->items_in_bag; i++)
     {
-        this->q->add(this->q, this->q->new_node(this->lootables[i], render_lootable, NULL));
+        ENQUEUE(this->q, this->lootables[i], render_lootable, NULL);
     }
     for (i = 0; i < this->num_npcs; i++)
     {
-        this->q->add(this->q, this->q->new_node(this->npcs[i], render_npc, NULL));
+        ENQUEUE(this->q, this->npcs[i], render_npc, NULL);
     }
-    this->q->add(this->q, this->q->new_node(this->trees, render_floor, NULL));
+    ENQUEUE(this->q, this->trees, render_floor, NULL);
     this->first_load = 0;
     return this->q;
 }
@@ -125,44 +125,46 @@ static Message *_render_area(Area *this)
     Message *dungeon_message = NULL;
     MOVEMENT_DISABLED = 0;
     this->hero->animate(this->hero);
-
-    for (k = 0; k < this->bag->items_in_bag; k++)
-    {
-        if (this->current_index == -1 &&
-            this->lootables[k]->ready_to_interact > 0 &&
-            (0 <= ((item_to_be_obtained) = (this->lootables[k]->loot(this->lootables[k])))))
+    /**
+    
+        for (k = 0; k < this->bag->items_in_bag; k++)
         {
+            if (this->current_index == -1 &&
+                this->lootables[k]->ready_to_interact > 0 &&
+                (0 <= ((item_to_be_obtained) = (this->lootables[k]->loot(this->lootables[k])))))
+            {
+                this->last_x = X;
+                this->last_y = Y;
+                this->current_index = k;
+                dungeon_message = CREATE_MESSAGE((char *)ITEMS[item_to_be_obtained], 0, 0, 10, ONE_LINER, item_to_be_obtained);
+                state = MESSAGE;
+                previous_state = this->area_key;
+                this->party_bag->loot(this->party_bag, item_to_be_obtained);
+            }
+        }
+        for (i = 0; i < this->num_npcs; i++)
+        {
+            if (this->current_index == -1 &&
+                this->npcs[i]->ready_to_interact != 0 &&
+                (0 <= ((npc_to_interact_with) = (this->npcs[i]->interact(this->npcs[i])))))
+            {
+                this->last_x = X;
+                this->last_y = Y;
+                this->current_index = i;
+                dungeon_message = CREATE_MESSAGE(" ", 0, 0, 10, DIALOGUE, npc_to_interact_with);
+                state = MESSAGE;
+                previous_state = this->area_key;
+                WAITING_FOR_MESSAGE = 0;
+            }
+        }
+        if (this->current_index != -1 && (this->last_x != X || this->last_y != Y))
+        {
+            this->npcs[this->current_index]->ready_to_interact = 0;
+            this->current_index = -1;
             this->last_x = X;
             this->last_y = Y;
-            this->current_index = k;
-            dungeon_message = CREATE_MESSAGE((char *)ITEMS[item_to_be_obtained], 0, 0, 10, ONE_LINER, item_to_be_obtained);
-            state = MESSAGE;
-            previous_state = this->area_key;
-            this->party_bag->loot(this->party_bag, item_to_be_obtained);
         }
-    }
-    for (i = 0; i < this->num_npcs; i++)
-    {
-        if (this->current_index == -1 &&
-            this->npcs[i]->ready_to_interact != 0 &&
-            (0 <= ((npc_to_interact_with) = (this->npcs[i]->interact(this->npcs[i])))))
-        {
-            this->last_x = X;
-            this->last_y = Y;
-            this->current_index = i;
-            dungeon_message = CREATE_MESSAGE(" ", 0, 0, 10, DIALOGUE, npc_to_interact_with);
-            state = MESSAGE;
-            previous_state = this->area_key;
-            WAITING_FOR_MESSAGE = 0;
-        }
-    }
-    if (this->current_index != -1 && (this->last_x != X || this->last_y != Y))
-    {
-        this->npcs[this->current_index]->ready_to_interact = 0;
-        this->current_index = -1;
-        this->last_x = X;
-        this->last_y = Y;
-    }
+*/
     this->q->copy(this->q);
     return dungeon_message;
 }

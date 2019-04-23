@@ -400,4 +400,8 @@ void SET_GLOBALS()
                            "data/save/save3/"};
 
     SAVE_PATHS = CREATE_LIST_STRING(save_paths, 3);
+    for (i = 0; i < 4; i++)
+    {
+        EDGE_DETECTION[i] = 1;
+    }
 }

@@ -97,8 +97,9 @@ int main(int argc, char **argv)
         }
 
         start_timer();
-        movement();
         game_collision->update_collidables(game_collision, state);
+        movement();
+
         set_fullscreen(window, hero);
         r_Q = r_Q->render(r_Q, renderer);
 
