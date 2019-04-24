@@ -108,7 +108,7 @@ Line *CREATE_LINE_WINDOW(Atlas *atlas, const char *line, int x, int y)
     this->window = CREATE_WINDOW(x - 3, y - 3, (int)(strlen(line) * 12), 16);
     return this;
 }
-void render_line0(void *obj, struct SDL_Renderer *renderer)
+void render_line(void *obj, struct SDL_Renderer *renderer)
 {
     int i;
     Line *this = (Line *)obj;

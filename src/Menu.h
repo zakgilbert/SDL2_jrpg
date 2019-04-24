@@ -16,7 +16,6 @@
 #include "Hand.h"
 #include "Character.h"
 #include "Words.h"
-#include "Text.h"
 #include "Render.h"
 #include "Atlas.h"
 #include "Line.h"

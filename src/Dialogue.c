@@ -56,7 +56,7 @@ static int _add_lines(Dialogue *this, Render_Q *q)
     ENQUEUE(q, this->window, render_window, NULL);
     for (; i < max; i++)
     {
-        ENQUEUE(q, CREATE_LINE(this->atlas, this->lines[i], x, y), render_line0, destroy_line);
+        ENQUEUE(q, CREATE_LINE(this->atlas, this->lines[i], x, y), render_line, destroy_line);
         y += 15;
     }
     return result;

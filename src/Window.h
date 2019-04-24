@@ -10,7 +10,6 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
 #include "Header.h"
-#include "Text.h"
 typedef struct _Window
 {
     void (*destroy)(struct _Window *);

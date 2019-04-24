@@ -24,7 +24,6 @@
 #include "Assets.h"
 #include "Enemy.h"
 #include "Battle_Q.h"
-#include "Text.h"
 #include "Line.h"
 #include "Animation.h"
 #include "Sprite.h"

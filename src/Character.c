@@ -47,10 +47,10 @@ static int prim_text(Character *this, Atlas *at, Render_Q *q)
     x = 200;
     y = 240;
     skip = 12;
-    ENQUEUE(q, CREATE_LINE(at, this->name, x, y - 22), render_line0, NULL);
+    ENQUEUE(q, CREATE_LINE(at, this->name, x, y - 22), render_line, NULL);
     for (i = 0; i < this->num_actions; i++)
     {
-        ENQUEUE(q, CREATE_LINE(at, ACTION_STRS[this->actions[i]], x, y), render_line0, NULL);
+        ENQUEUE(q, CREATE_LINE(at, ACTION_STRS[this->actions[i]], x, y), render_line, NULL);
         y += skip;
     }
     return skip;
@@ -63,10 +63,10 @@ static int spell_text(Character *this, Atlas *at, Render_Q *q)
     y = 230;
     skip = 12;
 
-    ENQUEUE(q, CREATE_LINE(at, this->name, x, y - 22), render_line0, NULL);
+    ENQUEUE(q, CREATE_LINE(at, this->name, x, y - 22), render_line, NULL);
     for (i = 0; i < this->num_spells; i++)
     {
-        ENQUEUE(q, CREATE_LINE(at, SPELL_STRS[this->spells[i]], x, y), render_line0, NULL);
+        ENQUEUE(q, CREATE_LINE(at, SPELL_STRS[this->spells[i]], x, y), render_line, NULL);
         y += skip;
     }
     return skip;

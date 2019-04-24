@@ -73,7 +73,7 @@ static int _set_text_enemies(Battle *this)
     {
         ENQUEUE(this->q,
                 CREATE_LINE(this->atlas, ENEMIES->list[this->enemies[i]->key], x, y),
-                render_line0, NULL);
+                render_line, NULL);
         y += skip;
     }
     return 0;
@@ -100,12 +100,12 @@ static int _set_text_stats(Battle *this)
         x = l_x;
         ENQUEUE(this->q,
                 CREATE_LINE(this->atlas, this->party[i]->name, x, y),
-                render_line0, NULL);
+                render_line, NULL);
 
         x += 60;
         ENQUEUE(this->q,
                 CREATE_LINE(this->atlas, this->party[i]->HP.display, x, y),
-                render_line0, NULL);
+                render_line, NULL);
         y += skip + 4;
     }
     return 0;

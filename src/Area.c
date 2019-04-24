@@ -142,7 +142,7 @@ static void _render_area(Area *this)
                                            ITEMS[item_to_be_obtained],
                                            WINDOW_WIDTH / 2, 10);
 
-                    ENQUEUE(this->q, line, render_line0, NULL);
+                    ENQUEUE(this->q, line, render_line, NULL);
                     this->in_message = 1;
                     this->last_x = X;
                     this->last_y = Y;
