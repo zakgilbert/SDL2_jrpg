@@ -330,11 +330,11 @@ void SET_GLOBALS()
     char *d_temp[8] = {"I am a giant, but im nice",
                        "as long as Im not hungry.",
                        "Where are you traveling",
-                       "too? I've seen a lot of",
+                       "too? Ive seen a lot of",
                        "treasure lately you should",
                        "look around, and see if",
                        "you can find some. I bet",
-                       "You'll get lucky..."};
+                       "Youll get lucky..."};
 
     char *d_yeti[1] = {"I am yeti..."};
 

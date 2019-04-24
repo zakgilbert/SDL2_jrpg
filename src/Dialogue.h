@@ -28,8 +28,6 @@ typedef struct _Dialogue
     int x, y;
     int num_lines;
     int index;
-    int last_index;
-    int update;
 
 } Dialogue;
 Dialogue *CREATE_DIALOGUE(Atlas *atlas, const char **lines, int x, int y, int num_lines);

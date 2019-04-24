@@ -21,16 +21,6 @@
 static const char *ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)};
 
-static const char *area_dia[] =
-    {"I am a giant, but im nice",
-     "as long as Im not hungry.",
-     "Where are you traveling",
-     "too? Ive seen a lot of",
-     "treasure lately you should",
-     "look around, and see if",
-     "you can find some. I bet",
-     "Youll get lucky..."};
-
 int handler_area(void *ptr)
 {
     Area *area = (Area *)ptr;
@@ -113,18 +103,17 @@ static void _render_area(Area *this)
 
         return;
     }
-    /**
-        else if (NUM_STEPS > (200 + (rand() % 500)))
-        {
-            state = BATTLE;
-            previous_state = this->area_key;
-            ROLL = rand() % 3;
-            this->q->free(this->q);
-            this->first_load = 1;
-    
-            return;
-        }
-*/
+    else if (!this->in_dialogue && !this->in_message &&
+             NUM_STEPS > (200 + (rand() % 500)))
+    {
+        state = BATTLE;
+        previous_state = this->area_key;
+        ROLL = rand() % 3;
+        this->q->free(this->q);
+        this->first_load = 1;
+
+        return;
+    }
     else if (this->first_load)
     {
         this->q = this->set_q(this);
@@ -147,7 +136,12 @@ static void _render_area(Area *this)
                 if (item_to_be_obtained != -1)
                 {
                     this->party_bag->loot(this->party_bag, item_to_be_obtained);
-                    Line *line = CREATE_LINE_WINDOW(this->atlas, ITEMS[item_to_be_obtained], WINDOW_WIDTH / 2, 10);
+                    
+                    Line *line =
+                        CREATE_LINE_WINDOW(this->atlas,
+                                           ITEMS[item_to_be_obtained],
+                                           WINDOW_WIDTH / 2, 10);
+
                     ENQUEUE(this->q, line, render_line0, NULL);
                     this->in_message = 1;
                     this->last_x = X;
@@ -166,7 +160,11 @@ static void _render_area(Area *this)
                 npc_to_interact_with = current_npc->interact(current_npc);
                 if (npc_to_interact_with != -1)
                 {
-                    this->current_dialogue = CREATE_DIALOGUE(this->atlas, area_dia, 100, 100, 8);
+                    this->current_dialogue =
+                        CREATE_DIALOGUE(this->atlas,
+                                        (const char **)DIALOGUES[i]->list,
+                                        ((WINDOW_WIDTH / 2) - (208 / 2)),
+                                        (WINDOW_HEIGHT - 64), DIALOGUES[i]->num_items);
                     this->last_x = X;
                     this->last_y = Y;
                 }
@@ -193,6 +191,7 @@ static void _render_area(Area *this)
         {
             this->current_dialogue->destroy(this->current_dialogue);
             this->current_dialogue = NULL;
+            this->in_dialogue = 0;
         }
     }
     this->q->copy(this->q);
@@ -202,9 +201,11 @@ Area *CREATE_AREA(int area_key, Hero *hero, Item *party_bag, Atlas *atlas)
 {
     Area *this = (Area *)malloc(sizeof(*this));
 
+    this->destroy = _destroy;
     this->create_assets = _create_assets;
     this->render_area = _render_area;
     this->set_q = _set_q;
+
     this->bag = CREATE_BAG();
     this->party_bag = party_bag;
     this->num_collidables = 0;
@@ -212,11 +213,6 @@ Area *CREATE_AREA(int area_key, Hero *hero, Item *party_bag, Atlas *atlas)
     this->map_w = 1239;
     this->map_h = 1024;
     this->area_key = area_key;
-    this->destroy = _destroy;
-    this->last_x = 0;
-    this->last_y = 0;
-    this->current_index = -1;
-    this->last_index = -1;
     this->last_x = X;
     this->last_y = Y;
     this->first_load = 1;
