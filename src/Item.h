@@ -7,7 +7,6 @@
 #include "Header.h"
 #include "Affect.h"
 #include "Words.h"
-#include "Message.h"
 #include "Atlas.h"
 
 typedef struct _item

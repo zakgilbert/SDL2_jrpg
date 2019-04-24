@@ -16,12 +16,11 @@
 #include "Atlas.h"
 #include "Character.h"
 #include "Affect.h"
-#include "Message.h"
 #include "Time.h"
 #include "Lootable.h"
 #include "Npc.h"
 #include "Collision.h"
-#include "Ba.h"
+#include "Battle.h"
 #include "Assets.h"
 #include "Enemy.h"
 #include "Battle_Q.h"
@@ -29,6 +28,7 @@
 #include "Line.h"
 #include "Animation.h"
 #include "Sprite.h"
+#include "Dialogue.h"
 
 int main(int argc, char **argv)
 {
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     Hand *hand = CREATE_HAND();
     Item *bag = CREATE_BAG();
     Hero *hero = CREATE_HERO(renderer);
-    Area *dark_forest = CREATE_AREA(DARK_FOREST, hero, bag);
+    Area *dark_forest = CREATE_AREA(DARK_FOREST, hero, bag, letters);
     Collision *game_collision = CREATE_COLLISION(hero);
     Animation *animations = CREATE_ANIMATION(renderer);
 
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
     SDL_Thread *hand_thread;
     SDL_Thread *input_thread;
 
-    Ba *current_ba = NULL;
+    Battle *current_battle = NULL;
 
     Character **party = load_party(0, renderer, animations);
 
@@ -97,8 +97,8 @@ int main(int argc, char **argv)
         }
 
         start_timer();
-        movement();
         game_collision->update_collidables(game_collision, state);
+        movement();
         set_fullscreen(window, hero);
         r_Q = r_Q->render(r_Q, renderer);
 
@@ -136,48 +136,22 @@ int main(int argc, char **argv)
                 hand->render(hand, renderer);
                 SDL_RenderPresent(renderer);
                 break;
-
-        case MESSAGE:
-            if (message_being_displayed->type == ONE_LINER)
-            {
-                message_being_displayed->render_one_liner(message_being_displayed, renderer);
-                SDL_RenderPresent(renderer);
-                wait_for_okay();
-                state = previous_state;
-                previous_state = MESSAGE;
-                message_being_displayed->destroy(message_being_displayed);
-                message_being_displayed = NULL;
-            }
-            else if (message_being_displayed->type == DIALOGUE)
-            {
-                while (!message_being_displayed->render_dialogue(message_being_displayed, renderer))
-                {
-                    SDL_RenderPresent(renderer);
-                    wait_for_okay();
-                    USER_INPUTS[4] = 0;
-                }
-                USER_INPUTS[4] = 0;
-                state = previous_state;
-                previous_state = MESSAGE;
-                message_being_displayed->destroy(message_being_displayed);
-                message_being_displayed = NULL;
-            }
-            break;
 */
+
         case BATTLE:
-            if (NULL == current_ba)
-                current_ba = CREATE_BA(previous_state, ROLL, party, letters, hand);
-            if (NULL != current_ba && state == BATTLE)
-                current_ba->update(current_ba);
-            if (NULL != current_ba && previous_state == BATTLE && !EXIT())
+            if (NULL == current_battle)
+                current_battle = CREATE_BATTLE(previous_state, ROLL, party, letters, hand);
+            if (NULL != current_battle && state == BATTLE)
+                current_battle->update(current_battle);
+            if (NULL != current_battle && previous_state == BATTLE && !EXIT())
             {
-                current_ba->destroy(current_ba);
+                current_battle->destroy(current_battle);
                 for (i = 0; i < NUM_CHARACTERS; i++)
                 {
                     party[i]->current_state = waiting;
                 }
 
-                current_ba = NULL;
+                current_battle = NULL;
             }
             break;
         default:
@@ -188,20 +162,22 @@ int main(int argc, char **argv)
         delay();
         reset_timer();
     }
-    menu_transition(&menu->delay, renderer);
+    SDL_SetWindowFullscreen(window, 0);
+    SDL_Delay(3000);
     SDL_WaitThread(hand_thread, NULL);
 
     dark_forest->destroy(dark_forest);
     hero->destroy(hero);
-    /**
-*/
-    if (NULL != current_ba)
+
+    if (NULL != current_battle)
     {
-        current_ba->destroy(current_ba);
+        current_battle->destroy(current_battle);
     }
     menu->destroy(menu);
     hand->destroy(hand);
-    save_bag(bag, 0);
+    /**
+        save_bag(bag, 0);
+*/
     bag->destroy(bag);
     animations->destroy(animations);
     letters->destroy(letters);

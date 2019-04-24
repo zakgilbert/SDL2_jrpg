@@ -14,8 +14,15 @@ static void _destroy(Lootable *this)
 
 static Lootable *_render(Lootable *this, struct SDL_Renderer *renderer)
 {
+    if (!MOVEMENT_DISABLED)
+    {
+        this->rect.x = this->x + X;
+        this->rect.y = this->y + Y;
+    }
     SDL_RenderCopy(renderer, this->texture, NULL, &this->rect);
-    SDL_RenderDrawRect(renderer, &this->rect);
+    /**
+        SDL_RenderDrawRect(renderer, &this->rect);
+*/
     return this;
 }
 

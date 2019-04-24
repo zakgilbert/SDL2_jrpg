@@ -330,11 +330,11 @@ void SET_GLOBALS()
     char *d_temp[8] = {"I am a giant, but im nice",
                        "as long as Im not hungry.",
                        "Where are you traveling",
-                       "too? I've seen a lot of",
+                       "too? Ive seen a lot of",
                        "treasure lately you should",
                        "look around, and see if",
                        "you can find some. I bet",
-                       "You'll get lucky..."};
+                       "Youll get lucky..."};
 
     char *d_yeti[1] = {"I am yeti..."};
 
@@ -400,4 +400,8 @@ void SET_GLOBALS()
                            "data/save/save3/"};
 
     SAVE_PATHS = CREATE_LIST_STRING(save_paths, 3);
+    for (i = 0; i < 4; i++)
+    {
+        EDGE_DETECTION[i] = 1;
+    }
 }

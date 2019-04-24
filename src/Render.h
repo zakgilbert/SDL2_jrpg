@@ -64,6 +64,7 @@ typedef struct _Render_Q
     void (*copy)(struct _Render_Q *this);
     struct _Render_Q *(*clone)(struct _Render_Q *this);
     struct Node *(*pop)(struct _Render_Q *this);
+    struct Node *(*poop)(struct _Render_Q *this);
     struct Node *front;
     struct Node *rear;
     void (*free)(struct _Render_Q *this);
