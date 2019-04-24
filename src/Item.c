@@ -4,6 +4,13 @@
 static char *ITEMS[] = {
     FOREACH_ITEM(GENERATE_STRING)};
 
+static void swap(int *array, int sw1, int sw2)
+{
+    int temp = array[sw1];
+    array[sw1] = array[sw2];
+    array[sw2] = temp;
+}
+
 static void _destroy(Item *this)
 {
     if (NULL != this)
@@ -38,13 +45,9 @@ static void _fill_bag(Item *this, int *items, int *quantities, int len)
     {
         this->items[i] = items[i];
         if (NULL == quantities)
-        {
             this->item_quantities[i] = 1;
-        }
         else
-        {
             this->item_quantities[i] = quantities[i];
-        }
     }
     this->items_in_bag = len;
 }
@@ -63,23 +66,18 @@ static char *_add_item(Item *this, ITEM_ENUM item_enum)
 
 static int _remove_item(Item *this, int item_index)
 {
-    int i;
-    int last_index = this->items_in_bag - 1;
-
-    this->items = realloc(this->items, sizeof(int) * (this->items_in_bag - 1));
-    this->item_quantities = realloc(this->items, sizeof(int) * (this->items_in_bag - 1));
-    if (last_index != item_index)
+    int last_item;
+    last_item = this->items_in_bag - 1;
+    while (item_index != last_item)
     {
-        for (i = item_index; i < last_index; i++)
-        {
-            this->items[i] = this->items[i + 1];
-            this->item_quantities[i] = this->item_quantities[i + 1];
-        }
+        swap(this->items, item_index, item_index + 1);
+        swap(this->item_quantities, item_index, item_index + 1);
+        item_index++;
     }
-    printf("\nRemoving %s at %d but from last index of %d", ITEMS[this->items[last_index]], item_index, last_index);
-    this->items = realloc(this->items, sizeof(int) * (this->items_in_bag - 1));
-    this->item_quantities = realloc(this->items, sizeof(int) * (this->items_in_bag - 1));
-    this->items_in_bag = last_index;
+    this->items = realloc(this->items, sizeof(int) * last_item);
+    this->item_quantities = realloc(this->item_quantities, sizeof(int) * last_item);
+    this->items_in_bag = last_item;
+
     return -1;
 }
 static int _decrement_item(Item *this, ITEM_ENUM item_enum)
@@ -117,9 +115,7 @@ static int _find_item(Item *this, ITEM_ENUM item_enum)
     for (i = 0; i < this->items_in_bag; i++)
     {
         if (this->items[i] == item_enum)
-        {
             item_index = i;
-        }
     }
     return item_index;
 }
@@ -133,9 +129,8 @@ static int _quaff_item(Item *this, Affect *affect)
     this->affect = affect;
 
     if (((item_was_quaffed) = (this->affect->cause_affect(affect))))
-    {
         item_was_removed = this->decrement_item(this, this->affect->affect_enum);
-    }
+
     this->affect->destroy(this->affect);
     return item_was_removed;
 }
@@ -153,9 +148,7 @@ static char *_loot(Item *this, ITEM_ENUM item_enum)
     item_index = this->find_item(this, item_enum);
 
     if (item_index == -1)
-    {
         return this->add_item(this, item_enum);
-    }
     else
     {
         this->item_quantities[item_index]++;
@@ -163,9 +156,7 @@ static char *_loot(Item *this, ITEM_ENUM item_enum)
         return ITEMS[this->items[item_index]];
     }
 }
-/**
- * fjsdlafsldsal
- */
+
 static void _update_quant_disp(Item *this)
 {
     int i;
@@ -173,9 +164,7 @@ static void _update_quant_disp(Item *this)
     if (NULL != this->display)
     {
         for (i = 0; i < this->items_in_bag; i++)
-        {
             free(this->display[i]);
-        }
         this->display = NULL;
     }
     this->display = (char **)malloc(sizeof(char *) * this->items_in_bag);
