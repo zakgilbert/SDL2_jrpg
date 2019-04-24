@@ -286,9 +286,11 @@ static void _update_use_item(Menu *this)
             this->hand->items_menu_position(this->hand);
             this->hand->number_of_states = this->previous_number_states;
             state = ITEMS_MENU;
+            this->skip = this->set_items_menu(this);
+            this->q->copy(this->q);
             SDL_Delay(300);
+            return;
         }
-        this->q->free(this->q);
         this->set_items_menu(this);
         this->q->add(this->q, this->q->new_node(this->back_ground_use_item, render_window, NULL));
         this->set_text_use_item(this);
@@ -322,7 +324,6 @@ static void _set_text_use_item(Menu *this)
                          CREATE_LINE(this->atlas, this->party[i]->name, x, y),
                          render_line, destroy_line));
         y += skip;
-
         this->q->add(this->q,
                      this->q->new_node(
                          CREATE_LINE(this->atlas, this->party[i]->HP.display, x, y),
@@ -382,11 +383,14 @@ static int _set_text_config(Menu *this)
     this->rgb_bars[2]->color_bar_color = BLU;
 
     sprintf(this->rgb_matrix[0],
-            "RED                                      %d", (int)MENU_BACKGROUND.r);
+            "RED                                      %d",
+            (int)MENU_BACKGROUND.r);
     sprintf(this->rgb_matrix[1],
-            "GREEN                                   %d", (int)MENU_BACKGROUND.g);
+            "GREEN                                   %d",
+            (int)MENU_BACKGROUND.g);
     sprintf(this->rgb_matrix[2],
-            "BLUE                                     %d", (int)MENU_BACKGROUND.b);
+            "BLUE                                     %d",
+            (int)MENU_BACKGROUND.b);
 
     x = 50;
     y = skip;
