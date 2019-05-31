@@ -71,7 +71,7 @@ static void _insert(Sprite *this, const char *key, int x, int y, int w, int h)
         current_node = this->table[index];
         i++;
     }
-/**
+    /**
         printf("%s was added at index %d\n", node->key, index);
 */
     this->table[index] = node;

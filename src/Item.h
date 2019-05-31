@@ -11,6 +11,7 @@
 
 typedef struct _item
 {
+
     void (*destroy)(struct _item *);
     void (*fill_bag)(struct _item *, int *items, int *quantities, int len);
     char *(*add_item)(struct _item *, ITEM_ENUM);
@@ -20,7 +21,7 @@ typedef struct _item
     int (*decrement_item)(struct _item *, ITEM_ENUM);
     const char *(*get_display)(struct _item *, int index);
     char *(*loot)(struct _item *, ITEM_ENUM);
-    void (*update_quant_disp)(struct _item * this);
+    void (*update_quant_disp)(struct _item *this);
     Affect *affect;
     int *items;
     int *item_quantities;
